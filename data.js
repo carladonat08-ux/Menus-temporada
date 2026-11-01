@@ -4,10 +4,21 @@ const ING = {
   pol: ["Pechuga de pollo", "carne", 110, 23, 0, null, 7.5],
   mus: ["Muslo de pollo deshuesado sin piel", "carne", 120, 20, 0, null, 6.5],
   pav: ["Pechuga de pavo", "carne", 105, 24, 0, null, 9],
-  ter: ["Ternera magra", "carne", 130, 21, 0, null, 12],
+  ter: ["Ternera magra (filetes o para guisar)", "carne", 130, 21, 0, null, 12],
   lom: ["Lomo de cerdo", "carne", 140, 21, 0, null, 7],
   jam: ["Jamón cocido extra", "carne", 110, 19, 0, null, 12],
   fpv: ["Pavo en lonchas", "carne", 100, 19, 0, null, 12],
+  que: ["Queso curado (manchego u oveja)", "lacteos", 400, 25, 0, null, 13],
+  par: ["Parmesano o grana padano", "lacteos", 390, 33, 0, null, 15],
+  moz: ["Mozzarella sin lactosa", "lacteos", 250, 18, 0, null, 9],
+  mej: ["Mejillones cocidos (carne, congelados)", "pescado", 172, 24, 0, null, 9],
+  pul: ["Pulpo cocido", "pescado", 90, 18, 0, null, 20],
+  jur: ["Jurel", "pescado", 120, 20, 0, null, 5],
+  boq: ["Boquerones", "pescado", 115, 20, 0, null, 6],
+  tru: ["Trucha", "pescado", 120, 20, 0, null, 7],
+  sca: ["Sardinas en lata con espina (escurridas)", "pescado", 210, 25, 0, ["latas", 85], 12],
+  hig: ["Hígado de pollo", "carne", 120, 17, 0, null, 4],
+  con: ["Conejo troceado", "carne", 135, 21, 0, null, 7.5],
   sal: ["Salmón (porciones congeladas)", "pescado", 200, 20, 0, null, 14],
   mer: ["Merluza (congelada)", "pescado", 75, 16, 0, null, 8],
   bac: ["Bacalao (lomos congelados)", "pescado", 80, 18, 0, null, 11],
@@ -23,7 +34,7 @@ const ING = {
   hue: ["Huevos", "huevos", 140, 12.5, 0, ["uds", 55], 4.5],
   cla: ["Claras de huevo", "huevos", 50, 11, 0, null, 4],
   tof: ["Tofu firme", "huevos", 130, 13, 0, null, 6],
-  lsl: ["Leche sin lactosa", "lacteos", 46, 3.3, 0, null, 1.1],
+  lsl: ["Leche sin lactosa enriquecida en calcio", "lacteos", 46, 3.3, 0, null, 1.1],
   sky: ["Yogur o skyr sin lactosa (marca blanca)", "lacteos", 63, 11, 0, null, 5],
   arr: ["Arroz integral", "cereal", 350, 7.5, 1, null, 2.2],
   qui: ["Quinoa", "cereal", 365, 14, 1, null, 7],
@@ -49,7 +60,7 @@ const ING = {
   can: ["Canónigos", "verdura", 20, 2, 0, null, 12],
   ace: ["Acelgas", "verdura", 20, 1.8, 0, null, 2.5],
   pak: ["Pak choi", "verdura", 13, 1.5, 0, null, 6],
-  cza: ["Calabaza", "verdura", 35, 1, 0, null, 1.8],
+  cza: ["Calabaza japonesa (kabocha)", "verdura", 35, 1, 0, null, 1.8],
   chi: ["Chirivía", "verdura", 75, 1.2, 0, null, 4],
   nab: ["Nabo", "verdura", 28, 0.9, 0, null, 2.5],
   kal: ["Kale", "verdura", 35, 3, 0, null, 8],
@@ -76,6 +87,21 @@ const ING = {
   whe: ["Whey isolate (sin polioles ni inulina)", "suple", 370, 85, 0, null, 30],
 };
 
+
+// Nutrientes por 100 g en crudo: [grasa g, hidratos g, fibra g, calcio mg, hierro mg] (tablas BEDCA/USDA aproximadas)
+const NUT = {
+  pol:[1.5,0,0,5,.4], mus:[4.5,0,0,10,.9], pav:[1,0,0,8,.7], ter:[5,0,0,6,2.3], lom:[6,0,0,6,.8], jam:[3,1,0,10,.7], fpv:[2,2,0,10,.6], hig:[5,1,0,8,9], con:[5.5,0,0,20,1.5],
+  sal:[13,0,0,10,.3], mer:[1.5,0,0,30,.4], bac:[.7,0,0,15,.4], dor:[4,0,0,20,.5], lub:[4,0,0,15,.4], sar:[9,0,0,50,2.5], cab:[12,0,0,15,1.2], bon:[6,0,0,20,1.2], atu:[1,0,0,10,1.3],
+  gam:[1,0,0,60,1.5], cal:[1.3,3,0,30,.7], sep:[.7,.8,0,90,6], mej:[4.5,7,0,33,6.7], pul:[1,2,0,50,5.3], jur:[4,0,0,30,1.1], boq:[4.5,0,0,60,1.8], tru:[4.5,0,0,30,.4], sca:[12,0,0,380,2.9],
+  hue:[10,.7,0,55,1.8], cla:[.2,.7,0,7,.1], tof:[7,1.5,.9,350,2.7], lsl:[1.6,4.8,0,160,0], sky:[.2,4,0,100,.1], que:[33,.5,0,1000,.5], par:[28,0,0,1180,.8], moz:[17,1,0,450,.3],
+  arr:[2.7,72,3.5,23,1.5], qui:[6,64,7,47,4.6], pas:[2.5,75,3,15,1.2], fid:[.6,80,1.6,18,.7], pom:[1.5,77,4,5,1], pat:[.1,17,1.8,10,.8], pan:[2,46,6,25,2.5], avn:[7,59,10,50,4.3], tor:[3,80,4,10,1.5],
+  len:[.4,13,6,20,2.3], gar:[2.5,14,6,40,1.6], alu:[.5,13,6,60,1.7],
+  cbc:[.3,2.2,1.1,16,.4], zan:[.2,7,2.8,33,.3], ber:[.2,3,3,9,.2], jud:[.2,4.5,3,37,1], esp:[.4,1.4,2.2,99,2.7], tom:[.2,3,1.2,10,.3], tri:[.2,5,1.5,15,.6], pep:[.1,3,.5,16,.3], lec:[.2,1.5,1.3,36,.9],
+  can:[.4,1.6,1.5,38,2], ace:[.2,2,1.6,51,1.8], pak:[.2,2.2,1,105,.8], cza:[.1,8,1.5,20,.5], chi:[.3,18,4.9,36,.6], nab:[.1,6,1.8,30,.3], kal:[.9,4,4,150,1.5], end:[.2,3,3,52,.2], pue:[.3,6,1.8,59,2], apn:[.3,9,1.8,43,.7],
+  fre:[.3,7.7,2,16,.4], ara:[.3,14,2.4,6,.3], fra:[.7,12,6.5,25,.7], kiw:[.5,15,3,34,.3], nar:[.1,12,2.4,40,.1], man:[.3,13,1.8,37,.2], pla:[.3,23,2.6,5,.3], pin:[.1,13,1.4,13,.3], uva:[.2,18,.9,10,.4], mel:[.2,8,.9,9,.2], pap:[.3,11,1.7,20,.3],
+  aov:[100,0,0,1,.6], agu:[15,9,7,12,.6], nue:[65,14,6.7,98,2.9], alm:[50,22,12,269,3.7], cac:[50,20,6,40,1.9], coc:[7,2,0,5,.5], whe:[1,3,0,100,.5],
+};
+
 const CATS = {
   carne: "Carne",
   pescado: "Pescado y marisco",
@@ -95,22 +121,29 @@ const SEASONS = {
     range: "20 de marzo – 20 de junio",
     note: "Platos ligeros con verdura tierna, fresas y kiwi. Pescado blanco y marisco a la plancha.",
     desFruit: "fre",
-    mmFruits: [["fre", 150], ["kiw", 150], ["nar", 130], ["pin", 150], ["fra", 120], ["kiw", 150], ["fre", 150]],
+    mmFruits: [["fre", 150], ["kiw", 150], ["nar", 130], ["pin", 150], ["fra", 70], ["kiw", 150], ["fre", 150]],
     comidas: [
       "Arroz con pollo y verduras de primavera|arr:70,pol:150,cbc:120,zan:80,jud:60,aov:10",
       "Quinoa con garbanzos, salmón y espinacas|qui:30,gar:120,sal:110,esp:150,tom:80,aov:5",
       "Pasta de arroz integral con atún y tomate|pas:70,atu:112,tri:150,cbc:100,aov:10",
       "Ternera salteada con arroz y judía verde|arr:70,ter:130,jud:150,zan:80,aov:10",
       "Patatas guisadas con merluza|pat:280,mer:180,zan:80,tom:60,aov:10",
-      "Bowl de arroz con pavo, pepino y zanahoria|arr:70,pav:150,pep:100,zan:80,lec:40,aov:10",
-      "Garbanzos salteados con espinacas y lomo|gar:180,lom:120,esp:150,tom:60,aov:10",
+      "Bowl de arroz integral con lentejas, pavo y pepino|arr:40,len:120,pav:120,pep:100,zan:80,lec:40,aov:10",
+      "Garbanzos salteados con espinacas y lomo|gar:150,lom:120,esp:150,tom:60,aov:10",
       "Paella de marisco|arr:70,gam:100,cal:100,jud:80,tom:60,aov:10",
       "Pollo al limón con patatas al horno|pat:280,pol:150,zan:100,jud:100,aov:10",
-      "Ensalada de garbanzos con atún y huevo|gar:200,atu:56,hue:55,tom:100,pep:80,lec:40,aov:10",
+      "Ensalada de garbanzos con atún y huevo|gar:150,atu:56,hue:55,tom:100,pep:80,lec:40,aov:10",
       "Dorada con arroz y acelgas|arr:65,dor:170,ace:200,aov:10",
       "Tofu salteado con arroz, judía verde y zanahoria|arr:65,tof:200,jud:150,zan:80,aov:10",
       "Hamburguesa de ternera con patata asada y ensalada|ter:130,pat:250,lec:60,tom:100,aov:10",
       "Lentejas estofadas con zanahoria, calabacín y pollo|len:220,pol:100,zan:80,cbc:100,tri:60,arr:20,aov:10",
+      "Conejo en aceite de ajo con patatas al horno|con:180,pat:250,jud:100,aov:10",
+      "Hígado de pollo salteado con arroz integral y espinacas|hig:140,arr:65,esp:150,aov:10",
+      "Mejillones al vapor con limón y patata cocida|mej:150,pat:250,lec:60,tom:80,aov:10",
+      "Ensalada de pasta integral con mozzarella, tomate y atún|pas:65,moz:60,tom:150,atu:56,aov:5",
+      "Boquerones a la plancha con arroz integral y ensalada|boq:170,arr:60,lec:60,tom:100,aov:5",
+      "Trucha al horno con patata y judía verde|tru:180,pat:220,jud:120,aov:5",
+      "Arroz meloso de gambas con parmesano y calabacín|arr:70,gam:120,par:15,cbc:120,aov:5",
     ],
     cenas: [
       "Salmón al horno con patata y judías verdes|sal:120,pat:150,jud:150,aov:5",
@@ -122,11 +155,18 @@ const SEASONS = {
       "Crema de calabacín y bacalao a la plancha|cbc:300,pat:100,bac:180,aov:10",
       "Pollo en aceite de ajo con arroz y judía verde|pol:150,arr:45,jud:150,aov:10",
       "Sepia a la plancha con patata y ensalada|sep:200,pat:150,lec:60,tom:100,aov:10",
-      "Huevos rellenos de atún con ensalada|hue:110,atu:56,lec:80,tom:100,pep:80,pan:40,aov:5",
+      "Hígado de pollo a la plancha con patata y ensalada|hig:150,pat:150,lec:60,tom:100,aov:10",
       "Lomo con acelgas rehogadas y patata|lom:140,ace:200,pat:120,aov:10",
       "Caballa a la plancha con arroz y calabacín|cab:120,arr:40,cbc:200,aov:5",
       "Ensalada tibia de lentejas con huevo y atún|len:150,hue:110,atu:56,lec:50,tom:80,aov:5",
       "Dorada al horno con patata panadera y tomate|dor:170,pat:150,tom:100,aov:10",
+      "Tortilla de calabacín con queso curado y ensalada|hue:110,cla:70,cbc:150,que:20,lec:60,tom:80,pan:40,aov:5",
+      "Sardinas en lata con espina, huevo y tostada con tomate|sca:85,hue:55,pan:70,tom:120,lec:60",
+      "Jurel al horno con patata y tomate|jur:170,pat:150,tom:120,aov:10",
+      "Pulpo cocido con patata y aceite de oliva|pul:150,pat:220,lec:50,aov:10",
+      "Pollo a la plancha con ensalada de mozzarella y tomate|pol:130,moz:50,tom:150,lec:60,pan:40,aov:5",
+      "Calamares a la plancha con arroz integral y espinacas|cal:200,arr:40,esp:150,aov:10",
+      "Conejo al horno con zanahoria y patata|con:160,zan:120,pat:150,aov:5",
     ],
   },
   verano: {
@@ -134,7 +174,7 @@ const SEASONS = {
     range: "21 de junio – 22 de septiembre",
     note: "Platos fríos, ensaladas completas y pescado azul. Frutos rojos congelados, melón y piña.",
     desFruit: "fra",
-    mmFruits: [["mel", 150], ["fra", 120], ["ara", 100], ["nar", 130], ["pin", 150], ["fre", 150], ["kiw", 150]],
+    mmFruits: [["mel", 120], ["fra", 70], ["ara", 100], ["nar", 130], ["pin", 150], ["fre", 150], ["kiw", 150]],
     comidas: [
       "Ensalada de arroz con atún, huevo, tomate y pepino|arr:70,atu:112,tom:120,pep:100,hue:55,aov:10",
       "Gazpacho suave (sin pimiento, ajo ni cebolla) y pollo con patata|tom:250,pep:100,pan:20,pol:150,pat:150,aov:10",
@@ -146,15 +186,22 @@ const SEASONS = {
       "Ternera a la plancha con arroz y calabacín|ter:130,arr:70,cbc:200,aov:10",
       "Arroz de sepia y verduras|arr:70,sep:200,ber:100,tom:80,jud:60,aov:10",
       "Ensalada de lentejas con bonito y tomate|len:220,bon:110,tom:120,pep:80,aov:10",
-      "Pavo en tiras con arroz, calabacín y zanahoria|pav:150,arr:70,cbc:150,zan:80,aov:10",
+      "Pavo en tiras con lentejas, arroz, calabacín y zanahoria|pav:130,len:150,arr:30,cbc:150,zan:80,aov:10",
       "Dorada a la plancha con arroz, pepino y tomate|dor:170,arr:65,pep:120,tom:100,aov:10",
       "Brochetas de pollo con arroz, berenjena y calabacín|pol:150,arr:70,ber:150,cbc:100,aov:10",
-      "Ensalada de garbanzos con gambas y pepino|gar:200,gam:120,pep:100,tom:100,aov:10",
+      "Ensalada de garbanzos con gambas y pepino|gar:150,gam:120,pep:100,tom:100,aov:10",
+      "Boquerones en vinagre con ensalada de patata|boq:160,pat:250,tom:100,pep:80,aov:10",
+      "Ensalada de pulpo con patata y tomate|pul:150,pat:220,tom:120,pep:80,pan:30,aov:10",
+      "Mejillones al vapor con arroz integral y tomate|mej:140,arr:60,tom:120,aov:5",
+      "Conejo a la plancha con ensalada de arroz|con:170,arr:60,tom:100,pep:80,lec:40,aov:10",
+      "Hígado de pollo con patata y tomate aliñado|hig:160,pat:220,tom:150,aov:10",
+      "Trucha a la plancha con quinoa, pepino y tomate|tru:170,qui:55,pep:120,tom:100,aov:5",
+      "Ensalada de pasta integral con mozzarella, atún y tomate|pas:70,moz:70,atu:56,tom:150,aov:5",
     ],
     cenas: [
       "Salmorejo sin ajo con huevo duro y jamón|tom:300,pan:50,hue:110,jam:80,aov:10",
       "Lubina a la plancha con tomate y patata|lub:180,tom:150,pat:150,aov:10",
-      "Tortilla de calabacín con ensalada|hue:110,cla:100,cbc:150,lec:60,tom:80,pan:40,aov:5",
+      "Hígado de pollo a la plancha con ensalada de tomate y pan|hig:150,tom:150,lec:60,pan:50,aov:10",
       "Gambas y calamares a la plancha con ensalada|gam:120,cal:120,lec:80,tom:100,pat:120,aov:10",
       "Pavo a la plancha con berenjena asada y pan|pav:150,ber:200,pan:50,aov:10",
       "Merluza con salteado de calabacín, berenjena y tomate|mer:200,cbc:120,ber:100,tom:80,pat:120,aov:10",
@@ -166,6 +213,13 @@ const SEASONS = {
       "Hummus sin ajo con pollo a la plancha y crudités|gar:120,pol:130,pep:120,zan:80,pan:30,aov:10",
       "Dorada al horno con patata y tomate|dor:170,pat:150,tom:120,aov:10",
       "Ensalada de pollo con aguacate y tomate|pol:140,lec:80,tom:120,pep:80,agu:30,pan:40,aov:5",
+      "Sardinas en lata con espina, huevo, tomate y tostada|sca:85,hue:55,pan:60,tom:150,pep:80",
+      "Jurel a la plancha con calabacín y patata|jur:170,cbc:200,pat:120,aov:10",
+      "Calamares a la plancha con ensalada y patata|cal:200,lec:80,tom:100,pat:150,aov:10",
+      "Ensalada caprese con jamón cocido y tostada|moz:80,tom:200,jam:80,pan:40,aov:5",
+      "Tortilla de calabacín con queso curado|hue:110,cla:100,cbc:150,que:20,pan:40,aov:5",
+      "Pollo al limón con ensalada de tomate y pepino|pol:150,tom:150,pep:100,pat:120,aov:10",
+      "Boquerones al horno con limón y ensalada|boq:170,lec:80,tom:120,pan:50,aov:5",
     ],
   },
   otono: {
@@ -183,15 +237,22 @@ const SEASONS = {
       "Merluza en salsa verde de perejil con patata|mer:200,pat:250,jud:80,aov:10",
       "Lomo al horno con calabaza asada y arroz|lom:140,cza:150,arr:55,aov:10",
       "Arroz caldoso de sepia y gambas|arr:70,sep:150,gam:80,tom:80,zan:60,aov:10",
-      "Muslo de pollo al horno con patata y zanahoria|mus:160,pat:250,zan:120,aov:10",
+      "Garbanzos guisados con muslo de pollo y zanahoria|gar:150,mus:130,zan:100,pat:80,tri:60,aov:10",
       "Polenta con ternera en salsa de tomate|pom:70,ter:130,tri:150,cbc:100,aov:5",
       "Dorada con arroz y calabacín|dor:170,arr:65,cbc:180,aov:10",
       "Tofu salteado con arroz, zanahoria y espinacas|tof:200,arr:65,zan:100,esp:120,aov:10",
       "Bacalao con patata y tomate|bac:180,pat:250,tom:120,aov:10",
-      "Garbanzos con espinacas y bacalao|gar:200,bac:150,esp:150,tom:60,aov:10",
+      "Garbanzos con espinacas y bacalao|gar:150,bac:150,esp:150,tom:60,aov:10",
+      "Conejo guisado con patata y zanahoria|con:170,pat:220,zan:100,tri:60,aov:10",
+      "Hígado de pollo con arroz integral y calabaza|hig:150,arr:60,cza:120,aov:10",
+      "Mejillones en salsa de tomate con patata|mej:150,tri:120,pat:220,aov:5",
+      "Jurel al horno con arroz integral y espinacas|jur:170,arr:60,esp:150,aov:5",
+      "Pasta integral con boloñesa de ternera y parmesano|pas:65,ter:110,tri:150,zan:60,par:10,aov:5",
+      "Pulpo con patata cocida y ensalada|pul:160,pat:250,lec:60,tom:80,aov:10",
+      "Arroz integral con conejo y judía verde|arr:70,con:150,jud:120,tom:60,aov:10",
     ],
     cenas: [
-      "Crema de calabaza y zanahoria con pollo a la plancha|cza:200,zan:100,pat:80,pol:140,aov:10",
+      "Crema de calabaza y zanahoria con pollo a la plancha|cza:150,zan:100,pat:80,pol:140,aov:10",
       "Salmón con patata y acelgas|sal:120,pat:150,ace:150,aov:5",
       "Tortilla de patata sin cebolla con ensalada|hue:110,cla:100,pat:150,lec:60,tom:80,aov:10",
       "Merluza al horno con calabacín y patata|mer:200,cbc:200,pat:120,aov:10",
@@ -199,12 +260,19 @@ const SEASONS = {
       "Caballa a la plancha con ensalada y patata|cab:120,lec:60,tom:100,pat:120,aov:5",
       "Sopa de pollo con fideos de arroz|pol:130,fid:40,zan:100,pue:50,cbc:100,aov:5",
       "Revuelto de gambas y calabacín con pan|hue:55,cla:100,gam:100,cbc:150,pan:40,aov:5",
-      "Lomo a la plancha con puré de calabaza|lom:140,cza:200,pat:100,aov:5",
+      "Lomo a la plancha con puré de calabaza|lom:140,cza:150,pat:100,aov:5",
       "Lubina en papillote con zanahoria y calabacín|lub:180,zan:100,cbc:120,pat:120,aov:10",
-      "Huevos al plato con tomate, espinacas y pan|hue:110,cla:70,tri:150,esp:80,pan:50,aov:5",
+      "Hígado de pollo a la plancha con puré de calabaza|hig:150,cza:150,pat:100,aov:10",
       "Sepia a la plancha con arroz y ensalada|sep:200,arr:40,lec:60,tom:80,aov:10",
       "Crema de lentejas, calabaza y zanahoria con huevo|len:150,zan:120,cza:100,hue:110,cla:70,aov:5",
       "Bacalao con acelgas y patata|bac:180,ace:200,pat:120,aov:10",
+      "Sardinas en lata con espina con patata y huevo|sca:85,pat:150,hue:55,lec:60,tom:100",
+      "Boquerones al horno con calabacín y patata|boq:170,cbc:200,pat:120,aov:10",
+      "Revuelto de gambas y espinacas con queso curado|hue:55,cla:100,gam:100,esp:150,que:15,pan:40,aov:5",
+      "Trucha a la plancha con puré de calabaza|tru:170,cza:150,pat:100,aov:5",
+      "Crema de calabacín con mejillones|cbc:300,pat:100,mej:120,aov:5",
+      "Tortilla de patata con queso curado y ensalada|hue:110,cla:70,pat:150,que:20,lec:60,tom:80,aov:10",
+      "Conejo a la plancha con acelgas y patata|con:160,ace:200,pat:100,aov:10",
     ],
   },
   invierno: {
@@ -217,9 +285,9 @@ const SEASONS = {
       "Cocido ligero de garbanzos con pollo, zanahoria y nabo|gar:150,pol:130,pat:100,zan:100,nab:80,pue:40,aov:5",
       "Estofado de ternera con chirivía y zanahoria|ter:130,pat:200,chi:75,zan:80,tri:60,aov:10",
       "Arroz con bacalao y espinacas|arr:70,bac:180,esp:150,tom:60,aov:10",
-      "Potaje de garbanzos con espinacas, bacalao y huevo|gar:200,bac:100,esp:150,hue:55,zan:60,tri:60,aov:10",
+      "Potaje de garbanzos con espinacas, bacalao y huevo|gar:150,bac:100,esp:150,hue:55,zan:60,tri:60,aov:10",
       "Merluza guisada con patata y zanahoria|mer:200,pat:250,zan:100,aov:10",
-      "Muslo de pollo al horno con chirivía y calabaza|mus:160,chi:75,cza:150,pat:150,aov:10",
+      "Garbanzos con pollo, chirivía y calabaza|gar:150,mus:130,chi:75,cza:100,aov:10",
       "Arroz caldoso de pollo y acelgas|arr:70,pol:150,ace:150,zan:60,aov:10",
       "Lomo con puré de patata y espinacas|lom:140,pat:250,esp:150,aov:10",
       "Caballa al horno con arroz y espinacas|cab:120,arr:60,esp:150,aov:5",
@@ -228,9 +296,16 @@ const SEASONS = {
       "Dorada al horno con patata y nabo|dor:170,pat:250,nab:100,aov:10",
       "Lentejas guisadas con ternera, zanahoria y patata|len:220,ter:100,zan:100,pat:80,tri:60,aov:10",
       "Polenta con pollo guisado en tomate|pom:70,pol:150,tri:150,zan:80,aov:5",
+      "Hígado de pollo con puré de patata y espinacas|hig:150,pat:250,esp:150,aov:10",
+      "Conejo guisado con chirivía y zanahoria|con:170,chi:75,zan:100,pat:150,aov:10",
+      "Arroz caldoso de mejillones|mej:140,arr:70,tom:60,zan:60,pue:40,aov:5",
+      "Guiso de pulpo con patata y zanahoria|pul:160,pat:220,zan:80,tri:60,aov:10",
+      "Jurel al horno con patata y nabo|jur:170,pat:220,nab:100,aov:10",
+      "Macarrones integrales con atún, tomate y parmesano|pas:70,atu:112,tri:150,par:10,aov:5",
+      "Trucha al horno con arroz integral y acelgas|tru:170,arr:60,ace:150,aov:5",
     ],
     cenas: [
-      "Crema de calabaza con huevo poché|cza:250,zan:80,pat:100,hue:110,cla:70,aov:10",
+      "Crema de calabaza con huevo poché|cza:150,zan:80,pat:100,hue:110,cla:70,aov:10",
       "Sopa de merluza y gambas con arroz|mer:150,gam:80,arr:35,zan:80,pue:40,tom:60,aov:5",
       "Crema de lentejas y zanahoria con pavo a la plancha|len:150,zan:120,pav:130,pue:40,pat:80,aov:5",
       "Salmón al horno con nabo y zanahoria|sal:120,nab:80,zan:100,pat:100,aov:5",
@@ -238,12 +313,19 @@ const SEASONS = {
       "Bacalao con puré de chirivía y patata|bac:180,chi:75,pat:150,aov:10",
       "Caldo de pollo con fideos de arroz y huevo|pol:120,fid:40,hue:55,zan:80,pue:40,aov:5",
       "Lubina al horno con acelgas y patata|lub:180,ace:200,pat:120,aov:10",
-      "Lomo a la plancha con calabaza asada|lom:140,cza:200,pat:80,aov:5",
-      "Revuelto de gambas y espinacas con pan|hue:55,cla:100,gam:100,esp:150,pan:50,aov:5",
+      "Lomo a la plancha con calabaza asada|lom:140,cza:150,pat:80,aov:5",
+      "Hígado de pollo a la plancha con endibias y pan|hig:150,end:120,pan:50,aov:10",
       "Merluza con crema de calabacín|mer:200,cbc:300,pat:100,aov:10",
       "Pollo a la plancha con acelgas y quinoa|pol:150,ace:150,qui:40,zan:60,aov:10",
       "Alubias blancas con acelgas y bacalao|alu:150,ace:200,bac:120,pan:40,aov:5",
       "Dorada con endibias y patata|dor:170,end:100,pat:150,aov:10",
+      "Sardinas en lata con espina sobre tostada, huevo y endibias|sca:85,pan:60,end:120,hue:55",
+      "Boquerones al horno con patata y espinacas|boq:170,pat:150,esp:150,aov:5",
+      "Tortilla de espinacas con queso curado|hue:110,cla:100,esp:150,que:20,pan:40,aov:5",
+      "Crema de calabaza con queso curado y huevo|cza:150,zan:120,pat:100,que:20,hue:110,cla:70,aov:5",
+      "Conejo al horno con calabaza y zanahoria|con:160,cza:120,zan:100,pat:80,aov:5",
+      "Calamares a la plancha con arroz integral y acelgas|cal:200,arr:40,ace:150,aov:10",
+      "Mejillones al vapor con patata y limón|mej:140,pat:180,lec:60,aov:5",
     ],
   },
 };
@@ -251,24 +333,25 @@ const SEASONS = {
 // Desayunos (la fruta del A cambia según estación)
 const DESAYUNOS = {
   A: { t: "Porridge de avena con whey, fruta y nueces", i: (s) => `avn:50,lsl:150,whe:30,${s.desFruit}:100,nue:10` },
-  B: { t: "Tostada de masa madre de espelta con revuelto, tomate y batido de whey", i: () => "pan:60,hue:55,cla:70,tom:80,aov:5,whe:30" },
-  C: { t: "Tortitas de avena, huevo y whey con plátano y crema de cacahuete", i: () => "avn:40,hue:55,whe:30,pla:60,cac:10" },
+  B: { t: "Tostada de espelta con 2 huevos revueltos, queso curado y tomate", i: () => "pan:60,hue:110,cla:70,que:20,tom:80,aov:5" },
+  C: { t: "Tortitas de avena con leche, huevo y whey, con plátano y crema de cacahuete", i: () => "avn:40,lsl:150,hue:55,whe:30,pla:60,cac:10" },
 };
 const DES_ROT = ["A", "B", "A", "C", "A", "B", "C"];
 const DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
-const ENTRENO = [true, true, false, true, true, false, false];
+const ENTRENO_DEF = [true, true, false, true, true, false, false];
 const MER_ENT = [
-  { t: "Plátano y 2 tortitas de arroz (60-90 min antes de entrenar)", i: "pla:110,tor:18" },
-  { t: "Pan de espelta con pavo (60-90 min antes de entrenar)", i: "pan:50,fpv:40" },
+  { t: "Plátano y yogur sin lactosa (60-90 min antes de entrenar)", i: "pla:110,sky:125" },
+  { t: "Bocadillo pequeño de espelta con pavo y queso curado (60-90 min antes de entrenar)", i: "pan:50,fpv:40,que:15" },
 ];
-const REST_FACTOR = 0.7; // hidratos de comida y cena en días de descanso
+const REST_FACTOR = 0.8; // hidratos de comida y cena en días de descanso
+const CITRICO = { primavera: "kiw", verano: "kiw", otono: "man", invierno: "nar" };
 
 function parse(s) {
   return s.split(",").map((p) => { const [c, g] = p.split(":"); return [c, +g]; });
 }
 function dish(str) { const [t, i] = str.split("|"); return { t, items: parse(i) }; }
 
-const PROT = ["pol","mus","pav","ter","lom","jam","fpv","sal","mer","bac","dor","lub","sar","cab","bon","atu","gam","cal","sep","tof"];
+const PROT = ["pol","mus","pav","ter","lom","jam","fpv","hig","con","sal","mer","bac","dor","lub","sar","cab","bon","atu","gam","cal","sep","mej","pul","jur","boq","tru","sca","tof"];
 const LEG = ["len","gar","alu"];
 // Comida y cena no repiten proteína principal ni legumbre el mismo día
 function clash(a, b) {
@@ -277,37 +360,105 @@ function clash(a, b) {
   return ca.some((c) => LEG.includes(c)) && cb.some((c) => LEG.includes(c));
 }
 
-// Construye el menú de una semana (w = 0..3)
-function buildWeek(key, w) {
+function nutrients(items) {
+  const t = { kcal: 0, prot: 0, fat: 0, carb: 0, fib: 0, ca: 0, fe: 0 };
+  items.forEach(([c, g]) => {
+    const I = ING[c], n = NUT[c] || [0, 0, 0, 0, 0], q = g / 100;
+    t.kcal += I[2] * q; t.prot += I[3] * q; t.fat += n[0] * q; t.carb += n[1] * q; t.fib += n[2] * q; t.ca += n[3] * q; t.fe += n[4] * q;
+  });
+  return t;
+}
+
+// Índices por defecto de comida (w = 0..3). Con 21 platos, las semanas 1-3 no repiten; la 4 mezcla.
+function defaultComida(w, d, N) { return w < 3 ? (d + 7 * w) % N : (d * 3 + 1) % N; }
+function defaultCena(w, d, N) { return w < 3 ? (d + 7 * ((w + 1) % 3) + 2) % N : (d * 3 + 2) % N; }
+
+// Construye el menú de una semana. opts: { ent: [7 booleanos], swaps: { "d-c": n, "d-n": n } }
+// Reglas: comida y cena sin la misma proteína ni doble legumbre; hígado máx. 1 vez/semana;
+// al menos 2 días con legumbres a la semana.
+function buildWeek(key, w, opts = {}) {
   const S = SEASONS[key];
-  const days = [];
-  const used = new Set();
+  const ENT = opts.ent || ENTRENO_DEF;
+  const swaps = opts.swaps || {};
+  const NC = S.comidas.length, NN = S.cenas.length;
+  const hasHig = (str) => /\bhig:/.test(str);
+  const hasLeg = (str) => /\b(len|gar|alu):/.test(str);
+
+  // 1) Elegir platos
+  const CI = [], NI = [];
+  const usedC = new Set(), usedN = new Set();
+  let higUsed = false;
   for (let d = 0; d < 7; d++) {
-    const ent = ENTRENO[d];
-    const ci = (d + 7 * (w % 2) + (w >= 2 ? 3 : 0)) % 14;
+    let ci = defaultComida(w, d, NC);
+    for (let j = 0; j < NC; j++) { const c = (ci + j) % NC; if (!usedC.has(c) && !(higUsed && hasHig(S.comidas[c]))) { ci = c; break; } }
+    if (swaps[`${d}-c`] !== undefined) ci = swaps[`${d}-c`] % NC;
+    usedC.add(ci);
     const com0 = dish(S.comidas[ci]);
-    let ni = (d + 7 * ((w + 1) % 2) + (w >= 2 ? 5 : 0) + 2) % 14;
-    for (let j = 0; j < 14; j++) {
-      const cand = (ni + j) % 14;
-      if (!used.has(cand) && !clash(com0, dish(S.cenas[cand]))) { ni = cand; break; }
+    let ni = defaultCena(w, d, NN);
+    if (swaps[`${d}-n`] !== undefined) ni = swaps[`${d}-n`] % NN;
+    else for (let j = 0; j < NN; j++) {
+      const cand = (ni + j) % NN;
+      if (!usedN.has(cand) && !clash(com0, dish(S.cenas[cand])) && !((higUsed || hasHig(S.comidas[ci])) && hasHig(S.cenas[cand]))) { ni = cand; break; }
     }
-    used.add(ni);
+    usedN.add(ni);
+    if (hasHig(S.comidas[ci]) || hasHig(S.cenas[ni])) higUsed = true;
+    CI.push(ci); NI.push(ni);
+  }
+  // 2) Asegurar al menos 2 días con legumbres (sin tocar platos cambiados a mano)
+  const legDays = () => CI.filter((c, d) => hasLeg(S.comidas[c]) || hasLeg(S.cenas[NI[d]])).length;
+  for (let d = 0; d < 7 && legDays() < 2; d++) {
+    if (hasLeg(S.comidas[CI[d]]) || hasLeg(S.cenas[NI[d]]) || swaps[`${d}-n`] !== undefined) continue;
+    for (let cand = 0; cand < NN; cand++) {
+      if (hasLeg(S.cenas[cand]) && !NI.includes(cand) && !hasHig(S.cenas[cand]) && !clash(dish(S.comidas[CI[d]]), dish(S.cenas[cand]))) { NI[d] = cand; break; }
+    }
+  }
+
+  // 3) Montar los días
+  const days = [];
+  for (let d = 0; d < 7; d++) {
+    const ent = ENT[d];
+    const ci = CI[d], ni = NI[d];
     const dk = DES_ROT[(d + w * 2) % 7];
-    const des = { t: DESAYUNOS[dk].t, items: parse(DESAYUNOS[dk].i(S)), tag: dk };
+    const des = { t: DESAYUNOS[dk].t, items: parse(DESAYUNOS[dk].i(S)) };
     const [mf, mg] = S.mmFruits[(d + w) % 7];
-    const mm = { t: `Skyr sin lactosa con ${ING[mf][0].toLowerCase()}`, items: [["sky", 150], [mf, mg]] };
+    const mm = { t: `Yogur o skyr sin lactosa con ${ING[mf][0].toLowerCase()}`, items: [["sky", 150], [mf, mg]] };
     let mer;
     if (ent) { const m = MER_ENT[(d + w) % 2]; mer = { t: m.t, items: parse(m.i) }; }
-    else { const [rf, rg] = S.mmFruits[(d + w + 3) % 7]; mer = { t: `${ING[rf][0]} y 12 almendras`, items: [[rf, rg], ["alm", 12]] }; }
-    const scale = (o) => ent ? o : { t: o.t, items: o.items.map(([c, g]) => [c, ING[c][4] ? Math.round(g * REST_FACTOR / 5) * 5 : g]) };
-    const com = scale(dish(S.comidas[ci]));
-    const cen = scale(dish(S.cenas[ni]));
+    else {
+      const [rf, rg] = S.mmFruits[(d + w + 3) % 7];
+      mer = (d + w) % 2
+        ? { t: `${ING[rf][0]} y 20 g de queso curado`, items: [[rf, rg], ["que", 20]] }
+        : { t: `Yogur sin lactosa con ${ING[rf][0].toLowerCase()} y 5 almendras`, items: [["sky", 125], [rf, rg], ["alm", 5]] };
+    }
+    const scale = (o) => ent ? o : { ...o, items: o.items.map(([c, g]) => [c, ING[c][4] ? Math.round(g * REST_FACTOR / 5) * 5 : g]) };
+    // Legumbres con cítrico de postre: la vitamina C mejora la absorción del hierro
+    const withCitrus = (o) => {
+      if (!o.items.some(([c]) => LEG.includes(c))) return o;
+      const f = CITRICO[key];
+      return { ...o, t: `${o.t} + ${ING[f][0].toLowerCase()} de postre`, items: [...o.items, [f, f === "nar" ? 130 : 150]] };
+    };
+    const com = { ...withCitrus(scale(dish(S.comidas[ci]))), idx: ci, slot: "c" };
+    const cen = { ...withCitrus(scale(dish(S.cenas[ni]))), idx: ni, slot: "n" };
     const meals = [["Desayuno", des], ["Media mañana", mm], ["Comida", com], [ent ? "Pre-entreno" : "Merienda", mer], ["Cena", cen]];
-    let kcal = 0, prot = 0;
-    meals.forEach(([, m]) => m.items.forEach(([c, g]) => { kcal += ING[c][2] * g / 100; prot += ING[c][3] * g / 100; }));
-    days.push({ dia: DIAS[d], ent, meals, kcal: Math.round(kcal), prot: Math.round(prot) });
+    const n = nutrients(meals.flatMap(([, m]) => m.items));
+    days.push({ dia: DIAS[d], ent, meals, kcal: Math.round(n.kcal), prot: Math.round(n.prot), fat: Math.round(n.fat), carb: Math.round(n.carb), fib: Math.round(n.fib), ca: Math.round(n.ca), fe: +n.fe.toFixed(1) });
   }
   return days;
+}
+
+// Siguiente plato válido para "Cambiar plato"
+function nextDish(key, w, d, slot, opts) {
+  const S = SEASONS[key];
+  const week = buildWeek(key, w, opts);
+  const list = slot === "c" ? S.comidas : S.cenas;
+  const cur = week[d].meals[slot === "c" ? 2 : 4][1].idx;
+  const usedSame = new Set(week.map((x, i) => i !== d ? x.meals[slot === "c" ? 2 : 4][1].idx : -1));
+  const other = dish((slot === "c" ? S.cenas : S.comidas)[week[d].meals[slot === "c" ? 4 : 2][1].idx]);
+  for (let j = 1; j < list.length; j++) {
+    const cand = (cur + j) % list.length;
+    if (!usedSame.has(cand) && !clash(dish(list[cand]), other)) return cand;
+  }
+  return cur;
 }
 
 function shopping(days) {
@@ -320,7 +471,7 @@ function shopping(days) {
   Object.entries(tot).forEach(([c, g]) => {
     const [n, cat, , , , u] = ING[c];
     let q;
-    if (u) q = `${Math.ceil(g / u[1])} ${u[0]}`;
+    if (u) { const k = Math.ceil(g / u[1]); q = `${k} ${k === 1 ? { latas: "lata", uds: "ud" }[u[0]] : u[0]}`; }
     else if (g >= 1000) q = `${(Math.ceil(g / 100) / 10).toString().replace(".", ",")} kg`;
     else q = `${Math.ceil(g / 10) * 10} g`;
     (out[cat] = out[cat] || []).push([n, q]);
@@ -350,4 +501,4 @@ function seasonOf(date) {
   return { key: seasonKey(monday), week: n === 5 ? 1 : n - 1, n, month: MESES[monday.getMonth()], monday, dow };
 }
 
-if (typeof module !== "undefined") module.exports = { ING, SEASONS, buildWeek, shopping, seasonOf };
+if (typeof module !== "undefined") module.exports = { ING, NUT, SEASONS, buildWeek, shopping, seasonOf, nextDish };
