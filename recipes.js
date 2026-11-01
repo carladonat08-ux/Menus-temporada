@@ -152,11 +152,24 @@ const RECETAS = [
   [/^Ensalada de (garbanzos|alubias)/, () => ({ tiempo: "15 min", notas: [NOTA_LEG], pasos: [
     "Si lleva huevo, cuécelo 10 minutos, enfríalo y pélalo.",
     "Enjuaga la legumbre y escúrrela bien.",
-    "Corta el tomate, el pepino y la lechuga y mézclalo con la legumbre, el pescado escurrido, el huevo y las aceitunas (lo que lleve la receta).",
+    "Si lleva pollo, hazlo a la plancha con sal y especias y córtalo en tiras.",
+    "Corta el tomate, el pepino y la lechuga y mézclalo con la legumbre y el resto de ingredientes (pescado escurrido, pollo, huevo o aceitunas, según la receta).",
     "Aliña con aceite, sal, comino y unas gotas de vinagre o limón.",
   ] })],
+  [/^Garbanzos salteados con gambas/, () => ({ tiempo: "20 min", notas: [NOTA_AJO, NOTA_LEG], pasos: [
+    "En una sartén, prepara el aceite de ajo y retira el ajo.",
+    "Saltea el calabacín en dados 5 minutos con sal.",
+    "Añade las gambas peladas y saltéalas 1-2 minutos.",
+    "Incorpora los garbanzos escurridos y el tomate rallado, con pimentón y comino, y saltea 3 minutos más.",
+    "Termina con perejil y unas gotas de limón.",
+  ] })],
+  [/^Brocheta de pollo/, () => ({ tiempo: "20 min", pasos: [
+    "Corta el pollo en dados y el calabacín en rodajas gruesas. Alíñalos con sal, pimentón, tomillo y unas gotas de aceite.",
+    "Ensártalos alternando en palillos de brocheta (opcional) y hazlos a la plancha 8-10 minutos, dándoles la vuelta.",
+    "Sirve con el tomate en rodajas aliñado con orégano.",
+  ] })],
   [/^Putxero/, () => ({ tiempo: "1 h 45 min", notas: [NOTA_LEG, NOTA_TAPER], pasos: [
-    "Separa unos 30 g de la ternera, pícala y mézclala con perejil, nuez moscada, sal, una cucharada de pan rallado de espelta y un poco de huevo batido. Forma 2-3 pilotes.",
+    "Separa unos 30 g de la ternera, pícala y mézclala con perejil, nuez moscada, sal y una cucharada de pan rallado de espelta humedecido en agua. Forma 2-3 pilotes.",
     "Pon en una olla el resto de la ternera y el pollo con agua fría, sal y una hoja de laurel. Hierve 60 minutos retirando la espuma.",
     "Añade la patata, la zanahoria, el nabo y la chirivía pelados y en trozos grandes, y las pilotes. Cuece 25 minutos.",
     "Añade los garbanzos y cuece 10 minutos más. Prueba de sal.",
@@ -169,7 +182,7 @@ const RECETAS = [
     "Cuando hierva, añade los fideos de arroz y cuécelos 3-4 minutos. Sirve con el huevo picado.",
   ] })],
   [/^Pilotes de ternera/, (t) => ({ tiempo: "45 min", notas: [NOTA_AJO, NOTA_TAPER], pasos: [
-    "Remoja el pan en un poco de agua o leche sin lactosa y escúrrelo.",
+    "Remoja el pan en un poco de agua y escúrrelo.",
     "Mezcla la carne picada con el pan, el huevo, perejil picado, nuez moscada, pimienta negra y sal. Forma bolitas del tamaño de una nuez.",
     "Dóralas en una cazuela con el aceite de ajo (ya sin el ajo) 4-5 minutos y resérvalas.",
     "En la misma cazuela, cuece el tomate triturado con una hoja de laurel y orégano 10 minutos.",
@@ -216,11 +229,13 @@ const RECETAS = [
     "Cuece la patata con piel en agua con sal y una hoja de laurel 20-25 minutos. Pélala y córtala en rodajas.",
     "Calienta el pulpo cocido 2 minutos en el agua de las patatas, escúrrelo y córtalo en rodajas con tijera.",
     "Pon el pulpo sobre la patata y aliña con aceite de oliva, sal gruesa y pimentón (dulce, picante o mezcla), como el pulpo a la gallega.",
+    "Acompaña con la lechuga y el tomate (si lo lleva) aliñados con sal y unas gotas de vinagre.",
   ] })],
   [/^Clòtxines.*vapor|^Clòtxines al vapor/, (t) => ({ tiempo: "20 min", notas: ["Si usas carne de mejillón congelada ya cocida, solo tienes que calentarla 2-3 minutos al vapor o en la sartén."], pasos: [
     "Limpia las clòtxines (mejillones) bajo el grifo y quítales las barbas. Desecha las que estén abiertas o rotas.",
     "Ponlas en una olla con un dedo de agua, una hoja de laurel y unas rodajas de limón. Tapa y cuece a fuego fuerte 4-5 minutos, hasta que se abran. Desecha las que sigan cerradas.",
-    /patata/.test(t) ? "Cuece la patata en agua con sal 20 minutos." : "Prepara la ensalada y tuesta el pan.",
+    /patata/.test(t) ? "Cuece la patata en agua con sal 20 minutos." : "Tuesta el pan.",
+    "Prepara la lechuga (y el tomate, si lo lleva) aliñada con aceite, sal y limón.",
     "Sírvelas con limón, pimienta negra y un hilo de aceite.",
   ] })],
   [/mejillones\) en salsa de tomate|^Clòtxines \(mejillones\) en salsa/, () => ({ tiempo: "25 min", notas: [NOTA_AJO], pasos: [
@@ -267,7 +282,7 @@ const RECETAS = [
     "Vierte la salsa en la sartén, añade el pavo y cuece 8-10 minutos a fuego suave. Sirve con el arroz.",
   ] })],
   [/^Lomo con puré/, () => ({ tiempo: "30 min", notas: [NOTA_AJO], pasos: [
-    "Cuece la patata en trozos 20 minutos, escúrrela y cháfala con un chorrito de leche sin lactosa, la mitad del aceite, sal y nuez moscada.",
+    "Cuece la patata en trozos 20 minutos, escúrrela y cháfala con un poco de su agua de cocción, la mitad del aceite, sal y nuez moscada.",
     "Saltea las espinacas 2-3 minutos con el aceite de ajo.",
     "Haz el lomo a la plancha con sal, orégano y pimienta, 3-4 minutos por lado. Sírvelo con el puré y las espinacas.",
   ] })],
@@ -311,7 +326,7 @@ const RECETAS = [
     /ensalada/.test(t) ? "Sírvela con la ensalada aliñada y el pan." : "Sírvela con el pan.",
   ] })],
   [/^Tortilla francesa/, (t) => ({ tiempo: "10 min", pasos: [
-    "Bate los huevos (y las claras) con sal y pimienta.",
+    "Bate los huevos (y las claras, si las lleva) con sal y pimienta.",
     "Cuaja la tortilla en una sartén antiadherente con unas gotas de aceite a fuego medio.",
     `Antes de doblarla, pon dentro ${/jamón/.test(t) ? "el jamón cocido" : "el queso curado rallado"}.`,
     "Sírvela con el tomate en rodajas aliñado con aceite y orégano, y el pan.",
@@ -456,7 +471,8 @@ function genReceta(t, items) {
   if (has("esp")) pasos.push("Saltea las espinacas 2-3 minutos con unas gotas de aceite (puede ser aceite de ajo).");
   if (has("end")) pasos.push("Corta las endibias por la mitad y márcalas a la plancha 2 minutos, o sírvelas crudas en hojas aliñadas.");
   if (has("jud")) pasos.push("Cuece la bajoqueta (judía verde) troceada 8-10 minutos en agua con sal.");
-  if (has("lec") || /ensalada/.test(tl)) pasos.push(`Prepara la ensalada con ${yList(["lechuga", has("tom") && "tomate", has("pep") && "pepino", has("oli") && "aceitunas"].filter(Boolean))}, y alíñala con aceite, sal y vinagre o limón.`);
+  const ens = [has("lec") && "lechuga", has("tom") && "tomate", has("pep") && "pepino", has("oli") && "aceitunas", /ensalada de patata/.test(tl) && "la patata cocida", has("jud") && /ensalada de patata/.test(tl) && "la bajoqueta"].filter(Boolean);
+  if (has("lec") || (/ensalada/.test(tl) && ens.length)) pasos.push(`Prepara la ensalada con ${yList(ens)}, y alíñala con aceite, sal y vinagre o limón.`);
   else if (has("tom") && !horno) pasos.push("Corta el tomate en rodajas y alíñalo con sal, aceite y orégano.");
   if (has("pep") && !has("lec") && !/ensalada/.test(tl)) pasos.push("Corta el pepino en rodajas y añádelo al tomate.");
   if (has("pan")) pasos.push("Tuesta el pan.");

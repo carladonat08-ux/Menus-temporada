@@ -148,6 +148,19 @@ button.meal:hover { border-color: var(--accent); }
 .ent-grid button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
 .panel p.lead { color: var(--muted); margin: 0; font-size: .92rem; }
 @media (max-width: 420px) { .ing-list { grid-template-columns: 1fr; } .app { padding-left: 14px; padding-right: 14px; } }
+.app > * { min-width: 0; }
+.top { min-width: 0; }
+.top-actions { min-width: 0; }
+@media (max-width: 360px) {
+  .brand { font-size: 1rem; }
+  .top-actions { gap: 6px; }
+  .date-pill { padding: 6px 9px; font-size: .8rem; }
+  .icon-btn { width: 34px; height: 34px; }
+  .today-btn { padding: 6px 9px; font-size: .78rem; }
+  .seg button { font-size: .8rem; padding: 8px 2px; }
+  .hero h1 { font-size: 2.2rem; }
+  .day-btn .n { font-size: 1.1rem; }
+}
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>

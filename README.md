@@ -36,7 +36,7 @@ Es una pauta general y no sustituye a un médico o dietista.
 - **Comida y cena de grupos distintos:** si a mediodía hay carne, por la noche hay pescado o huevo, y al revés.
 - **Reparto semanal:** pescado 4-6 veces (al menos 2 de azul), carne 4-6 (roja como máximo 2), huevo 2-4 y legumbre al mediodía 2-4 días.
 - **Variedad:** cada proteína (pollo, cerdo, merluza, sardina…) como mucho 2 veces por semana y nunca en días seguidos. Arroz entre semana como mucho 2 días y no seguidos. Tortillas como mucho 2, bullit 1 y cremas 2. Nunca el mismo tipo de plato en la comida y la cena.
-- **Cenas ligeras:** proteína con verdura, sin arroz, pasta, fideos ni legumbres. Como mucho 100 g de patata o 30 g de pan, y unas 380 kcal.
+- **Cenas ligeras:** proteína con verdura, sin arroz, pasta, fideos ni legumbres. Como mucho 100 g de patata o 30 g de pan, y unas 380 kcal. Si la comida lleva huevo, la cena no es de huevo.
 - **Domingo:** comida de fiesta (paella, fideuà, arròs al forn, arròs negre, putxero…) con una ración generosa. Por la noche no se cena: solo un yogur o unas palomitas caseras.
 - **Nunca dos bocadillos el mismo día.**
 
@@ -44,6 +44,7 @@ Es una pauta general y no sustituye a un médico o dietista.
 
 | Archivo | Para qué sirve |
 | --- | --- |
+| `plan.js` | Plan de platos de las 4 semanas de cada estación, generado por `tools/planner.js` (cumple todas las reglas y maximiza la variedad del mes) |
 | `data.js` | Ingredientes (kcal, proteína y nutrientes), platos de cada estación y lógica de los menús |
 | `recipes.js` | Recetas paso a paso (escritas a mano para los platos tradicionales y generadas para los de plancha u horno) |
 | `template.html` | Diseño y funcionamiento de la página |
@@ -54,3 +55,9 @@ Para cambiar un plato, edita su línea en `data.js` con el formato `"Nombre del 
 ## Publicación
 
 La web se sirve con GitHub Pages desde la rama `main`, carpeta raíz.
+
+## Revisión y mantenimiento
+
+- `node tools/planner.js`: vuelve a calcular el plan de platos (tras añadir o cambiar platos).
+- `python3 build.py`: genera `index.html`.
+- Auditorías: `node tools/audit/audit_data.js` (reglas de la dieta en los 112 días), `node tools/audit/audit_recipes.js` (recetas) y `python3 tools/audit/audit_app.py` (la app en navegador; necesita Playwright).
