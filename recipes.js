@@ -1,5 +1,5 @@
 // Recetas paso a paso. Las cantidades salen del menú de cada día; aquí solo van los pasos.
-// Regla de la casa: sin cebolla, sin pimiento ni pimentón, sin lactosa. El ajo se usa solo para aromatizar el aceite.
+// Regla de la casa: sin cebolla, sin pimiento (verdura), sin lactosa. Especias todas, pimentón incluido. El ajo solo aromatiza el aceite.
 
 const NOTA_AJO = "Aceite de ajo: calienta el aceite a fuego suave con 1-2 dientes de ajo laminados durante 2-3 minutos y retira el ajo antes de seguir. El sabor pasa al aceite, pero los fructanos no.";
 const NOTA_TAPER = "Si se cocina el día antes: deja templar como mucho 1-2 horas, guarda en la nevera a 4 °C o menos y recalienta hasta que humee. El arroz y el pescado, mejor en 24 horas.";
@@ -30,7 +30,7 @@ const RECETAS = [
     "En la paella, prepara el aceite de ajo y retira el ajo.",
     "Sala el pollo y el conejo troceados y dóralos a fuego medio unos 10-12 minutos, hasta que estén bien dorados por todos lados.",
     "Añade la bajoqueta troceada y el garrofó y rehoga 5 minutos.",
-    "Echa el tomate rallado y sofríe 3-4 minutos.",
+    "Echa el tomate rallado y sofríe 3-4 minutos. Añade una cucharadita de pimentón dulce y remueve unos segundos, sin que se queme.",
     "Añade agua (unas 4 veces el volumen del arroz), una ramita de romero y el azafrán. Deja hervir 20 minutos para hacer el caldo y prueba de sal.",
     "Quita el romero y reparte el arroz por toda la paella. A partir de aquí no se remueve.",
     "Cuece 10 minutos a fuego fuerte y después 20-25 minutos a fuego medio-bajo, hasta que el arroz esté tierno y sin caldo.",
@@ -39,7 +39,7 @@ const RECETAS = [
   [/^Paella de marisco/, () => ({ tiempo: "1 h", notas: [NOTA_AJO, NOTA_INTEGRAL], pasos: [
     "Haz un caldo rápido: hierve las cabezas y cáscaras de las gambas con agua, sal y una hoja de laurel 15 minutos y cuélalo.",
     "En la paella, prepara el aceite de ajo y retira el ajo. Marca las gambas peladas 1 minuto y resérvalas.",
-    "Sofríe la sepia y el calamar troceados 5-6 minutos. Añade el tomate rallado y sofríe 3 minutos más.",
+    "Sofríe la sepia y el calamar troceados 5-6 minutos. Añade el tomate rallado y sofríe 3 minutos más. Añade media cucharadita de pimentón dulce y remueve unos segundos.",
     "Añade el caldo caliente (unas 3,5-4 veces el volumen del arroz) con el azafrán. Cuando hierva, reparte el arroz y no remuevas más.",
     "Cuece 10 minutos a fuego fuerte y 20-25 minutos a fuego medio. En los últimos 3 minutos coloca las gambas por encima.",
     "Deja reposar 5 minutos tapada con un paño.",
@@ -77,7 +77,7 @@ const RECETAS = [
     "Precalienta el horno a 200 °C. Prepara un caldo caliente: agua con sal, azafrán y una hoja de laurel.",
     "En una cazuela de barro (o una sartén que luego pasarás a una fuente), prepara el aceite de ajo y retira el ajo.",
     "Dora la costilla troceada 8-10 minutos. Añade la mitad de la patata en rodajas y dórala 3 minutos.",
-    "Añade la mitad del tomate rallado y sofríe 2 minutos. Incorpora los garbanzos y el arroz y remueve 1 minuto.",
+    "Añade la mitad del tomate rallado y sofríe 2 minutos. Añade una cucharadita de pimentón dulce y enseguida los garbanzos y el arroz; remueve 1 minuto.",
     "Vierte el caldo caliente (unas 3 veces el volumen del arroz). Coloca por encima el resto de la patata en rodajas y medio tomate cortado.",
     "Hornea 20 minutos tapado con papel de aluminio y después 20-25 minutos destapado, hasta que el arroz esté hecho y seco por arriba.",
     "Reposa 5 minutos fuera del horno.",
@@ -117,7 +117,7 @@ const RECETAS = [
   [/^Lentejas con arroz/, () => ({ tiempo: "45 min", notas: [NOTA_AJO, NOTA_LEG, NOTA_TAPER], pasos: [
     "Cuece los huevos 10 minutos en agua hirviendo, enfríalos y pélalos.",
     "En una olla, prepara el aceite de ajo y retira el ajo. Rehoga la zanahoria en dados 5 minutos.",
-    "Añade el tomate triturado, una hoja de laurel y una pizca de comino y sofríe 3 minutos.",
+    "Añade el tomate triturado, una cucharadita de pimentón dulce, una hoja de laurel y una pizca de comino y sofríe 3 minutos.",
     "Añade 2 vasos de agua y el arroz y cuece 25 minutos.",
     "Incorpora las lentejas escurridas y cuece 10 minutos más, hasta que el arroz esté tierno. Prueba de sal.",
     "Sirve con el huevo duro en cuartos por encima.",
@@ -131,7 +131,7 @@ const RECETAS = [
   [/^Potaje de garbanzos/, () => ({ tiempo: "35 min", notas: [NOTA_AJO, NOTA_LEG, NOTA_TAPER], pasos: [
     "Si el bacalao es salado, desálalo 24-36 horas antes en agua fría en la nevera, cambiando el agua 3-4 veces.",
     "Cuece el huevo 10 minutos, enfríalo y pélalo.",
-    "En una olla, prepara el aceite de ajo y retira el ajo. Añade el tomate triturado, el comino y una hoja de laurel y sofríe 3 minutos.",
+    "En una olla, prepara el aceite de ajo y retira el ajo. Añade el tomate triturado, una cucharadita de pimentón dulce, el comino y una hoja de laurel y sofríe 3 minutos.",
     "Añade 2 vasos de agua y los garbanzos y cuece 10 minutos.",
     "Añade las espinacas y el bacalao en trozos y cuece 6-8 minutos más. Prueba de sal.",
     "Sirve con el huevo duro picado por encima.",
@@ -146,7 +146,7 @@ const RECETAS = [
   [/^Garbanzos guisados con pollo/, () => ({ tiempo: "45 min", notas: [NOTA_AJO, NOTA_LEG, NOTA_TAPER], pasos: [
     "En una olla, prepara el aceite de ajo y retira el ajo. Dora el pollo troceado con sal 8 minutos.",
     "Añade la zanahoria en rodajas y la patata en trozos y rehoga 3 minutos.",
-    "Añade el tomate triturado, la cúrcuma, el comino y una hoja de laurel y sofríe 2 minutos.",
+    "Añade el tomate triturado, una cucharadita de pimentón dulce, la cúrcuma, el comino y una hoja de laurel y sofríe 2 minutos.",
     "Cubre con agua y cuece 20 minutos. Añade los garbanzos y cuece 10 minutos más. Prueba de sal.",
   ] })],
   [/^Ensalada de (garbanzos|alubias)/, () => ({ tiempo: "15 min", notas: [NOTA_LEG], pasos: [
@@ -183,11 +183,11 @@ const RECETAS = [
     "Cuece el huevo 10 minutos, enfríalo y pélalo.",
     "En una olla con agua, sal y una hoja de laurel, cuece la patata en trozos 12 minutos.",
     "Añade la bajoqueta troceada y cuece 8 minutos. Añade el bacalao en trozos y cuece 5 minutos más.",
-    "Escurre y sirve todo junto con el huevo duro, regado con el aceite de ajo. Tradicionalmente lleva alioli, que aquí se sustituye por el aceite de ajo.",
+    "Escurre y sirve todo junto con el huevo duro, regado con el aceite de ajo y una pizca de pimentón. Tradicionalmente lleva alioli, que aquí se sustituye por el aceite de ajo.",
   ] })],
   [/^Borreta/, () => ({ tiempo: "35 min", notas: [NOTA_AJO, NOTA_TAPER], pasos: [
     "Si el bacalao es salado, desálalo 24-36 horas antes, cambiando el agua 3-4 veces.",
-    "En una cazuela, prepara el aceite de ajo y retira el ajo. Añade la patata en trozos, cúbrela de agua con laurel y comino y cuece 15 minutos.",
+    "En una cazuela, prepara el aceite de ajo y retira el ajo. Fuera del fuego, añade una cucharadita de pimentón dulce y remueve. Añade la patata en trozos, cúbrela de agua con laurel y comino y cuece 15 minutos.",
     "Añade las espinacas y cuece 3 minutos. Incorpora el bacalao en trozos y cuece 4 minutos.",
     "Casca el huevo encima, tapa y deja que se escalfe 3-4 minutos. Prueba de sal y sirve.",
   ] })],
@@ -215,7 +215,7 @@ const RECETAS = [
   [/^Pulpo/, () => ({ tiempo: "30 min", pasos: [
     "Cuece la patata con piel en agua con sal y una hoja de laurel 20-25 minutos. Pélala y córtala en rodajas.",
     "Calienta el pulpo cocido 2 minutos en el agua de las patatas, escúrrelo y córtalo en rodajas con tijera.",
-    "Pon el pulpo sobre la patata y aliña con aceite de oliva, sal gruesa y comino molido (en lugar de pimentón).",
+    "Pon el pulpo sobre la patata y aliña con aceite de oliva, sal gruesa y pimentón (dulce, picante o mezcla), como el pulpo a la gallega.",
   ] })],
   [/^Clòtxines.*vapor|^Clòtxines al vapor/, (t) => ({ tiempo: "20 min", notas: ["Si usas carne de mejillón congelada ya cocida, solo tienes que calentarla 2-3 minutos al vapor o en la sartén."], pasos: [
     "Limpia las clòtxines (mejillones) bajo el grifo y quítales las barbas. Desecha las que estén abiertas o rotas.",
@@ -244,7 +244,7 @@ const RECETAS = [
   [/^Conejo al ajillo/, () => ({ tiempo: "50 min", notas: [NOTA_AJO, NOTA_TAPER], pasos: [
     "Precalienta el horno a 200 °C. Corta la patata en rodajas finas, alíñala con unas gotas de aceite y sal y hornéala 30 minutos.",
     "En una sartén honda, prepara el aceite de ajo y retira el ajo.",
-    "Dora el conejo troceado con sal, romero y tomillo a fuego medio 12-15 minutos.",
+    "Dora el conejo troceado con sal, romero, tomillo y, si te gusta, una guindilla o una pizca de cayena, a fuego medio 12-15 minutos.",
     "Añade medio vaso de agua y un chorrito de limón, tapa y cuece 10 minutos más.",
     "Mientras, cuece la bajoqueta 8 minutos en agua con sal. Sírvelo todo junto.",
   ] })],
@@ -429,7 +429,7 @@ function genReceta(t, items) {
     else if (pc === "hig") pasos.push("Limpia el hígado de nervios, sálalo y hazlo a la plancha 2-3 minutos por lado, hasta que no quede rosado por dentro.");
     else if (pc === "con") pasos.push("Sala el conejo troceado y hazlo a la plancha o en la sartén con romero y tomillo 15-20 minutos, dándole vueltas, hasta que esté dorado y hecho.");
     else if (["pol", "pav", "mus"].includes(pc)) pasos.push(`Sala ${n} y haz${lo} a la plancha con unas gotas de aceite y las especias, 4-5 minutos por lado, hasta que no quede rosad${fin}${/limón/.test(tl) ? ". Al final, añade el zumo de medio limón" : ""}.`);
-    else if (pc === "lom") pasos.push("Sala el lomo y hazlo a la plancha con orégano y pimienta, 3-4 minutos por lado.");
+    else if (pc === "lom") pasos.push("Sala el lomo y hazlo a la plancha con pimentón, orégano y pimienta, 3-4 minutos por lado.");
     else pasos.push(`Cocina ${n} a la plancha con sal y unas gotas de aceite.`);
   }
   // Verdura y acompañamientos rápidos

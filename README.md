@@ -13,14 +13,14 @@ Web personal para planificar la comida de la semana. Al elegir una fecha:
 ## Pautas del plan
 
 - Dieta para perder grasa: unas 1.800 kcal los días de entreno y unas 1.650 los de descanso, con un techo diario de 1.850 y 1.700 kcal. Si un menú se pasa, la app recorta los hidratos de la comida y la cena. En los días de descanso, el arroz, la pasta, el pan, la patata y las legumbres de comida y cena bajan un 20 %.
-- Cocina de casa de Ontinyent y la Vall d'Albaida: paella valenciana, arròs al forn, arròs amb fesols i naps, arròs amb bledes, putxero con pilotes, giraboix, borreta, bullit, minxos, figatells, clòtxines, tortilla de bajoqueta… El sofrito va con aceite de ajo y azafrán, sin pimentón, morcilla ni alioli.
+- Cocina de casa de Ontinyent y la Vall d'Albaida: paella valenciana, arròs al forn, arròs amb fesols i naps, arròs amb bledes, putxero con pilotes, giraboix, borreta, bullit, minxos, figatells, clòtxines, tortilla de bajoqueta… El sofrito va con aceite de ajo, tomate y pimentón (azafrán en los arroces), sin morcilla ni alioli.
 - 21 comidas y 21 cenas por estación, y almuerzo a media mañana (yogur con fruta o bocadillito).
 - Platos pequeños: unas 500 kcal como máximo en la comida y 420 en la cena, con al menos 150 g de verdura por plato.
-- Cada comida y cena sugiere especias compatibles (azafrán, romero, comino, cúrcuma, nuez moscada…), sin pimentón, cayena ni curry.
+- Cada comida y cena sugiere especias (pimentón, azafrán, romero, comino, cúrcuma, nuez moscada…). Todas las especias están permitidas.
 - Calcio de ~1.000 mg al día (yogur, leche enriquecida, queso curado, sardinas con espina) y hierro de ~16 mg (hígado como máximo 1 vez por semana, moluscos, carne, y legumbres con cítrico de postre).
 - Unos 125-130 g de proteína al día (1,9-2 g/kg), repartidos en tomas de 15-35 g. Si un plato pasa de 33 g, el alimento proteico principal se reduce automáticamente.
 - Sin lactosa y sin fructosa en exceso: fuera la manzana, la pera, el mango, la sandía, la miel, los zumos y los polioles (E420, E421, E965, E967).
-- Sin pimiento ni sus derivados (pimentón, cayena, curry), sin cebolla y sin coliflor.
+- Sin pimiento como verdura, sin cebolla y sin coliflor. Las especias sí, pimentón incluido.
 - Cereales integrales: arroz integral, pasta de arroz integral y pan de espelta de masa madre.
 - Legumbres al menos 2 días por semana, garantizado por el algoritmo.
 - Comida y cena nunca repiten proteína ni llevan legumbre las dos el mismo día.

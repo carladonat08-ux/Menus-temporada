@@ -126,7 +126,7 @@ const SEASONS = {
     desFruit: "fre",
     mmFruits: [["fre", 150], ["kiw", 150], ["nar", 130], ["pin", 150], ["fra", 70], ["kiw", 150], ["fre", 150]],
     comidas: [
-      "Paella valenciana de pollo y conejo (azafrán, sin pimentón)|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
+      "Paella valenciana de pollo y conejo|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
       "Arròs amb bledes (arroz con acelgas, alubias y bacalao)|arr:60,ace:200,alu:100,bac:80,tom:60,aov:10",
       "Arroz caldoso de pollo y bajoqueta|arr:70,pol:130,jud:120,zan:60,tom:60,aov:10",
       "Arròs negre de sepia|arr:70,sep:180,tom:60,aov:10",
@@ -136,7 +136,7 @@ const SEASONS = {
       "Pollo al horno con patatas y romero|mus:160,pat:250,zan:80,aov:10",
       "Conejo al ajillo (con aceite de ajo) y patatas|con:170,pat:250,jud:80,aov:10",
       "Fideuà de fideos de arroz con gambas y sepia|fid:70,gam:80,sep:100,tom:60,aov:10",
-      "Arròs al forn con costilla, garbanzos y patata (sin morcilla ni pimentón)|arr:65,cos:85,gar:60,pat:60,tom:80,aov:5",
+      "Arròs al forn con costilla, garbanzos y patata (sin morcilla)|arr:65,cos:85,gar:60,pat:60,tom:80,aov:5",
       "Lomo a la plancha con patatas al horno y ensalada|lom:130,pat:220,lec:60,tom:100,aov:10",
       "Fesols amb bledes (alubias con acelgas y patata)|alu:180,ace:200,pat:100,hue:55,aov:10",
       "Tortilla de patatas con ensalada valenciana|hue:110,cla:100,pat:200,lec:60,tom:100,oli:20,aov:10",
@@ -179,8 +179,8 @@ const SEASONS = {
     desFruit: "fra",
     mmFruits: [["mel", 120], ["fra", 70], ["ara", 100], ["nar", 130], ["pin", 150], ["fre", 150], ["kiw", 150]],
     comidas: [
-      "Paella valenciana de pollo y conejo (azafrán, sin pimentón)|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
-      "Paella de marisco (azafrán, sin pimentón)|arr:70,gam:80,sep:100,cal:60,tom:60,aov:10",
+      "Paella valenciana de pollo y conejo|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
+      "Paella de marisco|arr:70,gam:80,sep:100,cal:60,tom:60,aov:10",
       "Arròs a banda con sepia y gambas (sin alioli)|arr:70,sep:150,gam:60,tom:60,aov:10",
       "Ensalada de arroz con atún, huevo y tomate|arr:70,atu:112,hue:55,tom:120,pep:100,aov:10",
       "Clòtxines al vapor con patata y ensalada|mej:150,pat:250,lec:60,tom:100,aov:10",
@@ -232,8 +232,8 @@ const SEASONS = {
     desFruit: "uva",
     mmFruits: [["man", 150], ["uva", 100], ["kiw", 150], ["pla", 100], ["nar", 130], ["man", 150], ["kiw", 150]],
     comidas: [
-      "Arròs al forn con costilla, garbanzos y patata (sin morcilla ni pimentón)|arr:65,cos:85,gar:60,pat:60,tom:80,aov:5",
-      "Paella valenciana de pollo y conejo (azafrán, sin pimentón)|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
+      "Arròs al forn con costilla, garbanzos y patata (sin morcilla)|arr:65,cos:85,gar:60,pat:60,tom:80,aov:5",
+      "Paella valenciana de pollo y conejo|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
       "Arròs amb fesols i naps (arroz con alubias, nabo y costilla)|arr:60,alu:100,nab:120,cos:80,ace:80,aov:5",
       "Arròs amb bledes (arroz con acelgas, alubias y bacalao)|arr:60,ace:200,alu:100,bac:80,tom:60,aov:10",
       "Lentejas con arroz y huevo duro|len:200,arr:30,zan:80,tri:60,hue:110,aov:10",
@@ -286,7 +286,7 @@ const SEASONS = {
     mmFruits: [["nar", 130], ["man", 150], ["kiw", 150], ["pin", 150], ["nar", 130], ["kiw", 150], ["man", 150]],
     comidas: [
       "Putxero valenciano con pilotes (garbanzos, pollo, ternera, patata, zanahoria, nabo y chirivía)|gar:120,pol:70,ter:50,pat:120,zan:80,nab:80,chi:60,aov:5",
-      "Arròs al forn con costilla, garbanzos y patata (sin morcilla ni pimentón)|arr:65,cos:85,gar:60,pat:60,tom:80,aov:5",
+      "Arròs al forn con costilla, garbanzos y patata (sin morcilla)|arr:65,cos:85,gar:60,pat:60,tom:80,aov:5",
       "Arròs amb fesols i naps (arroz con alubias, nabo y costilla)|arr:60,alu:100,nab:120,cos:80,ace:80,aov:5",
       "Arròs amb bledes (arroz con acelgas, alubias y bacalao)|arr:60,ace:200,alu:100,bac:80,tom:60,aov:10",
       "Lentejas con arroz y huevo duro|len:200,arr:30,zan:80,tri:60,hue:110,aov:10",
@@ -299,12 +299,12 @@ const SEASONS = {
       "Pilotes de ternera en salsa de tomate con patata|ter:120,pan:15,hue:30,tri:150,pat:200,aov:10",
       "Arròs negre de sepia|arr:70,sep:180,tom:60,aov:10",
       "Macarrones integrales con atún, tomate y parmesano|pas:70,atu:112,tri:150,par:10,aov:5",
-      "Borreta (patata, espinacas, bacalao y huevo; sin pimentón)|pat:250,esp:200,bac:150,hue:55,aov:10",
+      "Borreta (patata, espinacas, bacalao y huevo)|pat:250,esp:200,bac:150,hue:55,aov:10",
       "Figatells caseros (cerdo e hígado) con patata y acelgas|lom:80,hig:80,pat:200,ace:150,aov:10",
       "Merluza en salsa verde (perejil) con patata|mer:200,pat:250,jud:80,aov:10",
       "Lomo con puré de patata y espinacas|lom:130,pat:250,esp:150,aov:10",
       "Garbanzos guisados con pollo y zanahoria|gar:150,mus:130,zan:100,pat:80,tri:60,aov:10",
-      "Paella valenciana de pollo y conejo (azafrán, sin pimentón)|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
+      "Paella valenciana de pollo y conejo|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
       "Caballa al horno con patata y nabo|cab:130,pat:220,nab:100,aov:5",
     ],
     cenas: [
@@ -416,23 +416,25 @@ function normalize(o, slot) {
   return { ...o, t, items };
 }
 
-// Especias recomendadas (sin pimentón, cayena, guindilla ni curry)
+// Especias recomendadas (todas las especias están permitidas; el pimiento como verdura no)
 function spicesFor(o) {
   const t = o.t.toLowerCase(), has = (...cs) => o.items.some(([c]) => cs.includes(c));
   if (/arròs negre/.test(t)) return "azafrán, laurel y perejil";
-  if (/paella|arròs|arroz caldoso|arroz con|fideuà|arròs al forn/.test(t)) return "azafrán, romero y pimienta negra";
+  if (/arròs al forn/.test(t)) return "pimentón dulce, azafrán y romero";
+  if (/paella|arròs|arroz caldoso|arroz con|fideuà/.test(t)) return "pimentón dulce, azafrán y romero";
   if (/figatell|hígado/.test(t)) return "pimienta negra, clavo y nuez moscada";
   if (/pilotes|putxero/.test(t)) return "nuez moscada, perejil, laurel y pimienta negra";
   if (/crema de calabaza|calabaza asada|puré de calabaza/.test(t)) return "nuez moscada, comino y jengibre";
-  if (has("len", "gar", "alu")) return "comino, laurel y cúrcuma";
-  if (has("con")) return "romero, tomillo y laurel";
-  if (has("pol", "mus", "pav")) return "romero, tomillo, cúrcuma y pimienta negra";
-  if (has("pul")) return "comino, laurel y sal gruesa";
+  if (/borreta|giraboix/.test(t)) return "pimentón dulce, comino y laurel";
+  if (has("len", "gar", "alu")) return "pimentón dulce, comino, laurel y cúrcuma";
+  if (has("con")) return "romero, tomillo, laurel y una pizca de cayena";
+  if (has("pol", "mus", "pav")) return "romero, tomillo, pimentón, cúrcuma o curry";
+  if (has("pul")) return "pimentón dulce y picante, y sal gruesa";
   if (has("mej", "gam", "cal", "sep")) return "laurel, perejil y limón";
   if (has("sar", "cab", "bon", "jur", "boq", "sca", "sal", "atu")) return "orégano, perejil y limón";
   if (has("mer", "bac", "dor", "lub", "tru")) return "perejil, laurel, eneldo y limón";
-  if (has("lom", "ter", "cos", "jam")) return "orégano, tomillo y pimienta negra";
-  if (has("hue", "cla")) return "perejil, pimienta negra y nuez moscada";
+  if (has("lom", "ter", "cos", "jam")) return "pimentón, orégano, tomillo y pimienta negra";
+  if (has("hue", "cla")) return "perejil, pimentón, pimienta negra y nuez moscada";
   return "orégano, albahaca y tomillo";
 }
 
