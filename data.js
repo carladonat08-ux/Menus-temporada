@@ -1,90 +1,90 @@
 // Datos del planificador estacional
-// ING: código -> [nombre, categoría, kcal/100 g, proteína/100 g, hidrato escalable en descanso?, unidad [nombre, g/ud] o null, precio orientativo €/kg]
+// ING: código -> [nombre, categoría, kcal/100 g, proteína/100 g, hidrato escalable en descanso?, unidad opcional [nombre, g/ud]]
 const ING = {
-  pol: ["Pechuga de pollo", "carne", 110, 23, 0, null, 7.5],
-  mus: ["Muslo de pollo deshuesado sin piel", "carne", 120, 20, 0, null, 6.5],
-  pav: ["Pechuga de pavo", "carne", 105, 24, 0, null, 9],
-  ter: ["Ternera magra (filetes o para guisar)", "carne", 130, 21, 0, null, 12],
-  lom: ["Lomo de cerdo", "carne", 140, 21, 0, null, 7],
-  jam: ["Jamón cocido extra", "carne", 110, 19, 0, null, 12],
-  fpv: ["Pavo en lonchas", "carne", 100, 19, 0, null, 12],
-  que: ["Queso curado (manchego u oveja)", "lacteos", 400, 25, 0, null, 13],
-  par: ["Parmesano o grana padano", "lacteos", 390, 33, 0, null, 15],
-  moz: ["Mozzarella sin lactosa", "lacteos", 250, 18, 0, null, 9],
-  mej: ["Mejillones cocidos (carne, congelados)", "pescado", 172, 24, 0, null, 9],
-  pul: ["Pulpo cocido", "pescado", 90, 18, 0, null, 20],
-  jur: ["Jurel", "pescado", 120, 20, 0, null, 5],
-  boq: ["Boquerones", "pescado", 115, 20, 0, null, 6],
-  tru: ["Trucha", "pescado", 120, 20, 0, null, 7],
-  sca: ["Sardinas en lata con espina (escurridas)", "pescado", 210, 25, 0, ["latas", 85], 12],
-  hig: ["Hígado de pollo", "carne", 120, 17, 0, null, 4],
-  con: ["Conejo troceado", "carne", 135, 21, 0, null, 7.5],
-  sal: ["Salmón (porciones congeladas)", "pescado", 200, 20, 0, null, 14],
-  mer: ["Merluza (congelada)", "pescado", 75, 16, 0, null, 8],
-  bac: ["Bacalao (lomos congelados)", "pescado", 80, 18, 0, null, 11],
-  dor: ["Dorada de piscifactoría", "pescado", 100, 20, 0, null, 9],
-  lub: ["Lubina de piscifactoría", "pescado", 100, 19, 0, null, 10],
-  sar: ["Sardinas (limpias)", "pescado", 150, 20, 0, null, 5],
-  cab: ["Caballa", "pescado", 180, 19, 0, null, 6],
-  bon: ["Bonito (fresco en verano o congelado)", "pescado", 140, 24, 0, null, 11],
-  atu: ["Atún al natural (lata)", "pescado", 110, 25, 0, ["latas", 56], 14],
-  gam: ["Gambas peladas congeladas", "pescado", 85, 19, 0, null, 11],
-  cal: ["Anillas de calamar congeladas", "pescado", 80, 16, 0, null, 8],
-  sep: ["Sepia congelada", "pescado", 75, 16, 0, null, 9],
-  hue: ["Huevos", "huevos", 140, 12.5, 0, ["uds", 55], 4.5],
-  cla: ["Claras de huevo", "huevos", 50, 11, 0, null, 4],
-  tof: ["Tofu firme", "huevos", 130, 13, 0, null, 6],
-  lsl: ["Leche sin lactosa enriquecida en calcio", "lacteos", 46, 3.3, 0, null, 1.1],
-  sky: ["Yogur o skyr sin lactosa (marca blanca)", "lacteos", 63, 11, 0, null, 5],
-  arr: ["Arroz integral", "cereal", 350, 7.5, 1, null, 2.2],
-  qui: ["Quinoa", "cereal", 365, 14, 1, null, 7],
-  pas: ["Pasta de arroz integral", "cereal", 355, 7.5, 1, null, 5],
-  fid: ["Fideos de arroz", "cereal", 360, 6, 1, null, 6],
-  pom: ["Polenta (harina de maíz)", "cereal", 360, 8, 1, null, 3],
-  pat: ["Patata", "cereal", 80, 2, 1, null, 1.3],
-  pan: ["Pan de masa madre de espelta", "cereal", 250, 9, 1, null, 7],
-  avn: ["Copos de avena", "cereal", 375, 13, 0, null, 2],
-  len: ["Lentejas cocidas (bote, escurridas)", "legumbre", 90, 7, 1, null, 2.5],
-  gar: ["Garbanzos cocidos (bote, escurridos)", "legumbre", 120, 7, 1, null, 2.3],
-  alu: ["Alubias blancas cocidas (bote, escurridas)", "legumbre", 95, 6.5, 1, null, 2.5],
-  tor: ["Tortitas de arroz", "cereal", 380, 8, 0, ["uds", 9], 8],
-  cbc: ["Calabacín", "verdura", 17, 1.2, 0, null, 1.8],
-  zan: ["Zanahoria", "verdura", 40, 0.9, 0, null, 1.2],
-  ber: ["Berenjena", "verdura", 25, 1, 0, null, 2.2],
-  jud: ["Judía verde", "verdura", 30, 1.8, 0, null, 4],
-  esp: ["Espinacas", "verdura", 23, 2.9, 0, null, 6],
-  tom: ["Tomate", "verdura", 20, 0.9, 0, null, 2.5],
-  tri: ["Tomate triturado", "verdura", 30, 1.3, 0, null, 1.5],
-  pep: ["Pepino", "verdura", 13, 0.6, 0, null, 1.8],
-  lec: ["Lechuga", "verdura", 15, 1.3, 0, null, 3],
-  can: ["Canónigos", "verdura", 20, 2, 0, null, 12],
-  ace: ["Acelgas", "verdura", 20, 1.8, 0, null, 2.5],
-  pak: ["Pak choi", "verdura", 13, 1.5, 0, null, 6],
-  cza: ["Calabaza japonesa (kabocha)", "verdura", 35, 1, 0, null, 1.8],
-  chi: ["Chirivía", "verdura", 75, 1.2, 0, null, 4],
-  nab: ["Nabo", "verdura", 28, 0.9, 0, null, 2.5],
-  kal: ["Kale", "verdura", 35, 3, 0, null, 8],
-  end: ["Endibias", "verdura", 17, 1.2, 0, null, 3],
-  pue: ["Puerro (solo la parte verde)", "verdura", 30, 1.5, 0, null, 2.5],
-  apn: ["Apionabo", "verdura", 42, 1.5, 0, null, 4],
-  fre: ["Fresas", "fruta", 33, 0.7, 0, null, 4],
-  ara: ["Arándanos congelados", "fruta", 57, 0.7, 0, null, 7],
-  fra: ["Frambuesas congeladas", "fruta", 52, 1.2, 0, null, 8],
-  kiw: ["Kiwi", "fruta", 61, 1.1, 0, null, 3.5],
-  nar: ["Naranja", "fruta", 47, 0.9, 0, null, 1.5],
-  man: ["Mandarina", "fruta", 53, 0.8, 0, null, 2],
-  pla: ["Plátano poco maduro", "fruta", 90, 1.1, 0, null, 1.8],
-  pin: ["Piña", "fruta", 50, 0.5, 0, null, 1.8],
-  uva: ["Uva", "fruta", 69, 0.7, 0, null, 3],
-  mel: ["Melón cantalupo", "fruta", 34, 0.8, 0, null, 1.8],
-  pap: ["Papaya", "fruta", 43, 0.5, 0, null, 5],
-  aov: ["Aceite de oliva virgen extra", "grasa", 900, 0, 0, null, 8.7],
-  agu: ["Aguacate", "grasa", 160, 2, 0, null, 5],
-  nue: ["Nueces", "grasa", 650, 15, 0, null, 12],
-  alm: ["Almendras", "grasa", 600, 21, 0, null, 13],
-  cac: ["Crema de cacahuete 100 %", "grasa", 600, 25, 0, null, 10],
-  coc: ["Leche de coco ligera", "grasa", 70, 0.5, 0, null, 4],
-  whe: ["Whey isolate (sin polioles ni inulina)", "suple", 370, 85, 0, null, 30],
+  pol: ["Pechuga de pollo", "carne", 110, 23, 0],
+  mus: ["Muslo de pollo deshuesado sin piel", "carne", 120, 20, 0],
+  pav: ["Pechuga de pavo", "carne", 105, 24, 0],
+  ter: ["Ternera magra (filetes o para guisar)", "carne", 130, 21, 0],
+  lom: ["Lomo de cerdo", "carne", 140, 21, 0],
+  jam: ["Jamón cocido extra", "carne", 110, 19, 0],
+  fpv: ["Pavo en lonchas", "carne", 100, 19, 0],
+  que: ["Queso curado (manchego u oveja)", "lacteos", 400, 25, 0],
+  par: ["Parmesano o grana padano", "lacteos", 390, 33, 0],
+  moz: ["Mozzarella sin lactosa", "lacteos", 250, 18, 0],
+  mej: ["Mejillones cocidos (carne, congelados)", "pescado", 172, 24, 0],
+  pul: ["Pulpo cocido", "pescado", 90, 18, 0],
+  jur: ["Jurel", "pescado", 120, 20, 0],
+  boq: ["Boquerones", "pescado", 115, 20, 0],
+  tru: ["Trucha", "pescado", 120, 20, 0],
+  sca: ["Sardinas en lata con espina (escurridas)", "pescado", 210, 25, 0, ["latas", 85]],
+  hig: ["Hígado de pollo", "carne", 120, 17, 0],
+  con: ["Conejo troceado", "carne", 135, 21, 0],
+  sal: ["Salmón (porciones congeladas)", "pescado", 200, 20, 0],
+  mer: ["Merluza (congelada)", "pescado", 75, 16, 0],
+  bac: ["Bacalao (lomos congelados)", "pescado", 80, 18, 0],
+  dor: ["Dorada de piscifactoría", "pescado", 100, 20, 0],
+  lub: ["Lubina de piscifactoría", "pescado", 100, 19, 0],
+  sar: ["Sardinas (limpias)", "pescado", 150, 20, 0],
+  cab: ["Caballa", "pescado", 180, 19, 0],
+  bon: ["Bonito (fresco en verano o congelado)", "pescado", 140, 24, 0],
+  atu: ["Atún al natural (lata)", "pescado", 110, 25, 0, ["latas", 56]],
+  gam: ["Gambas peladas congeladas", "pescado", 85, 19, 0],
+  cal: ["Anillas de calamar congeladas", "pescado", 80, 16, 0],
+  sep: ["Sepia congelada", "pescado", 75, 16, 0],
+  hue: ["Huevos", "huevos", 140, 12.5, 0, ["uds", 55]],
+  cla: ["Claras de huevo", "huevos", 50, 11, 0],
+  tof: ["Tofu firme", "huevos", 130, 13, 0],
+  lsl: ["Leche sin lactosa enriquecida en calcio", "lacteos", 46, 3.3, 0],
+  sky: ["Yogur o skyr sin lactosa (marca blanca)", "lacteos", 63, 11, 0],
+  arr: ["Arroz integral", "cereal", 350, 7.5, 1],
+  qui: ["Quinoa", "cereal", 365, 14, 1],
+  pas: ["Pasta de arroz integral", "cereal", 355, 7.5, 1],
+  fid: ["Fideos de arroz", "cereal", 360, 6, 1],
+  pom: ["Polenta (harina de maíz)", "cereal", 360, 8, 1],
+  pat: ["Patata", "cereal", 80, 2, 1],
+  pan: ["Pan de masa madre de espelta", "cereal", 250, 9, 1],
+  avn: ["Copos de avena", "cereal", 375, 13, 0],
+  len: ["Lentejas cocidas (bote, escurridas)", "legumbre", 90, 7, 1],
+  gar: ["Garbanzos cocidos (bote, escurridos)", "legumbre", 120, 7, 1],
+  alu: ["Alubias blancas cocidas (bote, escurridas)", "legumbre", 95, 6.5, 1],
+  tor: ["Tortitas de arroz", "cereal", 380, 8, 0, ["uds", 9]],
+  cbc: ["Calabacín", "verdura", 17, 1.2, 0],
+  zan: ["Zanahoria", "verdura", 40, 0.9, 0],
+  ber: ["Berenjena", "verdura", 25, 1, 0],
+  jud: ["Judía verde", "verdura", 30, 1.8, 0],
+  esp: ["Espinacas", "verdura", 23, 2.9, 0],
+  tom: ["Tomate", "verdura", 20, 0.9, 0],
+  tri: ["Tomate triturado", "verdura", 30, 1.3, 0],
+  pep: ["Pepino", "verdura", 13, 0.6, 0],
+  lec: ["Lechuga", "verdura", 15, 1.3, 0],
+  can: ["Canónigos", "verdura", 20, 2, 0],
+  ace: ["Acelgas", "verdura", 20, 1.8, 0],
+  pak: ["Pak choi", "verdura", 13, 1.5, 0],
+  cza: ["Calabaza japonesa (kabocha)", "verdura", 35, 1, 0],
+  chi: ["Chirivía", "verdura", 75, 1.2, 0],
+  nab: ["Nabo", "verdura", 28, 0.9, 0],
+  kal: ["Kale", "verdura", 35, 3, 0],
+  end: ["Endibias", "verdura", 17, 1.2, 0],
+  pue: ["Puerro (solo la parte verde)", "verdura", 30, 1.5, 0],
+  apn: ["Apionabo", "verdura", 42, 1.5, 0],
+  fre: ["Fresas", "fruta", 33, 0.7, 0],
+  ara: ["Arándanos congelados", "fruta", 57, 0.7, 0],
+  fra: ["Frambuesas congeladas", "fruta", 52, 1.2, 0],
+  kiw: ["Kiwi", "fruta", 61, 1.1, 0],
+  nar: ["Naranja", "fruta", 47, 0.9, 0],
+  man: ["Mandarina", "fruta", 53, 0.8, 0],
+  pla: ["Plátano poco maduro", "fruta", 90, 1.1, 0],
+  pin: ["Piña", "fruta", 50, 0.5, 0],
+  uva: ["Uva", "fruta", 69, 0.7, 0],
+  mel: ["Melón cantalupo", "fruta", 34, 0.8, 0],
+  pap: ["Papaya", "fruta", 43, 0.5, 0],
+  aov: ["Aceite de oliva virgen extra", "grasa", 900, 0, 0],
+  agu: ["Aguacate", "grasa", 160, 2, 0],
+  nue: ["Nueces", "grasa", 650, 15, 0],
+  alm: ["Almendras", "grasa", 600, 21, 0],
+  cac: ["Crema de cacahuete 100 %", "grasa", 600, 25, 0],
+  coc: ["Leche de coco ligera", "grasa", 70, 0.5, 0],
+  whe: ["Whey isolate (sin polioles ni inulina)", "suple", 370, 85, 0],
 };
 
 
@@ -332,9 +332,9 @@ const SEASONS = {
 
 // Desayunos (la fruta del A cambia según estación)
 const DESAYUNOS = {
-  A: { t: "Porridge de avena con whey, fruta y nueces", i: (s) => `avn:50,lsl:150,whe:30,${s.desFruit}:100,nue:10` },
-  B: { t: "Tostada de espelta con 2 huevos revueltos, queso curado y tomate", i: () => "pan:60,hue:110,cla:70,que:20,tom:80,aov:5" },
-  C: { t: "Tortitas de avena con leche, huevo y whey, con plátano y crema de cacahuete", i: () => "avn:40,lsl:150,hue:55,whe:30,pla:60,cac:10" },
+  A: { t: "Porridge de avena con leche, whey, fruta y nueces", i: (s) => `avn:60,lsl:200,whe:15,${s.desFruit}:100,nue:15` },
+  B: { t: "Tostada de espelta con 2 huevos revueltos, queso curado y tomate", i: () => "pan:70,hue:110,que:20,tom:80,aov:5" },
+  C: { t: "Tortitas de avena con leche, huevo y whey, con plátano y crema de cacahuete", i: () => "avn:50,lsl:150,hue:55,whe:15,pla:80,cac:15" },
 };
 const DES_ROT = ["A", "B", "A", "C", "A", "B", "C"];
 const DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
@@ -369,17 +369,28 @@ function nutrients(items) {
   return t;
 }
 
+// Proteína por comida/cena: como máximo ~33 g (reparte mejor y evita excesos).
+// Se reduce solo el alimento proteico principal, nunca por debajo del 65 %.
+const MAX_P_MEAL = 33;
+function capProt(o) {
+  const p = o.items.reduce((s, [c, g]) => s + ING[c][3] * g / 100, 0);
+  if (p <= MAX_P_MEAL) return o;
+  const pMain = o.items.filter(([c]) => PROT.includes(c)).reduce((s, [c, g]) => s + ING[c][3] * g / 100, 0);
+  if (!pMain) return o;
+  const f = Math.max(0.65, 1 - (p - MAX_P_MEAL) / pMain);
+  return { ...o, items: o.items.map(([c, g]) => [c, PROT.includes(c) && !ING[c][5] ? Math.round(g * f / 5) * 5 : g]) };
+}
+
 // Índices por defecto de comida (w = 0..3). Con 21 platos, las semanas 1-3 no repiten; la 4 mezcla.
 function defaultComida(w, d, N) { return w < 3 ? (d + 7 * w) % N : (d * 3 + 1) % N; }
 function defaultCena(w, d, N) { return w < 3 ? (d + 7 * ((w + 1) % 3) + 2) % N : (d * 3 + 2) % N; }
 
-// Construye el menú de una semana. opts: { ent: [7 booleanos], swaps: { "d-c": n, "d-n": n } }
+// Construye el menú de una semana. opts: { ent: [7 booleanos] }
 // Reglas: comida y cena sin la misma proteína ni doble legumbre; hígado máx. 1 vez/semana;
 // al menos 2 días con legumbres a la semana.
 function buildWeek(key, w, opts = {}) {
   const S = SEASONS[key];
   const ENT = opts.ent || ENTRENO_DEF;
-  const swaps = opts.swaps || {};
   const NC = S.comidas.length, NN = S.cenas.length;
   const hasHig = (str) => /\bhig:/.test(str);
   const hasLeg = (str) => /\b(len|gar|alu):/.test(str);
@@ -391,12 +402,10 @@ function buildWeek(key, w, opts = {}) {
   for (let d = 0; d < 7; d++) {
     let ci = defaultComida(w, d, NC);
     for (let j = 0; j < NC; j++) { const c = (ci + j) % NC; if (!usedC.has(c) && !(higUsed && hasHig(S.comidas[c]))) { ci = c; break; } }
-    if (swaps[`${d}-c`] !== undefined) ci = swaps[`${d}-c`] % NC;
     usedC.add(ci);
     const com0 = dish(S.comidas[ci]);
     let ni = defaultCena(w, d, NN);
-    if (swaps[`${d}-n`] !== undefined) ni = swaps[`${d}-n`] % NN;
-    else for (let j = 0; j < NN; j++) {
+    for (let j = 0; j < NN; j++) {
       const cand = (ni + j) % NN;
       if (!usedN.has(cand) && !clash(com0, dish(S.cenas[cand])) && !((higUsed || hasHig(S.comidas[ci])) && hasHig(S.cenas[cand]))) { ni = cand; break; }
     }
@@ -404,10 +413,10 @@ function buildWeek(key, w, opts = {}) {
     if (hasHig(S.comidas[ci]) || hasHig(S.cenas[ni])) higUsed = true;
     CI.push(ci); NI.push(ni);
   }
-  // 2) Asegurar al menos 2 días con legumbres (sin tocar platos cambiados a mano)
+  // 2) Asegurar al menos 2 días con legumbres
   const legDays = () => CI.filter((c, d) => hasLeg(S.comidas[c]) || hasLeg(S.cenas[NI[d]])).length;
   for (let d = 0; d < 7 && legDays() < 2; d++) {
-    if (hasLeg(S.comidas[CI[d]]) || hasLeg(S.cenas[NI[d]]) || swaps[`${d}-n`] !== undefined) continue;
+    if (hasLeg(S.comidas[CI[d]]) || hasLeg(S.cenas[NI[d]])) continue;
     for (let cand = 0; cand < NN; cand++) {
       if (hasLeg(S.cenas[cand]) && !NI.includes(cand) && !hasHig(S.cenas[cand]) && !clash(dish(S.comidas[CI[d]]), dish(S.cenas[cand]))) { NI[d] = cand; break; }
     }
@@ -437,8 +446,8 @@ function buildWeek(key, w, opts = {}) {
       const f = CITRICO[key];
       return { ...o, t: `${o.t} + ${ING[f][0].toLowerCase()} de postre`, items: [...o.items, [f, f === "nar" ? 130 : 150]] };
     };
-    const com = { ...withCitrus(scale(dish(S.comidas[ci]))), idx: ci, slot: "c" };
-    const cen = { ...withCitrus(scale(dish(S.cenas[ni]))), idx: ni, slot: "n" };
+    const com = withCitrus(scale(capProt(dish(S.comidas[ci]))));
+    const cen = withCitrus(scale(capProt(dish(S.cenas[ni]))));
     const meals = [["Desayuno", des], ["Media mañana", mm], ["Comida", com], [ent ? "Pre-entreno" : "Merienda", mer], ["Cena", cen]];
     const n = nutrients(meals.flatMap(([, m]) => m.items));
     days.push({ dia: DIAS[d], ent, meals, kcal: Math.round(n.kcal), prot: Math.round(n.prot), fat: Math.round(n.fat), carb: Math.round(n.carb), fib: Math.round(n.fib), ca: Math.round(n.ca), fe: +n.fe.toFixed(1) });
@@ -446,28 +455,10 @@ function buildWeek(key, w, opts = {}) {
   return days;
 }
 
-// Siguiente plato válido para "Cambiar plato"
-function nextDish(key, w, d, slot, opts) {
-  const S = SEASONS[key];
-  const week = buildWeek(key, w, opts);
-  const list = slot === "c" ? S.comidas : S.cenas;
-  const cur = week[d].meals[slot === "c" ? 2 : 4][1].idx;
-  const usedSame = new Set(week.map((x, i) => i !== d ? x.meals[slot === "c" ? 2 : 4][1].idx : -1));
-  const other = dish((slot === "c" ? S.cenas : S.comidas)[week[d].meals[slot === "c" ? 4 : 2][1].idx]);
-  for (let j = 1; j < list.length; j++) {
-    const cand = (cur + j) % list.length;
-    if (!usedSame.has(cand) && !clash(dish(list[cand]), other)) return cand;
-  }
-  return cur;
-}
-
 function shopping(days) {
   const tot = {};
   days.forEach((d) => d.meals.forEach(([, m]) => m.items.forEach(([c, g]) => { tot[c] = (tot[c] || 0) + g; })));
   const out = {};
-  let cost = 0;
-  Object.entries(tot).forEach(([c, g]) => { cost += (ING[c][6] || 0) * g / 1000; });
-  out._cost = cost;
   Object.entries(tot).forEach(([c, g]) => {
     const [n, cat, , , , u] = ING[c];
     let q;
@@ -501,4 +492,4 @@ function seasonOf(date) {
   return { key: seasonKey(monday), week: n === 5 ? 1 : n - 1, n, month: MESES[monday.getMonth()], monday, dow };
 }
 
-if (typeof module !== "undefined") module.exports = { ING, NUT, SEASONS, buildWeek, shopping, seasonOf, nextDish };
+if (typeof module !== "undefined") module.exports = { ING, NUT, SEASONS, buildWeek, shopping, seasonOf };

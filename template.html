@@ -28,7 +28,6 @@
   --accent: #3f7d4e;
   --accent-soft: #e3efe5;
   --rest: #8a8f8c;
-  --ok: #3f9a5a; --warn: #d39a2b; --bad: #d1503a;
   --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
   color-scheme: light;
@@ -105,8 +104,6 @@ aside { display: grid; gap: 14px; position: sticky; top: 12px; }
 .shop li .q { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .shop li input:checked + span { text-decoration: line-through; color: var(--muted); }
 .shop .actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-.cost { display: flex; gap: 10px; align-items: baseline; margin-top: 10px; padding: 8px 10px; border-radius: 8px; background: var(--accent-soft); font-size: .84rem; color: var(--muted); }
-.cost b { font-family: var(--display); font-size: 1.3rem; color: var(--accent); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .toolbar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; }
 .ent-days { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .tool-lbl { font-size: .85rem; font-weight: 600; color: var(--muted); }
@@ -114,24 +111,7 @@ aside { display: grid; gap: 14px; position: sticky; top: 12px; }
 .chip { min-width: 40px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 600; font-size: .85rem; }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
 .btn.small { padding: 6px 12px; font-size: .85rem; }
-.nutr { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
-.nutr span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; background: var(--ok); }
-.nutr .mid::before { background: var(--warn); }
-.nutr .low::before { background: var(--bad); }
-.meal-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.swap { border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 999px; font-size: .72rem; font-weight: 600; padding: 2px 9px; }
-.swap:hover { color: var(--accent); border-color: var(--accent); }
-.meal.swapped .t::after { content: " · cambiado"; font-weight: 400; font-size: .75rem; color: var(--accent); }
 .small-t { font-size: .85rem; margin: 0 0 8px; }
-.log-form { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: end; }
-.log-form label:first-child { grid-column: 1 / -1; }
-.log-form input { font: inherit; padding: 7px 9px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); width: 100%; }
-.log-form .btn { grid-column: 1 / -1; }
-.log-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: .86rem; font-variant-numeric: tabular-nums; }
-.log-table th { text-align: left; color: var(--muted); font-weight: 600; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; padding: 4px 0; border-bottom: 1px solid var(--line); }
-.log-table td { padding: 5px 0; border-bottom: 1px solid var(--line); }
-.log-table .del { border: 0; background: transparent; color: var(--muted); font-size: .9rem; padding: 0 4px; }
-.trend { font-size: .85rem; margin-top: 8px; }
 .rules ul { margin: 6px 0 0; padding-left: 18px; font-size: .9rem; display: grid; gap: 4px; }
 .toast { font-size: .85rem; color: var(--accent); min-height: 1.2em; }
 footer { font-size: .85rem; color: var(--muted); max-width: 80ch; }
@@ -154,7 +134,7 @@ footer { font-size: .85rem; color: var(--muted); max-width: 80ch; }
   <header class="top">
     <div>
       <h1>Menús de temporada</h1>
-      <p class="muted">Elige una fecha y verás la estación y la semana de menú que te toca. Son ~1.800 kcal los días de entreno y ~1.700 los de descanso, sin lactosa, fructosa, pimiento, cebolla ni coliflor. Puedes elegir tus días de entreno y cambiar cualquier plato.</p>
+      <p class="muted">Elige una fecha y verás la estación y la semana de menú que te toca. Son ~1.800 kcal los días de entreno y ~1.700 los de descanso, sin lactosa, fructosa, pimiento, cebolla ni coliflor. Puedes elegir tus días de entreno.</p>
     </div>
     <form class="date-box" id="f">
       <label for="fecha">Fecha
@@ -173,24 +153,12 @@ footer { font-size: .85rem; color: var(--muted); max-width: 80ch; }
       <span id="ent-lbl" class="tool-lbl">Mis días de entreno</span>
       <div id="entdays" class="chips"></div>
     </div>
-    <button type="button" class="btn small" id="reset">Restaurar platos de esta semana</button>
   </div>
 
   <div class="main">
     <section class="days" id="days" aria-label="Menú de la semana"></section>
     <aside>
       <div class="panel shop" id="shop"></div>
-      <div class="panel log">
-        <h2>Mi registro</h2>
-        <p class="muted small-t">Pésate 3 días por semana en ayunas. La media semanal es la que cuenta.</p>
-        <form id="logf" class="log-form">
-          <label for="lfecha">Fecha<input type="date" id="lfecha" required></label>
-          <label for="lpeso">Peso (kg)<input type="number" id="lpeso" step="0.1" min="30" max="200" inputmode="decimal" required></label>
-          <label for="lcint">Cintura (cm)<input type="number" id="lcint" step="0.5" min="40" max="150" inputmode="decimal"></label>
-          <button class="btn" type="submit">Guardar</button>
-        </form>
-        <div id="logview"></div>
-      </div>
       <div class="panel rules">
         <h2>Reglas que sigue el menú</h2>
         <ul>
@@ -199,20 +167,20 @@ footer { font-size: .85rem; color: var(--muted); max-width: 80ch; }
           <li>Sin pimiento ni derivados (pimentón, cayena, curry), sin cebolla y sin coliflor.</li>
           <li>En las etiquetas, descarta: sorbitol (E420), manitol (E421), xilitol (E967), maltitol (E965), jarabe de glucosa-fructosa e inulina.</li>
           <li>Cereales integrales: arroz integral, pasta de arroz integral y pan de espelta de masa madre con fermentación larga. Las 2 primeras semanas, mezcla mitad blanco y mitad integral, y cambia un alimento cada vez.</li>
-          <li>Comida y cena nunca repiten la misma proteína ni llevan legumbre las dos el mismo día.</li>
+          <li>Comida y cena nunca repiten la misma proteína ni llevan legumbre las dos el mismo día. La proteína se reparte en 4-5 tomas de 15-35 g, unos 1,9-2 g/kg al día.</li>
           <li>Legumbres 2-3 veces por semana. Mejor de bote y bien enjuagadas: se digieren mejor que las cocidas en casa.</li>
           <li>En los días de descanso, las legumbres, el arroz, la pasta, la patata y el pan de comida y cena bajan un 20 %. Las cantidades ya están ajustadas.</li>
           <li>Calcio (objetivo ~1.000 mg): yogur o skyr a diario, leche enriquecida, queso curado y sardinas en lata con espina.</li>
           <li>Hierro (objetivo 16-18 mg): hígado de pollo como máximo 1 vez por semana por su vitamina A, mejillones, pulpo, carne y legumbres. Las legumbres llevan cítrico de postre para absorber mejor el hierro. Toma el café o el té 1 h antes o después de comer.</li>
           <li>Usa sal yodada. Revisa en tu analítica la ferritina y la vitamina D, sobre todo en otoño e invierno.</li>
-          <li>Para ahorrar: compra el pescado, las gambas y los frutos rojos congelados, las legumbres en bote, las marcas blancas y la fruta de temporada. Puedes cambiar cualquier pescado blanco por merluza congelada, que es el más barato, y la caballa y las sardinas dan el mismo omega-3 que el salmón.</li>
+          <li>Para ahorrar: pescado, marisco y frutos rojos congelados, legumbres de bote, marcas blancas y fruta de temporada. Cualquier pescado blanco se puede cambiar por merluza congelada.</li>
           <li>Creatina: 3-5 g todos los días. Agua: 2-2,5 L.</li>
         </ul>
       </div>
     </aside>
   </div>
 
-  <footer>Pesos en crudo y en limpio. Las calorías y la proteína son estimaciones a partir de tablas de composición estándar. Los precios son orientativos, de supermercado en España en 2026, y varían según la tienda. Calcio, hierro y fibra: el punto verde indica que llegas al objetivo, el ámbar que te quedas cerca y el rojo que te quedas bajo. Es una pauta general y no sustituye a tu médico o dietista.</footer>
+  <footer>Pesos en crudo y en limpio. Las calorías y la proteína son estimaciones a partir de tablas de composición estándar. Es una pauta general y no sustituye a tu médico o dietista.</footer>
 </div>
 
 <script>
@@ -238,9 +206,7 @@ function ingText(items) {
 }
 
 let ent = store.get("ent") || ENTRENO_DEF.slice();
-const swapKey = () => `swaps-${state.key}-${state.week}`;
-const opts = () => ({ ent, swaps: store.get(swapKey()) || {} });
-const lvl = (v, ok, mid) => (v >= ok ? "" : v >= mid ? "mid" : "low");
+const opts = () => ({ ent });
 
 function setDate(d) {
   const s = seasonOf(d);
@@ -262,7 +228,7 @@ function render() {
       <div><b>${fmtDate(state.date)}</b> · ${DIAS[state.dow]} de la semana ${state.n} de ${state.month}${state.n === 5 ? " (usa el menú de la semana 2)" : ""}</div>
       <div class="muted">${S.range}. ${S.note}</div>
     </div>
-    <div class="stat"><b>${avgE.toLocaleString("es-ES")} kcal</b><span class="muted">media en días de entreno · ${Math.round(avg("prot"))} g de proteína<br>calcio ${Math.round(avg("ca"))} mg · hierro ${avg("fe").toFixed(1).replace(".", ",")} mg al día</span></div>`;
+    <div class="stat"><b>${avgE.toLocaleString("es-ES")} kcal</b><span class="muted">media en días de entreno · ${Math.round(avg("prot"))} g de proteína al día</span></div>`;
 
   $("tabs").innerHTML = [0, 1, 2, 3].map((w) => `
     <button class="tab" role="tab" id="tab-${w}" aria-selected="${w === state.week}" data-w="${w}">
@@ -272,8 +238,6 @@ function render() {
 
   $("entdays").innerHTML = DIAS.map((n, i) => `<button type="button" class="chip" aria-pressed="${ent[i]}" data-i="${i}" title="${n}">${n.slice(0, 2)}</button>`).join("");
   $("entdays").querySelectorAll(".chip").forEach((b) => b.addEventListener("click", () => { ent[+b.dataset.i] = !ent[+b.dataset.i]; store.set("ent", ent); render(); }));
-  const sw = store.get(swapKey()) || {};
-  $("reset").disabled = !Object.keys(sw).length;
 
   $("days").innerHTML = days.map((d, i) => `
     <article class="day${state.week === state.currentWeek && i === state.dow ? " today" : ""}">
@@ -282,58 +246,16 @@ function render() {
         <span class="pill ${d.ent ? "ent" : "des"}">${d.ent ? "Entreno" : "Descanso"}</span>
       </div>
       <div class="totals">≈ ${d.kcal.toLocaleString("es-ES")} kcal · ${d.prot} g de proteína</div>
-      <div class="nutr">
-        <span class="${lvl(d.ca, 900, 700)}">Calcio ${d.ca} mg</span>
-        <span class="${lvl(d.fe, 15, 12)}">Hierro ${String(d.fe).replace(".", ",")} mg</span>
-        <span class="${lvl(d.fib, 25, 20)}">Fibra ${d.fib} g</span>
-      </div>
       ${d.meals.map(([lbl, m]) => `
-        <div class="meal${m.slot && sw[`${i}-${m.slot}`] !== undefined ? " swapped" : ""}">
-          <div class="meal-top"><div class="lbl">${lbl}</div>${m.slot ? `<button type="button" class="swap" data-d="${i}" data-s="${m.slot}" aria-label="Cambiar ${lbl.toLowerCase()} del ${d.dia.toLowerCase()}">Cambiar</button>` : ""}</div>
+        <div class="meal">
+          <div class="lbl">${lbl}</div>
           <div class="t">${esc(m.t)}</div>
           <div class="ing">${esc(ingText(m.items))}</div>
         </div>`).join("")}
     </article>`).join("");
-  $("days").querySelectorAll(".swap").forEach((b) => b.addEventListener("click", () => {
-    const d = +b.dataset.d, slot = b.dataset.s;
-    const next = nextDish(state.key, state.week, d, slot, opts());
-    const s = store.get(swapKey()) || {}; s[`${d}-${slot}`] = next; store.set(swapKey(), s);
-    render();
-  }));
 
   renderShop(days);
 }
-
-$("reset").addEventListener("click", () => { store.set(swapKey(), {}); render(); });
-
-// ---- Registro de peso y cintura
-function renderLog() {
-  const log = (store.get("log") || []).sort((a, b) => b.f.localeCompare(a.f));
-  if (!log.length) { $("logview").innerHTML = '<p class="muted small-t" style="margin-top:10px">Aún no hay registros.</p>'; return; }
-  // medias por semana (lunes)
-  const wk = {};
-  log.forEach((r) => { const d = fromInput(r.f); const m = new Date(d.getFullYear(), d.getMonth(), d.getDate() - ((d.getDay() + 6) % 7)); const k = toInput(m); (wk[k] = wk[k] || []).push(r.p); });
-  const keys = Object.keys(wk).sort();
-  const mean = (a) => a.reduce((x, y) => x + y, 0) / a.length;
-  let trend = "";
-  if (keys.length >= 2) {
-    const last = mean(wk[keys[keys.length - 1]]), prev = mean(wk[keys[keys.length - 2]]), diff = last - prev;
-    const msg = diff < -0.6 ? "Bajas más de 0,5 kg por semana: valora añadir ~150 kcal." : diff > -0.1 ? "Sin bajada esta semana. Si se repite 3 semanas, quita 100-150 kcal." : "Ritmo correcto (0,1-0,6 kg por semana).";
-    trend = `<div class="trend"><b>Media semanal: ${last.toFixed(1).replace(".", ",")} kg</b> (${diff >= 0 ? "+" : ""}${diff.toFixed(1).replace(".", ",")} kg). ${msg}</div>`;
-  } else trend = `<div class="trend"><b>Media de la semana: ${mean(wk[keys[0]]).toFixed(1).replace(".", ",")} kg</b></div>`;
-  $("logview").innerHTML = trend + `<table class="log-table"><thead><tr><th>Fecha</th><th>Peso</th><th>Cintura</th><th></th></tr></thead><tbody>` +
-    log.slice(0, 12).map((r) => `<tr><td>${fromInput(r.f).toLocaleDateString("es-ES", { day: "numeric", month: "short" })}</td><td>${String(r.p).replace(".", ",")} kg</td><td>${r.c ? String(r.c).replace(".", ",") + " cm" : "—"}</td><td><button type="button" class="del" data-f="${r.f}" aria-label="Borrar registro">✕</button></td></tr>`).join("") + "</tbody></table>";
-  $("logview").querySelectorAll(".del").forEach((b) => b.addEventListener("click", () => { store.set("log", (store.get("log") || []).filter((r) => r.f !== b.dataset.f)); renderLog(); }));
-}
-$("lfecha").value = toInput(new Date());
-$("logf").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const r = { f: $("lfecha").value, p: +(+$("lpeso").value).toFixed(1), c: $("lcint").value ? +$("lcint").value : null };
-  if (!r.f || !r.p) return;
-  const log = (store.get("log") || []).filter((x) => x.f !== r.f); log.push(r); store.set("log", log);
-  $("lpeso").value = ""; $("lcint").value = ""; renderLog();
-});
-renderLog();
 
 function renderShop(days) {
   const S = SEASONS[state.key];
@@ -341,9 +263,7 @@ function renderShop(days) {
   const sk = `shop-${state.key}-${state.week}`;
   const checked = store.get(sk) || {};
   const order = ["carne", "pescado", "huevos", "lacteos", "cereal", "legumbre", "verdura", "fruta", "grasa", "suple"];
-  const cost = Math.round(list._cost);
-  let html = `<h2>Lista de la compra</h2><div class="muted" style="font-size:.88rem">${S.name}, semana ${state.week + 1}, cantidades para 7 días</div>
-    <div class="cost"><b>≈ ${cost} €</b><span>coste estimado de la semana, unos ${(list._cost / 7).toFixed(2).replace(".", ",")} € al día. Incluye la parte proporcional de whey y aceite.</span></div>`;
+  let html = `<h2>Lista de la compra</h2><div class="muted" style="font-size:.88rem">${S.name}, semana ${state.week + 1}, cantidades para 7 días</div>`;
   order.forEach((cat) => {
     if (!list[cat]) return;
     html += `<h3>${CATS[cat]}</h3><ul>` + list[cat].sort((a, b) => a[0].localeCompare(b[0], "es")).map(([n, q], j) => {
@@ -358,7 +278,7 @@ function renderShop(days) {
   }));
   $("clear").addEventListener("click", () => { store.set(sk, {}); renderShop(days); });
   $("copy").addEventListener("click", async () => {
-    const txt = `Compra · ${S.name}, semana ${state.week + 1} (≈ ${cost} €)\n` + order.filter((c) => list[c]).map((c) => `\n${CATS[c]}\n` + list[c].map(([n, q]) => `- ${n}: ${q}`).join("\n")).join("\n");
+    const txt = `Compra · ${S.name}, semana ${state.week + 1}\n` + order.filter((c) => list[c]).map((c) => `\n${CATS[c]}\n` + list[c].map(([n, q]) => `- ${n}: ${q}`).join("\n")).join("\n");
     try { await navigator.clipboard.writeText(txt); $("toast").textContent = "Lista copiada."; }
     catch (e) { $("toast").textContent = "No se ha podido copiar. Selecciona la lista y cópiala a mano."; }
   });
