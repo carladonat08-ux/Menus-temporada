@@ -487,6 +487,22 @@ function recetaDe(meal, slot) {
   let r = null;
   for (const [re, fn] of RECETAS) { if (re.test(base)) { if (fn) r = fn(base); break; } }
   if (!r) r = genReceta(base, meal.items);
+  // Si el plato de hoy no lleva pan (por ejemplo, las cenas), se quitan las referencias al pan
+  if (!meal.items.some(([c]) => c === "pan")) {
+    r.pasos = r.pasos
+      .filter((p) => !/^Tuesta el pan\.?$/.test(p.trim()))
+      .map((p) => p
+        .replace(/^Tuesta el pan y ralla el tomate por encima con una pizca de sal\./, "Ralla o corta el tomate y alíñalo con una pizca de sal.")
+        .replace(/Pon las sardinas escurridas sobre el pan\./, "Pon las sardinas escurridas sobre el tomate.")
+        .replace(/,? y (el )?pan( tostado)?\./g, ".")
+        .replace(/ Sirve con el pan( tostado)?( para mojar)?\./g, "")
+        .replace(/Sírvelo con el pan tostado( para mojar)?\./, "Sírvelo bien caliente.")
+        .replace(/Sírvela con el pan\./, "Sírvela recién hecha.")
+        .replace(/ y tuesta el pan/g, "")
+        .replace(/Prepara la ensalada y tuesta el pan\./, "Prepara la ensalada.")
+        .replace(/Sirve con el tomate aliñado con sal, aceite y orégano, y el pan\./, "Sirve con el tomate aliñado con sal, aceite y orégano."))
+      .filter((p) => p.trim());
+  }
   const notas = [...(r.notas || [])];
   if (/de postre$/.test(meal.t)) notas.push("De postre, la fruta cítrica: su vitamina C ayuda a absorber el hierro de la legumbre.");
   if (slot === "c" && !notas.includes(NOTA_TAPER)) notas.push(NOTA_TAPER);

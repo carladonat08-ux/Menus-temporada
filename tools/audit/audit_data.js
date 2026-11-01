@@ -104,6 +104,8 @@ for (const k in X.SEASONS) for (let w = 0; w < 4; w++) {
     if (hc > 1) F("hígado", `${day}: hígado en comida y cena`);
     hig += hc;
     if (com.items.some(([c]) => X.LEG.includes(c))) legL++;
+    // Un solo cereal o pan al día: el del desayuno
+    [d.meals[1], d.meals[3], d.meals[4]].forEach(([l, m]) => { if (m.items.some(([c]) => ["pan", "avn", "tor"].includes(c))) F("pan", `${day}: ${l} con pan o cereal (${m.t})`); });
     // Dos bocadillos
     if (/Bocadill/.test(alm.t) && /Bocadill/.test(mer.t)) F("variedad", `${day}: dos bocadillos`);
     // Raciones según tolerancia

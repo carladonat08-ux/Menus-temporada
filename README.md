@@ -15,7 +15,7 @@ Web personal para planificar la comida de la semana. Al elegir una fecha:
 
 - Dieta para perder grasa: unas 1.800 kcal los días de entreno y unas 1.650 los de descanso, con un techo diario de 1.850 y 1.700 kcal. Si un menú se pasa, la app recorta los hidratos de la comida y la cena. En los días de descanso, el arroz, la pasta, el pan, la patata y las legumbres de comida y cena bajan un 20 %.
 - Cocina de casa de Ontinyent y la Vall d'Albaida: paella valenciana, arròs al forn, arròs amb fesols i naps, arròs amb bledes, putxero con pilotes, giraboix, borreta, bullit, minxos, figatells, clòtxines, tortilla de bajoqueta… El sofrito va con aceite de ajo, tomate y pimentón (azafrán en los arroces), sin morcilla ni alioli.
-- 21 comidas y 21 cenas por estación, y almuerzo a media mañana (yogur con fruta o bocadillito).
+- Más de 21 comidas y 21 cenas por estación, y almuerzo a media mañana (yogur o skyr con fruta).
 - Entre semana, comida de diario (legumbres, guisos, arroz caldoso, plancha). Los platos de fiesta (paellas, fideuà, arròs al forn, arròs a banda, arròs negre, putxero) van solo el domingo, uno distinto cada semana, con algo más de margen de calorías ese día. La coca y los minxos, solo en las cenas de viernes a domingo.
 - Platos pequeños: unas 500 kcal como máximo en la comida y 420 en la cena, con al menos 150 g de verdura por plato.
 - Cada comida y cena sugiere especias (pimentón, azafrán, romero, comino, cúrcuma, nuez moscada…). Todas las especias están permitidas.
@@ -38,7 +38,7 @@ Es una pauta general y no sustituye a un médico o dietista.
 - **Variedad:** cada proteína (pollo, cerdo, merluza, sardina…) como mucho 2 veces por semana y nunca en días seguidos. Arroz entre semana como mucho 2 días y no seguidos. Tortillas como mucho 2, bullit 1 y cremas 2. Nunca el mismo tipo de plato en la comida y la cena.
 - **Cenas ligeras:** proteína con verdura, sin arroz, pasta, fideos ni legumbres. Como mucho 100 g de patata o 30 g de pan, y unas 380 kcal. Si la comida lleva huevo, la cena no es de huevo.
 - **Domingo:** comida de fiesta (paella, fideuà, arròs al forn, arròs negre, putxero…) con una ración generosa. Por la noche no se cena: solo un yogur o unas palomitas caseras.
-- **Nunca dos bocadillos el mismo día.**
+- **Un solo cereal o pan al día, el del desayuno:** el almuerzo es yogur o skyr con fruta; el pre-entreno y la merienda, fruta con queso curado o almendras; la cena no lleva pan.
 
 ## Cómo editarla
 
