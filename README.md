@@ -8,6 +8,7 @@ Web personal para planificar la comida de la semana. Al elegir una fecha:
 - Calcula las calorías y la proteína de cada día.
 - Genera la lista de la compra de la semana. Puedes marcar lo que ya tienes y copiar la lista.
 - Te deja elegir tus días de entreno. Las cantidades se ajustan solas.
+- Botón «Receta» en el desayuno, la comida y la cena: abre los pasos para prepararlo, con tu ración del día, el tiempo, las especias y notas (aceite de ajo, arroz integral, conservación si se cocina el día antes).
 
 ## Pautas del plan
 
@@ -33,6 +34,7 @@ Es una pauta general y no sustituye a un médico o dietista.
 | Archivo | Para qué sirve |
 | --- | --- |
 | `data.js` | Ingredientes (kcal, proteína y nutrientes), platos de cada estación y lógica de los menús |
+| `recipes.js` | Recetas paso a paso (escritas a mano para los platos tradicionales y generadas para los de plancha u horno) |
 | `template.html` | Diseño y funcionamiento de la página |
 | `index.html` | Página final, generada con `python3 build.py` |
 

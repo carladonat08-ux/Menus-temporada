@@ -113,6 +113,28 @@ aside { display: grid; gap: 14px; position: sticky; top: 12px; }
 .btn.small { padding: 6px 12px; font-size: .85rem; }
 .small-t { font-size: .85rem; margin: 0 0 8px; }
 .spice { font-size: .8rem; color: var(--accent); margin-top: 3px; font-style: italic; }
+.meal-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.rec-btn { border: 1px solid var(--accent); background: transparent; color: var(--accent); border-radius: 999px; font-size: .74rem; font-weight: 700; padding: 3px 10px; }
+.rec-btn:hover { background: var(--accent); color: var(--surface); }
+.rec-overlay { position: fixed; inset: 0; background: rgba(20, 24, 22, .55); display: flex; align-items: flex-end; justify-content: center; z-index: 50; padding: 0; }
+.rec-overlay[hidden] { display: none; }
+.rec-panel { position: relative; background: var(--surface); color: var(--ink); width: min(680px, 100%); max-height: 92vh; overflow-y: auto; border-radius: 16px 16px 0 0; padding: 22px 20px 32px; box-shadow: 0 -8px 30px rgba(0,0,0,.2); }
+@media (min-width: 720px) { .rec-overlay { align-items: center; padding: 24px; } .rec-panel { border-radius: 16px; max-height: 88vh; } }
+.rec-close { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 1rem; }
+.rec-kicker { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); }
+#rec-title { font-size: 1.4rem; margin: 4px 40px 8px 0; }
+.rec-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .88rem; color: var(--muted); }
+.rec-meta span:first-child { font-weight: 700; color: var(--ink); }
+.rec-panel h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 18px 0 6px; font-family: var(--body); }
+.rec-ing { margin: 0; padding-left: 18px; columns: 2; column-gap: 24px; font-size: .92rem; }
+.rec-ing li { break-inside: avoid; margin-bottom: 2px; }
+.rec-steps { margin: 0; padding-left: 22px; display: grid; gap: 10px; }
+.rec-steps li { padding-left: 4px; line-height: 1.45; }
+.rec-steps li::marker { font-weight: 700; color: var(--accent); }
+.rec-notes { margin-top: 18px; padding: 10px 12px; background: var(--accent-soft); border-radius: 10px; font-size: .86rem; display: grid; gap: 6px; }
+.rec-notes p { margin: 0; }
+.rec-hint { font-size: .8rem; color: var(--muted); margin: -2px 0 6px; }
+@media (max-width: 480px) { .rec-ing { columns: 1; } }
 .rules ul { margin: 6px 0 0; padding-left: 18px; font-size: .9rem; display: grid; gap: 4px; }
 .toast { font-size: .85rem; color: var(--accent); min-height: 1.2em; }
 footer { font-size: .85rem; color: var(--muted); max-width: 80ch; }
@@ -188,6 +210,13 @@ footer { font-size: .85rem; color: var(--muted); max-width: 80ch; }
   <footer>Pesos en crudo y en limpio. Las calorías y la proteína son estimaciones a partir de tablas de composición estándar. Es una pauta general y no sustituye a tu médico o dietista.</footer>
 </div>
 
+<div class="rec-overlay" id="rec" hidden>
+  <div class="rec-panel" role="dialog" aria-modal="true" aria-labelledby="rec-title">
+    <button type="button" class="rec-close" id="rec-close" aria-label="Cerrar receta">✕</button>
+    <div id="rec-body"></div>
+  </div>
+</div>
+
 <script>
 /*DATA*/
 
@@ -251,16 +280,47 @@ function render() {
         <span class="pill ${d.ent ? "ent" : "des"}">${d.ent ? "Entreno" : "Descanso"}</span>
       </div>
       <div class="totals">≈ ${d.kcal.toLocaleString("es-ES")} kcal · ${d.prot} g de proteína</div>
-      ${d.meals.map(([lbl, m]) => `
+      ${d.meals.map(([lbl, m], j) => `
         <div class="meal">
-          <div class="lbl">${lbl}</div>
+          <div class="meal-top"><div class="lbl">${lbl}</div>${[0, 2, 4].includes(j) ? `<button type="button" class="rec-btn" data-d="${i}" data-j="${j}" aria-label="Ver receta: ${esc(m.t)}">Receta</button>` : ""}</div>
           <div class="t">${esc(m.t)}</div>
           <div class="ing">${esc(ingText(m.items))}</div>${m.spices ? `<div class="spice">Especias: ${esc(m.spices)}</div>` : ""}
         </div>`).join("")}
     </article>`).join("");
 
+  state.days = days;
+  $("days").querySelectorAll(".rec-btn").forEach((b) => b.addEventListener("click", () => openRecipe(+b.dataset.d, +b.dataset.j, b)));
   renderShop(days);
 }
+
+// ---- Receta paso a paso
+let lastFocus = null;
+function openRecipe(d, j, btn) {
+  const day = state.days[d];
+  const [lbl, m] = day.meals[j];
+  const r = recetaDe(m, j === 2 ? "c" : j === 4 ? "n" : "d");
+  lastFocus = btn;
+  $("rec-body").innerHTML = `
+    <div class="rec-kicker">${day.dia} · ${lbl}</div>
+    <h2 id="rec-title">${esc(r.titulo)}</h2>
+    <div class="rec-meta"><span>${esc(r.tiempo)}</span>${m.spices ? `<span>Especias: ${esc(m.spices)}</span>` : ""}</div>
+    <h3>Tu ración de hoy</h3><p class="rec-hint">Si cocináis para más personas, multiplica las cantidades.</p>
+    <ul class="rec-ing">${m.items.map(([c, g]) => `<li>${esc(ingText([[c, g]]))}</li>`).join("")}<li>Sal al gusto</li></ul>
+    <h3>Paso a paso</h3>
+    <ol class="rec-steps">${r.pasos.map((p) => `<li>${esc(p)}</li>`).join("")}</ol>
+    ${r.notas.length ? `<div class="rec-notes">${r.notas.map((n) => `<p>${esc(n)}</p>`).join("")}</div>` : ""}`;
+  $("rec").hidden = false;
+  document.body.style.overflow = "hidden";
+  $("rec-close").focus();
+}
+function closeRecipe() {
+  $("rec").hidden = true;
+  document.body.style.overflow = "";
+  if (lastFocus) lastFocus.focus();
+}
+$("rec-close").addEventListener("click", closeRecipe);
+$("rec").addEventListener("click", (e) => { if (e.target.id === "rec") closeRecipe(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("rec").hidden) closeRecipe(); });
 
 function renderShop(days) {
   const S = SEASONS[state.key];
