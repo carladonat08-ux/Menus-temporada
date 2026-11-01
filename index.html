@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Menús de temporada</title>
 <link rel="icon" type="image/svg+xml" href="icon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -13,207 +13,183 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#faf8f3">
+<meta name="theme-color" content="#f6f5f1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Plan: neutros de papel frío, un acento por estación; cabecera de control arriba, semana en rejilla de días, compra al lado */
-  --bg: #f4f5f2;
+  /* Una columna tipo app: estación arriba, días en fila, un día a la vista; compra en su propia pestaña */
+  --bg: #f6f5f1;
   --surface: #ffffff;
-  --ink: #1d2320;
-  --muted: #5f6964;
-  --line: #dde1dc;
+  --ink: #1c211e;
+  --muted: #6b726e;
+  --line: #e6e7e2;
   --accent: #3f7d4e;
-  --accent-soft: #e3efe5;
-  --rest: #8a8f8c;
-  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --accent-soft: #e6f0e7;
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --radius: 18px;
+  --shadow: 0 1px 2px rgba(28, 33, 30, .04), 0 6px 20px rgba(28, 33, 30, .05);
   color-scheme: light;
 }
-:root[data-season="primavera"] { --accent: #3f7d4e; --accent-soft: #e3efe5; }
-:root[data-season="verano"] { --accent: #c2512f; --accent-soft: #f8e6de; }
-:root[data-season="otono"] { --accent: #a86412; --accent-soft: #f5ead9; }
-:root[data-season="invierno"] { --accent: #2f6390; --accent-soft: #e1eaf3; }
+:root[data-season="primavera"] { --accent: #3f7d4e; --accent-soft: #e6f0e7; }
+:root[data-season="verano"] { --accent: #bf4f2e; --accent-soft: #f8e7df; }
+:root[data-season="otono"] { --accent: #a3620f; --accent-soft: #f4eadb; }
+:root[data-season="invierno"] { --accent: #2f6390; --accent-soft: #e3ebf3; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #141816; --surface: #1d2220; --ink: #e9ece9; --muted: #a1aaa5; --line: #2f3633; --rest: #8f9692; color-scheme: dark;
-  }
-  :root:not([data-theme="light"])[data-season="primavera"] { --accent: #7cc08c; --accent-soft: #233a2a; }
-  :root:not([data-theme="light"])[data-season="verano"] { --accent: #f08d6c; --accent-soft: #432820; }
-  :root:not([data-theme="light"])[data-season="otono"] { --accent: #e3a650; --accent-soft: #3f3020; }
-  :root:not([data-theme="light"])[data-season="invierno"] { --accent: #7fb2e0; --accent-soft: #1f3245; }
+  :root:not([data-theme="light"]) { --bg: #121614; --surface: #1b201d; --ink: #ecefec; --muted: #9ea7a2; --line: #2b322e; --shadow: none; color-scheme: dark; }
+  :root:not([data-theme="light"])[data-season="primavera"] { --accent: #86c595; --accent-soft: #213428; }
+  :root:not([data-theme="light"])[data-season="verano"] { --accent: #f0936f; --accent-soft: #3d251d; }
+  :root:not([data-theme="light"])[data-season="otono"] { --accent: #e4ab5a; --accent-soft: #3a2c1b; }
+  :root:not([data-theme="light"])[data-season="invierno"] { --accent: #86b6e2; --accent-soft: #1d2e40; }
 }
-:root[data-theme="dark"] { --bg: #141816; --surface: #1d2220; --ink: #e9ece9; --muted: #a1aaa5; --line: #2f3633; --rest: #8f9692; color-scheme: dark; }
-:root[data-theme="dark"][data-season="primavera"] { --accent: #7cc08c; --accent-soft: #233a2a; }
-:root[data-theme="dark"][data-season="verano"] { --accent: #f08d6c; --accent-soft: #432820; }
-:root[data-theme="dark"][data-season="otono"] { --accent: #e3a650; --accent-soft: #3f3020; }
-:root[data-theme="dark"][data-season="invierno"] { --accent: #7fb2e0; --accent-soft: #1f3245; }
+:root[data-theme="dark"] { --bg: #121614; --surface: #1b201d; --ink: #ecefec; --muted: #9ea7a2; --line: #2b322e; --shadow: none; color-scheme: dark; }
+:root[data-theme="dark"][data-season="primavera"] { --accent: #86c595; --accent-soft: #213428; }
+:root[data-theme="dark"][data-season="verano"] { --accent: #f0936f; --accent-soft: #3d251d; }
+:root[data-theme="dark"][data-season="otono"] { --accent: #e4ab5a; --accent-soft: #3a2c1b; }
+:root[data-theme="dark"][data-season="invierno"] { --accent: #86b6e2; --accent-soft: #1d2e40; }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; }
-body { background: var(--bg); color: var(--ink); font: 16px/1.5 var(--body); }
-.wrap { max-width: 1200px; margin: 0 auto; padding: 24px 16px 48px; display: grid; gap: 20px; }
-h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; }
-h1 { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.01em; }
-h2 { font-size: 1.3rem; font-weight: 700; }
-h3 { font-size: 1.05rem; font-weight: 700; }
-.muted { color: var(--muted); }
-.top { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: end; }
-.top p { margin: 4px 0 0; max-width: 62ch; }
-.date-box { display: flex; gap: 8px; align-items: end; flex-wrap: wrap; }
-label { font-size: .85rem; font-weight: 600; color: var(--muted); display: grid; gap: 4px; }
-input[type="date"] { font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); }
-button { font: inherit; cursor: pointer; }
-.btn { padding: 9px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 600; }
-.btn:hover { border-color: var(--accent); }
-:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+body { background: var(--bg); color: var(--ink); font: 16px/1.5 var(--body); -webkit-font-smoothing: antialiased; }
+button { font: inherit; cursor: pointer; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.app { max-width: 720px; margin: 0 auto; padding: calc(14px + env(safe-area-inset-top)) 18px calc(40px + env(safe-area-inset-bottom)); display: grid; gap: 18px; }
 
-.season { background: var(--accent-soft); border-left: 6px solid var(--accent); border-radius: 12px; padding: 18px 20px; display: grid; grid-template-columns: auto 1fr auto; gap: 8px 24px; align-items: center; }
-.season .name { font-family: var(--display); font-size: 2.2rem; font-weight: 700; color: var(--accent); line-height: 1; }
-.season .meta { display: grid; gap: 2px; }
-.season .stat { text-align: right; font-variant-numeric: tabular-nums; }
-.season .stat b { font-family: var(--display); font-size: 1.4rem; display: block; }
+/* Cabecera */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.brand { font-family: var(--display); font-weight: 600; font-size: 1.15rem; letter-spacing: -.01em; }
+.top-actions { display: flex; gap: 8px; align-items: center; }
+.date-pill { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: .88rem; font-weight: 500; }
+.date-pill input { position: absolute; inset: 0; opacity: 0; width: 100%; cursor: pointer; }
+.icon-btn { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line); }
+.icon-btn svg { width: 18px; height: 18px; }
+.today-btn { padding: 7px 12px; border-radius: 999px; background: var(--accent); color: var(--surface); border: 0; font-size: .85rem; font-weight: 600; }
+.today-btn[hidden] { display: none; }
 
-.tabs { display: flex; gap: 8px; flex-wrap: wrap; }
-.tab { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 600; display: inline-flex; gap: 8px; align-items: center; }
-.tab[aria-selected="true"] { background: var(--accent); color: var(--surface); border-color: var(--accent); }
-.tab .now { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: 1px 7px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+/* Estación */
+.hero { padding: 4px 2px 0; }
+.hero .kicker { font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.hero h1 { font-family: var(--display); font-weight: 400; font-size: clamp(2.4rem, 9vw, 3.2rem); line-height: 1; margin: 6px 0 8px; letter-spacing: -.02em; }
+.hero p { margin: 0; color: var(--muted); max-width: 52ch; font-size: .95rem; }
 
-.main { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start; }
-.days { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-.day { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 10px; align-content: start; }
-.day.today { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
-.day-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-.pill { font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
-.pill.ent { background: var(--accent); color: var(--surface); }
-.pill.des { background: transparent; color: var(--rest); border: 1px solid var(--rest); }
-.totals { font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
-.meal { border-top: 1px solid var(--line); padding-top: 8px; }
-.meal .lbl { font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); }
-.meal .t { font-weight: 600; line-height: 1.3; }
-.meal .ing { font-size: .84rem; color: var(--muted); line-height: 1.35; margin-top: 2px; }
+/* Controles */
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px; gap: 4px; }
+.seg button { border: 0; background: transparent; border-radius: 999px; padding: 8px 6px; font-weight: 600; font-size: .9rem; color: var(--muted); position: relative; white-space: nowrap; }
+.seg button[aria-selected="true"] { background: var(--accent); color: var(--surface); }
+.seg .dot { position: absolute; top: 7px; right: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.seg button[aria-selected="true"] .dot { background: var(--surface); }
+.days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.day-btn { border: 1px solid transparent; background: transparent; border-radius: 14px; padding: 8px 0 7px; display: grid; justify-items: center; gap: 3px; color: var(--muted); }
+.day-btn .d { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+.day-btn .n { font-family: var(--display); font-size: 1.25rem; color: var(--ink); line-height: 1.1; }
+.day-btn .tr { width: 5px; height: 5px; border-radius: 50%; background: transparent; }
+.day-btn .tr.on { background: var(--accent); }
+.day-btn[aria-selected="true"] { background: var(--surface); border-color: var(--line); box-shadow: var(--shadow); color: var(--accent); }
+.day-btn.is-today .n { color: var(--accent); }
 
-aside { display: grid; gap: 14px; position: sticky; top: 12px; }
-.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
-.panel h2 { margin-bottom: 6px; }
-.shop h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 12px 0 4px; font-family: var(--body); }
-.shop ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; }
-.shop li label { display: flex; gap: 8px; align-items: flex-start; font-size: .9rem; font-weight: 400; color: var(--ink); cursor: pointer; }
-.shop li .q { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.shop li input:checked + span { text-decoration: line-through; color: var(--muted); }
-.shop .actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-.toolbar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; }
-.ent-days { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.tool-lbl { font-size: .85rem; font-weight: 600; color: var(--muted); }
-.chips { display: flex; gap: 6px; flex-wrap: wrap; }
-.chip { min-width: 40px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 600; font-size: .85rem; }
-.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
-.btn.small { padding: 6px 12px; font-size: .85rem; }
-.small-t { font-size: .85rem; margin: 0 0 8px; }
-.spice { font-size: .8rem; color: var(--accent); margin-top: 3px; font-style: italic; }
-.meal-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.rec-btn { border: 1px solid var(--accent); background: transparent; color: var(--accent); border-radius: 999px; font-size: .74rem; font-weight: 700; padding: 3px 10px; }
-.rec-btn:hover { background: var(--accent); color: var(--surface); }
-.rec-overlay { position: fixed; inset: 0; background: rgba(20, 24, 22, .55); display: flex; align-items: flex-end; justify-content: center; z-index: 50; padding: 0; }
-.rec-overlay[hidden] { display: none; }
-.rec-panel { position: relative; background: var(--surface); color: var(--ink); width: min(680px, 100%); max-height: 92vh; overflow-y: auto; border-radius: 16px 16px 0 0; padding: 22px 20px 32px; box-shadow: 0 -8px 30px rgba(0,0,0,.2); }
-@media (min-width: 720px) { .rec-overlay { align-items: center; padding: 24px; } .rec-panel { border-radius: 16px; max-height: 88vh; } }
-.rec-close { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 1rem; }
-.rec-kicker { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); }
-#rec-title { font-size: 1.4rem; margin: 4px 40px 8px 0; }
-.rec-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .88rem; color: var(--muted); }
-.rec-meta span:first-child { font-weight: 700; color: var(--ink); }
-.rec-panel h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 18px 0 6px; font-family: var(--body); }
-.rec-ing { margin: 0; padding-left: 18px; columns: 2; column-gap: 24px; font-size: .92rem; }
-.rec-ing li { break-inside: avoid; margin-bottom: 2px; }
-.rec-steps { margin: 0; padding-left: 22px; display: grid; gap: 10px; }
-.rec-steps li { padding-left: 4px; line-height: 1.45; }
-.rec-steps li::marker { font-weight: 700; color: var(--accent); }
-.rec-notes { margin-top: 18px; padding: 10px 12px; background: var(--accent-soft); border-radius: 10px; font-size: .86rem; display: grid; gap: 6px; }
-.rec-notes p { margin: 0; }
-.rec-hint { font-size: .8rem; color: var(--muted); margin: -2px 0 6px; }
-@media (max-width: 480px) { .rec-ing { columns: 1; } }
-.rules ul { margin: 6px 0 0; padding-left: 18px; font-size: .9rem; display: grid; gap: 4px; }
-.toast { font-size: .85rem; color: var(--accent); min-height: 1.2em; }
-footer { font-size: .85rem; color: var(--muted); max-width: 80ch; }
+/* Día */
+.day-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 0 2px; }
+.day-head h2 { font-family: var(--display); font-weight: 400; font-size: 1.6rem; margin: 0; letter-spacing: -.01em; }
+.day-head .meta { font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tag { display: inline-block; font-family: var(--body); font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); margin-left: 8px; vertical-align: middle; }
+.tag.rest { background: transparent; border: 1px solid var(--line); color: var(--muted); }
+.meals { display: grid; gap: 10px; }
+.meal { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; box-shadow: var(--shadow); display: grid; gap: 4px; text-align: left; width: 100%; }
+button.meal { cursor: pointer; transition: border-color .15s; }
+button.meal:hover { border-color: var(--accent); }
+.meal .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.meal .lbl { font-size: .74rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--accent); }
+.meal .go { font-size: .78rem; font-weight: 600; color: var(--muted); display: inline-flex; align-items: center; gap: 4px; }
+.meal .t { font-family: var(--display); font-size: 1.12rem; line-height: 1.25; font-weight: 400; }
+.meal .ing { font-size: .86rem; color: var(--muted); line-height: 1.4; }
 
-@media (max-width: 900px) {
-  .main { grid-template-columns: 1fr; }
-  aside { position: static; }
-}
-@media (max-width: 560px) {
-  .top { grid-template-columns: 1fr; }
-  .season { grid-template-columns: 1fr; }
-  .season .stat { text-align: left; }
-  h1 { font-size: 1.55rem; }
-}
+/* Compra */
+.shop { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+.shop h2 { font-family: var(--display); font-weight: 400; font-size: 1.5rem; margin: 0; }
+.shop .sub { color: var(--muted); font-size: .88rem; margin-top: 2px; }
+.shop h3 { font-size: .74rem; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); margin: 18px 0 6px; }
+.shop ul { list-style: none; padding: 0; margin: 0; }
+.shop li { border-bottom: 1px solid var(--line); }
+.shop li:last-child { border-bottom: 0; }
+.shop label { display: flex; gap: 12px; align-items: center; padding: 9px 0; cursor: pointer; font-size: .95rem; }
+.shop input { width: 20px; height: 20px; accent-color: var(--accent); flex: none; }
+.shop .q { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; font-size: .9rem; }
+.shop input:checked ~ span { color: var(--muted); text-decoration: line-through; }
+.actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.btn { padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-weight: 600; font-size: .9rem; }
+.btn.primary { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+.toast { font-size: .85rem; color: var(--accent); min-height: 1.2em; margin-top: 8px; }
+
+/* Hojas (receta y ajustes) */
+.sheet { position: fixed; inset: 0; background: rgba(15, 18, 16, .45); display: flex; align-items: flex-end; justify-content: center; z-index: 50; }
+.sheet[hidden] { display: none; }
+.panel { position: relative; background: var(--surface); width: min(680px, 100%); max-height: 92vh; overflow-y: auto; border-radius: 22px 22px 0 0; padding: 12px 22px calc(28px + env(safe-area-inset-bottom)); }
+.panel::before { content: ""; display: block; width: 40px; height: 4px; border-radius: 4px; background: var(--line); margin: 0 auto 14px; }
+@media (min-width: 760px) { .sheet { align-items: center; padding: 24px; } .panel { border-radius: 22px; max-height: 88vh; padding-top: 22px; } .panel::before { display: none; } }
+.close { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--bg); font-size: .95rem; }
+.panel .kicker { font-size: .75rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--accent); }
+.panel h2 { font-family: var(--display); font-weight: 400; font-size: 1.6rem; line-height: 1.15; margin: 6px 44px 10px 0; }
+.chips-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: .8rem; padding: 4px 10px; border-radius: 999px; background: var(--bg); color: var(--muted); }
+.panel h3 { font-size: .74rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 22px 0 8px; }
+.ing-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+.ing-list li { display: flex; justify-content: space-between; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
+.ing-list li span:last-child { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.hint { font-size: .8rem; color: var(--muted); margin: 8px 0 0; }
+.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; gap: 14px; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 30px 1fr; gap: 10px; line-height: 1.5; }
+.steps li::before { content: counter(s); width: 26px; height: 26px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: .85rem; display: grid; place-items: center; }
+.notes { margin-top: 20px; padding: 12px 14px; border-radius: 14px; background: var(--accent-soft); font-size: .86rem; display: grid; gap: 6px; }
+.notes p { margin: 0; }
+.ent-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 6px; }
+.ent-grid button { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 10px 0; font-weight: 600; font-size: .85rem; }
+.ent-grid button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.panel p.lead { color: var(--muted); margin: 0; font-size: .92rem; }
+@media (max-width: 420px) { .ing-list { grid-template-columns: 1fr; } .app { padding-left: 14px; padding-right: 14px; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="app">
   <header class="top">
-    <div>
-      <h1>Menús de temporada</h1>
-      <p class="muted">Elige una fecha y verás la estación y la semana de menú que te toca. Cocina de casa valenciana en déficit calórico: ~1.800 kcal los días de entreno y ~1.650 los de descanso, sin lactosa, fructosa, pimiento, cebolla ni coliflor (las especias, todas). Puedes elegir tus días de entreno.</p>
+    <div class="brand">Menús</div>
+    <div class="top-actions">
+      <button type="button" class="today-btn" id="hoy" hidden>Hoy</button>
+      <label class="date-pill" for="fecha"><span id="fecha-txt"></span><input type="date" id="fecha" aria-label="Elegir fecha"></label>
+      <button type="button" class="icon-btn" id="ajustes" aria-label="Días de entreno">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>
+      </button>
     </div>
-    <form class="date-box" id="f">
-      <label for="fecha">Fecha
-        <input type="date" id="fecha" required>
-      </label>
-      <button type="button" class="btn" id="hoy">Hoy</button>
-    </form>
   </header>
 
-  <section class="season" id="season" aria-live="polite"></section>
+  <section class="hero" id="hero" aria-live="polite"></section>
 
-  <nav class="tabs" id="tabs" role="tablist" aria-label="Semana de menú"></nav>
-
-  <div class="toolbar">
-    <div class="ent-days" role="group" aria-labelledby="ent-lbl">
-      <span id="ent-lbl" class="tool-lbl">Mis días de entreno</span>
-      <div id="entdays" class="chips"></div>
-    </div>
+  <div class="seg" role="tablist" aria-label="Vista">
+    <button type="button" role="tab" id="v-menu" aria-selected="true">Menú</button>
+    <button type="button" role="tab" id="v-compra" aria-selected="false">Compra</button>
   </div>
 
-  <div class="main">
-    <section class="days" id="days" aria-label="Menú de la semana"></section>
-    <aside>
-      <div class="panel shop" id="shop"></div>
-      <div class="panel rules">
-        <h2>Reglas que sigue el menú</h2>
-        <ul>
-          <li>Sin lactosa: lácteos sin lactosa, whey isolate y quesos curados (manchego, parmesano), que prácticamente no tienen lactosa.</li>
-          <li>Sin fructosa en exceso: fuera manzana, pera, mango, sandía, cereza, higo, caqui, miel, agave, zumos y fruta desecada. Como máximo 1 ración de fruta por toma.</li>
-          <li>Sin pimiento (como verdura), sin cebolla y sin coliflor.</li>
-          <li>Especias: puedes usarlas todas. Azafrán, romero, tomillo, orégano, laurel, comino, cúrcuma, jengibre, pimienta negra, clavo, nuez moscada, canela, perejil, albahaca, eneldo y hierbabuena. También el pimentón (dulce y picante), la cayena, la guindilla y el curry. Solo revisa que las mezclas de especias no lleven cebolla o ajo en polvo.</li>
-          <li>Platos pequeños: unas 450-500 kcal en la comida y 350-420 en la cena, siempre con al menos 150 g de verdura.</li>
-          <li>Cocina de casa de la Vall d'Albaida adaptada: el sofrito se hace con aceite de ajo, tomate y pimentón, con azafrán en los arroces, y sin morcilla ni alioli.</li>
-          <li>Dieta para perder grasa: cada día tiene un techo de unas 1.850 kcal si entrenas y 1.700 si no. Si un menú se pasa, la app recorta el arroz, la patata, el pan o la legumbre de la comida y la cena.</li>
-          <li>En las etiquetas, descarta: sorbitol (E420), manitol (E421), xilitol (E967), maltitol (E965), jarabe de glucosa-fructosa e inulina.</li>
-          <li>Cereales integrales: arroz integral, pasta de arroz integral y pan de espelta de masa madre con fermentación larga. Las 2 primeras semanas, mezcla mitad blanco y mitad integral, y cambia un alimento cada vez.</li>
-          <li>Comida y cena nunca repiten la misma proteína ni llevan legumbre las dos el mismo día. La proteína se reparte en 4-5 tomas de 15-35 g, unos 1,9-2 g/kg al día.</li>
-          <li>Legumbres 2-3 veces por semana. Mejor de bote y bien enjuagadas: se digieren mejor que las cocidas en casa.</li>
-          <li>En los días de descanso, las legumbres, el arroz, la pasta, la patata y el pan de comida y cena bajan un 20 %. Las cantidades ya están ajustadas.</li>
-          <li>Calcio (objetivo ~1.000 mg): yogur o skyr a diario, leche enriquecida, queso curado y sardinas en lata con espina.</li>
-          <li>Hierro (objetivo 16-18 mg): hígado de pollo como máximo 1 vez por semana por su vitamina A, mejillones, pulpo, carne y legumbres. Las legumbres llevan cítrico de postre para absorber mejor el hierro. Toma el café o el té 1 h antes o después de comer.</li>
-          <li>Usa sal yodada. Revisa en tu analítica la ferritina y la vitamina D, sobre todo en otoño e invierno.</li>
-          <li>Para ahorrar: pescado, marisco y frutos rojos congelados, legumbres de bote, marcas blancas y fruta de temporada. Cualquier pescado blanco se puede cambiar por merluza congelada.</li>
-          <li>Creatina: 3-5 g todos los días. Agua: 2-2,5 L.</li>
-        </ul>
-      </div>
-    </aside>
-  </div>
+  <div class="seg" id="weeks" role="tablist" aria-label="Semana de menú"></div>
 
-  <footer>Pesos en crudo y en limpio. Las calorías y la proteína son estimaciones a partir de tablas de composición estándar. Es una pauta general y no sustituye a tu médico o dietista.</footer>
+  <main id="view"></main>
 </div>
 
-<div class="rec-overlay" id="rec" hidden>
-  <div class="rec-panel" role="dialog" aria-modal="true" aria-labelledby="rec-title">
-    <button type="button" class="rec-close" id="rec-close" aria-label="Cerrar receta">✕</button>
+<div class="sheet" id="rec" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="rec-title">
+    <button type="button" class="close" data-close aria-label="Cerrar">✕</button>
     <div id="rec-body"></div>
+  </div>
+</div>
+
+<div class="sheet" id="cfg" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="cfg-title">
+    <button type="button" class="close" data-close aria-label="Cerrar">✕</button>
+    <div class="kicker">Ajustes</div>
+    <h2 id="cfg-title">Días de entreno</h2>
+    <p class="lead">Marca los días que entrenas. Esos días llevan merienda pre-entreno y algo más de hidratos.</p>
+    <div class="ent-grid" id="entdays"></div>
   </div>
 </div>
 
@@ -1255,106 +1231,81 @@ if (typeof module !== "undefined") module.exports = { recetaDe, RECETAS };
 
 
 const $ = (id) => document.getElementById(id);
-const fmtDate = (d) => d.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
 const store = {
   get(k) { try { return JSON.parse(localStorage.getItem(k) || "null"); } catch (e) { return null; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
 };
-let state = { date: new Date(), key: null, week: 0, currentWeek: 0, dow: 0 };
+const DCORTO = ["Lu", "Ma", "Mi", "Ju", "Vi", "Sá", "Do"];
+let ent = store.get("ent") || ENTRENO_DEF.slice();
+let state = {};
+let view = "menu";
 
 function toInput(d) { const p = (n) => String(n).padStart(2, "0"); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`; }
 function fromInput(v) { const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); }
 function esc(s) { return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
-function ingText(items) {
-  return items.map(([c, g]) => {
-    const [n, , , , , u] = ING[c];
-    const q = u ? `${Math.max(1, Math.round(g / u[1]))} ${u[0] === "uds" ? (Math.round(g / u[1]) > 1 ? "uds" : "ud") : (Math.round(g / u[1]) > 1 ? "latas" : "lata")}` : `${g} g`;
-    return `${n.replace(/ \(.*\)/, "").toLowerCase()} ${q}`;
-  }).join(" · ");
+function ingParts(c, g) {
+  const [n, , , , , u] = ING[c];
+  let q;
+  if (u) { const k = Math.max(1, Math.round(g / u[1])); q = `${k} ${k === 1 ? { latas: "lata", uds: "ud" }[u[0]] : u[0]}`; } else q = `${g} g`;
+  return [n.replace(/ \(.*\)/, ""), q];
 }
-
-let ent = store.get("ent") || ENTRENO_DEF.slice();
-const opts = () => ({ ent });
+const ingLine = (items) => items.map(([c, g]) => { const [n, q] = ingParts(c, g); return `${n.toLowerCase()} ${q}`; }).join(" · ");
+const sameDay = (a, b) => a.toDateString() === b.toDateString();
 
 function setDate(d) {
   const s = seasonOf(d);
-  state = { date: d, key: s.key, week: s.week, currentWeek: s.week, dow: s.dow, n: s.n, month: s.month, monday: s.monday };
+  state = { date: d, key: s.key, week: s.week, currentWeek: s.week, dow: s.dow, n: s.n, month: s.month, monday: s.monday, sel: s.dow };
   document.documentElement.dataset.season = s.key;
   $("fecha").value = toInput(d);
+  $("fecha-txt").textContent = d.toLocaleDateString("es-ES", { weekday: "short", day: "numeric", month: "short" });
+  $("hoy").hidden = sameDay(d, new Date());
   render();
 }
 
 function render() {
   const S = SEASONS[state.key];
-  const days = buildWeek(state.key, state.week, opts());
-  const eDays = days.filter((d) => d.ent);
-  const avgE = eDays.length ? Math.round(eDays.reduce((a, d) => a + d.kcal, 0) / eDays.length) : 0;
-  const avg = (f) => days.reduce((a, d) => a + d[f], 0) / 7;
-  $("season").innerHTML = `
-    <div class="name">${S.name}</div>
-    <div class="meta">
-      <div><b>${fmtDate(state.date)}</b> · ${DIAS[state.dow]} de la semana ${state.n} de ${state.month}${state.n === 5 ? " (usa el menú de la semana 2)" : ""}</div>
-      <div class="muted">${S.range}. ${S.note}</div>
-    </div>
-    <div class="stat"><b>${avgE.toLocaleString("es-ES")} kcal</b><span class="muted">media en días de entreno · ${Math.round(avg("prot"))} g de proteína al día</span></div>`;
+  $("hero").innerHTML = `
+    <div class="kicker">Semana ${state.n} de ${state.month}${state.n === 5 ? " · menú 2" : ""}</div>
+    <h1>${S.name}</h1>
+    <p>${S.note}</p>`;
+  $("weeks").innerHTML = [0, 1, 2, 3].map((w) => `<button type="button" role="tab" aria-selected="${w === state.week}" data-w="${w}">Semana ${w + 1}${w === state.currentWeek ? '<span class="dot" aria-label="(te toca)"></span>' : ""}</button>`).join("");
+  $("weeks").querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { state.week = +b.dataset.w; if (state.week !== state.currentWeek) state.sel = 0; else state.sel = state.dow; render(); }));
+  $("v-menu").setAttribute("aria-selected", view === "menu");
+  $("v-compra").setAttribute("aria-selected", view === "compra");
 
-  $("tabs").innerHTML = [0, 1, 2, 3].map((w) => `
-    <button class="tab" role="tab" id="tab-${w}" aria-selected="${w === state.week}" data-w="${w}">
-      Semana ${w + 1}${w === state.currentWeek ? '<span class="now">te toca</span>' : ""}
-    </button>`).join("");
-  $("tabs").querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => { state.week = +b.dataset.w; render(); }));
-
-  $("entdays").innerHTML = DIAS.map((n, i) => `<button type="button" class="chip" aria-pressed="${ent[i]}" data-i="${i}" title="${n}">${n.slice(0, 2)}</button>`).join("");
-  $("entdays").querySelectorAll(".chip").forEach((b) => b.addEventListener("click", () => { ent[+b.dataset.i] = !ent[+b.dataset.i]; store.set("ent", ent); render(); }));
-
-  $("days").innerHTML = days.map((d, i) => `
-    <article class="day${state.week === state.currentWeek && i === state.dow ? " today" : ""}">
-      <div class="day-head">
-        <h3>${d.dia}</h3>
-        <span class="pill ${d.ent ? "ent" : "des"}">${d.ent ? "Entreno" : "Descanso"}</span>
-      </div>
-      <div class="totals">≈ ${d.kcal.toLocaleString("es-ES")} kcal · ${d.prot} g de proteína</div>
-      ${d.meals.map(([lbl, m], j) => `
-        <div class="meal">
-          <div class="meal-top"><div class="lbl">${lbl}</div>${[0, 2, 4].includes(j) ? `<button type="button" class="rec-btn" data-d="${i}" data-j="${j}" aria-label="Ver receta: ${esc(m.t)}">Receta</button>` : ""}</div>
-          <div class="t">${esc(m.t)}</div>
-          <div class="ing">${esc(ingText(m.items))}</div>${m.spices ? `<div class="spice">Especias: ${esc(m.spices)}</div>` : ""}
-        </div>`).join("")}
-    </article>`).join("");
-
+  const days = buildWeek(state.key, state.week, { ent });
   state.days = days;
-  $("days").querySelectorAll(".rec-btn").forEach((b) => b.addEventListener("click", () => openRecipe(+b.dataset.d, +b.dataset.j, b)));
-  renderShop(days);
-}
+  if (view === "compra") return renderShop(days);
 
-// ---- Receta paso a paso
-let lastFocus = null;
-function openRecipe(d, j, btn) {
-  const day = state.days[d];
-  const [lbl, m] = day.meals[j];
-  const r = recetaDe(m, j === 2 ? "c" : j === 4 ? "n" : "d");
-  lastFocus = btn;
-  $("rec-body").innerHTML = `
-    <div class="rec-kicker">${day.dia} · ${lbl}</div>
-    <h2 id="rec-title">${esc(r.titulo)}</h2>
-    <div class="rec-meta"><span>${esc(r.tiempo)}</span>${m.spices ? `<span>Especias: ${esc(m.spices)}</span>` : ""}</div>
-    <h3>Tu ración de hoy</h3><p class="rec-hint">Si cocináis para más personas, multiplica las cantidades.</p>
-    <ul class="rec-ing">${m.items.map(([c, g]) => `<li>${esc(ingText([[c, g]]))}</li>`).join("")}<li>Sal al gusto</li></ul>
-    <h3>Paso a paso</h3>
-    <ol class="rec-steps">${r.pasos.map((p) => `<li>${esc(p)}</li>`).join("")}</ol>
-    ${r.notas.length ? `<div class="rec-notes">${r.notas.map((n) => `<p>${esc(n)}</p>`).join("")}</div>` : ""}`;
-  $("rec").hidden = false;
-  document.body.style.overflow = "hidden";
-  $("rec-close").focus();
+  const monday = new Date(state.monday);
+  monday.setDate(monday.getDate() + 7 * (state.week - state.currentWeek));
+  const isCur = state.week === state.currentWeek;
+  const d = days[state.sel];
+  const dayDate = new Date(monday); dayDate.setDate(monday.getDate() + state.sel);
+  $("view").innerHTML = `
+    <nav class="days" role="tablist" aria-label="Día">${days.map((x, i) => {
+      const dd = new Date(monday); dd.setDate(monday.getDate() + i);
+      return `<button type="button" class="day-btn${isCur && i === state.dow && sameDay(state.date, new Date()) ? " is-today" : ""}" role="tab" aria-selected="${i === state.sel}" data-i="${i}" aria-label="${x.dia}${x.ent ? ", entreno" : ""}">
+        <span class="d">${DCORTO[i]}</span>${isCur ? `<span class="n">${dd.getDate()}</span>` : ""}<span class="tr${x.ent ? " on" : ""}"></span></button>`;
+    }).join("")}</nav>
+    <div style="height:14px"></div>
+    <div class="day-head">
+      <h2>${d.dia}${isCur ? ` <span style="color:var(--muted);font-size:1rem">${dayDate.getDate()} de ${MESES[dayDate.getMonth()]}</span>` : ""}<span class="tag${d.ent ? "" : " rest"}">${d.ent ? "Entreno" : "Descanso"}</span></h2>
+      <div class="meta">${d.kcal.toLocaleString("es-ES")} kcal · ${d.prot} g proteína</div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="meals">${d.meals.map(([lbl, m], j) => {
+      const rec = [0, 2, 4].includes(j);
+      const tag = rec ? "button" : "div";
+      return `<${tag} ${rec ? `type="button" data-j="${j}" aria-label="${esc(lbl)}: ${esc(m.t)}. Ver receta"` : ""} class="meal">
+        <div class="row"><span class="lbl">${lbl}</span>${rec ? '<span class="go">Receta <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span>' : ""}</div>
+        <div class="t">${esc(m.t)}</div>
+        <div class="ing">${esc(ingLine(m.items))}</div>
+      </${tag}>`;
+    }).join("")}</div>`;
+  $("view").querySelectorAll(".day-btn").forEach((b) => b.addEventListener("click", () => { state.sel = +b.dataset.i; render(); }));
+  $("view").querySelectorAll("button.meal").forEach((b) => b.addEventListener("click", () => openRecipe(+b.dataset.j, b)));
 }
-function closeRecipe() {
-  $("rec").hidden = true;
-  document.body.style.overflow = "";
-  if (lastFocus) lastFocus.focus();
-}
-$("rec-close").addEventListener("click", closeRecipe);
-$("rec").addEventListener("click", (e) => { if (e.target.id === "rec") closeRecipe(); });
-document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("rec").hidden) closeRecipe(); });
 
 function renderShop(days) {
   const S = SEASONS[state.key];
@@ -1362,30 +1313,64 @@ function renderShop(days) {
   const sk = `shop-${state.key}-${state.week}`;
   const checked = store.get(sk) || {};
   const order = ["carne", "pescado", "huevos", "lacteos", "cereal", "legumbre", "verdura", "fruta", "grasa", "suple"];
-  let html = `<h2>Lista de la compra</h2><div class="muted" style="font-size:.88rem">${S.name}, semana ${state.week + 1}, cantidades para 7 días</div>`;
+  let html = `<section class="shop"><h2>Lista de la compra</h2><div class="sub">${S.name} · semana ${state.week + 1} · para 7 días</div>`;
   order.forEach((cat) => {
     if (!list[cat]) return;
     html += `<h3>${CATS[cat]}</h3><ul>` + list[cat].sort((a, b) => a[0].localeCompare(b[0], "es")).map(([n, q], j) => {
       const id = `c-${cat}-${j}`;
-      return `<li><label for="${id}"><input type="checkbox" id="${id}" data-n="${esc(n)}" ${checked[n] ? "checked" : ""}><span>${esc(n)}</span><span class="q">${q}</span></label></li>`;
+      return `<li><label for="${id}"><input type="checkbox" id="${id}" data-n="${esc(n)}" ${checked[n] ? "checked" : ""}><span>${esc(n.replace(/ \(.*\)/, ""))}</span><span class="q">${q}</span></label></li>`;
     }).join("") + "</ul>";
   });
-  html += `<div class="actions"><button class="btn" id="copy" type="button">Copiar lista</button><button class="btn" id="clear" type="button">Desmarcar todo</button></div><div class="toast" id="toast"></div>`;
-  $("shop").innerHTML = html;
-  $("shop").querySelectorAll("input[type=checkbox]").forEach((cb) => cb.addEventListener("change", () => {
+  html += `<div class="actions"><button class="btn primary" id="copy" type="button">Copiar lista</button><button class="btn" id="clear" type="button">Desmarcar todo</button></div><div class="toast" id="toast" role="status"></div></section>`;
+  $("view").innerHTML = html;
+  $("view").querySelectorAll("input[type=checkbox]").forEach((cb) => cb.addEventListener("change", () => {
     const c = store.get(sk) || {}; c[cb.dataset.n] = cb.checked; store.set(sk, c);
   }));
   $("clear").addEventListener("click", () => { store.set(sk, {}); renderShop(days); });
   $("copy").addEventListener("click", async () => {
     const txt = `Compra · ${S.name}, semana ${state.week + 1}\n` + order.filter((c) => list[c]).map((c) => `\n${CATS[c]}\n` + list[c].map(([n, q]) => `- ${n}: ${q}`).join("\n")).join("\n");
     try { await navigator.clipboard.writeText(txt); $("toast").textContent = "Lista copiada."; }
-    catch (e) { $("toast").textContent = "No se ha podido copiar. Selecciona la lista y cópiala a mano."; }
+    catch (e) { $("toast").textContent = "No se ha podido copiar en este navegador."; }
   });
 }
 
+// ---- Hojas
+let lastFocus = null;
+function openSheet(id, from) { lastFocus = from || null; $(id).hidden = false; document.body.style.overflow = "hidden"; $(id).querySelector("[data-close]").focus(); }
+function closeSheet(id) { $(id).hidden = true; document.body.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
+["rec", "cfg"].forEach((id) => {
+  $(id).addEventListener("click", (e) => { if (e.target.id === id || e.target.closest("[data-close]")) closeSheet(id); });
+});
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") ["rec", "cfg"].forEach((id) => { if (!$(id).hidden) closeSheet(id); }); });
+
+function openRecipe(j, btn) {
+  const day = state.days[state.sel];
+  const [lbl, m] = day.meals[j];
+  const r = recetaDe(m, j === 2 ? "c" : j === 4 ? "n" : "d");
+  $("rec-body").innerHTML = `
+    <div class="kicker">${day.dia} · ${lbl}</div>
+    <h2 id="rec-title">${esc(r.titulo)}</h2>
+    <div class="chips-row"><span class="chip">${esc(r.tiempo)}</span>${m.spices ? `<span class="chip">${esc(m.spices)}</span>` : ""}</div>
+    <h3>Tu ración</h3>
+    <ul class="ing-list">${m.items.map(([c, g]) => { const [n, q] = ingParts(c, g); return `<li><span>${esc(n)}</span><span>${q}</span></li>`; }).join("")}</ul>
+    <p class="hint">Para más personas, multiplica las cantidades.</p>
+    <h3>Preparación</h3>
+    <ol class="steps">${r.pasos.map((p) => `<li><span>${esc(p)}</span></li>`).join("")}</ol>
+    ${r.notas.length ? `<div class="notes">${r.notas.map((n) => `<p>${esc(n)}</p>`).join("")}</div>` : ""}`;
+  $("rec").querySelector(".panel").scrollTop = 0;
+  openSheet("rec", btn);
+}
+
+function renderEnt() {
+  $("entdays").innerHTML = DCORTO.map((n, i) => `<button type="button" aria-pressed="${ent[i]}" data-i="${i}" aria-label="${DIAS[i]}">${n}</button>`).join("");
+  $("entdays").querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { ent[+b.dataset.i] = !ent[+b.dataset.i]; store.set("ent", ent); renderEnt(); render(); }));
+}
+
+$("v-menu").addEventListener("click", () => { view = "menu"; render(); });
+$("v-compra").addEventListener("click", () => { view = "compra"; render(); });
 $("fecha").addEventListener("change", (e) => { if (e.target.value) setDate(fromInput(e.target.value)); });
 $("hoy").addEventListener("click", () => setDate(new Date()));
-$("f").addEventListener("submit", (e) => e.preventDefault());
+$("ajustes").addEventListener("click", (e) => { renderEnt(); openSheet("cfg", e.currentTarget); });
 setDate(new Date());
 </script>
 </body>

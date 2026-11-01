@@ -7,7 +7,8 @@ Web personal para planificar la comida de la semana. Al elegir una fecha:
 - Muestra el menú de los 7 días: desayuno, media mañana, comida, merienda o pre-entreno y cena, con los gramos de cada ingrediente.
 - Calcula las calorías y la proteína de cada día.
 - Genera la lista de la compra de la semana. Puedes marcar lo que ya tienes y copiar la lista.
-- Te deja elegir tus días de entreno. Las cantidades se ajustan solas.
+- Te deja elegir tus días de entreno desde el botón de ajustes. Las cantidades se ajustan solas.
+- Diseño tipo app: estación arriba, selector de semana y de día (se abre en el día de hoy), un día a la vista y la lista de la compra en su propia pestaña.
 - Botón «Receta» en el desayuno, la comida y la cena: abre los pasos para prepararlo, con tu ración del día, el tiempo, las especias y notas (aceite de ajo, arroz integral, conservación si se cocina el día antes).
 
 ## Pautas del plan
