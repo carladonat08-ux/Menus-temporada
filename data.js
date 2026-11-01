@@ -387,6 +387,55 @@ function capProt(o) {
   return { ...o, items: o.items.map(([c, g]) => [c, PROT.includes(c) && !ING[c][5] ? Math.round(g * f / 5) * 5 : g]) };
 }
 
+// Platos pequeños y con verdura: techo de energía por plato y mínimo de verdura
+const MEAL_KCAL = { c: 500, n: 420 };
+const VEG_MIN = 150;
+function kcalOf(items) { return items.reduce((a, [c, g]) => a + ING[c][2] * g / 100, 0); }
+function normalize(o, slot) {
+  let items = o.items.map((x) => x.slice());
+  let t = o.t;
+  // 1) verdura mínima
+  const veg = items.filter(([c]) => ING[c][1] === "verdura");
+  const vg = veg.reduce((a, [, g]) => a + g, 0);
+  if (vg < VEG_MIN) {
+    if (vg > 0) items = items.map(([c, g]) => [c, ING[c][1] === "verdura" ? Math.round(g * VEG_MIN / vg / 10) * 10 : g]);
+    else { items.push(["lec", 70], ["tom", 80]); t += " y ensalada"; }
+  }
+  // 2) techo por plato: primero hidratos (mín. 60 %), luego proteína (mín. 80 %)
+  const cap = MEAL_KCAL[slot];
+  let k = kcalOf(items);
+  if (k > cap) {
+    const ck = items.filter(([c]) => ING[c][4]).reduce((a, [c, g]) => a + ING[c][2] * g / 100, 0);
+    if (ck) { const f = Math.max(0.6, 1 - (k - cap) / ck); items = items.map(([c, g]) => [c, ING[c][4] ? Math.round(g * f / 5) * 5 : g]); }
+    k = kcalOf(items);
+    if (k > cap) {
+      const pk = items.filter(([c]) => PROT.includes(c) && !ING[c][5]).reduce((a, [c, g]) => a + ING[c][2] * g / 100, 0);
+      if (pk) { const f = Math.max(0.8, 1 - (k - cap) / pk); items = items.map(([c, g]) => [c, PROT.includes(c) && !ING[c][5] ? Math.round(g * f / 5) * 5 : g]); }
+    }
+  }
+  return { ...o, t, items };
+}
+
+// Especias recomendadas (sin pimentón, cayena, guindilla ni curry)
+function spicesFor(o) {
+  const t = o.t.toLowerCase(), has = (...cs) => o.items.some(([c]) => cs.includes(c));
+  if (/arròs negre/.test(t)) return "azafrán, laurel y perejil";
+  if (/paella|arròs|arroz caldoso|arroz con|fideuà|arròs al forn/.test(t)) return "azafrán, romero y pimienta negra";
+  if (/figatell|hígado/.test(t)) return "pimienta negra, clavo y nuez moscada";
+  if (/pilotes|putxero/.test(t)) return "nuez moscada, perejil, laurel y pimienta negra";
+  if (/crema de calabaza|calabaza asada|puré de calabaza/.test(t)) return "nuez moscada, comino y jengibre";
+  if (has("len", "gar", "alu")) return "comino, laurel y cúrcuma";
+  if (has("con")) return "romero, tomillo y laurel";
+  if (has("pol", "mus", "pav")) return "romero, tomillo, cúrcuma y pimienta negra";
+  if (has("pul")) return "comino, laurel y sal gruesa";
+  if (has("mej", "gam", "cal", "sep")) return "laurel, perejil y limón";
+  if (has("sar", "cab", "bon", "jur", "boq", "sca", "sal", "atu")) return "orégano, perejil y limón";
+  if (has("mer", "bac", "dor", "lub", "tru")) return "perejil, laurel, eneldo y limón";
+  if (has("lom", "ter", "cos", "jam")) return "orégano, tomillo y pimienta negra";
+  if (has("hue", "cla")) return "perejil, pimienta negra y nuez moscada";
+  return "orégano, albahaca y tomillo";
+}
+
 // Índices por defecto de comida (w = 0..3). Con 21 platos, las semanas 1-3 no repiten; la 4 mezcla.
 function defaultComida(w, d, N) { return w < 3 ? (d + 7 * w) % N : (d * 3 + 1) % N; }
 function defaultCena(w, d, N) { return w < 3 ? (d + 7 * ((w + 1) % 3) + 2) % N : (d * 3 + 2) % N; }
@@ -461,8 +510,9 @@ function buildWeek(key, w, opts = {}) {
       return { ...o, t: `${o.t} + ${ING[f][0].toLowerCase()} de postre`, items: [...o.items, [f, f === "nar" ? 130 : 150]] };
     };
     const lessOil = (o) => ({ ...o, items: o.items.map(([c, g]) => [c, c === "aov" ? Math.round(g * AOV_FACTOR) : g]) });
-    const com = withCitrus(scale(capProt(lessOil(dish(S.comidas[ci])))));
-    const cen = withCitrus(scale(capProt(lessOil(dish(S.cenas[ni])))));
+    const com = withCitrus(scale(normalize(capProt(lessOil(dish(S.comidas[ci]))), "c")));
+    const cen = withCitrus(scale(normalize(capProt(lessOil(dish(S.cenas[ni]))), "n")));
+    com.spices = spicesFor(com); cen.spices = spicesFor(cen);
     const meals = [["Desayuno", des], ["Almuerzo", mm], ["Comida", com], [ent ? "Pre-entreno" : "Merienda", mer], ["Cena", cen]];
     // Control del déficit: si el día pasa del límite, se reducen los hidratos de comida y cena (mín. 60 %)
     const limit = ent ? KCAL_MAX_ENT : KCAL_MAX_DES;

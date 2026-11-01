@@ -112,6 +112,7 @@ aside { display: grid; gap: 14px; position: sticky; top: 12px; }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
 .btn.small { padding: 6px 12px; font-size: .85rem; }
 .small-t { font-size: .85rem; margin: 0 0 8px; }
+.spice { font-size: .8rem; color: var(--accent); margin-top: 3px; font-style: italic; }
 .rules ul { margin: 6px 0 0; padding-left: 18px; font-size: .9rem; display: grid; gap: 4px; }
 .toast { font-size: .85rem; color: var(--accent); min-height: 1.2em; }
 footer { font-size: .85rem; color: var(--muted); max-width: 80ch; }
@@ -165,6 +166,8 @@ footer { font-size: .85rem; color: var(--muted); max-width: 80ch; }
           <li>Sin lactosa: lácteos sin lactosa, whey isolate y quesos curados (manchego, parmesano), que prácticamente no tienen lactosa.</li>
           <li>Sin fructosa en exceso: fuera manzana, pera, mango, sandía, cereza, higo, caqui, miel, agave, zumos y fruta desecada. Como máximo 1 ración de fruta por toma.</li>
           <li>Sin pimiento ni derivados (pimentón, cayena, curry), sin cebolla y sin coliflor.</li>
+          <li>Especias que puedes usar: azafrán, romero, tomillo, orégano, laurel, comino, cúrcuma, jengibre, pimienta negra, clavo, nuez moscada, canela, perejil, albahaca, eneldo y hierbabuena. Evita el pimentón, la cayena, la guindilla, el curry y las mezclas que lleven ajo o cebolla en polvo (mira la etiqueta).</li>
+          <li>Platos pequeños: unas 450-500 kcal en la comida y 350-420 en la cena, siempre con al menos 150 g de verdura.</li>
           <li>Cocina de casa de la Vall d'Albaida adaptada: el sofrito se hace con aceite de ajo y tomate, se usa azafrán en vez de pimentón o colorante, y no lleva morcilla ni alioli.</li>
           <li>Dieta para perder grasa: cada día tiene un techo de unas 1.850 kcal si entrenas y 1.700 si no. Si un menú se pasa, la app recorta el arroz, la patata, el pan o la legumbre de la comida y la cena.</li>
           <li>En las etiquetas, descarta: sorbitol (E420), manitol (E421), xilitol (E967), maltitol (E965), jarabe de glucosa-fructosa e inulina.</li>
@@ -252,7 +255,7 @@ function render() {
         <div class="meal">
           <div class="lbl">${lbl}</div>
           <div class="t">${esc(m.t)}</div>
-          <div class="ing">${esc(ingText(m.items))}</div>
+          <div class="ing">${esc(ingText(m.items))}</div>${m.spices ? `<div class="spice">Especias: ${esc(m.spices)}</div>` : ""}
         </div>`).join("")}
     </article>`).join("");
 
