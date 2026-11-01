@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="75%">
+      <stop offset="0" stop-color="#2b3832"/>
+      <stop offset="1" stop-color="#141a17"/>
+    </radialGradient>
+    <radialGradient id="plate" cx="45%" cy="40%" r="70%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e6e9e4"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- anillo de las 4 estaciones: primavera, verano, otoño, invierno -->
+  <g fill="none" stroke-width="42" stroke-linecap="round" transform="rotate(-90 256 256)">
+    <circle cx="256" cy="256" r="172" stroke="#5fae72" stroke-dasharray="226 855" transform="rotate(8 256 256)"/>
+    <circle cx="256" cy="256" r="172" stroke="#ee7a52" stroke-dasharray="226 855" transform="rotate(98 256 256)"/>
+    <circle cx="256" cy="256" r="172" stroke="#e0a03e" stroke-dasharray="226 855" transform="rotate(188 256 256)"/>
+    <circle cx="256" cy="256" r="172" stroke="#5d9ad0" stroke-dasharray="226 855" transform="rotate(278 256 256)"/>
+  </g>
+  <!-- plato -->
+  <circle cx="256" cy="256" r="122" fill="url(#plate)"/>
+  <circle cx="256" cy="256" r="96" fill="none" stroke="#d5dad3" stroke-width="3"/>
+  <!-- brote de hoja -->
+  <g transform="translate(256 262)">
+    <path d="M0 52 C-2 20 -2 -6 4 -30" fill="none" stroke="#1d2320" stroke-width="9" stroke-linecap="round"/>
+    <path d="M4 -30 C10 -70 52 -82 74 -78 C72 -50 52 -22 4 -30 Z" fill="#3f7d4e"/>
+    <path d="M6 -32 C24 -48 44 -62 66 -72" fill="none" stroke="#e3efe5" stroke-width="4" stroke-linecap="round"/>
+    <path d="M0 8 C-8 -24 -46 -36 -66 -30 C-58 -6 -32 10 0 8 Z" fill="#a86412"/>
+    <path d="M-3 4 C-20 -8 -38 -18 -58 -26" fill="none" stroke="#f5ead9" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>
