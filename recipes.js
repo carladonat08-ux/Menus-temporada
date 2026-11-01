@@ -13,13 +13,23 @@ const RECETAS = [
     "Aparta del fuego y deja templar 1 minuto. Añade el whey y mezcla bien: si lo cueces, se apelmaza.",
     "Sírvelo con la fruta troceada y las nueces picadas por encima. Si te gusta, añade canela.",
   ] })],
-  [/^Tostada de espelta con 2 huevos revueltos/, () => ({ tiempo: "10 min", pasos: [
-    "Tuesta el pan.",
-    "Bate los huevos con una pizca de sal y pimienta negra. Cuájalos en una sartén antiadherente con el aceite, a fuego suave y removiendo, hasta que queden jugosos.",
-    "Ralla el tomate sobre el pan, pon el revuelto encima y termina con el queso curado rallado o en lascas.",
+  [/^Tostada de espelta con tomate y 2 huevos/, () => ({ tiempo: "10 min", pasos: [
+    "Tuesta el pan y ralla el tomate por encima con una pizca de sal y el aceite.",
+    "Bate los huevos con pimienta y cuájalos en una sartén antiadherente a fuego suave, removiendo, hasta que queden jugosos.",
+    "Pon el revuelto sobre la tostada y termina con el queso curado rallado o en lascas.",
+  ] })],
+  [/^Tostada de espelta con tomate, aceite, jamón/, () => ({ tiempo: "5 min", pasos: [
+    "Tuesta el pan y ralla el tomate por encima con una pizca de sal y el aceite.",
+    "Coloca encima el jamón cocido y el queso curado en lonchas finas.",
+    "Prepara el café con la leche sin lactosa caliente (o sola, si lo prefieres sin café).",
+  ] })],
+  [/^Yogur o skyr con copos de avena/, () => ({ tiempo: "5 min", pasos: [
+    "Pon el yogur o skyr sin lactosa en un bol.",
+    "Añade los copos de avena (si te gusta, déjalos 5 minutos para que se ablanden) y la fruta troceada.",
+    "Termina con las nueces picadas y canela al gusto.",
   ] })],
   [/^Tortitas de avena/, () => ({ tiempo: "15 min", pasos: [
-    "Tritura la avena con la leche, el huevo, el whey y la mitad del plátano hasta tener una masa espesa. Deja reposar 5 minutos.",
+    "Tritura la avena con la leche sin lactosa, el huevo, el whey y la mitad del plátano hasta tener una masa espesa. Deja reposar 5 minutos.",
     "Calienta una sartén antiadherente con unas gotas de aceite. Vierte la masa en porciones pequeñas.",
     "Cuando salgan burbujas (unos 2 minutos), dales la vuelta y cocina 1-2 minutos más.",
     "Sírvelas con el resto del plátano en rodajas y la crema de cacahuete. Opcional: canela.",

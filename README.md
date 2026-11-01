@@ -38,7 +38,9 @@ Es una pauta general y no sustituye a un médico o dietista.
 - **Variedad:** cada proteína (pollo, cerdo, merluza, sardina…) como mucho 2 veces por semana y nunca en días seguidos. Arroz entre semana como mucho 2 días y no seguidos. Tortillas como mucho 2, bullit 1 y cremas 2. Nunca el mismo tipo de plato en la comida y la cena.
 - **Cenas ligeras:** proteína con verdura, sin arroz, pasta, fideos ni legumbres. Como mucho 100 g de patata o 30 g de pan, y unas 380 kcal. Si la comida lleva huevo, la cena no es de huevo.
 - **Domingo:** comida de fiesta (paella, fideuà, arròs al forn, arròs negre, putxero…) con una ración generosa. Por la noche no se cena: solo un yogur o unas palomitas caseras.
-- **Un solo cereal o pan al día, el del desayuno:** el almuerzo es yogur o skyr con fruta; el pre-entreno y la merienda, fruta con queso curado o almendras; la cena no lleva pan.
+- **Desayunos (5, en rotación):** porridge de avena con fruta y nueces; tostada de espelta con tomate y huevos revueltos con queso; tortitas de avena y plátano; tostada con tomate, jamón cocido y queso con café con leche; yogur o skyr con avena, fruta y nueces. Entre 480 y 550 kcal y 26-36 g de proteína. Nunca el mismo desayuno ni tostada dos días seguidos.
+- **Un solo cereal o pan al día, el del desayuno:** el almuerzo es yogur o skyr con fruta o con canela y frutos secos (queso con fruta si el desayuno ya fue de yogur); el pre-entreno y la merienda, fruta con queso curado o almendras; la cena no lleva pan.
+- **Fruta:** como mucho 3 piezas al día, una por toma, sin repetir fruta en el día y un solo plátano.
 
 ## Cómo editarla
 

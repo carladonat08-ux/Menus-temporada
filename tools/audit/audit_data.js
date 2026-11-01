@@ -104,6 +104,21 @@ for (const k in X.SEASONS) for (let w = 0; w < 4; w++) {
     if (hc > 1) F("hígado", `${day}: hígado en comida y cena`);
     hig += hc;
     if (com.items.some(([c]) => X.LEG.includes(c))) legL++;
+    // Desayuno y almuerzo
+    const FRU = ["fre", "ara", "fra", "kiw", "nar", "man", "pla", "pin", "uva", "mel", "pap"];
+    const frs = d.meals.flatMap(([, m]) => m.items.filter(([c]) => FRU.includes(c)).map(([c]) => c));
+    if (new Set(frs).size < frs.length) F("fruta", `${day}: fruta repetida (${frs.join(", ")})`);
+    if (frs.length > 3) F("fruta", `${day}: ${frs.length} piezas de fruta`);
+    d.meals.forEach(([l, m]) => { if (m.items.filter(([c]) => FRU.includes(c)).length > 1) F("fruta", `${day}: más de una fruta en ${l}`); });
+    if (i > 0 && wk[i - 1].meals[0][1].t.slice(0, 18) === des.t.slice(0, 18)) F("desayuno", `${day}: mismo tipo de desayuno que el día anterior`);
+    if (i > 0 && wk[i - 1].meals[0][1].items.some(([c]) => c === "pan") && des.items.some(([c]) => c === "pan")) F("desayuno", `${day}: tostada dos días seguidos`);
+    const kD = des.items.reduce((a2, [c, g]) => a2 + X.ING[c][2] * g / 100, 0), pD = des.items.reduce((a2, [c, g]) => a2 + X.ING[c][3] * g / 100, 0);
+    if (kD < 420 || kD > 600) F("desayuno", `${day}: desayuno de ${Math.round(kD)} kcal`);
+    if (pD < 22) F("desayuno", `${day}: desayuno con solo ${Math.round(pD)} g de proteína`);
+    const kA = alm.items.reduce((a2, [c, g]) => a2 + X.ING[c][2] * g / 100, 0);
+    if (kA < 100 || kA > 260) F("almuerzo", `${day}: almuerzo de ${Math.round(kA)} kcal`);
+    if (des.items.some(([c]) => c === "sky") && alm.items.some(([c]) => c === "sky")) F("almuerzo", `${day}: yogur en desayuno y almuerzo`);
+    if (/Bocadill/.test(alm.t)) F("almuerzo", `${day}: bocadillo en el almuerzo`);
     // Un solo cereal o pan al día: el del desayuno
     [d.meals[1], d.meals[3], d.meals[4]].forEach(([l, m]) => { if (m.items.some(([c]) => ["pan", "avn", "tor"].includes(c))) F("pan", `${day}: ${l} con pan o cereal (${m.t})`); });
     // Dos bocadillos
