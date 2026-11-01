@@ -3,7 +3,7 @@
 Web personal para planificar la comida de la semana. Al elegir una fecha:
 
 - Indica la estación: primavera desde el 20 de marzo, verano desde el 21 de junio, otoño desde el 23 de septiembre e invierno desde el 21 de diciembre.
-- Indica qué semana del ciclo toca. Cada estación tiene 4 menús semanales que se repiten desde el inicio de la estación.
+- Indica qué semana del mes toca. Las semanas van de lunes a domingo y cada una pertenece al mes de su lunes: el primer lunes del mes empieza la semana 1. Cada estación tiene 4 menús, uno por semana. Si el mes tiene una semana 5, usa el menú 2 para que no se repita con la semana 1 del mes siguiente.
 - Muestra el menú de los 7 días: desayuno, media mañana, comida, merienda o pre-entreno y cena, con los gramos de cada ingrediente.
 - Calcula las calorías y la proteína de cada día.
 - Genera la lista de la compra de la semana con su coste estimado. Puedes marcar lo que ya tienes y copiar la lista.

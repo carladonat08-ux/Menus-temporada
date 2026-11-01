@@ -328,17 +328,26 @@ function shopping(days) {
   return out;
 }
 
-function seasonOf(date) {
+const MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+
+function seasonKey(date) {
   const y = date.getFullYear();
-  const t = (m, d, yy = y) => new Date(yy, m - 1, d);
-  let key, start;
-  if (date >= t(12, 21)) { key = "invierno"; start = t(12, 21); }
-  else if (date >= t(9, 23)) { key = "otono"; start = t(9, 23); }
-  else if (date >= t(6, 21)) { key = "verano"; start = t(6, 21); }
-  else if (date >= t(3, 20)) { key = "primavera"; start = t(3, 20); }
-  else { key = "invierno"; start = t(12, 21, y - 1); }
-  const days = Math.floor((date - start) / 86400000);
-  return { key, start, week: Math.floor(days / 7) % 4, dow: (date.getDay() + 6) % 7 };
+  const t = (m, d) => new Date(y, m - 1, d);
+  if (date >= t(12, 21)) return "invierno";
+  if (date >= t(9, 23)) return "otono";
+  if (date >= t(6, 21)) return "verano";
+  if (date >= t(3, 20)) return "primavera";
+  return "invierno";
+}
+
+// Semanas de lunes a domingo. Cada semana pertenece al mes en el que cae su lunes:
+// el 1.er lunes del mes abre la semana 1. Si el mes tiene 5 lunes, la semana 5 repite el menú 1.
+// La estación se decide por el lunes, para que toda la semana use el mismo menú.
+function seasonOf(date) {
+  const dow = (date.getDay() + 6) % 7;
+  const monday = new Date(date.getFullYear(), date.getMonth(), date.getDate() - dow);
+  const n = Math.ceil(monday.getDate() / 7);
+  return { key: seasonKey(monday), week: n === 5 ? 1 : n - 1, n, month: MESES[monday.getMonth()], monday, dow };
 }
 
 if (typeof module !== "undefined") module.exports = { ING, SEASONS, buildWeek, shopping, seasonOf };

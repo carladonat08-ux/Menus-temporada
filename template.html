@@ -191,7 +191,7 @@ function ingText(items) {
 
 function setDate(d) {
   const s = seasonOf(d);
-  state = { date: d, key: s.key, week: s.week, currentWeek: s.week, dow: s.dow, start: s.start };
+  state = { date: d, key: s.key, week: s.week, currentWeek: s.week, dow: s.dow, n: s.n, month: s.month, monday: s.monday };
   document.documentElement.dataset.season = s.key;
   $("fecha").value = toInput(d);
   render();
@@ -205,7 +205,7 @@ function render() {
   $("season").innerHTML = `
     <div class="name">${S.name}</div>
     <div class="meta">
-      <div><b>${fmtDate(state.date)}</b> · ${DIAS[state.dow]} de la semana ${state.currentWeek + 1} del ciclo</div>
+      <div><b>${fmtDate(state.date)}</b> · ${DIAS[state.dow]} de la semana ${state.n} de ${state.month}${state.n === 5 ? " (usa el menú de la semana 2)" : ""}</div>
       <div class="muted">${S.range}. ${S.note}</div>
     </div>
     <div class="stat"><b>${avgE.toLocaleString("es-ES")} kcal</b><span class="muted">media en días de entreno · ${avgP} g de proteína</span></div>`;
