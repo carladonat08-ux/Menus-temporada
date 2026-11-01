@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menús de temporada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Plan: neutros de papel frío, un acento por estación; cabecera de control arriba, semana en rejilla de días, compra al lado */
+  --bg: #f4f5f2;
+  --surface: #ffffff;
+  --ink: #1d2320;
+  --muted: #5f6964;
+  --line: #dde1dc;
+  --accent: #3f7d4e;
+  --accent-soft: #e3efe5;
+  --rest: #8a8f8c;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+:root[data-season="primavera"] { --accent: #3f7d4e; --accent-soft: #e3efe5; }
+:root[data-season="verano"] { --accent: #c2512f; --accent-soft: #f8e6de; }
+:root[data-season="otono"] { --accent: #a86412; --accent-soft: #f5ead9; }
+:root[data-season="invierno"] { --accent: #2f6390; --accent-soft: #e1eaf3; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141816; --surface: #1d2220; --ink: #e9ece9; --muted: #a1aaa5; --line: #2f3633; --rest: #8f9692; color-scheme: dark;
+  }
+  :root:not([data-theme="light"])[data-season="primavera"] { --accent: #7cc08c; --accent-soft: #233a2a; }
+  :root:not([data-theme="light"])[data-season="verano"] { --accent: #f08d6c; --accent-soft: #432820; }
+  :root:not([data-theme="light"])[data-season="otono"] { --accent: #e3a650; --accent-soft: #3f3020; }
+  :root:not([data-theme="light"])[data-season="invierno"] { --accent: #7fb2e0; --accent-soft: #1f3245; }
+}
+:root[data-theme="dark"] { --bg: #141816; --surface: #1d2220; --ink: #e9ece9; --muted: #a1aaa5; --line: #2f3633; --rest: #8f9692; color-scheme: dark; }
+:root[data-theme="dark"][data-season="primavera"] { --accent: #7cc08c; --accent-soft: #233a2a; }
+:root[data-theme="dark"][data-season="verano"] { --accent: #f08d6c; --accent-soft: #432820; }
+:root[data-theme="dark"][data-season="otono"] { --accent: #e3a650; --accent-soft: #3f3020; }
+:root[data-theme="dark"][data-season="invierno"] { --accent: #7fb2e0; --accent-soft: #1f3245; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 16px/1.5 var(--body); }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 24px 16px 48px; display: grid; gap: 20px; }
+h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; }
+h1 { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.3rem; font-weight: 700; }
+h3 { font-size: 1.05rem; font-weight: 700; }
+.muted { color: var(--muted); }
+.top { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: end; }
+.top p { margin: 4px 0 0; max-width: 62ch; }
+.date-box { display: flex; gap: 8px; align-items: end; flex-wrap: wrap; }
+label { font-size: .85rem; font-weight: 600; color: var(--muted); display: grid; gap: 4px; }
+input[type="date"] { font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); }
+button { font: inherit; cursor: pointer; }
+.btn { padding: 9px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 600; }
+.btn:hover { border-color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.season { background: var(--accent-soft); border-left: 6px solid var(--accent); border-radius: 12px; padding: 18px 20px; display: grid; grid-template-columns: auto 1fr auto; gap: 8px 24px; align-items: center; }
+.season .name { font-family: var(--display); font-size: 2.2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+.season .meta { display: grid; gap: 2px; }
+.season .stat { text-align: right; font-variant-numeric: tabular-nums; }
+.season .stat b { font-family: var(--display); font-size: 1.4rem; display: block; }
+
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.tab { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 600; display: inline-flex; gap: 8px; align-items: center; }
+.tab[aria-selected="true"] { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+.tab .now { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: 1px 7px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+
+.main { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start; }
+.days { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.day { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 10px; align-content: start; }
+.day.today { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.day-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.pill { font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.pill.ent { background: var(--accent); color: var(--surface); }
+.pill.des { background: transparent; color: var(--rest); border: 1px solid var(--rest); }
+.totals { font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.meal { border-top: 1px solid var(--line); padding-top: 8px; }
+.meal .lbl { font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); }
+.meal .t { font-weight: 600; line-height: 1.3; }
+.meal .ing { font-size: .84rem; color: var(--muted); line-height: 1.35; margin-top: 2px; }
+
+aside { display: grid; gap: 14px; position: sticky; top: 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+.panel h2 { margin-bottom: 6px; }
+.shop h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 12px 0 4px; font-family: var(--body); }
+.shop ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; }
+.shop li label { display: flex; gap: 8px; align-items: flex-start; font-size: .9rem; font-weight: 400; color: var(--ink); cursor: pointer; }
+.shop li .q { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.shop li input:checked + span { text-decoration: line-through; color: var(--muted); }
+.shop .actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.cost { display: flex; gap: 10px; align-items: baseline; margin-top: 10px; padding: 8px 10px; border-radius: 8px; background: var(--accent-soft); font-size: .84rem; color: var(--muted); }
+.cost b { font-family: var(--display); font-size: 1.3rem; color: var(--accent); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rules ul { margin: 6px 0 0; padding-left: 18px; font-size: .9rem; display: grid; gap: 4px; }
+.toast { font-size: .85rem; color: var(--accent); min-height: 1.2em; }
+footer { font-size: .85rem; color: var(--muted); max-width: 80ch; }
+
+@media (max-width: 900px) {
+  .main { grid-template-columns: 1fr; }
+  aside { position: static; }
+}
+@media (max-width: 560px) {
+  .top { grid-template-columns: 1fr; }
+  .season { grid-template-columns: 1fr; }
+  .season .stat { text-align: left; }
+  h1 { font-size: 1.55rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Menús de temporada</h1>
+      <p class="muted">Elige una fecha y verás la estación y la semana de menú que te toca. Son ~1.800 kcal los días de entreno y ~1.650 los de descanso, sin lactosa, fructosa, pimiento, cebolla ni coliflor.</p>
+    </div>
+    <form class="date-box" id="f">
+      <label for="fecha">Fecha
+        <input type="date" id="fecha" required>
+      </label>
+      <button type="button" class="btn" id="hoy">Hoy</button>
+    </form>
+  </header>
+
+  <section class="season" id="season" aria-live="polite"></section>
+
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Semana de menú"></nav>
+
+  <div class="main">
+    <section class="days" id="days" aria-label="Menú de la semana"></section>
+    <aside>
+      <div class="panel shop" id="shop"></div>
+      <div class="panel rules">
+        <h2>Reglas que sigue el menú</h2>
+        <ul>
+          <li>Sin lactosa: solo lácteos sin lactosa y whey isolate.</li>
+          <li>Sin fructosa en exceso: fuera manzana, pera, mango, sandía, cereza, higo, caqui, miel, agave, zumos y fruta desecada. Como máximo 1 ración de fruta por toma.</li>
+          <li>Sin pimiento ni derivados (pimentón, cayena, curry), sin cebolla y sin coliflor.</li>
+          <li>En las etiquetas, descarta: sorbitol (E420), manitol (E421), xilitol (E967), maltitol (E965), jarabe de glucosa-fructosa e inulina.</li>
+          <li>Cereales integrales: arroz integral, pasta de arroz integral y pan de espelta de masa madre con fermentación larga. Las 2 primeras semanas, mezcla mitad blanco y mitad integral, y cambia un alimento cada vez.</li>
+          <li>Comida y cena nunca repiten la misma proteína ni llevan legumbre las dos el mismo día.</li>
+          <li>Legumbres 2-3 veces por semana. Mejor de bote y bien enjuagadas: se digieren mejor que las cocidas en casa.</li>
+          <li>En los días de descanso, las legumbres, el arroz, la pasta, la patata y el pan de comida y cena bajan un 30 %. Las cantidades ya están ajustadas.</li>
+          <li>Para ahorrar: compra el pescado, las gambas y los frutos rojos congelados, las legumbres en bote, las marcas blancas y la fruta de temporada. Puedes cambiar cualquier pescado blanco por merluza congelada, que es el más barato, y la caballa y las sardinas dan el mismo omega-3 que el salmón.</li>
+          <li>Creatina: 3-5 g todos los días. Agua: 2-2,5 L.</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <footer>Pesos en crudo y en limpio. Las calorías y la proteína son estimaciones a partir de tablas de composición estándar. Los precios son orientativos, de supermercado en España en 2026, y varían según la tienda. Entrenamiento previsto: lunes, martes, jueves y viernes. Es una pauta general y no sustituye a tu médico o dietista.</footer>
+</div>
+
+<script>
+/*DATA*/
+
+const $ = (id) => document.getElementById(id);
+const fmtDate = (d) => d.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k) || "null"); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+};
+let state = { date: new Date(), key: null, week: 0, currentWeek: 0, dow: 0 };
+
+function toInput(d) { const p = (n) => String(n).padStart(2, "0"); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`; }
+function fromInput(v) { const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); }
+function esc(s) { return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+function ingText(items) {
+  return items.map(([c, g]) => {
+    const [n, , , , , u] = ING[c];
+    const q = u ? `${Math.max(1, Math.round(g / u[1]))} ${u[0] === "uds" ? (Math.round(g / u[1]) > 1 ? "uds" : "ud") : (Math.round(g / u[1]) > 1 ? "latas" : "lata")}` : `${g} g`;
+    return `${n.replace(/ \(.*\)/, "").toLowerCase()} ${q}`;
+  }).join(" · ");
+}
+
+function setDate(d) {
+  const s = seasonOf(d);
+  state = { date: d, key: s.key, week: s.week, currentWeek: s.week, dow: s.dow, start: s.start };
+  document.documentElement.dataset.season = s.key;
+  $("fecha").value = toInput(d);
+  render();
+}
+
+function render() {
+  const S = SEASONS[state.key];
+  const days = buildWeek(state.key, state.week);
+  const avgE = Math.round(days.filter((d) => d.ent).reduce((a, d) => a + d.kcal, 0) / 4);
+  const avgP = Math.round(days.reduce((a, d) => a + d.prot, 0) / 7);
+  $("season").innerHTML = `
+    <div class="name">${S.name}</div>
+    <div class="meta">
+      <div><b>${fmtDate(state.date)}</b> · ${DIAS[state.dow]} de la semana ${state.currentWeek + 1} del ciclo</div>
+      <div class="muted">${S.range}. ${S.note}</div>
+    </div>
+    <div class="stat"><b>${avgE.toLocaleString("es-ES")} kcal</b><span class="muted">media en días de entreno · ${avgP} g de proteína</span></div>`;
+
+  $("tabs").innerHTML = [0, 1, 2, 3].map((w) => `
+    <button class="tab" role="tab" id="tab-${w}" aria-selected="${w === state.week}" data-w="${w}">
+      Semana ${w + 1}${w === state.currentWeek ? '<span class="now">te toca</span>' : ""}
+    </button>`).join("");
+  $("tabs").querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => { state.week = +b.dataset.w; render(); }));
+
+  $("days").innerHTML = days.map((d, i) => `
+    <article class="day${state.week === state.currentWeek && i === state.dow ? " today" : ""}">
+      <div class="day-head">
+        <h3>${d.dia}</h3>
+        <span class="pill ${d.ent ? "ent" : "des"}">${d.ent ? "Entreno" : "Descanso"}</span>
+      </div>
+      <div class="totals">≈ ${d.kcal.toLocaleString("es-ES")} kcal · ${d.prot} g de proteína</div>
+      ${d.meals.map(([lbl, m]) => `
+        <div class="meal">
+          <div class="lbl">${lbl}</div>
+          <div class="t">${esc(m.t)}</div>
+          <div class="ing">${esc(ingText(m.items))}</div>
+        </div>`).join("")}
+    </article>`).join("");
+
+  renderShop(days);
+}
+
+function renderShop(days) {
+  const S = SEASONS[state.key];
+  const list = shopping(days);
+  const sk = `shop-${state.key}-${state.week}`;
+  const checked = store.get(sk) || {};
+  const order = ["carne", "pescado", "huevos", "lacteos", "cereal", "legumbre", "verdura", "fruta", "grasa", "suple"];
+  const cost = Math.round(list._cost);
+  let html = `<h2>Lista de la compra</h2><div class="muted" style="font-size:.88rem">${S.name}, semana ${state.week + 1}, cantidades para 7 días</div>
+    <div class="cost"><b>≈ ${cost} €</b><span>coste estimado de la semana, unos ${(list._cost / 7).toFixed(2).replace(".", ",")} € al día. Incluye la parte proporcional de whey y aceite.</span></div>`;
+  order.forEach((cat) => {
+    if (!list[cat]) return;
+    html += `<h3>${CATS[cat]}</h3><ul>` + list[cat].sort((a, b) => a[0].localeCompare(b[0], "es")).map(([n, q], j) => {
+      const id = `c-${cat}-${j}`;
+      return `<li><label for="${id}"><input type="checkbox" id="${id}" data-n="${esc(n)}" ${checked[n] ? "checked" : ""}><span>${esc(n)}</span><span class="q">${q}</span></label></li>`;
+    }).join("") + "</ul>";
+  });
+  html += `<div class="actions"><button class="btn" id="copy" type="button">Copiar lista</button><button class="btn" id="clear" type="button">Desmarcar todo</button></div><div class="toast" id="toast"></div>`;
+  $("shop").innerHTML = html;
+  $("shop").querySelectorAll("input[type=checkbox]").forEach((cb) => cb.addEventListener("change", () => {
+    const c = store.get(sk) || {}; c[cb.dataset.n] = cb.checked; store.set(sk, c);
+  }));
+  $("clear").addEventListener("click", () => { store.set(sk, {}); renderShop(days); });
+  $("copy").addEventListener("click", async () => {
+    const txt = `Compra · ${S.name}, semana ${state.week + 1} (≈ ${cost} €)\n` + order.filter((c) => list[c]).map((c) => `\n${CATS[c]}\n` + list[c].map(([n, q]) => `- ${n}: ${q}`).join("\n")).join("\n");
+    try { await navigator.clipboard.writeText(txt); $("toast").textContent = "Lista copiada."; }
+    catch (e) { $("toast").textContent = "No se ha podido copiar. Selecciona la lista y cópiala a mano."; }
+  });
+}
+
+$("fecha").addEventListener("change", (e) => { if (e.target.value) setDate(fromInput(e.target.value)); });
+$("hoy").addEventListener("click", () => setDate(new Date()));
+$("f").addEventListener("submit", (e) => e.preventDefault());
+setDate(new Date());
+</script>
+</body>
+</html>
