@@ -348,7 +348,7 @@ const MER_ENT = [
 ];
 const REST_FACTOR = 0.8; // hidratos de comida y cena en días de descanso
 // Objetivo de pérdida de peso: techo diario de energía
-const KCAL_MAX_ENT = 1850, KCAL_MAX_DES = 1700;
+const KCAL_MAX_ENT = 1850, KCAL_MAX_DES = 1700, KCAL_MAX_DOM = 1800;
 const AOV_FACTOR = 0.7; // aceite de comida y cena: 10 g -> 7 g, 5 g -> 4 g
 const CITRICO = { primavera: "kiw", verano: "kiw", otono: "man", invierno: "nar" };
 
@@ -388,7 +388,7 @@ function capProt(o) {
 }
 
 // Platos pequeños y con verdura: techo de energía por plato y mínimo de verdura
-const MEAL_KCAL = { c: 500, n: 420 };
+const MEAL_KCAL = { c: 500, n: 420, f: 580 }; // f: comida del domingo (día de juntarse)
 const VEG_MIN = 150;
 function kcalOf(items) { return items.reduce((a, [c, g]) => a + ING[c][2] * g / 100, 0); }
 function normalize(o, slot) {
@@ -438,6 +438,9 @@ function spicesFor(o) {
   return "orégano, albahaca y tomillo";
 }
 
+const isFiesta = (str) => /^(Paella|Fideuà|Arròs al forn|Arròs a banda|Arròs negre|Putxero)/.test(str);
+const isCenaFinde = (str) => /^(Coca|Minxos)/.test(str);
+
 // Índices por defecto de comida (w = 0..3). Con 21 platos, las semanas 1-3 no repiten; la 4 mezcla.
 function defaultComida(w, d, N) { return w < 3 ? (d + 7 * w) % N : (d * 3 + 1) % N; }
 function defaultCena(w, d, N) { return w < 3 ? (d + 7 * ((w + 1) % 3) + 2) % N : (d * 3 + 2) % N; }
@@ -453,34 +456,43 @@ function buildWeek(key, w, opts = {}) {
   const hasLeg = (str) => /\b(len|gar|alu|grf):/.test(str);
 
   // 1) Elegir platos
+  // Platos de fiesta (paellas, fideuà, arròs al forn…) solo el domingo; coca y minxos solo cenas de viernes a domingo.
+  const FEST = [], DIARIO = [];
+  S.comidas.forEach((x, i) => (isFiesta(x) ? FEST : DIARIO).push(i));
   const CI = [], NI = [];
   const usedC = new Set(), usedN = new Set();
   let higUsed = false;
   for (let d = 0; d < 7; d++) {
-    let ci = defaultComida(w, d, NC);
-    for (let j = 0; j < NC; j++) { const c = (ci + j) % NC; if (!usedC.has(c) && !(higUsed && hasHig(S.comidas[c]))) { ci = c; break; } }
+    let ci;
+    if (d === 6 && FEST.length) ci = FEST[w % FEST.length];
+    else {
+      const ND = DIARIO.length;
+      let k = w < 3 ? (d + 6 * w) % ND : (d * 3 + 1) % ND;
+      ci = DIARIO[k];
+      for (let j = 0; j < ND; j++) { const c = DIARIO[(k + j) % ND]; if (!usedC.has(c) && !(higUsed && hasHig(S.comidas[c]))) { ci = c; break; } }
+    }
     usedC.add(ci);
     const com0 = dish(S.comidas[ci]);
     let ni = defaultCena(w, d, NN);
     for (let j = 0; j < NN; j++) {
       const cand = (ni + j) % NN;
-      if (!usedN.has(cand) && !clash(com0, dish(S.cenas[cand])) && !((higUsed || hasHig(S.comidas[ci])) && hasHig(S.cenas[cand]))) { ni = cand; break; }
+      if (!usedN.has(cand) && !(d < 4 && isCenaFinde(S.cenas[cand])) && !clash(com0, dish(S.cenas[cand])) && !((higUsed || hasHig(S.comidas[ci])) && hasHig(S.cenas[cand]))) { ni = cand; break; }
     }
     usedN.add(ni);
     if (hasHig(S.comidas[ci]) || hasHig(S.cenas[ni])) higUsed = true;
     CI.push(ci); NI.push(ni);
   }
-  // 2) Asegurar al menos 2 días con legumbres
+  // 2) Asegurar al menos 2 días con legumbres (sin tocar la comida del domingo)
   const legDays = () => CI.filter((c, d) => hasLeg(S.comidas[c]) || hasLeg(S.cenas[NI[d]])).length;
-  // Se cambia la comida (la cena si no hay comida posible) de un día sin legumbre por otra con legumbre
-  for (let d = 0; d < 7 && legDays() < 2; d++) {
+  for (let d = 0; d < 6 && legDays() < 2; d++) {
     if (hasLeg(S.comidas[CI[d]]) || hasLeg(S.cenas[NI[d]])) continue;
     let done = false;
-    for (let cand = 0; cand < NC && !done; cand++) {
+    for (const cand of DIARIO) {
+      if (done) break;
       if (hasLeg(S.comidas[cand]) && !CI.includes(cand) && !hasHig(S.comidas[cand]) && !clash(dish(S.comidas[cand]), dish(S.cenas[NI[d]]))) { CI[d] = cand; done = true; }
     }
     for (let cand = 0; cand < NN && !done; cand++) {
-      if (hasLeg(S.cenas[cand]) && !NI.includes(cand) && !hasHig(S.cenas[cand]) && !clash(dish(S.comidas[CI[d]]), dish(S.cenas[cand]))) { NI[d] = cand; done = true; }
+      if (hasLeg(S.cenas[cand]) && !NI.includes(cand) && !hasHig(S.cenas[cand]) && !(d < 4 && isCenaFinde(S.cenas[cand])) && !clash(dish(S.comidas[CI[d]]), dish(S.cenas[cand]))) { NI[d] = cand; done = true; }
     }
   }
 
@@ -512,12 +524,12 @@ function buildWeek(key, w, opts = {}) {
       return { ...o, t: `${o.t} + ${ING[f][0].toLowerCase()} de postre`, items: [...o.items, [f, f === "nar" ? 130 : 150]] };
     };
     const lessOil = (o) => ({ ...o, items: o.items.map(([c, g]) => [c, c === "aov" ? Math.round(g * AOV_FACTOR) : g]) });
-    const com = withCitrus(scale(normalize(capProt(lessOil(dish(S.comidas[ci]))), "c")));
+    const com = withCitrus(scale(normalize(capProt(lessOil(dish(S.comidas[ci]))), d === 6 ? "f" : "c")));
     const cen = withCitrus(scale(normalize(capProt(lessOil(dish(S.cenas[ni]))), "n")));
     com.spices = spicesFor(com); cen.spices = spicesFor(cen);
     const meals = [["Desayuno", des], ["Almuerzo", mm], ["Comida", com], [ent ? "Pre-entreno" : "Merienda", mer], ["Cena", cen]];
     // Control del déficit: si el día pasa del límite, se reducen los hidratos de comida y cena (mín. 60 %)
-    const limit = ent ? KCAL_MAX_ENT : KCAL_MAX_DES;
+    const limit = d === 6 ? KCAL_MAX_DOM : ent ? KCAL_MAX_ENT : KCAL_MAX_DES;
     let n = nutrients(meals.flatMap(([, m]) => m.items));
     if (n.kcal > limit) {
       const carbK = [com, cen].flatMap((m) => m.items).filter(([c]) => ING[c][4]).reduce((a, [c, g]) => a + ING[c][2] * g / 100, 0);
