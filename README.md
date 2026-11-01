@@ -31,6 +31,15 @@ Web personal para planificar la comida de la semana. Al elegir una fecha:
 
 Es una pauta general y no sustituye a un médico o dietista.
 
+## Organización de la dieta
+
+- **Comida y cena de grupos distintos:** si a mediodía hay carne, por la noche hay pescado o huevo, y al revés.
+- **Reparto semanal:** pescado 4-6 veces (al menos 2 de azul), carne 4-6 (roja como máximo 2), huevo 2-4 y legumbre al mediodía 2-4 días.
+- **Variedad:** cada proteína (pollo, cerdo, merluza, sardina…) como mucho 2 veces por semana y nunca en días seguidos. Arroz entre semana como mucho 2 días y no seguidos. Tortillas como mucho 2, bullit 1 y cremas 2. Nunca el mismo tipo de plato en la comida y la cena.
+- **Cenas ligeras:** proteína con verdura, sin arroz, pasta, fideos ni legumbres. Como mucho 100 g de patata o 30 g de pan, y unas 380 kcal.
+- **Domingo:** comida de fiesta (paella, fideuà, arròs al forn, arròs negre, putxero…) con una ración generosa. Por la noche no se cena: solo un yogur o unas palomitas caseras.
+- **Nunca dos bocadillos el mismo día.**
+
 ## Cómo editarla
 
 | Archivo | Para qué sirve |

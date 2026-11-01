@@ -49,6 +49,7 @@ const ING = {
   len: ["Lentejas cocidas (bote, escurridas)", "legumbre", 90, 7, 1],
   gar: ["Garbanzos cocidos (bote, escurridos)", "legumbre", 120, 7, 1],
   alu: ["Alubias blancas cocidas (bote, escurridas)", "legumbre", 95, 6.5, 1],
+  pal: ["Maíz para palomitas", "cereal", 375, 11, 0],
   tor: ["Tortitas de arroz", "cereal", 380, 8, 0, ["uds", 9]],
   cbc: ["Calabacín", "verdura", 17, 1.2, 0],
   zan: ["Zanahoria", "verdura", 40, 0.9, 0],
@@ -102,7 +103,7 @@ const NUT = {
   cbc:[.3,2.2,1.1,16,.4], zan:[.2,7,2.8,33,.3], ber:[.2,3,3,9,.2], jud:[.2,4.5,3,37,1], esp:[.4,1.4,2.2,99,2.7], tom:[.2,3,1.2,10,.3], tri:[.2,5,1.5,15,.6], pep:[.1,3,.5,16,.3], lec:[.2,1.5,1.3,36,.9],
   can:[.4,1.6,1.5,38,2], ace:[.2,2,1.6,51,1.8], pak:[.2,2.2,1,105,.8], cza:[.1,8,1.5,20,.5], chi:[.3,18,4.9,36,.6], nab:[.1,6,1.8,30,.3], kal:[.9,4,4,150,1.5], end:[.2,3,3,52,.2], pue:[.3,6,1.8,59,2], apn:[.3,9,1.8,43,.7],
   fre:[.3,7.7,2,16,.4], ara:[.3,14,2.4,6,.3], fra:[.7,12,6.5,25,.7], kiw:[.5,15,3,34,.3], nar:[.1,12,2.4,40,.1], man:[.3,13,1.8,37,.2], pla:[.3,23,2.6,5,.3], pin:[.1,13,1.4,13,.3], uva:[.2,18,.9,10,.4], mel:[.2,8,.9,9,.2], pap:[.3,11,1.7,20,.3],
-  aov:[100,0,0,1,.6], oli:[15,1,3,50,1], grf:[.5,18,5,30,2.4], cos:[17,0,0,15,1], agu:[15,9,7,12,.6], nue:[65,14,6.7,98,2.9], alm:[50,22,12,269,3.7], cac:[50,20,6,40,1.9], coc:[7,2,0,5,.5], whe:[1,3,0,100,.5],
+  aov:[100,0,0,1,.6], pal:[4.5,74,13,7,3.2], oli:[15,1,3,50,1], grf:[.5,18,5,30,2.4], cos:[17,0,0,15,1], agu:[15,9,7,12,.6], nue:[65,14,6.7,98,2.9], alm:[50,22,12,269,3.7], cac:[50,20,6,40,1.9], coc:[7,2,0,5,.5], whe:[1,3,0,100,.5],
 };
 
 const CATS = {
@@ -153,8 +154,8 @@ const SEASONS = {
       "Sepia a la plancha con patata y ensalada|sep:200,pat:150,lec:60,tom:100,aov:10",
       "Merluza a la plancha con verdura al vapor|mer:200,pat:120,cbc:150,zan:80,aov:10",
       "Sardinas a la plancha con tomate aliñado y pan|sar:150,tom:150,pan:50,aov:5",
-      "Coca de espelta con tomate y atún|pan:80,tri:100,atu:112,oli:15,aov:5",
-      "Minxos de espinacas y bacalao (masa de espelta)|pan:80,esp:150,bac:120,aov:10",
+      "Ensalada de tomate con atún, huevo duro y aceitunas|tom:200,lec:60,atu:112,hue:55,oli:15,aov:7",
+      "Bacalao con espinacas salteadas|bac:160,esp:200,tom:80,aov:7",
       "Ensalada valenciana con huevo duro, atún y aceitunas|lec:100,tom:150,pep:80,oli:20,hue:110,atu:56,pan:40,aov:10",
       "Pollo a la plancha con calabacín y patata|pol:150,cbc:200,pat:120,aov:10",
       "Calamares a la plancha con ensalada y patata|cal:200,lec:80,tom:120,pat:120,aov:10",
@@ -206,7 +207,7 @@ const SEASONS = {
       "Clòtxines al vapor con ensalada y pan|mej:140,lec:80,tom:120,pan:40,aov:5",
       "Sardinas a la plancha con ensalada y pan|sar:150,lec:80,tom:120,pan:40,aov:5",
       "Tortilla de calabacín con ensalada|hue:110,cla:70,cbc:200,lec:60,tom:80,pan:40,aov:5",
-      "Coca de espelta con tomate y atún|pan:80,tri:100,atu:112,oli:15,aov:5",
+      "Ensalada de tomate con atún, huevo duro y aceitunas|tom:200,lec:60,atu:112,hue:55,oli:15,aov:7",
       "Calamares a la plancha con ensalada valenciana|cal:200,lec:80,tom:120,oli:15,pat:100,aov:5",
       "Merluza a la plancha con calabacín y tomate|mer:200,cbc:200,tom:100,pat:100,aov:10",
       "Ensalada caprese con jamón cocido|moz:80,tom:200,jam:60,pan:40,aov:5",
@@ -257,7 +258,7 @@ const SEASONS = {
     cenas: [
       "Tortilla de patata (sin cebolla) con ensalada|hue:110,cla:70,pat:150,lec:60,tom:80,aov:10",
       "Crema de calabaza con queso curado y huevo|cza:150,zan:120,pat:100,que:20,hue:110,aov:5",
-      "Minxos de espinacas y bacalao (masa de espelta)|pan:80,esp:150,bac:120,aov:10",
+      "Bacalao con espinacas salteadas|bac:160,esp:200,tom:80,aov:7",
       "Sepia a la plancha con patata y ensalada|sep:200,pat:150,lec:60,tom:100,aov:10",
       "Merluza al horno con calabacín y patata|mer:200,cbc:200,pat:120,aov:10",
       "Sardinas en lata con espina, tomate y tostada|sca:85,tom:150,pan:60,hue:55",
@@ -268,8 +269,8 @@ const SEASONS = {
       "Clòtxines (mejillones) en salsa de tomate con pan|mej:140,tri:100,pan:50,aov:5",
       "Lubina al horno con patata|lub:170,pat:150,tom:100,aov:10",
       "Pavo a la plancha con calabaza asada|pav:150,cza:150,pat:80,aov:10",
-      "Calamares a la plancha con arroz y espinacas|cal:200,arr:40,esp:150,aov:10",
-      "Coca de espelta con tomate y sardinas|pan:80,tri:100,sca:85,aov:5",
+      "Calamares a la plancha con espinacas salteadas|cal:180,esp:200,aov:7",
+      "Sardinas en lata con espina sobre ensalada de tomate y endibias|sca:85,tom:150,end:100,aov:5",
       "Revuelto de espinacas y gambas|hue:55,cla:100,esp:150,gam:100,pan:40,aov:5",
       "Sorell (jurel) al horno con patata|jur:170,pat:150,tom:100,aov:5",
       "Hígado de pollo a la plancha con puré de calabaza|hig:150,cza:150,pat:100,aov:10",
@@ -309,10 +310,10 @@ const SEASONS = {
     ],
     cenas: [
       "Crema de calabaza con huevo y queso curado|cza:150,zan:120,pat:100,que:20,hue:110,aov:5",
-      "Sopa de putxero con fideos de arroz y huevo|fid:40,pol:100,hue:55,zan:80,pue:40,aov:5",
+      "Caldo de putxero con pollo, verduras y huevo|pol:100,hue:55,zan:100,nab:80,pue:40,aov:5",
       "Tortilla de espinacas con queso curado|hue:110,cla:70,esp:150,que:20,pan:40,aov:5",
       "Merluza a la plancha con acelgas y patata|mer:200,ace:200,pat:120,aov:10",
-      "Minxos de espinacas y bacalao (masa de espelta)|pan:80,esp:150,bac:120,aov:10",
+      "Bacalao con espinacas salteadas|bac:160,esp:200,tom:80,aov:7",
       "Sepia a la plancha con patata y endibias|sep:200,pat:150,end:120,aov:10",
       "Pollo a la plancha con calabaza asada|pol:150,cza:150,pat:80,aov:10",
       "Sardinas en lata con espina sobre tostada con tomate|sca:85,pan:60,tom:120,hue:55",
@@ -324,7 +325,7 @@ const SEASONS = {
       "Pavo a la plancha con endibias y pan|pav:150,end:120,pan:50,aov:10",
       "Revuelto de espinacas y gambas|hue:55,cla:100,esp:150,gam:100,pan:40,aov:5",
       "Hígado de pollo a la plancha con patata y endibias|hig:150,pat:150,end:100,aov:10",
-      "Calamares a la plancha con arroz y acelgas|cal:200,arr:40,ace:150,aov:10",
+      "Calamares a la plancha con acelgas rehogadas|cal:180,ace:200,aov:7",
       "Sorell (jurel) al horno con patata|jur:170,pat:150,tom:80,aov:5",
       "Pulpo con patata y aceite de oliva|pul:150,pat:200,aov:10",
       "Tortilla francesa con jamón cocido, tomate y pan|hue:110,jam:60,tom:150,pan:40,aov:5",
@@ -388,7 +389,7 @@ function capProt(o) {
 }
 
 // Platos pequeños y con verdura: techo de energía por plato y mínimo de verdura
-const MEAL_KCAL = { c: 500, n: 420, f: 580 }; // f: comida del domingo (día de juntarse)
+const MEAL_KCAL = { c: 560, n: 380, f: 700 }; // f: comida del domingo (día de juntarse; ese día no se cena)
 const VEG_MIN = 150;
 function kcalOf(items) { return items.reduce((a, [c, g]) => a + ING[c][2] * g / 100, 0); }
 function normalize(o, slot) {
@@ -401,6 +402,8 @@ function normalize(o, slot) {
     if (vg > 0) items = items.map(([c, g]) => [c, ING[c][1] === "verdura" ? Math.round(g * VEG_MIN / vg / 10) * 10 : g]);
     else { items.push(["lec", 70], ["tom", 80]); t += " y ensalada"; }
   }
+  // Cena ligera: como mucho 100 g de patata y 30 g de pan
+  if (slot === "n") items = items.map(([c, g]) => [c, c === "pat" ? Math.min(g, 100) : c === "pan" ? Math.min(g, 30) : g]);
   // 2) techo por plato: primero hidratos (mín. 60 %), luego proteína (mín. 80 %)
   const cap = MEAL_KCAL[slot];
   let k = kcalOf(items);
@@ -412,6 +415,11 @@ function normalize(o, slot) {
       const pk = items.filter(([c]) => PROT.includes(c) && !ING[c][5]).reduce((a, [c, g]) => a + ING[c][2] * g / 100, 0);
       if (pk) { const f = Math.max(0.8, 1 - (k - cap) / pk); items = items.map(([c, g]) => [c, PROT.includes(c) && !ING[c][5] ? Math.round(g * f / 5) * 5 : g]); }
     }
+  }
+  // Comida del domingo (sin cena después): ración generosa, hasta ~650 kcal
+  if (slot === "f") {
+    const kk = kcalOf(items);
+    if (kk < 650) { const up = Math.min(1.3, 650 / kk); items = items.map(([c, g]) => [c, Math.round(g * up / 5) * 5]); }
   }
   return { ...o, t, items };
 }
@@ -438,6 +446,43 @@ function spicesFor(o) {
   return "orégano, albahaca y tomillo";
 }
 
+const MEAT = ["pol", "mus", "pav", "con", "ter", "lom", "cos", "hig", "jam", "fpv"], ROJA = ["ter", "lom", "cos"];
+const FISH = ["mer", "bac", "dor", "lub", "tru", "sar", "cab", "bon", "jur", "boq", "sal", "sca", "atu", "gam", "cal", "sep", "mej", "pul"], AZUL = ["sar", "cab", "bon", "jur", "boq", "sal", "sca"];
+const EGG = ["hue", "cla", "tof"];
+// Grupo principal de un plato: carne / roja / pescado / azul / huevo / legumbre
+function famOf(str) {
+  const it = parse(str.split("|")[1]);
+  const pr = (arr) => it.filter(([c]) => arr.includes(c)).reduce((a, [c, g]) => a + ING[c][3] * g / 100, 0);
+  const m = pr(MEAT), f = pr(FISH), e = pr(EGG);
+  const lg = it.filter(([c]) => LEG.includes(c)).reduce((a, [, g]) => a + g, 0);
+  if (!m && !f) return lg >= 100 ? "legumbre" : "huevo";
+  if (e > m + f) return "huevo";
+  if (m >= f) return pr(ROJA) > m / 2 ? "roja" : "carne";
+  return pr(AZUL) > f / 2 ? "azul" : "pescado";
+}
+// Alimento proteico principal (para no repetirlo más de 2 veces por semana)
+const KEY = { pol: "pollo", mus: "pollo", pav: "pavo", con: "conejo", ter: "ternera", lom: "cerdo", cos: "cerdo", hig: "hígado", jam: "jamón",
+  sar: "sardina", sca: "sardina", atu: "atún", bon: "atún", mer: "merluza", bac: "bacalao", dor: "dorada", lub: "lubina", tru: "trucha",
+  cab: "caballa", jur: "jurel", boq: "boquerón", sal: "salmón", gam: "gamba", cal: "calamar", sep: "sepia", mej: "mejillón", pul: "pulpo", hue: "huevo", tof: "tofu" };
+function keysOf(str) { return [...new Set(parse(str.split("|")[1]).filter(([c]) => KEY[c] && c !== "hue").map(([c]) => KEY[c]))]; }
+function mainKey(str) {
+  const it = parse(str.split("|")[1]).filter(([c]) => KEY[c] && c !== "hue");
+  if (!it.length) return /\bhue:/.test(str) ? "huevo" : "legumbre";
+  it.sort((a, b) => ING[b[0]][3] * b[1] - ING[a[0]][3] * a[1]);
+  return KEY[it[0][0]];
+}
+// Tipo de plato (para variar la forma de cocinar)
+function tipoOf(str) {
+  const t = str.split("|")[0].toLowerCase();
+  if (/^(tortilla|revuelto)/.test(t)) return "tortilla";
+  if (/^bullit/.test(t)) return "bullit";
+  if (/^crema/.test(t)) return "crema";
+  if (/^ensalada/.test(t)) return "ensalada";
+  if (/^(arroz|arròs|paella|fideuà)/.test(t) || /\barr:([4-9]\d|1\d\d)/.test(str)) return "arroz";
+  if (/^(macarrones)/.test(t)) return "pasta";
+  return "otro";
+}
+const TIPO_MAX = { tortilla: 2, bullit: 1, crema: 2, ensalada: 3, arroz: 2, pasta: 1 };
 const isFiesta = (str) => /^(Paella|Fideuà|Arròs al forn|Arròs a banda|Arròs negre|Putxero)/.test(str);
 const isCenaFinde = (str) => /^(Coca|Minxos)/.test(str);
 
@@ -455,45 +500,81 @@ function buildWeek(key, w, opts = {}) {
   const hasHig = (str) => /\bhig:/.test(str);
   const hasLeg = (str) => /\b(len|gar|alu|grf):/.test(str);
 
-  // 1) Elegir platos
-  // Platos de fiesta (paellas, fideuà, arròs al forn…) solo el domingo; coca y minxos solo cenas de viernes a domingo.
+  // 1) Planificación por grupos (como en consulta):
+  //    · comida y cena nunca del mismo grupo (carne / pescado / huevo / legumbre)
+  //    · semana: pescado ~5 (al menos 2 azul), carne ~5 (roja máx. 2), huevo 2-3, legumbre al mediodía 2 días
+  //    · platos de fiesta solo el domingo; hígado máx. 1 vez por semana
   const FEST = [], DIARIO = [];
   S.comidas.forEach((x, i) => (isFiesta(x) ? FEST : DIARIO).push(i));
+  // Plantilla lunes-sábado [comida, cena]; "leg" = comida con legumbre. Se rota cada semana.
+  const T = [
+    [["leg"], ["azul", "pescado"]],
+    [["carne"], ["azul", "pescado"]],
+    [["pescado", "azul"], ["huevo", "carne"]],
+    [["leg"], ["carne", "huevo"]],
+    [["roja", "carne"], ["azul", "pescado"]],
+    [["carne", "roja"], ["huevo", "pescado"]],
+  ];
+  const rot = [0, 2, 4, 1][w];
   const CI = [], NI = [];
   const usedC = new Set(), usedN = new Set();
   let higUsed = false;
+  // El domingo (plato de fiesta) cuenta desde el principio para el límite de carne roja
+  let rojas = FEST.length && famOf(S.comidas[FEST[w % FEST.length]]) === "roja" ? 1 : 0;
+  const famOfC = (i) => famOf(S.comidas[i]), famOfN = (i) => famOf(S.cenas[i]);
+  const bigFam = (f) => (f === "roja" ? "carne" : f === "azul" ? "pescado" : f);
+  const keyCount = {}, tipoCount = {}, riceDays = [];
+  let prevKeys = [], todayKeys = [], curDay = 0;
+  const sunKeys = FEST.length ? keysOf(S.comidas[FEST[w % FEST.length]]) : [];
+  const okBasic = (str) => !(higUsed && hasHig(str)) && !(rojas >= 2 && famOf(str) === "roja")
+    && keysOf(str).every((k) => (keyCount[k] || 0) < 2) && !(mainKey(str) === "huevo" && (keyCount.huevo || 0) >= 3)
+    && !keysOf(str).some((k) => prevKeys.includes(k) || (curDay === 5 && sunKeys.includes(k)))
+    && (tipoOf(str) === "otro" || (tipoCount[tipoOf(str)] || 0) < TIPO_MAX[tipoOf(str)]);
+  if (FEST.length) keysOf(S.comidas[FEST[w % FEST.length]]).forEach((k) => { keyCount[k] = 1; });
+  const note = (str, d) => {
+    keysOf(str).forEach((k) => { keyCount[k] = (keyCount[k] || 0) + 1; });
+    todayKeys.push(...keysOf(str));
+    if (mainKey(str) === "huevo") keyCount.huevo = (keyCount.huevo || 0) + 1;
+    const tp = tipoOf(str); if (tp !== "otro" && d !== 6) tipoCount[tp] = (tipoCount[tp] || 0) + 1;
+    if (tp === "arroz") riceDays.push(d);
+  };
+  const pick = (pool, list, used, accept, prefs, start) => {
+    for (const p of prefs) {
+      for (let j = 0; j < pool.length; j++) {
+        const i = pool[(start + j) % pool.length];
+        if (used.has(i) || !okBasic(list[i]) || !accept(i)) continue;
+        if (p === "leg" ? hasLeg(list[i]) : famOf(list[i]) === p) return i;
+      }
+    }
+    for (let j = 0; j < pool.length; j++) { const i = pool[(start + j) % pool.length]; if (!used.has(i) && okBasic(list[i]) && accept(i)) return i; }
+    // Respaldo: se relajan los límites de variedad, pero nunca se repite plato ni se rompe el grupo
+    for (let j = 0; j < pool.length; j++) { const i = pool[(start + j) % pool.length]; if (!used.has(i) && accept(i) && !(higUsed && hasHig(list[i]))) return i; }
+    for (let j = 0; j < pool.length; j++) { const i = pool[(start + j) % pool.length]; if (!used.has(i)) return i; }
+    return pool[start % pool.length];
+  };
+  const allN = S.cenas.map((_, i) => i);
   for (let d = 0; d < 7; d++) {
-    let ci;
-    if (d === 6 && FEST.length) ci = FEST[w % FEST.length];
-    else {
-      const ND = DIARIO.length;
-      let k = w < 3 ? (d + 6 * w) % ND : (d * 3 + 1) % ND;
-      ci = DIARIO[k];
-      for (let j = 0; j < ND; j++) { const c = DIARIO[(k + j) % ND]; if (!usedC.has(c) && !(higUsed && hasHig(S.comidas[c]))) { ci = c; break; } }
-    }
+    let ci, ni;
+    curDay = d;
+    const start = (w * 6 + d * 3) % 64;
+    if (d === 6 && FEST.length) { ci = FEST[w % FEST.length]; keysOf(S.comidas[ci]).forEach((k) => { keyCount[k] = (keyCount[k] || 0) - 1; }); }
+    else ci = pick(DIARIO, S.comidas, usedC, (i) => !(tipoOf(S.comidas[i]) === "arroz" && (riceDays.includes(d - 1) || (d === 5 && FEST.length))), T[(d + rot) % 6][0], start);
     usedC.add(ci);
+    note(S.comidas[ci], d);
+    if (d === 6) { CI.push(ci); NI.push(-1); prevKeys = todayKeys; todayKeys = []; continue; }
+    const fc = bigFam(famOfC(ci));
     const com0 = dish(S.comidas[ci]);
-    let ni = defaultCena(w, d, NN);
-    for (let j = 0; j < NN; j++) {
-      const cand = (ni + j) % NN;
-      if (!usedN.has(cand) && !(d < 4 && isCenaFinde(S.cenas[cand])) && !clash(com0, dish(S.cenas[cand])) && !((higUsed || hasHig(S.comidas[ci])) && hasHig(S.cenas[cand]))) { ni = cand; break; }
-    }
+    const prefsN = d === 6 ? ["huevo", fc === "carne" ? "pescado" : "carne"] : T[(d + rot) % 6][1];
+    const tc = tipoOf(S.comidas[ci]);
+    ni = pick(allN, S.cenas, usedN, (i) => bigFam(famOfN(i)) !== fc && !clash(com0, dish(S.cenas[i])) && !(hasHig(S.comidas[ci]) && hasHig(S.cenas[i]))
+      && (tc === "otro" || tipoOf(S.cenas[i]) !== tc) && mainKey(S.cenas[i]) !== mainKey(S.comidas[ci]), prefsN, start + w * 5);
     usedN.add(ni);
+    note(S.cenas[ni], -1);
     if (hasHig(S.comidas[ci]) || hasHig(S.cenas[ni])) higUsed = true;
+    if (famOfC(ci) === "roja" && d !== 6) rojas++;
+    if (famOfN(ni) === "roja") rojas++;
     CI.push(ci); NI.push(ni);
-  }
-  // 2) Asegurar al menos 2 días con legumbres (sin tocar la comida del domingo)
-  const legDays = () => CI.filter((c, d) => hasLeg(S.comidas[c]) || hasLeg(S.cenas[NI[d]])).length;
-  for (let d = 0; d < 6 && legDays() < 2; d++) {
-    if (hasLeg(S.comidas[CI[d]]) || hasLeg(S.cenas[NI[d]])) continue;
-    let done = false;
-    for (const cand of DIARIO) {
-      if (done) break;
-      if (hasLeg(S.comidas[cand]) && !CI.includes(cand) && !hasHig(S.comidas[cand]) && !clash(dish(S.comidas[cand]), dish(S.cenas[NI[d]]))) { CI[d] = cand; done = true; }
-    }
-    for (let cand = 0; cand < NN && !done; cand++) {
-      if (hasLeg(S.cenas[cand]) && !NI.includes(cand) && !hasHig(S.cenas[cand]) && !(d < 4 && isCenaFinde(S.cenas[cand])) && !clash(dish(S.comidas[CI[d]]), dish(S.cenas[cand]))) { NI[d] = cand; done = true; }
-    }
+    prevKeys = todayKeys; todayKeys = [];
   }
 
   // 3) Montar los días
@@ -509,10 +590,16 @@ function buildWeek(key, w, opts = {}) {
       ? { t: "Bocadillito de espelta con tomate rallado, queso curado y pavo", items: [["pan", 40], ["tom", 40], ["que", 20], ["fpv", 30], ["aov", 3]] }
       : { t: `Yogur o skyr sin lactosa con ${ING[mf][0].toLowerCase()}`, items: [["sky", 150], [mf, mg]] };
     let mer;
-    if (ent) { const m = MER_ENT[(d + w) % 2]; mer = { t: m.t, items: parse(m.i) }; }
+    if (ent) {
+      // Si el almuerzo ya es bocadillito, el pre-entreno es plátano con yogur (nunca dos bocadillos el mismo día)
+      const bocata = mm.t.startsWith("Bocadillito");
+      const m = bocata ? MER_ENT[0] : MER_ENT[1];
+      mer = { t: m.t, items: parse(m.i) };
+    }
     else {
       const [rf, rg] = S.mmFruits[(d + w + 3) % 7];
-      mer = (d + w) % 2
+      const conQueso = d === 6 ? w % 2 === 0 : (d + w) % 2; // domingo: si se cenan palomitas, merienda con yogur
+      mer = conQueso
         ? { t: `${ING[rf][0]} y 20 g de queso curado`, items: [[rf, rg], ["que", 20]] }
         : { t: `Yogur sin lactosa con ${ING[rf][0].toLowerCase()} y 5 almendras`, items: [["sky", 125], [rf, rg], ["alm", 5]] };
     }
@@ -525,8 +612,11 @@ function buildWeek(key, w, opts = {}) {
     };
     const lessOil = (o) => ({ ...o, items: o.items.map(([c, g]) => [c, c === "aov" ? Math.round(g * AOV_FACTOR) : g]) });
     const com = withCitrus(scale(normalize(capProt(lessOil(dish(S.comidas[ci]))), d === 6 ? "f" : "c")));
-    const cen = withCitrus(scale(normalize(capProt(lessOil(dish(S.cenas[ni]))), "n")));
-    com.spices = spicesFor(com); cen.spices = spicesFor(cen);
+    const cen = ni === -1
+      ? (w % 2 ? { t: "Palomitas caseras (maíz en la sartén con una gota de aceite)", items: [["pal", 20], ["aov", 3]], noRecipe: true }
+               : { t: "Un yogur sin lactosa con canela", items: [["sky", 125]], noRecipe: true })
+      : withCitrus(scale(normalize(capProt(lessOil(dish(S.cenas[ni]))), "n")));
+    com.spices = spicesFor(com); if (!cen.noRecipe) cen.spices = spicesFor(cen);
     const meals = [["Desayuno", des], ["Almuerzo", mm], ["Comida", com], [ent ? "Pre-entreno" : "Merienda", mer], ["Cena", cen]];
     // Control del déficit: si el día pasa del límite, se reducen los hidratos de comida y cena (mín. 60 %)
     const limit = d === 6 ? KCAL_MAX_DOM : ent ? KCAL_MAX_ENT : KCAL_MAX_DES;

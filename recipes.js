@@ -380,10 +380,27 @@ const RECETAS = [
     "Mezcla la lechuga, las fresas laminadas y el pepino.",
     "Añade el pollo y las nueces y aliña con aceite, sal y vinagre.",
   ] })],
+  [/^Sardinas en lata.*endibias/, () => ({ tiempo: "10 min", pasos: [
+    "Corta el tomate en rodajas y las endibias en hojas o tiras.",
+    "Aliña con aceite, sal y orégano.",
+    "Pon por encima las sardinas escurridas, enteras o en trozos, y unas gotas de limón.",
+  ] })],
   [/^Sardinas en lata/, () => ({ tiempo: "15 min", pasos: [
     "Cuece el huevo 10 minutos (o hazlo a la plancha).",
     "Tuesta el pan y ralla el tomate por encima con una pizca de sal.",
     "Pon las sardinas escurridas sobre el pan. Sirve con el huevo y el resto del tomate.",
+  ] })],
+  [/^Caldo de putxero/, () => ({ tiempo: "45 min", pasos: [
+    "Pon el pollo en una olla con agua fría, sal, una hoja de laurel, la zanahoria, el nabo y la parte verde del puerro. Hierve 35-40 minutos a fuego suave.",
+    "Mientras, cuece el huevo 10 minutos, enfríalo y pícalo.",
+    "Saca el pollo, desmígalo y devuélvelo al caldo con la verdura en trocitos.",
+    "Sirve el caldo bien caliente con el huevo picado y perejil.",
+  ] })],
+  [/^Ensalada de tomate con atún/, () => ({ tiempo: "15 min", pasos: [
+    "Cuece el huevo 10 minutos, enfríalo y pélalo.",
+    "Corta el tomate en gajos y la lechuga en tiras.",
+    "Añade el atún escurrido, el huevo en cuartos y las aceitunas.",
+    "Aliña con aceite, sal, orégano y unas gotas de vinagre.",
   ] })],
 ];
 
