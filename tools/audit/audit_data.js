@@ -6,7 +6,7 @@ vm.runInContext(
   fs.readFileSync(root + "plan.js", "utf8").replace(/if \(typeof module[^\n]*\n/, "") + "\n" +
   fs.readFileSync(root + "data.js", "utf8").replace(/if \(typeof module[^\n]*\n/, "") + "\n" +
   fs.readFileSync(root + "recipes.js", "utf8").replace(/if \(typeof module[^\n]*\n/, "") +
-  "\nthis.X={ING,NUT,SEASONS,buildWeek,shopping,seasonOf,recetaDe,famOf,keysOf,tipoOf,isFiesta,LEG,PROT,RACION_MAX,RACION_MIN,FRUTA_MES,MES_POR_DEFECTO};", ctx);
+  "\nthis.X={ING,NUT,SEASONS,buildWeek,shopping,seasonOf,recetaDe,famOf,keysOf,tipoOf,isFiesta,LEG,PROT,RACION_MAX,RACION_MIN,FRUTA_MES,MES_POR_DEFECTO,VERD_MES,GUARN};", ctx);
 const X = ctx.X;
 const fails = [], warns = [];
 const F = (cat, msg) => fails.push(`[${cat}] ${msg}`);
@@ -61,6 +61,7 @@ for (const k in X.SEASONS) for (const mo of MESES_EST[k]) for (let w = 0; w < 4;
   if (new Set(nTitles).size < 6) F("variedad", `${tag}: cena repetida`);
   const fam = {}, keyC = {}, tipoC = {}, rice = [], dayKeys = [];
   let eggsW = 0, aovW = 0;
+  const vegW = new Set(), fruW = new Set();
   let hig = 0, legL = 0, wk_k = 0;
   wk.forEach((d, i) => {
     const day = `${tag} ${d.dia}`;
@@ -111,8 +112,14 @@ for (const k in X.SEASONS) for (const mo of MESES_EST[k]) for (let w = 0; w < 4;
     const TEMP = { cbc: "pvo", jud: "pvoi", ber: "vo", tom: "pvoi", pep: "pv", esp: "oip", cza: "oi", chi: "oi", nab: "oi", end: "oi",
       sar: "pvo", boq: "pvo", bon: "vo" };
     d.meals.forEach(([l, m]) => m.items.forEach(([c]) => { if (X.FRUTA_MES[c] && !X.FRUTA_MES[c].includes(mo)) F("temporada", `${day} ${l}: ${X.ING[c][0]} fuera de su mes`); }));
+    [com, cen].forEach((m) => { if (m.side && !X.VERD_MES[m.side].includes(mo)) F("temporada", `${day}: guarnición de ${X.GUARN[m.side].t} fuera de su mes`); });
+    if (com.side && com.side === cen.side) F("variedad", `${day}: la misma guarnición en comida y cena`);
+    if (i > 0 && [com.side, cen.side].some((x) => x && [wk[i - 1].meals[2][1].side, wk[i - 1].meals[4][1].side].includes(x))) F("variedad", `${day}: guarnición repetida del día anterior`);
+    [com, cen].forEach((m) => { if (m.items && !X.ING) return; });
+    d.meals.forEach(([l, m]) => m.items.forEach(([c]) => { vegW.add(X.ING[c][1] === "verdura" && !["tom", "tri"].includes(c) ? c : null); if (X.ING[c][1] === "fruta") fruW.add(c); }));
     const est = { primavera: "p", verano: "v", otono: "o", invierno: "i" }[k];
-    d.meals.forEach(([l, m]) => m.items.forEach(([c]) => { if (TEMP[c] && !TEMP[c].includes(est)) F("temporada", `${day} ${l}: ${X.ING[c][0]} fuera de temporada`); }));
+    d.meals.forEach(([l, m]) => m.items.forEach(([c]) => { if (TEMP[c] && !X.VERD_MES[c] && !TEMP[c].includes(est)) F("temporada", `${day} ${l}: ${X.ING[c][0]} fuera de temporada`); }));
+    d.meals.forEach(([l, m]) => m.items.forEach(([c]) => { if (X.VERD_MES[c] && !X.VERD_MES[c].includes(mo)) F("temporada", `${day} ${l}: ${X.ING[c][0]} fuera de su mes`); }));
     // Topes de ración
     d.meals.forEach(([l, m]) => m.items.forEach(([c, g]) => { if (X.RACION_MIN[c] && g < X.RACION_MIN[c]) F("ración", `${day} ${l}: ${X.ING[c][0]} ${g} g (mín. ${X.RACION_MIN[c]})`); }));
     if (des.items.some(([c]) => c === "hue") && [com, cen].some((m) => m.items.some(([c]) => c === "hue"))) F("huevo", `${day}: huevo en el desayuno y en otra comida`);
@@ -161,6 +168,9 @@ for (const k in X.SEASONS) for (const mo of MESES_EST[k]) for (let w = 0; w < 4;
   if (C < 4 || C > 6) F("reparto", `${tag}: carne ${C}`);
   if ((fam.roja || 0) > 2) F("reparto", `${tag}: carne roja ${fam.roja}`);
   if ((fam.huevo || 0) < 1) F("reparto", `${tag}: huevo ${fam.huevo || 0}`);
+  vegW.delete(null);
+  if (vegW.size < 8) F("variedad", `${tag}: solo ${vegW.size} verduras distintas en la semana (${[...vegW].join(", ")})`);
+  if (fruW.size < 6) F("variedad", `${tag}: solo ${fruW.size} frutas distintas en la semana (${[...fruW].join(", ")})`);
   if (legL < 3) F("mediterránea", `${tag}: legumbre (≥80 g) solo ${legL} días`);
   if (hig > 1) F("hígado", `${tag}: hígado ${hig} veces`);
   Object.entries(keyC).forEach(([x, n]) => { if (n > 2) F("variedad", `${tag}: ${x} ${n} veces`); });

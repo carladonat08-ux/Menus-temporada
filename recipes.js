@@ -470,7 +470,7 @@ function genReceta(t, items) {
 }
 
 function recetaDe(meal, slot) {
-  const base = meal.t.replace(/ \+ .* de postre$/, "");
+  const base = meal.t.split(" + ")[0]; // sin guarnición ni postre
   let r = null;
   for (const [re, fn] of RECETAS) { if (re.test(base)) { if (fn) r = fn(base, meal.items); break; } }
   if (!r) r = genReceta(base, meal.items);
@@ -487,6 +487,11 @@ function recetaDe(meal, slot) {
         .replace(/ con el huevo duro\./, ".")
         .replace(/ \(huevos y claras\)/, ""))
       .filter((p) => p.trim());
+  }
+  // Guarnición de verdura de temporada
+  if (meal.side && GUARN[meal.side]) {
+    let sv = -1; r.pasos.forEach((p, i) => { if (/S[ií]rv|Emplata/.test(p)) sv = i; }); // antes del último paso de servir
+    if (sv >= 0) r.pasos.splice(sv, 0, GUARN[meal.side].paso); else r.pasos.push(GUARN[meal.side].paso);
   }
   // Ensalada de acompañamiento añadida para llegar a la ración de verdura
   if (meal.items.some(([c]) => c === "lec") && !r.pasos.some((p) => /lechuga|ensalada/i.test(p))) {

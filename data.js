@@ -81,6 +81,12 @@ const ING = {
   uva: ["Uva", "fruta", 69, 0.7, 0],
   mel: ["Melón cantalupo", "fruta", 34, 0.8, 0],
   pap: ["Papaya", "fruta", 43, 0.5, 0],
+  gra: ["Granada (granos)", "fruta", 83, 1.7, 0],
+  pmo: ["Pomelo", "fruta", 42, 0.8, 0],
+  bro: ["Brócoli (solo los ramilletes)", "verdura", 34, 2.8, 0],
+  col: ["Col o repollo", "verdura", 25, 1.3, 0],
+  ruc: ["Rúcula", "verdura", 25, 2.6, 0],
+  rab: ["Rábanos", "verdura", 16, 0.7, 0],
   oli: ["Aceitunas", "grasa", 145, 1, 0],
   aov: ["Aceite de oliva virgen extra", "grasa", 900, 0, 0],
   agu: ["Aguacate", "grasa", 160, 2, 0],
@@ -101,7 +107,7 @@ const NUT = {
   len:[.4,13,6,20,2.3], gar:[2.5,14,6,40,1.6], alu:[.5,13,6,60,1.7],
   cbc:[.3,2.2,1.1,16,.4], zan:[.2,7,2.8,33,.3], ber:[.2,3,3,9,.2], jud:[.2,4.5,3,37,1], esp:[.4,1.4,2.2,99,2.7], tom:[.2,3,1.2,10,.3], tri:[.2,5,1.5,15,.6], pep:[.1,3,.5,16,.3], lec:[.2,1.5,1.3,36,.9],
   can:[.4,1.6,1.5,38,2], ace:[.2,2,1.6,51,1.8], pak:[.2,2.2,1,105,.8], cza:[.1,8,1.5,20,.5], chi:[.3,18,4.9,36,.6], nab:[.1,6,1.8,30,.3], kal:[.9,4,4,150,1.5], end:[.2,3,3,52,.2], pue:[.3,6,1.8,59,2], apn:[.3,9,1.8,43,.7],
-  fre:[.3,7.7,2,16,.4], ara:[.3,14,2.4,6,.3], fra:[.7,12,6.5,25,.7], kiw:[.5,15,3,34,.3], nar:[.1,12,2.4,40,.1], man:[.3,13,1.8,37,.2], pla:[.3,23,2.6,5,.3], pin:[.1,13,1.4,13,.3], uva:[.2,18,.9,10,.4], mel:[.2,8,.9,9,.2], pap:[.3,11,1.7,20,.3],
+  fre:[.3,7.7,2,16,.4], ara:[.3,14,2.4,6,.3], fra:[.7,12,6.5,25,.7], kiw:[.5,15,3,34,.3], nar:[.1,12,2.4,40,.1], man:[.3,13,1.8,37,.2], pla:[.3,23,2.6,5,.3], pin:[.1,13,1.4,13,.3], uva:[.2,18,.9,10,.4], mel:[.2,8,.9,9,.2], pap:[.3,11,1.7,20,.3], gra:[1.2,19,4,10,.3], pmo:[.1,8,1.6,22,.1], bro:[.4,7,2.6,47,.7], col:[.1,6,2.5,40,.5], ruc:[.7,3.7,1.6,160,1.5], rab:[.1,3.4,1.6,25,.3],
   aov:[100,0,0,1,.6], pal:[4.5,74,13,7,3.2], oli:[15,1,3,50,1], grf:[.5,18,5,30,2.4], cos:[17,0,0,15,1], agu:[15,9,7,12,.6], nue:[65,14,6.7,98,2.9], alm:[50,22,12,269,3.7], cac:[50,20,6,40,1.9], coc:[7,2,0,5,.5], whe:[1,3,0,100,.5],
 };
 
@@ -347,13 +353,26 @@ const KCAL_MAX_ENT = 1800, KCAL_MAX_DES = 1700, KCAL_MAX_DOM = 1750;
 const KCAL_MIN_ENT = 1650, KCAL_MIN_DES = 1550, KCAL_MIN_DOM = 1500, PROT_MIN = 107; // suelos: 1,6 g/kg con 67 kg
 const AOV_FACTOR = 1; // aceite de comida y cena tal cual (la dieta mediterránea pide 20-30 g de AOVE al día)
 // Fruta de temporada por mes (Comunitat Valenciana). La fruta se elige según el mes de cada semana.
-const FRUTA_MES = { fre: [3, 4, 5, 6], kiw: [11, 12, 1, 2, 3, 4], nar: [11, 12, 1, 2, 3, 4, 5], man: [10, 11, 12, 1, 2], uva: [8, 9, 10, 11],
-  mel: [6, 7, 8, 9], fra: [6, 7, 8, 9], ara: [6, 7, 8, 9], pla: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] };
-const FRUTA_G = { fre: 100, kiw: 100, nar: 130, man: 100, uva: 100, mel: 120, fra: 70, ara: 100, pla: 100 };
-const FRUTA_ORDEN = ["fre", "kiw", "nar", "man", "uva", "mel", "fra", "ara", "pla"];
+// Todas son frutas bien toleradas con malabsorción de fructosa, en estas raciones. Fuera: manzana, pera, mango, sandía,
+// cereza, melocotón, albaricoque, ciruela e higo (exceso de fructosa o sorbitol). Frutos rojos congelados todo el año.
+const TODO_EL_ANO = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const FRUTA_MES = {
+  fre: [2, 3, 4, 5, 6],                  // fresas de Huelva y de la huerta valenciana
+  nar: [11, 12, 1, 2, 3, 4, 5, 6],       // naranjas de la Comunitat (navelina, navel, lane late, valencia late)
+  man: [10, 11, 12, 1, 2, 3, 4],         // clementinas y, de febrero a abril, mandarinas tardías
+  pmo: [11, 12, 1, 2, 3, 4, 5],          // pomelo de la Comunitat
+  kiw: [11, 12, 1, 2, 3, 4, 5],
+  uva: [8, 9, 10, 11, 12],               // uva embolsada del Vinalopó hasta diciembre
+  gra: [9, 10, 11, 12],                  // granada mollar de Elche
+  mel: [6, 7, 8, 9],
+  pin: TODO_EL_ANO, pap: TODO_EL_ANO, ara: TODO_EL_ANO, fra: TODO_EL_ANO, pla: TODO_EL_ANO,
+};
+const FRUTA_G = { fre: 100, kiw: 100, nar: 130, man: 100, pmo: 80, uva: 100, gra: 45, mel: 120, pin: 140, pap: 140, fra: 60, ara: 75, pla: 100 };
+// Orden de rotación: primero la fruta propia de la temporada, después la de todo el año
+const FRUTA_ORDEN = ["fre", "man", "kiw", "nar", "uva", "mel", "pin", "gra", "ara", "pap", "pmo", "fra", "pla"];
 const MES_POR_DEFECTO = { primavera: 4, verano: 7, otono: 11, invierno: 1 };
 // Postre de los días con legumbre: fruta rica en vitamina C (ayuda a absorber el hierro)
-const POSTRE_VITC = ["nar", "man", "kiw", "fre", "mel"];
+const POSTRE_VITC = ["nar", "kiw", "fre", "pap", "man", "mel", "pin"];
 
 function parse(s) {
   return s.split(",").map((p) => { const [c, g] = p.split(":"); return [c, +g]; });
@@ -393,6 +412,40 @@ function capProt(o) {
 // Platos pequeños y con verdura: techo de energía por plato y mínimo de verdura
 const MEAL_KCAL = { c: 600, n: 380, f: 700 }; // f: comida del domingo (día de juntarse; ese día no se cena)
 const VEG_MIN = 150;
+// Guarniciones de verdura de temporada (huerta de la Comunitat Valenciana). Se añaden a la comida y la cena
+// cuando el plato no lleva verdura propia, para comer verduras distintas cada día.
+const VERD_MES = {
+  cbc: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12], ber: [6, 7, 8, 9, 10], pep: [3, 4, 5, 6, 7, 8, 9, 10],
+  jud: TODO_EL_ANO, // bajoqueta de la huerta de mayo a octubre; el resto del año, de invernadero o congelada
+  lec: TODO_EL_ANO, zan: TODO_EL_ANO, ace: TODO_EL_ANO, ruc: TODO_EL_ANO, rab: [3, 4, 5, 6, 7, 8, 9],
+  can: [10, 11, 12, 1, 2, 3, 4], end: [9, 10, 11, 12, 1, 2, 3, 4], esp: [9, 10, 11, 12, 1, 2, 3, 4, 5, 6],
+  cza: [9, 10, 11, 12, 1, 2, 3], chi: [10, 11, 12, 1, 2, 3], nab: [9, 10, 11, 12, 1, 2, 3, 4], kal: [11, 12, 1, 2, 3], // la calabaza se guarda y se vende hasta marzo
+  pak: [10, 11, 12, 1, 2, 3, 4], bro: [10, 11, 12, 1, 2, 3, 4], col: [11, 12, 1, 2, 3],
+};
+const GUARN = {
+  cbc: { t: "calabacín a la plancha", it: "cbc:150", paso: "Guarnición: corta el calabacín en rodajas y hazlo a la plancha con unas gotas del aceite y sal, 3 minutos por cada lado." },
+  ber: { t: "berenjena asada", it: "ber:150", paso: "Guarnición: corta la berenjena en rodajas, sálala y ásala a 200 °C unos 20 minutos (o a la plancha) con unas gotas del aceite." },
+  jud: { t: "bajoqueta rehogada", it: "jud:150", paso: "Guarnición: cuece la bajoqueta troceada 8-10 minutos en agua con sal, escúrrela y rehógala 2 minutos con un poco del aceite y una pizca de pimentón." },
+  pep: { t: "ensalada de pepino y tomate", it: "pep:100,tom:80", ens: true, paso: "Guarnición: corta el pepino y el tomate y alíñalos con aceite, sal y orégano." },
+  lec: { t: "ensalada de lechuga y tomate", it: "lec:80,tom:80", ens: true, paso: "Guarnición: prepara la ensalada de lechuga y tomate y alíñala con aceite, sal y vinagre o limón." },
+  rab: { t: "ensalada de lechuga y rábanos", it: "lec:70,rab:60", ens: true, paso: "Guarnición: lava la lechuga, corta los rábanos en rodajas finas y alíñalos con aceite, sal y vinagre." },
+  can: { t: "ensalada de canónigos y tomate", it: "can:60,tom:80", ens: true, paso: "Guarnición: mezcla los canónigos con el tomate troceado y alíñalos con aceite, sal y limón." },
+  ruc: { t: "ensalada de rúcula y tomate", it: "ruc:50,tom:80", ens: true, paso: "Guarnición: mezcla la rúcula con el tomate troceado y alíñalos con aceite, sal y vinagre." },
+  end: { t: "ensalada de endibias y zanahoria", it: "end:100,zan:50", ens: true, paso: "Guarnición: corta las endibias en juliana, ralla la zanahoria y alíñalas con aceite, sal y limón." },
+  zan: { t: "zanahoria asada con comino", it: "zan:130", paso: "Guarnición: corta la zanahoria en bastones y ásala a 200 °C unos 25 minutos con unas gotas del aceite, sal y comino." },
+  esp: { t: "espinacas salteadas", it: "esp:150", paso: "Guarnición: saltea las espinacas 2-3 minutos con un poco del aceite y sal." },
+  ace: { t: "acelgas rehogadas", it: "ace:150", paso: "Guarnición: cuece las acelgas troceadas 5 minutos, escúrrelas y rehógalas 2 minutos con un poco del aceite y pimentón." },
+  cza: { t: "calabaza asada", it: "cza:150", paso: "Guarnición: corta la calabaza en dados y ásala a 200 °C unos 20-25 minutos con unas gotas del aceite, sal y romero." },
+  chi: { t: "chirivía y zanahoria asadas", it: "chi:75,zan:75", paso: "Guarnición: corta la chirivía y la zanahoria en bastones y ásalas a 200 °C unos 25 minutos con unas gotas del aceite, sal y tomillo." },
+  nab: { t: "nabo y zanahoria al vapor", it: "nab:100,zan:50", paso: "Guarnición: cuece el nabo y la zanahoria en dados al vapor 12-15 minutos y alíñalos con un hilo del aceite y sal." },
+  kal: { t: "kale salteado", it: "kal:100", paso: "Guarnición: quita los tallos al kale, trocéalo y saltéalo 3-4 minutos con un poco del aceite, sal y una gota de limón." },
+  pak: { t: "pak choi salteado", it: "pak:150", paso: "Guarnición: corta el pak choi a lo largo y saltéalo 3 minutos con un poco del aceite y sal." },
+  bro: { t: "brócoli y zanahoria al vapor", it: "bro:75,zan:75", paso: "Guarnición: cuece al vapor los ramilletes de brócoli y la zanahoria en rodajas 6-8 minutos y alíñalos con un hilo del aceite y sal." },
+  col: { t: "col salteada con zanahoria", it: "col:75,zan:75", paso: "Guarnición: corta la col en tiras finas y saltéala con la zanahoria rallada 5 minutos con un poco del aceite, sal y comino." },
+};
+const GUARN_ORDEN = ["bro", "cbc", "esp", "ber", "cza", "jud", "kal", "col", "pep", "ace", "rab", "chi", "can", "nab", "pak", "ruc", "end", "zan", "lec"];
+// Platos que ya son de verdura o que no admiten guarnición
+const SIN_GUARN = /^(Ensalada|Tomate aliñado|Crema|Bullit|Caldo|Putxero|Revuelto|Tortilla de (calabacín|bajoqueta|espinacas))/;
 function kcalOf(items) { return items.reduce((a, [c, g]) => a + ING[c][2] * g / 100, 0); }
 function normalize(o, slot) {
   let items = o.items.map((x) => x.slice());
@@ -497,7 +550,7 @@ const isFiesta = (str) => /^(Paella|Fideuà|Arròs al forn|Arròs a banda|Arròs
 
 // Topes de ración por toma (g en crudo): tolerancia digestiva y platos de tamaño normal
 const RACION_MIN = { arr: 50, pas: 50, fid: 50, pat: 60 }; // por debajo no es una ración que se pueda cocinar
-const RACION_MAX = { tri: 100, tom: 150, gar: 150, len: 200, alu: 200, grf: 50, cza: 150, chi: 100, pat: 250, arr: 80, pas: 80, fid: 80,
+const RACION_MAX = { bro: 75, col: 75, tri: 100, tom: 150, gar: 150, len: 200, alu: 200, grf: 50, cza: 150, chi: 100, pat: 250, arr: 80, pas: 80, fid: 80,
   sep: 200, cal: 200, mer: 200, bac: 180, dor: 180, lub: 180, tru: 170, sal: 140, mus: 160, pol: 150, pav: 150, lom: 150, ter: 130,
   con: 200, cos: 100, hig: 100, sar: 170, boq: 170, bon: 150, cab: 150, jur: 170, gam: 150, mej: 150, pul: 150, atu: 120 };
 const limRacion = ([c, g]) => [c, Math.max(RACION_MIN[c] || 0, RACION_MAX[c] ? Math.min(g, RACION_MAX[c]) : g)];
@@ -678,6 +731,33 @@ function buildWeek(key, w, opts = {}) {
   // 3) Montar los días
   const days = [];
   let prevDk = null;
+  const sideUse = {};
+  let ayer = [];
+  const isVegC = (c) => ING[c][1] === "verdura" && c !== "tom" && c !== "tri";
+  // Guarnición de temporada: si el plato no lleva verdura propia (o solo «ensalada»), se le pone una verdura del mes,
+  // la menos usada de la semana y distinta de la de la otra comida del día y de las del día anterior.
+  const withSide = (o, hoy, d) => {
+    o.items.forEach(([c]) => { if (isVegC(c)) sideUse[c] = (sideUse[c] || 0) + 1; }); // cuenta también la verdura propia del plato
+    if (SIN_GUARN.test(o.t)) return o;
+    let t = o.t, items = o.items;
+    const generic = / (con|y) ensalada( y patata)?$/.test(t) || / con ensalada y patata$/.test(t);
+    if (generic) { t = t.replace(/ con ensalada y patata$/, " con patata").replace(/ (con|y) ensalada$/, ""); items = items.filter(([c]) => c !== "lec"); }
+    const own = items.filter(([c]) => isVegC(c)).reduce((a, [, g]) => a + g, 0);
+    if (own >= 100 && !generic) return o;
+    if (own >= 100) return { ...o, t, items };
+    const soloEns = isFiesta(t) || items.some(([c]) => ["arr", "pas", "fid"].includes(c));
+    const cand = GUARN_ORDEN.filter((c) => VERD_MES[c].includes(mes) && (!soloEns || GUARN[c].ens) && !hoy.includes(c) && !items.some(([x]) => x === c));
+    const pool = cand.filter((c) => !ayer.includes(c));
+    const list = pool.length ? pool : cand;
+    if (!list.length) return { ...o, t, items };
+    const off = (d * 5 + w * 7) % list.length;
+    const pick = list.map((c, i) => [c, (sideUse[c] || 0) * 100 + ((i - off + list.length) % list.length)]).sort((a, b) => a[1] - b[1])[0][0];
+    sideUse[pick] = (sideUse[pick] || 0) + 1; hoy.push(pick);
+    const add = parse(GUARN[pick].it);
+    const merged = items.map((x) => x.slice());
+    add.forEach(([c, g]) => { const e = merged.find(([x]) => x === c); if (e) e[1] += g; else merged.push([c, g]); });
+    return { ...o, t: `${t} + ${GUARN[pick].t}`, items: merged, side: pick };
+  };
   for (let d = 0; d < 7; d++) {
     const ent = ENT[d];
     const ci = CI[d], ni = NI[d];
@@ -685,16 +765,19 @@ function buildWeek(key, w, opts = {}) {
     // Legumbres con cítrico de postre: la vitamina C mejora la absorción del hierro
     const withCitrus = (o) => {
       if (!o.items.some(([c]) => LEG.includes(c))) return o;
-      const f = POSTRE_VITC.find((c) => FRUTA_MES[c].includes(mes)) || "pla";
+      const opts = POSTRE_VITC.filter((c) => FRUTA_MES[c].includes(mes));
+      const f = opts.length ? opts[(d + w) % opts.length] : "pla";
       return { ...o, t: `${o.t} + ${ING[f][0].toLowerCase()} de postre`, items: [...o.items, [f, FRUTA_G[f]]] };
     };
     const lessOil = (o) => ({ ...o, items: o.items.map(([c, g]) => [c, c === "aov" ? Math.round(g * AOV_FACTOR) : g]) });
     const oil = (o, min) => (o.items.some(([c]) => c === "aov") ? { ...o, items: o.items.map(([c, g]) => [c, c === "aov" ? Math.max(g, min) : g]) } : { ...o, items: [...o.items, ["aov", min]] });
-    const com = withCitrus(capRacion(scale(normalize(oil(capProt(lessOil(dish(S.comidas[ci]))), 10), d === 6 ? "f" : "c"))));
+    const hoy = [];
+    const com = withCitrus(capRacion(scale(normalize(oil(capProt(lessOil(withSide(dish(S.comidas[ci]), hoy, d))), 10), d === 6 ? "f" : "c"))));
     const cen = ni === -1
       ? (w % 2 ? { t: "Palomitas caseras (maíz en la sartén con una gota de aceite)", items: [["pal", 20], ["aov", 3]], noRecipe: true }
                : { t: "Un skyr o yogur proteico sin lactosa con canela", items: [["sky", 125]], noRecipe: true })
-      : withCitrus(capRacion(scale(normalize(oil(capProt(lessOil(dish(S.cenas[ni]))), 8), "n"))));
+      : withCitrus(capRacion(scale(normalize(oil(capProt(lessOil(withSide(dish(S.cenas[ni]), hoy, d))), 8), "n"))));
+    ayer = hoy;
     com.spices = spicesFor(com); if (!cen.noRecipe) cen.spices = spicesFor(cen);
     // ---- Desayuno, almuerzo y merienda
     // Reglas: un solo pan o cereal al día (desayuno); como mucho 3 piezas de fruta al día, ninguna repetida,
@@ -746,7 +829,8 @@ function buildWeek(key, w, opts = {}) {
       const f = nextFruit(false);
       mer = { t: f ? `Yogur sin lactosa con ${ING[f[0]][0].toLowerCase()}` : "Yogur sin lactosa con canela", items: f ? [["sky", 125], f] : [["sky", 125]] };
     } else {
-      const f = ent && !usedF.has("pla") ? (usedF.add("pla"), ["pla", 120]) : nextFruit(false);
+      // plátano antes de entrenar en días alternos; el resto, otra fruta del mes
+      const f = ent && (d + w) % 2 === 0 && !usedF.has("pla") ? (usedF.add("pla"), ["pla", 120]) : nextFruit(false);
       const add = conQueso ? ["que", 25] : ["alm", 10];
       const txt = conQueso ? "25 g de queso curado" : "10 almendras";
       const fruta = f ? ING[f[0]][0] : null;
@@ -812,7 +896,11 @@ function buildWeek(key, w, opts = {}) {
       com.items = com.items.map(([c, g]) => limRacion([c, ING[c][4] ? Math.round(g * 0.85 / 5) * 5 : g]));
       n = nutrients(meals.flatMap(([, m]) => m.items));
     }
-    if (n.kcal > limit + 20 && mm.items.length > 1 && !mm.items.some(([c]) => c === "que") && mm.items.some(([c]) => ["alm", "nue"].includes(c))) {
+    if (n.kcal > limit + 20) { // un poco menos de aceite en la comida (de 10 a 7 g)
+      com.items = com.items.map(([c, g]) => [c, c === "aov" ? Math.min(g, 7) : g]);
+      n = nutrients(meals.flatMap(([, m]) => m.items));
+    }
+    if (n.kcal > limit + 20 && mm.items.length > 1 && !mm.items.some(([c]) => c === "que") && kcalOf(mm.items.filter(([c]) => !["alm", "nue"].includes(c))) >= 100 && mm.items.some(([c]) => ["alm", "nue"].includes(c))) {
       mm.items = mm.items.filter(([c]) => !["alm", "nue"].includes(c));
       mm.t = mm.t.replace(/ y (10|15) (g de )?(almendras|nueces)/, "");
       n = nutrients(meals.flatMap(([, m]) => m.items));

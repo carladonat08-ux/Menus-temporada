@@ -3,7 +3,7 @@ const fs = require("fs"), vm = require("vm");
 const root = require("path").join(__dirname, "..", "..") + "/";
 const strip = (f) => fs.readFileSync(root + f, "utf8").replace(/if \(typeof module[^\n]*\n/g, "");
 const ctx = { console }; vm.createContext(ctx);
-vm.runInContext(strip("plan.js") + "\n" + strip("data.js") + "\n" + strip("recipes.js") + "\nthis.X={ING,SEASONS,buildWeek,recetaDe,RECETAS};", ctx);
+vm.runInContext(strip("plan.js") + "\n" + strip("data.js") + "\n" + strip("recipes.js") + "\nthis.X={ING,SEASONS,buildWeek,recetaDe,RECETAS,GUARN};", ctx);
 const X = ctx.X;
 const fails = [], seen = new Map();
 const F = (m) => fails.push(m);
@@ -30,7 +30,7 @@ for (const k in X.SEASONS) for (const mo of MESES_EST[k]) for (let w = 0; w < 4;
   [[0, "d"], [2, "c"], [4, "n"]].forEach(([j, slot]) => {
     const m = d.meals[j][1];
     if (m.noRecipe) return;
-    const base = m.t.replace(/ \+ .* de postre$/, "");
+    const base = m.t.split(" + ")[0];
     const r = X.recetaDe(m, slot);
     const keyId = base + "|" + m.items.map((x) => x[0]).sort().join(",");
     if (seen.has(keyId)) return; seen.set(keyId, 1);

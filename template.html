@@ -264,8 +264,7 @@ function render() {
   const mon = state.tabMonday;
   $("hero").innerHTML = `
     <div class="kicker">Semana ${state.n} de ${state.monthName}${state.n === 5 ? " · menú 2" : ""}</div>
-    <h1>${S.name}</h1>
-    <p>${S.note}</p>`;
+    <h1>${S.name}</h1>`;
   const tabs = mondaysOfMonth(state.monday.getFullYear(), state.monday.getMonth());
   $("weeks").innerHTML = tabs.map((m, i) => `<button type="button" role="tab" aria-selected="${sameDay(m, mon)}" data-i="${i}" aria-label="Semana ${i + 1}, ${fmtRange(m)}${sameDay(m, state.monday) ? ", la que te toca" : ""}"><span class="wk">Semana ${i + 1}</span><span class="rg">${fmtRange(m)}</span>${sameDay(m, state.monday) ? '<span class="dot"></span>' : ""}</button>`).join("");
   $("weeks").querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { selectTab(tabs[+b.dataset.i]); render(); }));
