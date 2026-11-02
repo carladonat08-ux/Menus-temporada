@@ -114,6 +114,8 @@ for (const k in X.SEASONS) for (const mo of MESES_EST[k]) for (let w = 0; w < 4;
     d.meals.forEach(([l, m]) => m.items.forEach(([c]) => { if (X.FRUTA_MES[c] && !X.FRUTA_MES[c].includes(mo)) F("temporada", `${day} ${l}: ${X.ING[c][0]} fuera de su mes`); }));
     [com, cen].forEach((m) => { if (m.side && !X.VERD_MES[m.side].includes(mo)) F("temporada", `${day}: guarnición de ${X.GUARN[m.side].t} fuera de su mes`); });
     if (com.side && com.side === cen.side) F("variedad", `${day}: la misma guarnición en comida y cena`);
+    { const vv = (m) => m.items.filter(([c, g]) => X.ING[c][1] === "verdura" && !["tom", "tri", "lec", "zan"].includes(c) && g >= 60).map(([c]) => c);
+      const rep = vv(com).filter((c) => vv(cen).includes(c)); if (i < 6 && rep.length) F("variedad", `${day}: ${rep.map((c) => X.ING[c][0]).join(", ")} en comida y cena`); }
     if (i > 0 && [com.side, cen.side].some((x) => x && [wk[i - 1].meals[2][1].side, wk[i - 1].meals[4][1].side].includes(x))) F("variedad", `${day}: guarnición repetida del día anterior`);
     [com, cen].forEach((m) => { if (m.items && !X.ING) return; });
     d.meals.forEach(([l, m]) => m.items.forEach(([c]) => { vegW.add(X.ING[c][1] === "verdura" && !["tom", "tri"].includes(c) ? c : null); if (X.ING[c][1] === "fruta") fruW.add(c); }));
@@ -137,6 +139,9 @@ for (const k in X.SEASONS) for (const mo of MESES_EST[k]) for (let w = 0; w < 4;
     if (kD < 420 || kD > 600) F("desayuno", `${day}: desayuno de ${Math.round(kD)} kcal`);
     if (pD < 22) F("desayuno", `${day}: desayuno con solo ${Math.round(pD)} g de proteína`);
     const kA = alm.items.reduce((a2, [c, g]) => a2 + X.ING[c][2] * g / 100, 0);
+    const kM = mer.items.reduce((a2, [c, g]) => a2 + X.ING[c][2] * g / 100, 0);
+    if (kM < 80) F("merienda", `${day}: ${lblM} de solo ${Math.round(kM)} kcal (${mer.t})`);
+    [com, cen].forEach((m) => { const z = m.items.find(([c]) => c === "zan"); if (z && z[1] > 160) F("variedad", `${day}: ${z[1]} g de zanahoria en «${m.t}»`); });
     if (kA < 100 || kA > 260) F("almuerzo", `${day}: almuerzo de ${Math.round(kA)} kcal`);
     if (des.items.some(([c]) => c === "sky") && alm.items.some(([c]) => c === "sky")) F("almuerzo", `${day}: yogur en desayuno y almuerzo`);
     if (/Bocadill/.test(alm.t)) F("almuerzo", `${day}: bocadillo en el almuerzo`);
@@ -153,7 +158,8 @@ for (const k in X.SEASONS) for (const mo of MESES_EST[k]) for (let w = 0; w < 4;
     // Energía
     const lim = i === 6 ? 1750 : d.ent ? 1800 : 1700;
     if (d.kcal > lim + 25) F("energía", `${day}: ${d.kcal} kcal (techo ${lim})`);
-    if (d.kcal < 1400) F("energía", `${day}: solo ${d.kcal} kcal`);
+    const suelo = i === 6 ? 1450 : d.ent ? 1590 : 1500; // suelos de la dieta (1500/1650/1550) con 50-60 kcal de margen
+    if (d.kcal < suelo) F("energía", `${day}: solo ${d.kcal} kcal (suelo ${suelo})`);
     if (d.prot < 100) F("proteína", `${day}: solo ${d.prot} g de proteína`);
     else if (d.prot < 103) W("proteína", `${day}: ${d.prot} g`);
     if (!cuenta) return;
@@ -186,6 +192,16 @@ for (const k in X.SEASONS) for (const mo of MESES_EST[k]) for (let w = 0; w < 4;
   const listed = Object.values(sh).flat().length;
   if (listed !== Object.keys(tot).length) F("compra", `${tag}: ${listed} productos en lista vs ${Object.keys(tot).length} usados`);
   Object.values(sh).flat().forEach(([n, q]) => { if (/NaN|undefined/.test(q + n)) F("compra", `${tag}: ${n} ${q}`); });
+}
+// Repetición de platos en el mes: cada comida y cada cena como mucho 2 veces, y la comida nunca el mismo día de la semana
+for (const k in X.SEASONS) {
+  const uc = {}, un = {};
+  for (let w = 0; w < 4; w++) X.buildWeek(k, w).forEach((d, i) => {
+    const c = d.meals[2][1].t.split(" + ")[0], n = d.meals[4][1].t.split(" + ")[0];
+    (uc[c] = uc[c] || []).push(i); if (i < 6) (un[n] = un[n] || []).push(i);
+  });
+  Object.entries(uc).forEach(([t, v]) => { if (v.length > 2) F("mes", `${k}: «${t}» ${v.length} veces en el mes`); if (new Set(v).size < v.length) F("mes", `${k}: «${t}» repite día de la semana`); });
+  Object.entries(un).forEach(([t, v]) => { if (v.length > 2) F("mes", `${k}: cena «${t}» ${v.length} veces en el mes`); });
 }
 // Diferencias entre las 4 semanas de cada estación
 for (const k in X.SEASONS) {

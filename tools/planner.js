@@ -27,14 +27,14 @@ function planSeason(key, seed, tries) {
   let best = null, bestScore = Infinity;
 
   for (let t = 0; t < tries; t++) {
-    const useC = {}, useN = {};
+    const useC = {}, useN = {}, posC = {};
     const month = [];
     let ok = true;
     for (let w = 0; w < 4 && ok; w++) {
       let week = null;
-      for (let attempt = 0; attempt < 60 && !week; attempt++) week = buildWeekPlan(w, useC, useN);
+      for (let attempt = 0; attempt < 60 && !week; attempt++) week = buildWeekPlan(w, useC, useN, posC);
       if (!week) { ok = false; break; }
-      week.CI.forEach((i) => { useC[i] = (useC[i] || 0) + 1; });
+      week.CI.forEach((i, d) => { useC[i] = (useC[i] || 0) + 1; (posC[i] = posC[i] || new Set()).add(d); });
       week.NI.forEach((i) => { if (i >= 0) useN[i] = (useN[i] || 0) + 1; });
       month.push(week);
     }
@@ -48,7 +48,7 @@ function planSeason(key, seed, tries) {
   }
   return { best, bestScore };
 
-  function buildWeekPlan(w, useC, useN) {
+  function buildWeekPlan(w, useC, useN, posC) {
     const CI = [], NI = [];
     const fest = FEST[w % FEST.length];
     const sunKeys = CK[fest];
@@ -77,6 +77,7 @@ function planSeason(key, seed, tries) {
       for (const ci of comCands) {
         if (needLeg && !hasLeg(S.comidas[ci])) continue;
         if (CI.includes(ci)) continue;
+        if ((useC[ci] || 0) >= 2 || (posC[ci] && posC[ci].has(d))) continue; // como mucho 2 veces al mes y nunca el mismo día de la semana
         if (CK[ci].some((k) => (keyCnt[k] || 0) >= 2 || prevKeys.includes(k) || (d === 5 && sunKeys.includes(k)))) continue;
         if (higDone && hasHig(S.comidas[ci])) continue;
         const tc = CT[ci];
@@ -84,6 +85,7 @@ function planSeason(key, seed, tries) {
         if (tc === "arroz" && (riceDays.includes(d - 1) || d === 5)) continue;
         for (const ni of order(S.cenas.map((_, i) => i), useN)) {
           if (NI.includes(ni)) continue;
+          if ((useN[ni] || 0) >= 2) continue; // cada cena, como mucho 2 veces al mes
           if (big(CF[ci]) === big(NF[ni])) continue;
           if (/\bhue:/.test(S.comidas[ci]) && /\bhue:/.test(S.cenas[ni])) continue; // nunca huevo en comida y cena
           if (X.clash(CD[ci], ND[ni])) continue;

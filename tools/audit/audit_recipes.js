@@ -26,7 +26,7 @@ const OPC = /(si lo lleva|si la lleva|si las lleva|si los lleva|si lleva|opciona
 
 const MESES_EST = { primavera: [3, 4, 5, 6], verano: [6, 7, 8, 9], otono: [9, 10, 11, 12], invierno: [12, 1, 2, 3] };
 for (const k in X.SEASONS) for (const mo of MESES_EST[k]) for (let w = 0; w < 4; w++) X.buildWeek(k, w, { month: mo }).forEach((d) => {
-  d.meals.forEach(([l, m]) => { if (/Sirve con\.|con y |, y\.|  |\by y\b|\bcon con\b/.test(m.t)) F(`frase rota en ${l}: "${m.t}"`); });
+  d.meals.forEach(([l, m]) => { if (/Sirve con\.|con y |, y\.|  |\by y\b|\bcon con\b/.test(m.t) || / y [^,+()]* y [^,+()]* y /.test(m.t.split(" + ")[0]) || (l !== "Comida" && l !== "Cena" && / y [^,]* y /.test(m.t.replace(/ \(60-90.*\)/, "")) && !/^Tostada|^Tortitas|^Porridge|^Yogur o skyr con copos/.test(m.t))) F(`frase rota en ${l}: "${m.t}"`); });
   [[0, "d"], [2, "c"], [4, "n"]].forEach(([j, slot]) => {
     const m = d.meals[j][1];
     if (m.noRecipe) return;

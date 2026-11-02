@@ -25,6 +25,7 @@ Web personal para planificar la comida de la semana. Al elegir una fecha:
 - Sin pimiento como verdura, sin cebolla y sin coliflor. Las especias sí, pimentón incluido.
 - Cereales integrales: arroz integral, pasta de arroz integral y pan de espelta de masa madre.
 - Legumbres al menos 3 días por semana, nunca en días seguidos.
+- Si un día se queda corto de energía (por ejemplo, con una ensalada de legumbre), la app sube primero los hidratos o la legumbre de la comida, después añade frutos secos, fruta de postre o completa la merienda; la merienda nunca se queda en una fruta sola.
 - Comida y cena nunca repiten proteína ni llevan legumbre las dos el mismo día.
 - Raciones ajustadas a la tolerancia: calabaza japonesa como máximo 150 g, frambuesas 70 g, melón 120 g y garbanzos 150 g.
 - Pensado para un presupuesto ajustado: pescado congelado, legumbres de bote y marcas blancas.
@@ -35,7 +36,7 @@ Es una pauta general y no sustituye a un médico o dietista.
 
 - **Comida y cena de grupos distintos:** si a mediodía hay carne, por la noche hay pescado o huevo, y al revés.
 - **Reparto semanal:** pescado 4-6 veces (al menos 2 de azul), carne 4-6 (roja como máximo 2), huevo al menos 1 vez (como mucho unos 7 huevos a la semana contando el desayuno) y legumbre al mediodía al menos 3 días.
-- **Variedad:** cada proteína (pollo, cerdo, merluza, sardina…) como mucho 2 veces por semana y nunca en días seguidos. Arroz entre semana como mucho 2 días y no seguidos. Tortillas como mucho 2, bullit 1 y cremas 2. Nunca el mismo tipo de plato en la comida y la cena.
+- **Variedad:** cada proteína (pollo, cerdo, merluza, sardina, lentejas, garbanzos…) como mucho 2 veces por semana y nunca en días seguidos. En el mes, cada comida y cada cena se repite como mucho 2 veces, y la misma comida nunca cae el mismo día de la semana. Arroz entre semana como mucho 2 días y no seguidos. Tortillas como mucho 2, bullit 1 y cremas 2. Nunca el mismo tipo de plato ni la misma verdura protagonista en la comida y la cena. Entre 9 y 11 platos de legumbre por estación (lentejas con sepia, alubias con bacalao, garbanzos con pollo, olleta de la Vall, fesols amb bledes…).
 - **Cenas ligeras:** proteína con verdura, sin arroz, pasta, fideos ni legumbres. Como mucho 100 g de patata, sin pan, y unas 380 kcal (400 como máximo). El huevo no se repite en el mismo día: si la comida o la cena lleva huevo, el desayuno cambia a uno sin huevo.
 - **Domingo:** comida de fiesta (paella, fideuà, arròs al forn, arròs negre, putxero…) con una ración generosa. Por la noche no se cena: solo un yogur o unas palomitas caseras.
 - **Desayunos (5, en rotación):** porridge de avena con fruta y nueces; tostada de espelta con tomate y revuelto de huevo y claras con queso curado; tortitas de avena y plátano; tostada con tomate, jamón cocido y queso con café con leche; yogur o skyr con avena, fruta y nueces. Entre 420 y 600 kcal y al menos 22 g de proteína. Nunca el mismo desayuno ni tostada dos días seguidos.

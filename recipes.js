@@ -126,6 +126,53 @@ const RECETAS = [
   [/^Sepia a la plancha con arroz|^Calamares a la plancha con arroz|^Dorada a la plancha con arroz|^Pollo al limón con arroz/, null], // generador
 
   // ---------------- Legumbres y ollas ----------------
+  [/^Lentejas con sepia/, (t) => ({ tiempo: "40 min", notas: [NOTA_AJO, NOTA_LEG, NOTA_TAPER], pasos: [
+    "En una olla, prepara el aceite de ajo y retira el ajo. Dora la sepia en dados con sal 5 minutos.",
+    `Añade ${/calabaza/.test(t) ? "la calabaza en dados" : "la zanahoria en rodajas"} y rehoga 3 minutos.`,
+    "Añade el tomate triturado, una cucharadita de pimentón dulce, una pizca de comino y una hoja de laurel y sofríe 3 minutos.",
+    "Cubre con agua y cuece 15 minutos, hasta que la sepia esté tierna.",
+    "Incorpora las lentejas escurridas y cuece 8 minutos más. Prueba de sal y sirve caliente.",
+  ] })],
+  [/^Garbanzos con pollo/, (t) => ({ tiempo: "35 min", notas: [NOTA_AJO, NOTA_LEG, NOTA_TAPER], pasos: [
+    "En una olla, prepara el aceite de ajo y retira el ajo. Dora el pollo en dados con sal 6-8 minutos.",
+    ...(/calabaza/.test(t) ? ["Añade la calabaza en dados y rehoga 3 minutos."] : []),
+    "Añade el tomate triturado, una cucharadita de comino y otra de pimentón dulce, y sofríe 2 minutos.",
+    "Añade los garbanzos escurridos y un vaso de agua, y cuece 12 minutos.",
+    "Añade las espinacas, deja 3 minutos más hasta que se ablanden y prueba de sal.",
+  ] })],
+  [/^Ensalada templada de lentejas/, () => ({ tiempo: "15 min", notas: [NOTA_LEG], pasos: [
+    "Cuece el huevo 10 minutos, enfríalo y pélalo.",
+    "Cuece la patata en dados 12-15 minutos en agua con sal y escúrrela.",
+    "Enjuaga las lentejas y caliéntalas 2 minutos en una sartén con la mitad del aceite y una pizca de comino.",
+    "Pon la rúcula en el plato con el tomate troceado, la patata y las lentejas templadas por encima.",
+    "Añade el huevo duro en cuartos y aliña con el resto del aceite, sal y unas gotas de vinagre.",
+  ] })],
+  [/^Alubias blancas con (sepia|bacalao)/, (t) => ({ tiempo: "35 min", notas: [NOTA_AJO, NOTA_LEG, NOTA_TAPER], pasos: [
+    ...(/bacalao/.test(t) ? ["Si el bacalao es salado, desálalo 24-36 horas antes en agua fría en la nevera, cambiando el agua 3-4 veces."] : []),
+    `En una olla, prepara el aceite de ajo y retira el ajo. ${/sepia/.test(t) ? "Dora la sepia en dados con sal 5 minutos." : "Añade el tomate triturado."}`,
+    `${/sepia/.test(t) ? "Añade el tomate triturado, u" : "U"}na cucharadita de pimentón dulce y una hoja de laurel, y sofríe 3 minutos.`,
+    `Añade un vaso y medio de agua${/sepia/.test(t) ? " y cuece 12 minutos, hasta que la sepia esté tierna" : " y cuece 5 minutos"}.`,
+    `Añade las alubias escurridas y ${/acelgas/.test(t) ? "las acelgas troceadas" : "las espinacas"}${/bacalao/.test(t) ? " y el bacalao en trozos" : ""}, y cuece 6-8 minutos más. Prueba de sal.`,
+  ] })],
+  [/^Olleta/, () => ({ tiempo: "1 h 10 min", notas: [NOTA_AJO, NOTA_LEG, NOTA_INTEGRAL, NOTA_TAPER], pasos: [
+    "En una olla, prepara el aceite de ajo y retira el ajo. Dora el magro de cerdo en dados con sal 5 minutos.",
+    "Añade las pencas de acelga troceadas (guarda las hojas) y el nabo en dados, y rehoga 3 minutos con una cucharadita de pimentón dulce.",
+    "Cubre con 1 litro de agua, añade una hoja de laurel y una pizca de azafrán y cuece 25 minutos.",
+    "Añade el arroz y cuece 30 minutos (arroz integral).",
+    "Añade las alubias escurridas y las hojas de acelga y cuece 5 minutos más. Debe quedar caldosa. Prueba de sal.",
+  ] })],
+  [/^Ensalada de lentejas con caballa/, () => ({ tiempo: "20 min", notas: [NOTA_LEG], pasos: [
+    "Haz la caballa a la plancha con sal, 3-4 minutos por cada lado, y desmígala sin espinas.",
+    "Enjuaga las lentejas y escúrrelas bien.",
+    "Mezcla las lentejas con el pepino y el tomate en dados y la caballa por encima.",
+    "Aliña con el aceite, sal, comino y unas gotas de limón.",
+  ] })],
+  [/^Garbanzos con calamares/, () => ({ tiempo: "20 min", notas: [NOTA_AJO, NOTA_LEG], pasos: [
+    "En una sartén, prepara el aceite de ajo y retira el ajo. Saltea los calamares en anillas con sal 3 minutos a fuego fuerte y resérvalos.",
+    "En la misma sartén, saltea el calabacín en dados 4 minutos.",
+    "Añade el tomate triturado y una cucharadita de pimentón dulce y deja 2 minutos.",
+    "Añade los garbanzos escurridos y los calamares, y saltea 3 minutos más. Prueba de sal.",
+  ] })],
   [/^Lentejas con arroz/, () => ({ tiempo: "45 min", notas: [NOTA_AJO, NOTA_LEG, NOTA_TAPER], pasos: [
     "Cuece los huevos 10 minutos en agua hirviendo, enfríalos y pélalos.",
     "En una olla, prepara el aceite de ajo y retira el ajo. Rehoga la zanahoria en dados 5 minutos.",
@@ -162,9 +209,10 @@ const RECETAS = [
   [/^Ensalada de (garbanzos|alubias)/, (t, it) => {
     const has = (c) => it.some(([x]) => x === c);
     const verd = ["tom", "pep", "lec"].filter(has).map((c) => ({ tom: "el tomate", pep: "el pepino", lec: "la lechuga" }[c]));
-    const resto = [has("atu") && "el atún escurrido", has("pol") && "el pollo en tiras", has("hue") && "el huevo en cuartos", has("oli") && "las aceitunas"].filter(Boolean);
+    const resto = [has("pat") && "la patata", has("atu") && "el atún escurrido", has("pol") && "el pollo en tiras", has("hue") && "el huevo en cuartos", has("oli") && "las aceitunas"].filter(Boolean);
     return { tiempo: "15 min", notas: [NOTA_LEG], pasos: [
       ...(has("hue") ? ["Cuece el huevo 10 minutos, enfríalo y pélalo."] : []),
+      ...(has("pat") ? ["Cuece la patata en dados 12-15 minutos en agua con sal, escúrrela y deja que se temple."] : []),
       "Enjuaga la legumbre y escúrrela bien.",
       ...(has("pol") ? ["Haz el pollo a la plancha con sal y especias, y córtalo en tiras."] : []),
       `Corta ${verd.join(", ").replace(/, ([^,]*)$/, " y $1")} y mézclalo con la legumbre${resto.length ? ", " + resto.join(", ").replace(/, ([^,]*)$/, " y $1") : ""}.`,
@@ -488,6 +536,7 @@ function recetaDe(meal, slot) {
         .replace(/ \(huevos y claras\)/, ""))
       .filter((p) => p.trim());
   }
+  if (meal.patExtra) r.pasos.unshift("Cuece la patata en dados 12-15 minutos en agua con sal (o 6 minutos al microondas, tapada) y alíñala con un poco del aceite.");
   // Guarnición de verdura de temporada
   if (meal.side && GUARN[meal.side]) {
     let sv = -1; r.pasos.forEach((p, i) => { if (/S[ií]rv|Emplata/.test(p)) sv = i; }); // antes del último paso de servir

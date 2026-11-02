@@ -130,6 +130,10 @@ const SEASONS = {
     range: "20 de marzo – 20 de junio",
     note: "Cocina de casa: arroces, bullit y tortillas de bajoqueta. Fresas, kiwi y las últimas naranjas.",
     comidas: [
+      "Lentejas con sepia y zanahoria|len:180,sep:120,zan:80,tri:60,aov:10",
+      "Garbanzos con pollo, espinacas y comino|gar:150,pol:100,esp:150,tri:60,aov:10",
+      "Ensalada templada de lentejas con patata, huevo duro, rúcula y tomate|len:180,pat:120,hue:55,ruc:50,tom:100,aov:10",
+      "Alubias blancas con sepia y acelgas|alu:180,sep:110,ace:150,tri:60,aov:10",
       "Paella valenciana de pollo y conejo|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
       "Arròs amb bledes (arroz con acelgas, alubias y bacalao)|arr:60,ace:200,alu:100,bac:80,tom:60,aov:10",
       "Arroz caldoso de pollo y bajoqueta|arr:70,pol:130,jud:120,zan:60,tom:60,aov:10",
@@ -142,7 +146,7 @@ const SEASONS = {
       "Fideuà de fideos de arroz con gambas y sepia|fid:70,gam:80,sep:100,tom:60,aov:10",
       "Arròs al forn con costilla, magro de cerdo, garbanzos y patata (sin morcilla)|arr:65,cos:70,lom:60,gar:60,pat:60,tom:80,aov:5",
       "Lomo a la plancha con patatas al horno y ensalada|lom:130,pat:220,lec:60,tom:100,aov:10",
-      "Fesols amb bledes (alubias con acelgas y patata)|alu:180,ace:200,pat:100,hue:55,aov:10",
+      "Fesols amb bledes (alubias con acelgas, patata y huevo duro)|alu:180,ace:200,pat:100,hue:55,aov:10",
       "Tortilla de patatas con ensalada valenciana|hue:55,cla:170,pat:200,lec:60,tom:100,oli:20,aov:10",
       "Dorada al horno con patata y tomate|dor:170,pat:220,tom:120,aov:10",
       "Macarrones integrales con carne picada y tomate|pas:70,ter:110,tri:150,par:10,aov:5",
@@ -181,6 +185,9 @@ const SEASONS = {
     range: "21 de junio – 22 de septiembre",
     note: "Arroces de verano, clòtxines, sardinas y tomate de la huerta. Frutos rojos, melón y piña.",
     comidas: [
+      "Ensalada de lentejas con caballa, pepino y tomate|len:180,cab:90,pep:80,tom:100,aov:10",
+      "Garbanzos con calamares y calabacín|gar:150,cal:150,cbc:150,tri:60,aov:10",
+      "Ensalada de alubias con patata, huevo duro, pepino y tomate|alu:180,pat:120,hue:55,pep:80,tom:100,aov:10",
       "Paella valenciana de pollo y conejo|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
       "Paella de marisco|arr:70,gam:80,sep:100,cal:60,tom:60,aov:10",
       "Arròs a banda con sepia y gambas (sin alioli)|arr:70,sep:150,gam:60,tom:60,aov:10",
@@ -191,7 +198,7 @@ const SEASONS = {
       "Ensalada de lentejas y arroz con atún y tomate|len:200,arr:50,atu:56,tom:120,pep:80,lec:40,aov:10",
       "Fideuà de fideos de arroz con gambas|fid:70,gam:120,tom:60,aov:10",
       "Bonito a la plancha con tomate y patata|bon:140,tom:150,pat:220,aov:10",
-      "Ensalada de garbanzos con huevo, aceitunas y tomate|gar:150,hue:55,tom:150,pep:80,oli:15,aov:10",
+      "Ensalada de garbanzos con patata, huevo, aceitunas y tomate|gar:150,hue:55,tom:150,pep:80,oli:15,aov:10,pat:100",
       "Conejo a la plancha con patatas y ensalada|con:170,pat:220,lec:60,tom:100,aov:10",
       "Dorada a la plancha con arroz y ensalada|dor:170,arr:60,lec:60,tom:100,aov:10",
       "Arroz con conejo y bajoqueta|arr:70,con:140,jud:120,tom:60,aov:10",
@@ -236,6 +243,10 @@ const SEASONS = {
     range: "23 de septiembre – 20 de diciembre",
     note: "Arròs al forn, arroces con legumbre, figatells y calabaza. Mandarinas, uva y kiwi.",
     comidas: [
+      "Olleta de la Vall (alubias, pencas, nabo, magro de cerdo y arroz; sin morcilla)|alu:150,lom:90,ace:150,nab:80,arr:50,aov:8",
+      "Lentejas con sepia y calabaza|len:180,sep:120,cza:120,tri:60,aov:10",
+      "Garbanzos con pollo, calabaza y espinacas|gar:150,pol:100,cza:120,esp:80,tri:60,aov:10",
+      "Alubias blancas con bacalao y espinacas|alu:180,bac:110,esp:150,tri:60,aov:10",
       "Arròs al forn con costilla, magro de cerdo, garbanzos y patata (sin morcilla)|arr:65,cos:70,lom:60,gar:60,pat:60,tom:80,aov:5",
       "Paella valenciana de pollo y conejo|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
       "Arròs amb fesols i naps (arroz con alubias, nabo y costilla)|arr:60,alu:100,nab:120,cos:80,ace:80,aov:5",
@@ -253,7 +264,7 @@ const SEASONS = {
       "Caballa al horno con patatas y bajoqueta|cab:130,pat:250,jud:120,aov:5",
       "Figatells caseros (lomo de cerdo e hígado de pollo) con puré de calabaza|lom:80,hig:80,cza:150,pat:150,aov:10",
       "Lomo a la plancha con patatas al horno y ensalada|lom:130,pat:220,lec:60,tom:100,aov:10",
-      "Fesols amb bledes (alubias con acelgas y patata)|alu:180,ace:200,pat:100,hue:55,aov:10",
+      "Fesols amb bledes (alubias con acelgas, patata y huevo duro)|alu:180,ace:200,pat:100,hue:55,aov:10",
       "Arroz con conejo y bajoqueta|arr:70,con:140,jud:120,tom:60,aov:10",
       "Dorada al horno con patata y tomate|dor:170,pat:220,tom:120,aov:10",
       "Pavo en salsa de almendras con arroz|pav:140,arr:60,alm:10,tri:80,aov:10",
@@ -287,6 +298,9 @@ const SEASONS = {
     range: "21 de diciembre – 19 de marzo",
     note: "Olleta y putxero con pilotes, arròs al forn, giraboix y platos de cuchara. Naranjas, mandarinas y kiwi.",
     comidas: [
+      "Olleta de la Vall (alubias, pencas, nabo, magro de cerdo y arroz; sin morcilla)|alu:150,lom:90,ace:150,nab:80,arr:50,aov:8",
+      "Lentejas con sepia y zanahoria|len:180,sep:120,zan:80,tri:60,aov:10",
+      "Alubias blancas con bacalao y espinacas|alu:180,bac:110,esp:150,tri:60,aov:10",
       "Putxero valenciano con pilotes de ternera (garbanzos, pollo, ternera, patata y verduras)|gar:120,pol:70,ter:50,pat:120,zan:80,nab:80,chi:60,aov:5",
       "Arròs al forn con costilla, magro de cerdo, garbanzos y patata (sin morcilla)|arr:65,cos:70,lom:60,gar:60,pat:60,tom:80,aov:5",
       "Arròs amb fesols i naps (arroz con alubias, nabo y costilla)|arr:60,alu:100,nab:120,cos:80,ace:80,aov:5",
@@ -297,7 +311,7 @@ const SEASONS = {
       "Arroz caldoso de pollo y acelgas|arr:70,pol:130,ace:150,zan:60,aov:10",
       "Pollo al horno con patatas y chirivía|mus:160,pat:200,chi:75,aov:10",
       "Conejo guisado con patata y zanahoria|con:170,pat:220,zan:100,tri:60,aov:10",
-      "Fesols amb bledes (alubias con acelgas y patata)|alu:180,ace:200,pat:100,hue:55,aov:10",
+      "Fesols amb bledes (alubias con acelgas, patata y huevo duro)|alu:180,ace:200,pat:100,hue:55,aov:10",
       "Pilotes de ternera en salsa de tomate con patata|ter:120,hue:30,tri:100,pat:200,aov:10",
       "Arròs negre de sepia|arr:70,sep:180,tom:60,aov:10",
       "Macarrones integrales con atún, tomate y parmesano|pas:70,atu:112,tri:150,par:10,aov:5",
@@ -385,6 +399,9 @@ const LEG = ["len","gar","alu","grf"];
 function clash(a, b) {
   const ca = a.items.map((i) => i[0]), cb = b.items.map((i) => i[0]);
   if (ca.some((c) => PROT.includes(c) && cb.includes(c))) return true;
+  // la misma verdura protagonista en comida y cena (tomate, lechuga y zanahoria aparte)
+  const vb = (o) => o.items.filter(([c, g]) => ING[c][1] === "verdura" && !["tom", "tri", "lec", "zan"].includes(c) && g >= 80).map(([c]) => c);
+  if (vb(a).some((c) => vb(b).includes(c))) return true;
   return ca.some((c) => LEG.includes(c)) && cb.some((c) => LEG.includes(c));
 }
 
@@ -746,7 +763,9 @@ function buildWeek(key, w, opts = {}) {
     if (own >= 100 && !generic) return o;
     if (own >= 100) return { ...o, t, items };
     const soloEns = isFiesta(t) || items.some(([c]) => ["arr", "pas", "fid"].includes(c));
-    const cand = GUARN_ORDEN.filter((c) => VERD_MES[c].includes(mes) && (!soloEns || GUARN[c].ens) && !hoy.includes(c) && !items.some(([x]) => x === c));
+    const yaEns = /ensalada/i.test(t); // el plato ya trae ensalada: la guarnición será de verdura cocinada
+    const cand = GUARN_ORDEN.filter((c) => VERD_MES[c].includes(mes) && (!soloEns || GUARN[c].ens) && !(yaEns && GUARN[c].ens) && !hoy.includes(c) && !items.some(([x]) => x === c)
+      && !parse(GUARN[c].it).some(([x]) => x !== "tom" && (hoy.includes(x) || items.some(([y]) => y === x))));
     const pool = cand.filter((c) => !ayer.includes(c));
     const list = pool.length ? pool : cand;
     if (!list.length) return { ...o, t, items };
@@ -771,12 +790,14 @@ function buildWeek(key, w, opts = {}) {
     };
     const lessOil = (o) => ({ ...o, items: o.items.map(([c, g]) => [c, c === "aov" ? Math.round(g * AOV_FACTOR) : g]) });
     const oil = (o, min) => (o.items.some(([c]) => c === "aov") ? { ...o, items: o.items.map(([c, g]) => [c, c === "aov" ? Math.max(g, min) : g]) } : { ...o, items: [...o.items, ["aov", min]] });
-    const hoy = [];
-    const com = withCitrus(capRacion(scale(normalize(oil(capProt(lessOil(withSide(dish(S.comidas[ci]), hoy, d))), 10), d === 6 ? "f" : "c"))));
+    const rawC = dish(S.comidas[ci]), rawN = ni === -1 ? null : dish(S.cenas[ni]);
+    const vegsOf = (o) => (o ? o.items.filter(([c]) => isVegC(c)).map(([c]) => c) : []);
+    const hoy = [...vegsOf(rawC), ...vegsOf(rawN)]; // verduras que ya hay hoy: la guarnición será otra
+    const com = withCitrus(capRacion(scale(normalize(oil(capProt(lessOil(withSide(rawC, hoy, d))), 10), d === 6 ? "f" : "c"))));
     const cen = ni === -1
       ? (w % 2 ? { t: "Palomitas caseras (maíz en la sartén con una gota de aceite)", items: [["pal", 20], ["aov", 3]], noRecipe: true }
                : { t: "Un skyr o yogur proteico sin lactosa con canela", items: [["sky", 125]], noRecipe: true })
-      : withCitrus(capRacion(scale(normalize(oil(capProt(lessOil(withSide(dish(S.cenas[ni]), hoy, d))), 8), "n"))));
+      : withCitrus(capRacion(scale(normalize(oil(capProt(lessOil(withSide(rawN, hoy, d))), 10), "n"))));
     ayer = hoy;
     com.spices = spicesFor(com); if (!cen.noRecipe) cen.spices = spicesFor(cen);
     // ---- Desayuno, almuerzo y merienda
@@ -865,8 +886,19 @@ function buildWeek(key, w, opts = {}) {
       n = nutrients(meals.flatMap(([, m]) => m.items));
     }
     const floor = d === 6 ? KCAL_MIN_DOM : ent ? KCAL_MIN_ENT : KCAL_MIN_DES;
-    if (n.kcal < floor && !mm.items.some(([c]) => c === "nue")) {
-      mm.items = [...mm.items, ["nue", 10]]; mm.t += " y 10 g de nueces";
+    // Energía baja (p. ej. ensaladas de legumbre en verano): primero más hidratos o legumbre en la comida (hasta +25 % y su ración máxima)
+    if (n.kcal < floor - 20 && d !== 6) {
+      const adj = com.items.filter(([c]) => ING[c][4] || (LEG.includes(c) && c !== "grf"));
+      const ak = adj.reduce((a, [c, g]) => a + ING[c][2] * g / 100, 0);
+      if (ak > 0) {
+        const f = Math.min(1.25, 1 + (floor - n.kcal) / ak);
+        com.items = com.items.map(([c, g]) => adj.some(([x]) => x === c) ? limRacion([c, Math.round(g * f / 5) * 5]) : [c, g]);
+        n = nutrients(meals.flatMap(([, m]) => m.items));
+      }
+    }
+    if (n.kcal < floor && !mm.items.some(([c]) => ["nue", "alm"].includes(c))) {
+      mm.items = [...mm.items, ["nue", 10]];
+      mm.t = (mm.t.includes(" y ") ? mm.t.replace(" y ", ", ") : mm.t) + " y 10 g de nueces";
       n = nutrients(meals.flatMap(([, m]) => m.items));
     }
     // Si la proteína sigue baja (p. ej. domingo de arroz): más pescado o carne en la comida (hasta 35 g de proteína y su ración máxima)
@@ -887,16 +919,44 @@ function buildWeek(key, w, opts = {}) {
       n = nutrients(meals.flatMap(([, m]) => m.items));
     }
     // Si la energía sigue baja: fruta de postre en la comida (si quedan frutas por poner en el día)
-    if (n.kcal < floor - 100 && nFruit() < 3 && !/de postre$/.test(com.t)) {
+    if (n.kcal < floor - 30 && nFruit() < 3 && !/de postre$/.test(com.t)) {
       const f = nextFruit(false);
       if (f) { com.items = [...com.items, f]; com.t += ` + ${ING[f[0]][0].toLowerCase()} de postre`; n = nutrients(meals.flatMap(([, m]) => m.items)); }
+    }
+    // Y si aún falta: la merienda o el pre-entreno se completa con queso curado, almendras o un skyr
+    if (n.kcal < floor - 40 && mer.items.length === 1 && !mer.items.some(([c]) => c === "sky" || c === "pal")) {
+      const add = mer.items.some(([c]) => c === "que") ? ["alm", 10] : ["que", 25];
+      mer.items = [...mer.items, add];
+      mer.t = mer.t.replace(/^([^(]*?)( \(60-90|$)/, (m0, a1, a2) => `${a1} y ${add[0] === "que" ? "25 g de queso curado" : "10 almendras"}${a2}`);
+      n = nutrients(meals.flatMap(([, m]) => m.items));
+    }
+    if (n.kcal < floor - 40 && mer.items.length === 2 && !mer.items.some(([c]) => c === "sky")) {
+      mer.items = [...mer.items, ["sky", 125]];
+      mer.t = mer.t.replace(/^([^(]*?)( \(60-90|$)/, (m0, a1, a2) => `${a1.replace(" y ", ", ")} y un skyr${a2}`);
+      n = nutrients(meals.flatMap(([, m]) => m.items));
+    }
+    // Último recurso: cena muy ligera sin patata → 80 g de patata cocida
+    if (n.kcal < floor - 40 && cen.items && !cen.noRecipe && !cen.items.some(([c]) => c === "pat") && kcalOf(cen.items) < 330) {
+      cen.items = [...cen.items, ["pat", 80]]; cen.patExtra = true;
+      cen.t = cen.t.includes(" + ") ? cen.t.replace(" + ", " y patata cocida + ") : cen.t + " y patata cocida";
+      n = nutrients(meals.flatMap(([, m]) => m.items));
+    }
+    // Merienda que se ha quedado en casi nada (solo fruta pequeña): vuelven las almendras si caben en el techo
+    if (kcalOf(mer.items) < 80 && mer.items.length === 1) { // los recortes de abajo compensan si hace falta
+      mer.items = [...mer.items, ["alm", 10]];
+      mer.t = mer.t.replace(/^([^(]*?)( \(60-90|$)/, (m0, a1, a2) => `${a1} y 10 almendras${a2}`);
+      n = nutrients(meals.flatMap(([, m]) => m.items));
     }
     // Recorte final si los suelos han pasado el techo: fuera los frutos secos del almuerzo y, si hace falta, menos hidratos en la comida
     if (n.kcal > limit + 20) {
       com.items = com.items.map(([c, g]) => limRacion([c, ING[c][4] ? Math.round(g * 0.85 / 5) * 5 : g]));
       n = nutrients(meals.flatMap(([, m]) => m.items));
     }
-    if (n.kcal > limit + 20) { // un poco menos de aceite en la comida (de 10 a 7 g)
+    if (n.kcal > limit + 20) { // algo menos de legumbre (nunca por debajo de 120 g)
+      com.items = com.items.map(([c, g]) => [c, LEG.includes(c) && c !== "grf" ? Math.max(120, Math.round(g * 0.85 / 10) * 10) : g]);
+      n = nutrients(meals.flatMap(([, m]) => m.items));
+    }
+    if (n.kcal > limit + 20) { // si aún hace falta, un poco menos de aceite en la comida (de 10 a 7 g)
       com.items = com.items.map(([c, g]) => [c, c === "aov" ? Math.min(g, 7) : g]);
       n = nutrients(meals.flatMap(([, m]) => m.items));
     }
