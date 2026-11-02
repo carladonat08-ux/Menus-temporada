@@ -24,7 +24,9 @@ const WORDS = [
 // Ingredientes opcionales/aromáticos que una receta puede mencionar aunque no estén en la lista
 const OPC = /(si lo lleva|si la lleva|si las lleva|si los lleva|si lleva|opcional|o una|o un |puede ser|si usas|según la receta|si no tienes|si te gusta|en lugar de|opción rápida)/;
 
-for (const k in X.SEASONS) for (let w = 0; w < 4; w++) X.buildWeek(k, w).forEach((d) => {
+const MESES_EST = { primavera: [3, 4, 5, 6], verano: [6, 7, 8, 9], otono: [9, 10, 11, 12], invierno: [12, 1, 2, 3] };
+for (const k in X.SEASONS) for (const mo of MESES_EST[k]) for (let w = 0; w < 4; w++) X.buildWeek(k, w, { month: mo }).forEach((d) => {
+  d.meals.forEach(([l, m]) => { if (/Sirve con\.|con y |, y\.|  |\by y\b|\bcon con\b/.test(m.t)) F(`frase rota en ${l}: "${m.t}"`); });
   [[0, "d"], [2, "c"], [4, "n"]].forEach(([j, slot]) => {
     const m = d.meals[j][1];
     if (m.noRecipe) return;
@@ -34,6 +36,7 @@ for (const k in X.SEASONS) for (let w = 0; w < 4; w++) X.buildWeek(k, w).forEach
     if (seen.has(keyId)) return; seen.set(keyId, 1);
     if (!r || !r.pasos || r.pasos.length < 2) F(`sin receta o con menos de 2 pasos: ${base}`);
     const text = (r.pasos.join(" ") + " ").toLowerCase();
+    r.pasos.forEach((p) => { if (/Sirve con\.|con y |, y\.|\by y\b|\bcon con\b|undefined|NaN/.test(p)) F(`frase rota en la receta de ${base}: "${p.slice(0, 80)}"`); });
     const codes = new Set(m.items.map((x) => x[0]));
     // Prohibidos en la receta
     if (/cebolla/.test(text.replace(/sin cebolla|ni cebolla|cebolla o ajo en polvo/g, ""))) F(`cebolla en receta: ${base}`);
@@ -54,7 +57,7 @@ for (const k in X.SEASONS) for (let w = 0; w < 4; w++) X.buildWeek(k, w).forEach
     WORDS.forEach(([re, cs]) => { if (re.test(tl) && !cs.some((c) => codes.has(c)) && !/sin (cebolla|morcilla|alioli|ajo)/.test(tl.match(re)?.input || "")) F(`título "${base}" menciona ${re.source} y no está en ingredientes`); });
     // Ingredientes principales que la receta no explica
     const MAIN = ["pat", "arr", "pas", "fid", "hue", "pol", "mus", "pav", "con", "ter", "lom", "cos", "hig", "mer", "bac", "dor", "lub", "tru", "sar", "cab", "bon", "jur", "boq", "sca", "atu", "gam", "cal", "sep", "mej", "pul", "len", "gar", "alu", "esp", "ace", "cza", "cbc", "jud", "ber", "nab", "chi", "end", "lec", "pan", "que", "moz"];
-    const NAMEW = { pat: /patata/, arr: /arroz/, pas: /pasta|macarrones/, fid: /fideos/, hue: /huevo|tortilla|revuelto/, pol: /pollo/, mus: /pollo|muslo/, pav: /pavo/, con: /conejo/, ter: /ternera|carne|pilotes/, lom: /lomo|carne|figatells/, cos: /costilla/, hig: /hígado|figatells/,
+    const NAMEW = { pat: /patata/, arr: /arroz/, pas: /pasta|macarrones/, fid: /fideos/, hue: /huevo|tortilla|revuelto/, pol: /pollo/, mus: /pollo|muslo/, pav: /pavo/, con: /conejo/, ter: /ternera|carne|pilotes/, lom: /lomo|magro|carne|figatells/, cos: /costilla/, hig: /hígado|figatells/,
       mer: /merluza|pescado/, bac: /bacalao/, dor: /dorada|pescado/, lub: /lubina|pescado/, tru: /trucha|pescado/, sar: /sardinas/, cab: /caballa|pescado/, bon: /bonito|pescado/, jur: /sorell|jurel|pescado/, boq: /boquerones/, sca: /sardinas/, atu: /atún|pescado/,
       gam: /gambas|marisco/, cal: /calamar/, sep: /sepia/, mej: /mejillones|clòtxines/, pul: /pulpo/, len: /lentejas|legumbre/, gar: /garbanzos|legumbre/, alu: /alubias|legumbre/, esp: /espinacas|verdura/, ace: /acelgas|pencas|verdura/, cza: /calabaza|verdura/,
       cbc: /calabacín|verdura/, jud: /bajoqueta|judía|verdura/, ber: /berenjena|verdura/, nab: /nabo|verdura/, chi: /chirivía|verdura/, end: /endibias/, lec: /lechuga|ensalada/, pan: /pan|tostada|masa/, que: /queso/, moz: /mozzarella/ };

@@ -5,6 +5,8 @@ const NOTA_AJO = "Aceite de ajo: calienta el aceite a fuego suave con 1-2 diente
 const NOTA_TAPER = "Si se cocina el día antes: deja templar como mucho 1-2 horas, guarda en la nevera a 4 °C o menos y recalienta hasta que humee. El arroz y el pescado, mejor en 24 horas.";
 const NOTA_INTEGRAL = "El arroz integral necesita más agua y más tiempo que el blanco (30-40 minutos). Si se queda seco antes de estar tierno, añade un poco de agua caliente.";
 const NOTA_LEG = "Enjuaga bien las legumbres de bote con agua fría: se digieren mejor.";
+const NOTA_CALDO = "No uses caldos ni pastillas de caldo comerciales: casi todos llevan cebolla y ajo. Si usas tinta de calamar o sepia, mira que la etiqueta no lleve cebolla ni ajo.";
+const CALDO_CASERO = "Haz un caldo casero: hierve 15 minutos agua con sal, una hoja de laurel y, si tienes, unas cabezas de gamba o espinas de pescado (si no, usa solo agua). Cuélalo.";
 
 const RECETAS = [
   // ---------------- Desayunos ----------------
@@ -13,9 +15,9 @@ const RECETAS = [
     "Aparta del fuego y deja templar 1 minuto. Añade el whey y mezcla bien: si lo cueces, se apelmaza.",
     "Sírvelo con la fruta troceada y las nueces picadas por encima. Si te gusta, añade canela.",
   ] })],
-  [/^Tostada de espelta con tomate y 2 huevos/, () => ({ tiempo: "10 min", pasos: [
+  [/^Tostada de espelta con tomate y revuelto/, () => ({ tiempo: "10 min", pasos: [
     "Tuesta el pan y ralla el tomate por encima con una pizca de sal y el aceite.",
-    "Bate los huevos con pimienta y cuájalos en una sartén antiadherente a fuego suave, removiendo, hasta que queden jugosos.",
+    "Bate el huevo con las claras y pimienta, y cuájalo en una sartén antiadherente a fuego suave, removiendo, hasta que quede jugoso.",
     "Pon el revuelto sobre la tostada y termina con el queso curado rallado o en lascas.",
   ] })],
   [/^Tostada de espelta con tomate, aceite, jamón/, () => ({ tiempo: "5 min", pasos: [
@@ -29,7 +31,7 @@ const RECETAS = [
     "Termina con las nueces picadas y canela al gusto.",
   ] })],
   [/^Tortitas de avena/, () => ({ tiempo: "15 min", pasos: [
-    "Tritura la avena con la leche sin lactosa, el huevo, el whey y la mitad del plátano hasta tener una masa espesa. Deja reposar 5 minutos.",
+    "Tritura la avena con la leche sin lactosa, las claras, el whey y la mitad del plátano hasta tener una masa espesa. Deja reposar 5 minutos.",
     "Calienta una sartén antiadherente con unas gotas de aceite. Vierte la masa en porciones pequeñas.",
     "Cuando salgan burbujas (unos 2 minutos), dales la vuelta y cocina 1-2 minutos más.",
     "Sírvelas con el resto del plátano en rodajas y la crema de cacahuete. Opcional: canela.",
@@ -46,26 +48,26 @@ const RECETAS = [
     "Cuece 10 minutos a fuego fuerte y después 20-25 minutos a fuego medio-bajo, hasta que el arroz esté tierno y sin caldo.",
     "Tapa con un paño limpio y deja reposar 5 minutos antes de servir.",
   ] })],
-  [/^Paella de marisco/, () => ({ tiempo: "1 h", notas: [NOTA_AJO, NOTA_INTEGRAL], pasos: [
-    "Haz un caldo rápido: hierve las cabezas y cáscaras de las gambas con agua, sal y una hoja de laurel 15 minutos y cuélalo.",
+  [/^Paella de marisco/, () => ({ tiempo: "1 h", notas: [NOTA_AJO, NOTA_INTEGRAL, NOTA_CALDO], pasos: [
+    CALDO_CASERO,
     "En la paella, prepara el aceite de ajo y retira el ajo. Marca las gambas peladas 1 minuto y resérvalas.",
     "Sofríe la sepia y el calamar troceados 5-6 minutos. Añade el tomate rallado y sofríe 3 minutos más. Añade media cucharadita de pimentón dulce y remueve unos segundos.",
     "Añade el caldo caliente (unas 3,5-4 veces el volumen del arroz) con el azafrán. Cuando hierva, reparte el arroz y no remuevas más.",
     "Cuece 10 minutos a fuego fuerte y 20-25 minutos a fuego medio. En los últimos 3 minutos coloca las gambas por encima.",
     "Deja reposar 5 minutos tapada con un paño.",
   ] })],
-  [/^Arròs a banda/, () => ({ tiempo: "1 h", notas: [NOTA_AJO, NOTA_INTEGRAL], pasos: [
-    "Hierve las cabezas de las gambas con agua, sal y laurel 15-20 minutos para hacer el caldo y cuélalo.",
+  [/^Arròs a banda/, () => ({ tiempo: "1 h", notas: [NOTA_AJO, NOTA_INTEGRAL, NOTA_CALDO], pasos: [
+    CALDO_CASERO,
     "En la paella, prepara el aceite de ajo y retira el ajo. Dora la sepia troceada 6-8 minutos.",
     "Añade el tomate rallado y sofríe 3 minutos. Incorpora el arroz y remueve 1 minuto.",
     "Añade el caldo caliente (unas 3,5 veces el volumen del arroz) y el azafrán. Cuece 30-35 minutos, primero fuerte y después a fuego medio.",
     "En los últimos 3 minutos añade las gambas peladas. Reposa 5 minutos. Tradicionalmente lleva alioli; aquí sírvelo con limón.",
   ] })],
-  [/^Arròs negre/, () => ({ tiempo: "55 min", notas: [NOTA_AJO, NOTA_INTEGRAL], pasos: [
+  [/^Arròs negre/, () => ({ tiempo: "55 min", notas: [NOTA_AJO, NOTA_INTEGRAL, NOTA_CALDO], pasos: [
     "En la paella, prepara el aceite de ajo y retira el ajo.",
     "Dora la sepia troceada a fuego medio 8 minutos.",
     "Añade el tomate rallado y sofríe 3 minutos. Incorpora el arroz y remueve 1 minuto.",
-    "Añade agua o caldo de pescado caliente (unas 3,5 veces el volumen del arroz) con la tinta (1-2 sobres) y una hoja de laurel. Prueba de sal.",
+    "Añade agua caliente o caldo casero (unas 3,5 veces el volumen del arroz) con la tinta (1-2 sobres) y una hoja de laurel. Prueba de sal.",
     "Cuece 10 minutos a fuego fuerte y 20-25 minutos a fuego medio, sin remover. Reposa 5 minutos y sirve con limón.",
   ] })],
   [/^Arròs amb bledes/, () => ({ tiempo: "50 min", notas: [NOTA_AJO, NOTA_LEG, NOTA_INTEGRAL], pasos: [
@@ -86,7 +88,7 @@ const RECETAS = [
   [/^Arròs al forn/, () => ({ tiempo: "1 h 15 min", notas: [NOTA_AJO, NOTA_LEG, NOTA_INTEGRAL], pasos: [
     "Precalienta el horno a 200 °C. Prepara un caldo caliente: agua con sal, azafrán y una hoja de laurel.",
     "En una cazuela de barro (o una sartén que luego pasarás a una fuente), prepara el aceite de ajo y retira el ajo.",
-    "Dora la costilla troceada 8-10 minutos. Añade la mitad de la patata en rodajas y dórala 3 minutos.",
+    "Dora la costilla troceada y el magro en dados 8-10 minutos. Añade la mitad de la patata en rodajas y dórala 3 minutos.",
     "Añade la mitad del tomate rallado y sofríe 2 minutos. Añade una cucharadita de pimentón dulce y enseguida los garbanzos y el arroz; remueve 1 minuto.",
     "Vierte el caldo caliente (unas 3 veces el volumen del arroz). Coloca por encima el resto de la patata en rodajas y medio tomate cortado.",
     "Hornea 20 minutos tapado con papel de aluminio y después 20-25 minutos destapado, hasta que el arroz esté hecho y seco por arriba.",
@@ -114,8 +116,8 @@ const RECETAS = [
     "Añade el tomate rallado y sofríe 3 minutos. Incorpora el arroz y remueve 1 minuto.",
     "Añade agua caliente (unas 3,5 veces el volumen del arroz) con el azafrán y sal. Cuece 30-35 minutos sin remover. Reposa 5 minutos.",
   ] })],
-  [/^Fideuà/, (t) => ({ tiempo: "35 min", notas: [NOTA_AJO], pasos: [
-    "Hierve las cabezas y cáscaras de las gambas con agua, sal y laurel 15 minutos para hacer el caldo y cuélalo.",
+  [/^Fideuà/, (t) => ({ tiempo: "35 min", notas: [NOTA_AJO, NOTA_CALDO], pasos: [
+    CALDO_CASERO,
     `En una paella, prepara el aceite de ajo y retira el ajo. Marca las gambas 1 minuto y resérvalas${/sepia/.test(t) ? ". Dora la sepia troceada 5 minutos" : ""}.`,
     "Añade el tomate rallado y sofríe 3 minutos. Vierte el caldo (unas 3 veces el peso de los fideos) con el azafrán.",
     "Cuando hierva, añade los fideos de arroz y cuécelos 4-5 minutos (mira el tiempo del paquete: se hacen rápido).",
@@ -140,11 +142,9 @@ const RECETAS = [
   ] })],
   [/^Potaje de garbanzos/, () => ({ tiempo: "35 min", notas: [NOTA_AJO, NOTA_LEG, NOTA_TAPER], pasos: [
     "Si el bacalao es salado, desálalo 24-36 horas antes en agua fría en la nevera, cambiando el agua 3-4 veces.",
-    "Cuece el huevo 10 minutos, enfríalo y pélalo.",
     "En una olla, prepara el aceite de ajo y retira el ajo. Añade el tomate triturado, una cucharadita de pimentón dulce, el comino y una hoja de laurel y sofríe 3 minutos.",
     "Añade 2 vasos de agua y los garbanzos y cuece 10 minutos.",
-    "Añade las espinacas y el bacalao en trozos y cuece 6-8 minutos más. Prueba de sal.",
-    "Sirve con el huevo duro picado por encima.",
+    "Añade las espinacas y el bacalao en trozos y cuece 6-8 minutos más. Prueba de sal y sirve caliente.",
   ] })],
   [/^Fesols amb bledes/, () => ({ tiempo: "35 min", notas: [NOTA_AJO, NOTA_LEG, NOTA_TAPER], pasos: [
     "Cuece el huevo 10 minutos, enfríalo y pélalo.",
@@ -159,13 +159,18 @@ const RECETAS = [
     "Añade el tomate triturado, una cucharadita de pimentón dulce, la cúrcuma, el comino y una hoja de laurel y sofríe 2 minutos.",
     "Cubre con agua y cuece 20 minutos. Añade los garbanzos y cuece 10 minutos más. Prueba de sal.",
   ] })],
-  [/^Ensalada de (garbanzos|alubias)/, () => ({ tiempo: "15 min", notas: [NOTA_LEG], pasos: [
-    "Si lleva huevo, cuécelo 10 minutos, enfríalo y pélalo.",
-    "Enjuaga la legumbre y escúrrela bien.",
-    "Si lleva pollo, hazlo a la plancha con sal y especias y córtalo en tiras.",
-    "Corta el tomate, el pepino y la lechuga y mézclalo con la legumbre y el resto de ingredientes (pescado escurrido, pollo, huevo o aceitunas, según la receta).",
-    "Aliña con aceite, sal, comino y unas gotas de vinagre o limón.",
-  ] })],
+  [/^Ensalada de (garbanzos|alubias)/, (t, it) => {
+    const has = (c) => it.some(([x]) => x === c);
+    const verd = ["tom", "pep", "lec"].filter(has).map((c) => ({ tom: "el tomate", pep: "el pepino", lec: "la lechuga" }[c]));
+    const resto = [has("atu") && "el atún escurrido", has("pol") && "el pollo en tiras", has("hue") && "el huevo en cuartos", has("oli") && "las aceitunas"].filter(Boolean);
+    return { tiempo: "15 min", notas: [NOTA_LEG], pasos: [
+      ...(has("hue") ? ["Cuece el huevo 10 minutos, enfríalo y pélalo."] : []),
+      "Enjuaga la legumbre y escúrrela bien.",
+      ...(has("pol") ? ["Haz el pollo a la plancha con sal y especias, y córtalo en tiras."] : []),
+      `Corta ${verd.join(", ").replace(/, ([^,]*)$/, " y $1")} y mézclalo con la legumbre${resto.length ? ", " + resto.join(", ").replace(/, ([^,]*)$/, " y $1") : ""}.`,
+      "Aliña con aceite, sal, comino y unas gotas de vinagre o limón.",
+    ] };
+  }],
   [/^Garbanzos salteados con gambas/, () => ({ tiempo: "20 min", notas: [NOTA_AJO, NOTA_LEG], pasos: [
     "En una sartén, prepara el aceite de ajo y retira el ajo.",
     "Saltea el calabacín en dados 5 minutos con sal.",
@@ -179,21 +184,14 @@ const RECETAS = [
     "Sirve con el tomate en rodajas aliñado con orégano.",
   ] })],
   [/^Putxero/, () => ({ tiempo: "1 h 45 min", notas: [NOTA_LEG, NOTA_TAPER], pasos: [
-    "Separa unos 30 g de la ternera, pícala y mézclala con perejil, nuez moscada, sal y una cucharada de pan rallado de espelta humedecido en agua. Forma 2-3 pilotes.",
+    "Separa unos 30 g de la ternera, pícala muy fina y mézclala con perejil, nuez moscada y sal. Forma 2-3 pilotes pequeñas apretando bien.",
     "Pon en una olla el resto de la ternera y el pollo con agua fría, sal y una hoja de laurel. Hierve 60 minutos retirando la espuma.",
     "Añade la patata, la zanahoria, el nabo y la chirivía pelados y en trozos grandes, y las pilotes. Cuece 25 minutos.",
     "Añade los garbanzos y cuece 10 minutos más. Prueba de sal.",
     "Sirve el caldo aparte o junto con las verduras y la carne. El caldo que sobre sirve para la sopa de putxero.",
   ] })],
-  [/^Sopa de putxero/, () => ({ tiempo: "50 min", pasos: [
-    "Si no tienes caldo del putxero, haz uno: hierve el pollo con agua, sal, la zanahoria, la parte verde del puerro y una hoja de laurel 40 minutos.",
-    "Cuece el huevo 10 minutos, enfríalo y pícalo.",
-    "Saca el pollo, desmígalo y devuélvelo al caldo con la zanahoria en trocitos.",
-    "Cuando hierva, añade los fideos de arroz y cuécelos 3-4 minutos. Sirve con el huevo picado.",
-  ] })],
   [/^Pilotes de ternera/, (t) => ({ tiempo: "45 min", notas: [NOTA_AJO, NOTA_TAPER], pasos: [
-    "Remoja el pan en un poco de agua y escúrrelo.",
-    "Mezcla la carne picada con el pan, el huevo, perejil picado, nuez moscada, pimienta negra y sal. Forma bolitas del tamaño de una nuez.",
+    "Mezcla la carne picada con el huevo batido, perejil picado, nuez moscada, pimienta negra y sal. Forma bolitas del tamaño de una nuez, apretando bien.",
     "Dóralas en una cazuela con el aceite de ajo (ya sin el ajo) 4-5 minutos y resérvalas.",
     "En la misma cazuela, cuece el tomate triturado con una hoja de laurel y orégano 10 minutos.",
     "Añade las pilotes y cuece tapado 10-12 minutos a fuego suave.",
@@ -220,12 +218,13 @@ const RECETAS = [
     "Echa la patata en trozos y cuece 10 minutos.",
     `Añade ${[/bajoqueta/.test(t) && "la bajoqueta", /calabacín/.test(t) && "el calabacín", /calabaza/.test(t) && "la calabaza", /zanahoria/.test(t) && "la zanahoria", /acelgas/.test(t) && "las acelgas"].filter(Boolean).join(", ") || "la verdura"} y cuece 8-10 minutos más.`,
     /merluza/.test(t) ? "Añade la merluza en trozos en los últimos 5-6 minutos." : "Comprueba con un cuchillo que la patata está tierna.",
+    ...(/atún/.test(t) ? ["Escurre el atún y repártelo por encima al servir."] : []),
     "Escurre y sirve aliñado con el aceite (puede ser aceite de ajo), sal y limón.",
   ] })],
-  [/^Merluza en salsa verde/, () => ({ tiempo: "35 min", notas: [NOTA_AJO, NOTA_TAPER], pasos: [
+  [/^Merluza en salsa verde/, () => ({ tiempo: "35 min", notas: [NOTA_AJO, NOTA_TAPER, NOTA_CALDO], pasos: [
     "Cuece la patata en rodajas y la bajoqueta en agua con sal 15-18 minutos.",
     "En una cazuela baja, prepara el aceite de ajo y retira el ajo. Añade una cucharadita de harina de espelta o de maíz y remueve 1 minuto.",
-    "Añade medio vaso de agua o caldo de pescado poco a poco, removiendo, y mucho perejil picado.",
+    "Añade medio vaso de agua poco a poco, removiendo, y mucho perejil picado.",
     "Coloca la merluza y cuécela 6-8 minutos moviendo la cazuela para que la salsa ligue. Sirve con la patata y la bajoqueta.",
   ] })],
   [/^Boquerones en vinagre/, () => ({ tiempo: "20 min + marinado", notas: ["Importante: congela los boquerones limpios a -20 °C al menos 5 días antes de marinarlos, para eliminar el anisakis."], pasos: [
@@ -241,14 +240,14 @@ const RECETAS = [
     "Pon el pulpo sobre la patata y aliña con aceite de oliva, sal gruesa y pimentón (dulce, picante o mezcla), como el pulpo a la gallega.",
     "Acompaña con la lechuga y el tomate (si lo lleva) aliñados con sal y unas gotas de vinagre.",
   ] })],
-  [/^Clòtxines.*vapor|^Clòtxines al vapor/, (t) => ({ tiempo: "20 min", notas: ["Si usas carne de mejillón congelada ya cocida, solo tienes que calentarla 2-3 minutos al vapor o en la sartén."], pasos: [
+  [/^(Clòtxines|Mejillones).*vapor/, (t) => ({ tiempo: "20 min", notas: ["Si usas carne de mejillón congelada ya cocida, solo tienes que calentarla 2-3 minutos al vapor o en la sartén."], pasos: [
     "Limpia las clòtxines (mejillones) bajo el grifo y quítales las barbas. Desecha las que estén abiertas o rotas.",
     "Ponlas en una olla con un dedo de agua, una hoja de laurel y unas rodajas de limón. Tapa y cuece a fuego fuerte 4-5 minutos, hasta que se abran. Desecha las que sigan cerradas.",
     /patata/.test(t) ? "Cuece la patata en agua con sal 20 minutos." : "Tuesta el pan.",
     "Prepara la lechuga (y el tomate, si lo lleva) aliñada con aceite, sal y limón.",
     "Sírvelas con limón, pimienta negra y un hilo de aceite.",
   ] })],
-  [/mejillones\) en salsa de tomate|^Clòtxines \(mejillones\) en salsa/, () => ({ tiempo: "25 min", notas: [NOTA_AJO], pasos: [
+  [/^(Mejillones|Clòtxines).*salsa de tomate/, () => ({ tiempo: "25 min", notas: [NOTA_AJO], pasos: [
     "En una sartén, prepara el aceite de ajo y retira el ajo.",
     "Añade el tomate triturado, una hoja de laurel y orégano y cuece 10 minutos.",
     "Añade los mejillones (carne o abiertos al vapor) y cuece 3-4 minutos.",
@@ -348,36 +347,19 @@ const RECETAS = [
     "Sírvelo con el pan tostado.",
   ] })],
   [/^Crema de calabacín/, () => ({ tiempo: "30 min", pasos: [
-    "Cuece el huevo 10 minutos (o escálfalo al final en la crema).",
     "Cuece el calabacín y la patata en trozos con poca agua y sal 15 minutos.",
     "Tritura con el aceite hasta que quede fina. Ajusta de sal y pimienta.",
-    "Sirve con el huevo en trozos y el queso curado rallado por encima.",
+    "Vuelve a poner la crema al fuego suave, casca el huevo encima, tapa y deja que se haga (escalfado) 3-4 minutos.",
+    "Sirve con los taquitos de jamón cocido marcados 1 minuto en la sartén y el queso curado rallado.",
   ] })],
   [/^Crema de calabaza/, () => ({ tiempo: "35 min", pasos: [
-    "Cuece el huevo 10 minutos, enfríalo y pélalo.",
     "Cuece la calabaza, la zanahoria y la patata en trozos con poca agua y sal 20 minutos.",
     "Tritura con el aceite, nuez moscada y una pizca de jengibre y comino.",
-    "Sirve con el huevo duro en trozos y el queso curado rallado.",
+    "Vuelve a poner la crema al fuego suave, casca el huevo encima, tapa y deja que se haga (escalfado) 3-4 minutos.",
+    "Sirve con los taquitos de jamón cocido marcados 1 minuto en la sartén y el queso curado rallado.",
   ] })],
 
   // ---------------- Masas ----------------
-  [/^Coca de espelta/, (t) => ({ tiempo: "35 min", notas: ["Opción rápida: usa una base de pan de espelta abierto en lugar de hacer la masa."], pasos: [
-    "Precalienta el horno a 200 °C.",
-    "Masa: mezcla unos 60 g de harina de espelta, agua templada (unos 35 ml), una cucharadita de aceite, sal y una pizca de levadura. Amasa 5 minutos y deja reposar 15 minutos.",
-    "Estira la masa fina sobre papel de horno.",
-    "Cuece el tomate triturado 5 minutos con orégano para que espese y extiéndelo sobre la masa.",
-    `Reparte por encima ${/sardinas/.test(t) ? "las sardinas" : "el atún desmigado"}${/aceitunas|atún/.test(t) ? " y las aceitunas en rodajas" : ""}.`,
-    "Hornea 12-15 minutos, hasta que los bordes estén dorados.",
-  ] })],
-  [/^Minxos/, () => ({ tiempo: "40 min", notas: [NOTA_AJO], pasos: [
-    "Si el bacalao es salado, desálalo 24-36 horas antes, cambiando el agua 3-4 veces.",
-    "Masa: mezcla unos 60 g de harina de espelta con agua, una cucharadita de aceite y sal hasta tener una masa lisa. Reposa 10 minutos.",
-    "Estírala muy fina y cuécela en una plancha o sartén caliente 1-2 minutos por lado.",
-    "En una sartén, prepara el aceite de ajo y retira el ajo. Saltea las espinacas 2 minutos y añade el bacalao desmigado 3-4 minutos.",
-    "Reparte el relleno sobre la masa y sirve abierto o enrollado.",
-  ] })],
-
-  // ---------------- Ensaladas y platos fríos ----------------
   [/^Tomate aliñado/, () => ({ tiempo: "15 min", pasos: [
     "Cuece el huevo 10 minutos, enfríalo y pélalo.",
     "Corta el tomate maduro en gajos y aliña con sal, aceite y orégano.",
@@ -400,20 +382,15 @@ const RECETAS = [
     "Monta la ensalada con las aceitunas, el huevo en cuartos y el atún (si lo lleva).",
     "Aliña con aceite, sal y vinagre de vino. Sirve con el pan.",
   ] })],
-  [/^Ensalada de pollo/, () => ({ tiempo: "20 min", pasos: [
-    "Haz el pollo a la plancha con sal y pimienta y córtalo en tiras.",
-    "Mezcla la lechuga, las fresas laminadas y el pepino.",
-    "Añade el pollo y las nueces y aliña con aceite, sal y vinagre.",
-  ] })],
   [/^Sardinas en lata.*endibias/, () => ({ tiempo: "10 min", pasos: [
     "Corta el tomate en rodajas y las endibias en hojas o tiras.",
     "Aliña con aceite, sal y orégano.",
     "Pon por encima las sardinas escurridas, enteras o en trozos, y unas gotas de limón.",
   ] })],
-  [/^Sardinas en lata/, () => ({ tiempo: "15 min", pasos: [
-    "Cuece el huevo 10 minutos (o hazlo a la plancha).",
-    "Tuesta el pan y ralla el tomate por encima con una pizca de sal.",
-    "Pon las sardinas escurridas sobre el pan. Sirve con el huevo y el resto del tomate.",
+  [/^Sardinas en lata/, () => ({ tiempo: "10 min", pasos: [
+    "Corta el tomate en rodajas y alíñalo con sal, aceite y orégano.",
+    "Pon encima las sardinas escurridas, enteras o en trozos (la espina se come: aporta calcio).",
+    "Termina con unas gotas de limón y perejil picado.",
   ] })],
   [/^Caldo de putxero/, () => ({ tiempo: "45 min", pasos: [
     "Pon el pollo en una olla con agua fría, sal, una hoja de laurel, la zanahoria, el nabo y la parte verde del puerro. Hierve 35-40 minutos a fuego suave.",
@@ -495,8 +472,26 @@ function genReceta(t, items) {
 function recetaDe(meal, slot) {
   const base = meal.t.replace(/ \+ .* de postre$/, "");
   let r = null;
-  for (const [re, fn] of RECETAS) { if (re.test(base)) { if (fn) r = fn(base); break; } }
+  for (const [re, fn] of RECETAS) { if (re.test(base)) { if (fn) r = fn(base, meal.items); break; } }
   if (!r) r = genReceta(base, meal.items);
+  // Si el plato no lleva huevo, se quitan los pasos y menciones del huevo
+  if (!meal.items.some(([c]) => c === "hue")) {
+    r.pasos = r.pasos
+      .filter((p) => !/^(Cuece|Si lleva huevo, cuécelo|Cuece el huevo|Cuece los huevos)[^.]*huevo/.test(p.trim()))
+      .map((p) => p
+        .replace(/,? (el|y el) huevo( duro)?( en cuartos| picado)?( por encima)?/g, "")
+        .replace(/ Sirve con el huevo duro picado por encima\./, "")
+        .replace(/Sirve con el huevo duro picado por encima\./, "Sirve caliente.")
+        .replace(/Sirve con el huevo y el resto del tomate\./, "Sirve con el resto del tomate.")
+        .replace(/, el huevo en cuartos y las aceitunas/, " y las aceitunas")
+        .replace(/ con el huevo duro\./, ".")
+        .replace(/ \(huevos y claras\)/, ""))
+      .filter((p) => p.trim());
+  }
+  // Ensalada de acompañamiento añadida para llegar a la ración de verdura
+  if (meal.items.some(([c]) => c === "lec") && !r.pasos.some((p) => /lechuga|ensalada/i.test(p))) {
+    r.pasos.push("Acompaña con una ensalada de lechuga (y el tomate, si lleva), aliñada con un poco del aceite del plato, sal y vinagre o limón.");
+  }
   // Si el plato de hoy no lleva pan (por ejemplo, las cenas), se quitan las referencias al pan
   if (!meal.items.some(([c]) => c === "pan")) {
     r.pasos = r.pasos
@@ -514,7 +509,7 @@ function recetaDe(meal, slot) {
       .filter((p) => p.trim());
   }
   const notas = [...(r.notas || [])];
-  if (/de postre$/.test(meal.t)) notas.push("De postre, la fruta cítrica: su vitamina C ayuda a absorber el hierro de la legumbre.");
+  if (/de postre$/.test(meal.t)) notas.push("De postre, una fruta rica en vitamina C: ayuda a absorber el hierro de la legumbre.");
   if (slot === "c" && !notas.includes(NOTA_TAPER)) notas.push(NOTA_TAPER);
   return { titulo: base, tiempo: r.tiempo, pasos: r.pasos, notas };
 }

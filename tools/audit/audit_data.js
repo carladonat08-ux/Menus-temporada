@@ -6,7 +6,7 @@ vm.runInContext(
   fs.readFileSync(root + "plan.js", "utf8").replace(/if \(typeof module[^\n]*\n/, "") + "\n" +
   fs.readFileSync(root + "data.js", "utf8").replace(/if \(typeof module[^\n]*\n/, "") + "\n" +
   fs.readFileSync(root + "recipes.js", "utf8").replace(/if \(typeof module[^\n]*\n/, "") +
-  "\nthis.X={ING,NUT,SEASONS,buildWeek,shopping,seasonOf,recetaDe,famOf,keysOf,tipoOf,isFiesta,LEG,PROT};", ctx);
+  "\nthis.X={ING,NUT,SEASONS,buildWeek,shopping,seasonOf,recetaDe,famOf,keysOf,tipoOf,isFiesta,LEG,PROT,RACION_MAX,RACION_MIN,FRUTA_MES,MES_POR_DEFECTO};", ctx);
 const X = ctx.X;
 const fails = [], warns = [];
 const F = (cat, msg) => fails.push(`[${cat}] ${msg}`);
@@ -50,14 +50,17 @@ const KEYS = X.keysOf;
 const big = (f) => (f === "roja" ? "carne" : f === "azul" ? "pescado" : f);
 const famItems = (items) => X.famOf("x|" + items.filter(([c]) => !["nar", "man", "kiw"].includes(c)).map(([c, g]) => `${c}:${g}`).join(","));
 const stats = { kcalE: [], kcalD: [], kcalDom: [], prot: [], ca: [], fe: [], fib: [], fat: [], carb: [], week: [] };
-for (const k in X.SEASONS) for (let w = 0; w < 4; w++) {
-  const wk = X.buildWeek(k, w);
-  const tag = `${k} S${w + 1}`;
+const MESES_EST = { primavera: [3, 4, 5, 6], verano: [6, 7, 8, 9], otono: [9, 10, 11, 12], invierno: [12, 1, 2, 3] };
+for (const k in X.SEASONS) for (const mo of MESES_EST[k]) for (let w = 0; w < 4; w++) {
+  const wk = X.buildWeek(k, w, { month: mo });
+  const tag = `${k} S${w + 1} (mes ${mo})`;
+  const cuenta = mo === X.MES_POR_DEFECTO[k]; // las estadísticas se calculan una vez por semana
   if (wk.length !== 7) F("semana", `${tag} no tiene 7 días`);
   const cTitles = wk.map((d) => d.meals[2][1].t), nTitles = wk.slice(0, 6).map((d) => d.meals[4][1].t);
   if (new Set(cTitles).size < 7) F("variedad", `${tag}: comida repetida`);
   if (new Set(nTitles).size < 6) F("variedad", `${tag}: cena repetida`);
   const fam = {}, keyC = {}, tipoC = {}, rice = [], dayKeys = [];
+  let eggsW = 0, aovW = 0;
   let hig = 0, legL = 0, wk_k = 0;
   wk.forEach((d, i) => {
     const day = `${tag} ${d.dia}`;
@@ -86,7 +89,7 @@ for (const k in X.SEASONS) for (let w = 0; w < 4; w++) {
       // Grupos distintos
       const fc = famItems(com.items), fn = famItems(cen.items);
       if (big(fc) === big(fn)) F("grupos", `${day}: comida ${fc} y cena ${fn}`);
-      if (com.items.some(([c]) => c === "hue") && X.famOf(cen.t + "|" + cen.items.map(([c, g]) => `${c}:${g}`).join(",")) === "huevo") F("grupos", `${day}: huevo en comida y cena`);
+      if (com.items.some(([c]) => c === "hue") && cen.items.some(([c]) => c === "hue")) F("grupos", `${day}: huevo en comida y cena`);
       fam[fn] = (fam[fn] || 0) + 1;
       const tc = X.tipoOf(com.t + "|" + com.items.map(([c, g]) => `${c}:${g}`).join(",")), tn = X.tipoOf(cen.t + "|x:1");
       if (tc !== "otro" && tc === tn) F("variedad", `${day}: mismo tipo de plato (${tc})`);
@@ -103,7 +106,18 @@ for (const k in X.SEASONS) for (let w = 0; w < 4; w++) {
     const hc = [com, cen].filter((m) => m.items.some(([c]) => c === "hig")).length;
     if (hc > 1) F("hígado", `${day}: hígado en comida y cena`);
     hig += hc;
-    if (com.items.some(([c]) => X.LEG.includes(c))) legL++;
+    if (com.items.some(([c, g]) => ["len", "gar", "alu"].includes(c) && g >= 80)) legL++;
+    // Temporada (Comunitat Valenciana): frutas, verduras y pescado azul de temporada
+    const TEMP = { cbc: "pvo", jud: "pvoi", ber: "vo", tom: "pvoi", pep: "pv", esp: "oip", cza: "oi", chi: "oi", nab: "oi", end: "oi",
+      sar: "pvo", boq: "pvo", bon: "vo" };
+    d.meals.forEach(([l, m]) => m.items.forEach(([c]) => { if (X.FRUTA_MES[c] && !X.FRUTA_MES[c].includes(mo)) F("temporada", `${day} ${l}: ${X.ING[c][0]} fuera de su mes`); }));
+    const est = { primavera: "p", verano: "v", otono: "o", invierno: "i" }[k];
+    d.meals.forEach(([l, m]) => m.items.forEach(([c]) => { if (TEMP[c] && !TEMP[c].includes(est)) F("temporada", `${day} ${l}: ${X.ING[c][0]} fuera de temporada`); }));
+    // Topes de ración
+    d.meals.forEach(([l, m]) => m.items.forEach(([c, g]) => { if (X.RACION_MIN[c] && g < X.RACION_MIN[c]) F("ración", `${day} ${l}: ${X.ING[c][0]} ${g} g (mín. ${X.RACION_MIN[c]})`); }));
+    if (des.items.some(([c]) => c === "hue") && [com, cen].some((m) => m.items.some(([c]) => c === "hue"))) F("huevo", `${day}: huevo en el desayuno y en otra comida`);
+    d.meals.forEach(([l, m]) => m.items.forEach(([c, g]) => { if (X.RACION_MAX[c] && g > X.RACION_MAX[c]) F("ración", `${day} ${l}: ${X.ING[c][0]} ${g} g (máx. ${X.RACION_MAX[c]})`); if (c === "fre" && g > 100) F("tolerancia", `${day}: fresas ${g} g`); }));
+    d.meals.forEach(([, m]) => m.items.forEach(([c, g]) => { if (c === "hue") eggsW += g / 55; if (c === "aov") aovW += g; }));
     // Desayuno y almuerzo
     const FRU = ["fre", "ara", "fra", "kiw", "nar", "man", "pla", "pin", "uva", "mel", "pap"];
     const frs = d.meals.flatMap(([, m]) => m.items.filter(([c]) => FRU.includes(c)).map(([c]) => c));
@@ -130,28 +144,32 @@ for (const k in X.SEASONS) for (let w = 0; w < 4; w++) {
       if (c === "alm" && g > 10) W("tolerancia", `${day} ${l}: ${g} g de almendra (umbral orientativo ~10-12 g)`);
     }));
     // Energía
-    const lim = i === 6 ? 1800 : d.ent ? 1850 : 1700;
+    const lim = i === 6 ? 1750 : d.ent ? 1800 : 1700;
     if (d.kcal > lim + 25) F("energía", `${day}: ${d.kcal} kcal (techo ${lim})`);
-    if (d.kcal < 1350) W("energía", `${day}: solo ${d.kcal} kcal`);
-    if (d.prot < 90) W("proteína", `${day}: ${d.prot} g`);
+    if (d.kcal < 1400) F("energía", `${day}: solo ${d.kcal} kcal`);
+    if (d.prot < 100) F("proteína", `${day}: solo ${d.prot} g de proteína`);
+    else if (d.prot < 103) W("proteína", `${day}: ${d.prot} g`);
+    if (!cuenta) return;
     (i === 6 ? stats.kcalDom : d.ent ? stats.kcalE : stats.kcalD).push(d.kcal);
     stats.prot.push(d.prot); stats.ca.push(d.ca); stats.fe.push(d.fe); stats.fib.push(d.fib); stats.fat.push(d.fat); stats.carb.push(d.carb);
     wk_k += d.kcal;
   });
-  stats.week.push(wk_k / 7);
+  if (cuenta) stats.week.push(wk_k / 7);
   const P = (fam.pescado || 0) + (fam.azul || 0), C = (fam.carne || 0) + (fam.roja || 0);
   if (P < 4 || P > 6) F("reparto", `${tag}: pescado ${P}`);
   if ((fam.azul || 0) < 2) F("reparto", `${tag}: azul ${fam.azul || 0}`);
   if (C < 4 || C > 6) F("reparto", `${tag}: carne ${C}`);
   if ((fam.roja || 0) > 2) F("reparto", `${tag}: carne roja ${fam.roja}`);
   if ((fam.huevo || 0) < 1) F("reparto", `${tag}: huevo ${fam.huevo || 0}`);
-  if (legL < 2) F("reparto", `${tag}: legumbre al mediodía ${legL}`);
+  if (legL < 3) F("mediterránea", `${tag}: legumbre (≥80 g) solo ${legL} días`);
   if (hig > 1) F("hígado", `${tag}: hígado ${hig} veces`);
   Object.entries(keyC).forEach(([x, n]) => { if (n > 2) F("variedad", `${tag}: ${x} ${n} veces`); });
   if (rice.length > 2) F("variedad", `${tag}: arroz ${rice.length} días entre semana`);
   rice.forEach((x, j) => { if (j && x === rice[j - 1] + 1) F("variedad", `${tag}: arroz en días seguidos`); });
   if ((tipoC.tortilla || 0) > 2) F("variedad", `${tag}: ${tipoC.tortilla} tortillas`);
   if ((tipoC.bullit || 0) > 1) F("variedad", `${tag}: ${tipoC.bullit} bullit`);
+  if (eggsW > 7.5) F("mediterránea", `${tag}: ${eggsW.toFixed(1)} huevos a la semana`);
+  if (aovW / 7 < 18) F("mediterránea", `${tag}: solo ${(aovW / 7).toFixed(0)} g de AOVE al día`);
   // Lista de la compra = suma exacta de la semana
   const sh = X.shopping(wk);
   const tot = {}; wk.forEach((d) => d.meals.forEach(([, m]) => m.items.forEach(([c, g]) => { tot[c] = (tot[c] || 0) + g; })));

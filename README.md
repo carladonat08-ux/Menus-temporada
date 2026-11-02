@@ -3,7 +3,7 @@
 Web personal para planificar la comida de la semana. Al elegir una fecha:
 
 - Indica la estación: primavera desde el 20 de marzo, verano desde el 21 de junio, otoño desde el 23 de septiembre e invierno desde el 21 de diciembre.
-- Indica qué semana del mes toca. Las semanas van de lunes a domingo y cada una pertenece al mes de su lunes: el primer lunes del mes empieza la semana 1. Cada estación tiene 4 menús, uno por semana. Si el mes tiene una semana 5, usa el menú 2 para que no se repita con la semana 1 del mes siguiente.
+- Indica qué semana del mes toca. Las semanas van de lunes a domingo y cada una pertenece al mes de su lunes: el primer lunes del mes empieza la semana 1. Las pestañas de semana son las semanas reales del mes, con sus fechas, y cada una toma la estación de su lunes (la última semana de marzo ya sale con el menú de primavera). Cada estación tiene 4 menús, uno por semana. Si el mes tiene una semana 5, usa el menú 2 para que no se repita con la semana 1 del mes siguiente.
 - Muestra el menú de los 7 días: desayuno, media mañana, comida, merienda o pre-entreno y cena, con los gramos de cada ingrediente.
 - Calcula las calorías y la proteína de cada día.
 - Genera la lista de la compra de la semana. Puedes marcar lo que ya tienes y copiar la lista.
@@ -13,18 +13,18 @@ Web personal para planificar la comida de la semana. Al elegir una fecha:
 
 ## Pautas del plan
 
-- Dieta para perder grasa: unas 1.800 kcal los días de entreno y unas 1.650 los de descanso, con un techo diario de 1.850 y 1.700 kcal. Si un menú se pasa, la app recorta los hidratos de la comida y la cena. En los días de descanso, el arroz, la pasta, el pan, la patata y las legumbres de comida y cena bajan un 20 %.
-- Cocina de casa de Ontinyent y la Vall d'Albaida: paella valenciana, arròs al forn, arròs amb fesols i naps, arròs amb bledes, putxero con pilotes, giraboix, borreta, bullit, minxos, figatells, clòtxines, tortilla de bajoqueta… El sofrito va con aceite de ajo, tomate y pimentón (azafrán en los arroces), sin morcilla ni alioli.
+- Dieta para perder grasa (de 67 a 60-62 kg): unas 1.700 kcal los días de entreno, 1.600 los de descanso y 1.500 el domingo (media de unas 1.650 kcal/día). Techo diario de 1.800, 1.700 y 1.750 kcal y suelo de 1.650, 1.550 y 1.500. Si un día se pasa, la app recorta primero los hidratos de la comida y la cena. En los días de descanso, el arroz, la pasta, el pan y la patata de comida y cena bajan un 20 % (las legumbres no, para mantener la ración).
+- Cocina de casa de Ontinyent y la Vall d'Albaida: paella valenciana, arròs al forn, arròs amb fesols i naps, arròs amb bledes, putxero con pilotes, giraboix, borreta, bullit, figatells, clòtxines, tortilla de bajoqueta… El sofrito va con aceite de ajo, tomate y pimentón (azafrán en los arroces), sin morcilla ni alioli.
 - Más de 21 comidas y 21 cenas por estación, y almuerzo a media mañana (yogur o skyr con fruta).
-- Entre semana, comida de diario (legumbres, guisos, arroz caldoso, plancha). Los platos de fiesta (paellas, fideuà, arròs al forn, arròs a banda, arròs negre, putxero) van solo el domingo, uno distinto cada semana, con algo más de margen de calorías ese día. La coca y los minxos, solo en las cenas de viernes a domingo.
-- Platos pequeños: unas 500 kcal como máximo en la comida y 420 en la cena, con al menos 150 g de verdura por plato.
+- Entre semana, comida de diario (legumbres, guisos, arroz caldoso, plancha). Los platos de fiesta (paellas, fideuà, arròs al forn, arròs a banda, arròs negre, putxero) van solo el domingo, uno distinto cada semana, con algo más de margen de calorías ese día.
+- Platos pequeños: unas 550-600 kcal como máximo en la comida, sin contar la fruta de postre (700 el domingo) y 400 en la cena, con al menos 150 g de verdura por plato. Raciones mínimas y máximas por alimento (por ejemplo, 50-80 g de arroz o pasta en crudo y 60-250 g de patata).
 - Cada comida y cena sugiere especias (pimentón, azafrán, romero, comino, cúrcuma, nuez moscada…). Todas las especias están permitidas.
-- Calcio de ~1.000 mg al día (yogur, leche enriquecida, queso curado, sardinas con espina) y hierro de ~16 mg (hígado como máximo 1 vez por semana, moluscos, carne, y legumbres con cítrico de postre).
-- Unos 125-130 g de proteína al día (1,9-2 g/kg), repartidos en tomas de 15-35 g. Si un plato pasa de 33 g, el alimento proteico principal se reduce automáticamente.
+- Calcio de ~1.000 mg al día (yogur, leche enriquecida, queso curado, sardinas con espina) y hierro de ~14 mg (hígado como máximo 1 vez por semana, moluscos, carne, y legumbres con cítrico de postre).
+- Unos 115-120 g de proteína al día (1,7-1,8 g/kg) y nunca menos de 100 g, repartidos en tomas de 15-35 g. Si un plato pasa de 35 g, el alimento proteico principal se reduce; si el día se queda corto, se sube el pescado o la carne de la comida o se añade un skyr.
 - Sin lactosa y sin fructosa en exceso: fuera la manzana, la pera, el mango, la sandía, la miel, los zumos y los polioles (E420, E421, E965, E967).
 - Sin pimiento como verdura, sin cebolla y sin coliflor. Las especias sí, pimentón incluido.
 - Cereales integrales: arroz integral, pasta de arroz integral y pan de espelta de masa madre.
-- Legumbres al menos 2 días por semana, garantizado por el algoritmo.
+- Legumbres al menos 3 días por semana, nunca en días seguidos.
 - Comida y cena nunca repiten proteína ni llevan legumbre las dos el mismo día.
 - Raciones ajustadas a la tolerancia: calabaza japonesa como máximo 150 g, frambuesas 70 g, melón 120 g y garbanzos 150 g.
 - Pensado para un presupuesto ajustado: pescado congelado, legumbres de bote y marcas blancas.
@@ -34,13 +34,13 @@ Es una pauta general y no sustituye a un médico o dietista.
 ## Organización de la dieta
 
 - **Comida y cena de grupos distintos:** si a mediodía hay carne, por la noche hay pescado o huevo, y al revés.
-- **Reparto semanal:** pescado 4-6 veces (al menos 2 de azul), carne 4-6 (roja como máximo 2), huevo 2-4 y legumbre al mediodía 2-4 días.
+- **Reparto semanal:** pescado 4-6 veces (al menos 2 de azul), carne 4-6 (roja como máximo 2), huevo al menos 1 vez (como mucho unos 7 huevos a la semana contando el desayuno) y legumbre al mediodía al menos 3 días.
 - **Variedad:** cada proteína (pollo, cerdo, merluza, sardina…) como mucho 2 veces por semana y nunca en días seguidos. Arroz entre semana como mucho 2 días y no seguidos. Tortillas como mucho 2, bullit 1 y cremas 2. Nunca el mismo tipo de plato en la comida y la cena.
-- **Cenas ligeras:** proteína con verdura, sin arroz, pasta, fideos ni legumbres. Como mucho 100 g de patata o 30 g de pan, y unas 380 kcal. Si la comida lleva huevo, la cena no es de huevo.
+- **Cenas ligeras:** proteína con verdura, sin arroz, pasta, fideos ni legumbres. Como mucho 100 g de patata, sin pan, y unas 380 kcal (400 como máximo). El huevo no se repite en el mismo día: si la comida o la cena lleva huevo, el desayuno cambia a uno sin huevo.
 - **Domingo:** comida de fiesta (paella, fideuà, arròs al forn, arròs negre, putxero…) con una ración generosa. Por la noche no se cena: solo un yogur o unas palomitas caseras.
-- **Desayunos (5, en rotación):** porridge de avena con fruta y nueces; tostada de espelta con tomate y huevos revueltos con queso; tortitas de avena y plátano; tostada con tomate, jamón cocido y queso con café con leche; yogur o skyr con avena, fruta y nueces. Entre 480 y 550 kcal y 26-36 g de proteína. Nunca el mismo desayuno ni tostada dos días seguidos.
+- **Desayunos (5, en rotación):** porridge de avena con fruta y nueces; tostada de espelta con tomate y revuelto de huevo y claras con queso curado; tortitas de avena y plátano; tostada con tomate, jamón cocido y queso con café con leche; yogur o skyr con avena, fruta y nueces. Entre 420 y 600 kcal y al menos 22 g de proteína. Nunca el mismo desayuno ni tostada dos días seguidos.
 - **Un solo cereal o pan al día, el del desayuno:** el almuerzo es yogur o skyr con fruta o con canela y frutos secos (queso con fruta si el desayuno ya fue de yogur); el pre-entreno y la merienda, fruta con queso curado o almendras; la cena no lleva pan.
-- **Fruta:** como mucho 3 piezas al día, una por toma, sin repetir fruta en el día y un solo plátano.
+- **Fruta del mes:** se usa la fruta de temporada de cada mes (fresas de marzo a junio; melón, frambuesas y arándanos en verano; uva de agosto a noviembre; mandarina de octubre a febrero; naranja de noviembre a mayo; kiwi de noviembre a abril; plátano todo el año). Como mucho 3 piezas al día, una por toma, sin repetir fruta en el día y un solo plátano. Los platos con legumbre llevan de postre una fruta rica en vitamina C para absorber mejor el hierro.
 
 ## Cómo editarla
 

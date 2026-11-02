@@ -4,29 +4,29 @@ const ING = {
   pol: ["Pechuga de pollo", "carne", 110, 23, 0],
   mus: ["Muslo de pollo deshuesado sin piel", "carne", 120, 20, 0],
   pav: ["Pechuga de pavo", "carne", 105, 24, 0],
-  ter: ["Ternera magra (filetes o para guisar)", "carne", 130, 21, 0],
-  cos: ["Costilla de cerdo (peso sin hueso)", "carne", 230, 18, 0],
+  ter: ["Ternera magra (pídela picada o en filetes en la carnicería)", "carne", 130, 21, 0],
+  cos: ["Costilla de cerdo (peso sin hueso; con hueso, compra 1,6 veces más)", "carne", 230, 18, 0],
   lom: ["Lomo de cerdo", "carne", 140, 21, 0],
-  jam: ["Jamón cocido extra", "carne", 110, 19, 0],
-  fpv: ["Pavo en lonchas", "carne", 100, 19, 0],
+  jam: ["Jamón cocido extra (sin lactosa ni dextrosa: mira la etiqueta)", "carne", 110, 19, 0],
+  fpv: ["Pavo en lonchas (sin lactosa: mira la etiqueta)", "carne", 100, 19, 0],
   que: ["Queso curado (manchego u oveja)", "lacteos", 400, 25, 0],
   par: ["Parmesano o grana padano", "lacteos", 390, 33, 0],
   moz: ["Mozzarella sin lactosa", "lacteos", 250, 18, 0],
-  mej: ["Mejillones cocidos (carne, congelados)", "pescado", 172, 24, 0],
+  mej: ["Mejillones (carne cocida congelada; o clòtxines con concha, unas 4 veces el peso)", "pescado", 172, 24, 0],
   pul: ["Pulpo cocido", "pescado", 90, 18, 0],
-  jur: ["Jurel", "pescado", 120, 20, 0],
-  boq: ["Boquerones", "pescado", 115, 20, 0],
-  tru: ["Trucha", "pescado", 120, 20, 0],
+  jur: ["Sorell (jurel), limpio", "pescado", 120, 20, 0],
+  boq: ["Boquerones limpios (abiertos, sin espina)", "pescado", 115, 20, 0],
+  tru: ["Trucha (en filetes)", "pescado", 120, 20, 0],
   sca: ["Sardinas en lata con espina (escurridas)", "pescado", 210, 25, 0, ["latas", 85]],
   hig: ["Hígado de pollo", "carne", 120, 17, 0],
-  con: ["Conejo troceado", "carne", 135, 21, 0],
+  con: ["Conejo troceado (peso con hueso)", "carne", 101, 15.8, 0],
   sal: ["Salmón (porciones congeladas)", "pescado", 200, 20, 0],
   mer: ["Merluza (congelada)", "pescado", 75, 16, 0],
   bac: ["Bacalao (lomos congelados)", "pescado", 80, 18, 0],
-  dor: ["Dorada de piscifactoría", "pescado", 100, 20, 0],
-  lub: ["Lubina de piscifactoría", "pescado", 100, 19, 0],
-  sar: ["Sardinas (limpias)", "pescado", 150, 20, 0],
-  cab: ["Caballa", "pescado", 180, 19, 0],
+  dor: ["Dorada de piscifactoría (en lomos)", "pescado", 100, 20, 0],
+  lub: ["Lubina de piscifactoría (en lomos)", "pescado", 100, 19, 0],
+  sar: ["Sardinas limpias (peso con espina)", "pescado", 120, 16, 0],
+  cab: ["Caballa (en lomos)", "pescado", 180, 19, 0],
   bon: ["Bonito (fresco en verano o congelado)", "pescado", 140, 24, 0],
   atu: ["Atún al natural (lata)", "pescado", 110, 25, 0, ["latas", 56]],
   gam: ["Gambas peladas congeladas", "pescado", 85, 19, 0],
@@ -36,7 +36,7 @@ const ING = {
   cla: ["Claras de huevo", "huevos", 50, 11, 0],
   tof: ["Tofu firme", "huevos", 130, 13, 0],
   lsl: ["Leche sin lactosa enriquecida en calcio", "lacteos", 46, 3.3, 0],
-  sky: ["Yogur o skyr sin lactosa (marca blanca)", "lacteos", 63, 11, 0],
+  sky: ["Skyr o yogur proteico sin lactosa", "lacteos", 63, 11, 0],
   arr: ["Arroz integral", "cereal", 350, 7.5, 1],
   qui: ["Quinoa", "cereal", 365, 14, 1],
   pas: ["Pasta de arroz integral", "cereal", 355, 7.5, 1],
@@ -46,15 +46,15 @@ const ING = {
   pan: ["Pan de masa madre de espelta", "cereal", 250, 9, 1],
   grf: ["Garrofó (congelado)", "legumbre", 110, 7, 1],
   avn: ["Copos de avena", "cereal", 375, 13, 0],
-  len: ["Lentejas cocidas (bote, escurridas)", "legumbre", 90, 7, 1],
-  gar: ["Garbanzos cocidos (bote, escurridos)", "legumbre", 120, 7, 1],
-  alu: ["Alubias blancas cocidas (bote, escurridas)", "legumbre", 95, 6.5, 1],
+  len: ["Lentejas cocidas (bote, escurridas)", "legumbre", 90, 7, 0],
+  gar: ["Garbanzos cocidos (bote, escurridos)", "legumbre", 120, 7, 0],
+  alu: ["Alubias blancas cocidas (bote, escurridas)", "legumbre", 95, 6.5, 0],
   pal: ["Maíz para palomitas", "cereal", 375, 11, 0],
   tor: ["Tortitas de arroz", "cereal", 380, 8, 0, ["uds", 9]],
   cbc: ["Calabacín", "verdura", 17, 1.2, 0],
   zan: ["Zanahoria", "verdura", 40, 0.9, 0],
   ber: ["Berenjena", "verdura", 25, 1, 0],
-  jud: ["Judía verde", "verdura", 30, 1.8, 0],
+  jud: ["Judía verde (bajoqueta; en invierno, congelada)", "verdura", 30, 1.8, 0],
   esp: ["Espinacas", "verdura", 23, 2.9, 0],
   tom: ["Tomate", "verdura", 20, 0.9, 0],
   tri: ["Tomate triturado", "verdura", 30, 1.3, 0],
@@ -123,52 +123,50 @@ const SEASONS = {
     name: "Primavera",
     range: "20 de marzo – 20 de junio",
     note: "Cocina de casa: arroces, bullit y tortillas de bajoqueta. Fresas, kiwi y las últimas naranjas.",
-    desFruit: "fre",
-    mmFruits: [["fre", 150], ["kiw", 150], ["nar", 130], ["pin", 150], ["fra", 70], ["kiw", 150], ["fre", 150]],
     comidas: [
       "Paella valenciana de pollo y conejo|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
       "Arròs amb bledes (arroz con acelgas, alubias y bacalao)|arr:60,ace:200,alu:100,bac:80,tom:60,aov:10",
       "Arroz caldoso de pollo y bajoqueta|arr:70,pol:130,jud:120,zan:60,tom:60,aov:10",
       "Arròs negre de sepia|arr:70,sep:180,tom:60,aov:10",
-      "Lentejas con arroz y huevo duro|len:200,arr:30,zan:80,tri:60,hue:110,aov:10",
-      "Potaje de garbanzos con espinacas y bacalao|gar:150,esp:150,bac:120,hue:55,tri:60,aov:10",
-      "Bullit valencià de merluza (patata, bajoqueta, calabacín y huevo)|mer:180,pat:250,jud:120,cbc:120,hue:55,aov:10",
+      "Lentejas con arroz y huevo duro|len:180,arr:50,zan:80,tri:60,hue:55,aov:10",
+      "Potaje de garbanzos con espinacas y bacalao|gar:150,esp:150,bac:120,tri:60,aov:10",
+      "Bullit valencià de merluza (patata, bajoqueta y calabacín)|mer:180,pat:250,jud:120,cbc:120,aov:10",
       "Pollo al horno con patatas y romero|mus:160,pat:250,zan:80,aov:10",
       "Conejo al ajillo (con aceite de ajo) y patatas|con:170,pat:250,jud:80,aov:10",
       "Fideuà de fideos de arroz con gambas y sepia|fid:70,gam:80,sep:100,tom:60,aov:10",
-      "Arròs al forn con costilla, garbanzos y patata (sin morcilla)|arr:65,cos:85,gar:60,pat:60,tom:80,aov:5",
+      "Arròs al forn con costilla, magro de cerdo, garbanzos y patata (sin morcilla)|arr:65,cos:70,lom:60,gar:60,pat:60,tom:80,aov:5",
       "Lomo a la plancha con patatas al horno y ensalada|lom:130,pat:220,lec:60,tom:100,aov:10",
       "Fesols amb bledes (alubias con acelgas y patata)|alu:180,ace:200,pat:100,hue:55,aov:10",
-      "Tortilla de patatas con ensalada valenciana|hue:110,cla:100,pat:200,lec:60,tom:100,oli:20,aov:10",
+      "Tortilla de patatas con ensalada valenciana|hue:55,cla:170,pat:200,lec:60,tom:100,oli:20,aov:10",
       "Dorada al horno con patata y tomate|dor:170,pat:220,tom:120,aov:10",
       "Macarrones integrales con carne picada y tomate|pas:70,ter:110,tri:150,par:10,aov:5",
       "Arroz con conejo y bajoqueta|arr:70,con:140,jud:120,tom:60,aov:10",
-      "Figatells caseros (cerdo e hígado) con patata y ensalada|lom:80,hig:80,pat:200,lec:60,tom:100,aov:10",
+      "Figatells caseros (lomo de cerdo e hígado de pollo) con patata y ensalada|lom:80,hig:80,pat:200,lec:60,tom:100,aov:10",
       "Sepia a la plancha con arroz y ensalada|sep:200,arr:60,lec:60,tom:100,aov:10",
-      "Pavo en salsa de almendras (sin ajo) con arroz|pav:140,arr:60,alm:10,tri:80,aov:10",
-      "Ensalada de garbanzos con atún, huevo y aceitunas|gar:150,atu:56,hue:55,tom:120,lec:40,oli:15,aov:10",
+      "Pavo en salsa de almendras con arroz|pav:140,arr:60,alm:10,tri:80,aov:10",
+      "Ensalada de garbanzos con atún y aceitunas|gar:150,atu:56,tom:120,lec:40,oli:15,aov:10",
     ],
     cenas: [
-      "Tortilla de bajoqueta (judía verde) con tomate|hue:110,cla:70,jud:150,tom:120,aov:10",
+      "Tortilla de bajoqueta (judía verde) con tomate|hue:55,cla:140,jud:150,tom:120,aov:10",
       "Sepia a la plancha con patata y ensalada|sep:200,pat:150,lec:60,tom:100,aov:10",
       "Merluza a la plancha con verdura al vapor|mer:200,pat:120,cbc:150,zan:80,aov:10",
       "Sardinas a la plancha con tomate aliñado|sar:150,tom:150,aov:5",
-      "Ensalada de tomate con atún, huevo duro y aceitunas|tom:200,lec:60,atu:112,hue:55,oli:15,aov:7",
+      "Ensalada de tomate con atún y aceitunas|tom:200,lec:60,atu:112,oli:15,aov:7",
       "Bacalao con espinacas salteadas|bac:160,esp:200,tom:80,aov:7",
-      "Ensalada valenciana con huevo duro, atún y aceitunas|lec:100,tom:150,pep:80,oli:15,hue:55,cla:35,atu:56,aov:7",
+      "Ensalada valenciana con huevo duro, atún y aceitunas|lec:100,tom:150,pep:80,oli:15,hue:55,atu:80,aov:7",
       "Pollo a la plancha con calabacín y patata|pol:150,cbc:200,pat:120,aov:10",
       "Calamares a la plancha con ensalada y patata|cal:200,lec:80,tom:120,pat:120,aov:10",
       "Revuelto de espinacas y gambas|hue:55,cla:100,esp:150,gam:100,aov:5",
       "Boquerones a la plancha con tomate|boq:170,tom:150,lec:60,aov:5",
-      "Bullit de patata, bajoqueta y calabacín con huevo duro|pat:200,jud:150,cbc:150,hue:110,cla:70,aov:10",
+      "Bullit de patata, bajoqueta y calabacín con huevo duro y atún|pat:200,jud:150,cbc:150,hue:55,atu:80,aov:10",
       "Lubina al horno con patata|lub:170,pat:150,tom:100,aov:10",
-      "Tortilla francesa con jamón cocido, tomate|hue:110,jam:60,tom:150,aov:5",
+      "Tortilla francesa con jamón cocido y tomate|hue:55,cla:70,jam:60,tom:150,aov:5",
       "Pavo a la plancha con ensalada valenciana|pav:150,lec:80,tom:120,oli:15,aov:5",
-      "Clòtxines (mejillones) al vapor con limón y patata|mej:140,pat:150,lec:60,aov:5",
-      "Crema de calabacín con queso curado y huevo|cbc:300,pat:60,que:15,hue:55,cla:70,aov:5",
+      "Mejillones al vapor con patata y ensalada|mej:140,pat:150,lec:80,tom:80,aov:5",
+      "Crema de calabacín con huevo poché y taquitos de jamón cocido|cbc:300,pat:60,que:10,hue:55,jam:50,aov:5",
       "Sorell (jurel) a la plancha con patata y tomate|jur:170,pat:120,tom:120,aov:10",
       "Hígado de pollo a la plancha con patata y ensalada|hig:150,pat:150,lec:60,tom:100,aov:10",
-      "Pulpo con patata, ensalada y aceite de oliva|pul:150,pat:200,lec:80,tom:80,aov:10",
+      "Merluza en papillote con patata y ensalada|mer:180,pat:100,lec:80,tom:80,aov:8",
       "Caballa a la plancha con tomate|cab:120,tom:150,aov:5",
     ],
   },
@@ -176,56 +174,54 @@ const SEASONS = {
     name: "Verano",
     range: "21 de junio – 22 de septiembre",
     note: "Arroces de verano, clòtxines, sardinas y tomate de la huerta. Frutos rojos, melón y piña.",
-    desFruit: "fra",
-    mmFruits: [["mel", 120], ["fra", 70], ["ara", 100], ["nar", 130], ["pin", 150], ["fre", 150], ["kiw", 150]],
     comidas: [
       "Paella valenciana de pollo y conejo|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
       "Paella de marisco|arr:70,gam:80,sep:100,cal:60,tom:60,aov:10",
       "Arròs a banda con sepia y gambas (sin alioli)|arr:70,sep:150,gam:60,tom:60,aov:10",
-      "Ensalada de arroz con atún, huevo y tomate|arr:70,atu:112,hue:55,tom:120,pep:100,aov:10",
+      "Ensalada de arroz con atún y tomate|arr:70,atu:112,tom:120,pep:100,aov:10",
       "Clòtxines al vapor con patata y ensalada|mej:150,pat:250,lec:60,tom:100,aov:10",
       "Sardinas a la plancha con patata y tomate aliñado|sar:150,pat:250,tom:150,aov:5",
       "Pollo al limón con arroz y calabacín|pol:150,arr:65,cbc:180,aov:10",
-      "Ensalada de lentejas con atún y tomate|len:200,arr:30,atu:56,tom:120,pep:80,lec:40,aov:10",
+      "Ensalada de lentejas y arroz con atún y tomate|len:200,arr:50,atu:56,tom:120,pep:80,lec:40,aov:10",
       "Fideuà de fideos de arroz con gambas|fid:70,gam:120,tom:60,aov:10",
       "Bonito a la plancha con tomate y patata|bon:140,tom:150,pat:220,aov:10",
-      "Ensalada de garbanzos con huevo, aceitunas y tomate|gar:150,hue:110,tom:150,pep:80,oli:15,aov:10",
+      "Ensalada de garbanzos con huevo, aceitunas y tomate|gar:150,hue:55,tom:150,pep:80,oli:15,aov:10",
       "Conejo a la plancha con patatas y ensalada|con:170,pat:220,lec:60,tom:100,aov:10",
       "Dorada a la plancha con arroz y ensalada|dor:170,arr:60,lec:60,tom:100,aov:10",
       "Arroz con conejo y bajoqueta|arr:70,con:140,jud:120,tom:60,aov:10",
       "Macarrones integrales fríos con atún, tomate y mozzarella|pas:70,atu:56,moz:50,tom:150,aov:5",
       "Boquerones en vinagre (sin ajo) con ensalada de patata|boq:160,pat:250,tom:100,pep:80,aov:10",
       "Lomo a la plancha con ensalada de patata y bajoqueta|lom:130,pat:220,jud:120,aov:10",
-      "Figatells caseros (cerdo e hígado) con tomate y patata|lom:80,hig:80,pat:200,tom:150,aov:10",
+      "Figatells caseros (lomo de cerdo e hígado de pollo) con tomate y patata|lom:80,hig:80,pat:200,tom:150,aov:10",
       "Arroz de verduras de temporada con sepia|arr:70,sep:150,ber:100,cbc:100,tom:60,aov:10",
-      "Ensalada de alubias con bonito y tomate|alu:200,bon:100,tom:150,pep:80,aov:10",
+      "Ensalada de alubias con atún y tomate|alu:200,atu:112,tom:150,pep:80,aov:10",
       "Calamares a la plancha con arroz y tomate|cal:200,arr:65,tom:120,aov:10",
       "Ensalada de garbanzos con pollo, pepino y tomate|gar:150,pol:100,pep:100,tom:120,lec:40,aov:10",
       "Garbanzos salteados con gambas y calabacín|gar:150,gam:100,cbc:150,tom:60,aov:10",
     ],
     cenas: [
-      "Tomate aliñado (tomaca amb oli i sal) con atún, huevo|tom:250,atu:112,hue:55,aov:10",
+      "Tomate aliñado (tomaca amb oli i sal) con atún|tom:250,atu:112,aov:10",
       "Clòtxines al vapor con ensalada|mej:140,lec:80,tom:120,aov:5",
       "Sardinas a la plancha con ensalada|sar:150,lec:80,tom:120,aov:5",
-      "Tortilla de calabacín con ensalada|hue:110,cla:70,cbc:200,lec:60,tom:80,aov:5",
-      "Ensalada de tomate con atún, huevo duro y aceitunas|tom:200,lec:60,atu:112,hue:55,oli:15,aov:7",
+      "Tortilla de calabacín con ensalada|hue:55,cla:140,cbc:200,lec:60,tom:80,aov:5",
+      "Ensalada de tomate con atún y aceitunas|tom:200,lec:60,atu:112,oli:15,aov:7",
       "Calamares a la plancha con ensalada valenciana|cal:200,lec:80,tom:120,oli:15,pat:100,aov:5",
       "Merluza a la plancha con calabacín y tomate|mer:200,cbc:200,tom:100,pat:100,aov:10",
-      "Ensalada caprese con jamón cocido|moz:80,tom:200,jam:60,aov:5",
+      "Pechuga de pavo a la plancha con ensalada de tomate|pav:140,tom:200,lec:60,aov:8",
       "Pollo a la plancha con ensalada de pepino y tomate|pol:140,pep:120,tom:150,aov:10",
       "Sorell (jurel) a la plancha con patata y tomate|jur:170,pat:120,tom:120,aov:10",
       "Gambas a la plancha con ensalada|gam:150,lec:80,tom:120,aov:10",
-      "Ensalada valenciana con huevo duro y aceitunas|lec:100,tom:150,pep:80,oli:20,hue:110,cla:70,aov:10",
+      "Ensalada valenciana con huevo duro y aceitunas|lec:100,tom:150,pep:80,oli:20,hue:110,aov:10",
       "Boquerones al horno con limón y ensalada|boq:170,lec:80,tom:120,aov:5",
       "Revuelto de calabacín y gambas|hue:55,cla:100,cbc:150,gam:100,aov:5",
       "Pavo a la plancha con berenjena asada|pav:150,ber:200,aov:10",
       "Caballa a la plancha con tomate y patata|cab:120,tom:150,pat:120,aov:5",
       "Bullit de patata y bajoqueta con merluza|mer:150,pat:180,jud:150,aov:10",
       "Hígado de pollo a la plancha con tomate|hig:150,tom:150,lec:60,aov:10",
-      "Pulpo con patata, ensalada y aceite de oliva|pul:150,pat:200,lec:80,tom:80,aov:10",
-      "Tortilla francesa con queso curado y tomate|hue:110,cla:70,que:20,tom:150,aov:5",
+      "Merluza en papillote con patata y ensalada|mer:180,pat:100,lec:80,tom:80,aov:8",
+      "Tortilla francesa con queso curado y tomate|hue:55,cla:140,que:20,tom:150,aov:5",
       "Lubina a la plancha con tomate y patata|lub:170,tom:150,lec:60,pat:120,aov:10",
-      "Tortilla de bajoqueta (judía verde) con tomate|hue:110,cla:70,jud:150,tom:120,aov:7",
+      "Tortilla de bajoqueta (judía verde) con tomate|hue:55,cla:140,jud:150,tom:120,aov:7",
       "Brocheta de pollo con calabacín y tomate a la plancha|pol:140,cbc:200,tom:100,aov:7",
     ],
   },
@@ -233,43 +229,41 @@ const SEASONS = {
     name: "Otoño",
     range: "23 de septiembre – 20 de diciembre",
     note: "Arròs al forn, arroces con legumbre, figatells y calabaza. Mandarinas, uva y kiwi.",
-    desFruit: "uva",
-    mmFruits: [["man", 150], ["uva", 100], ["kiw", 150], ["pla", 100], ["nar", 130], ["man", 150], ["kiw", 150]],
     comidas: [
-      "Arròs al forn con costilla, garbanzos y patata (sin morcilla)|arr:65,cos:85,gar:60,pat:60,tom:80,aov:5",
+      "Arròs al forn con costilla, magro de cerdo, garbanzos y patata (sin morcilla)|arr:65,cos:70,lom:60,gar:60,pat:60,tom:80,aov:5",
       "Paella valenciana de pollo y conejo|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
       "Arròs amb fesols i naps (arroz con alubias, nabo y costilla)|arr:60,alu:100,nab:120,cos:80,ace:80,aov:5",
       "Arròs amb bledes (arroz con acelgas, alubias y bacalao)|arr:60,ace:200,alu:100,bac:80,tom:60,aov:10",
-      "Lentejas con arroz y huevo duro|len:200,arr:30,zan:80,tri:60,hue:110,aov:10",
-      "Potaje de garbanzos con espinacas y bacalao|gar:150,esp:150,bac:120,hue:55,tri:60,aov:10",
+      "Lentejas con arroz y huevo duro|len:180,arr:50,zan:80,tri:60,hue:55,aov:10",
+      "Potaje de garbanzos con espinacas y bacalao|gar:150,esp:150,bac:120,tri:60,aov:10",
       "Arroz caldoso de pollo y calabaza|arr:70,pol:130,cza:120,jud:80,aov:10",
       "Pollo al horno con patatas y calabaza|mus:160,pat:200,cza:120,aov:10",
       "Conejo al ajillo (con aceite de ajo) y patatas|con:170,pat:250,jud:80,aov:10",
       "Arròs negre de sepia|arr:70,sep:180,tom:60,aov:10",
-      "Bullit valencià de merluza (patata, bajoqueta, calabacín y huevo)|mer:180,pat:250,jud:120,cbc:120,hue:55,aov:10",
-      "Pilotes de ternera en salsa de tomate con arroz|ter:120,pan:15,hue:30,tri:150,arr:60,aov:10",
+      "Bullit valencià de merluza (patata, bajoqueta y calabacín)|mer:180,pat:250,jud:120,cbc:120,aov:10",
+      "Pilotes de ternera en salsa de tomate con arroz|ter:120,hue:30,tri:100,arr:60,aov:10",
       "Macarrones integrales con carne picada y tomate|pas:70,ter:110,tri:150,par:10,aov:5",
       "Fideuà de fideos de arroz con gambas y sepia|fid:70,gam:80,sep:100,tom:60,aov:10",
       "Caballa al horno con patatas y bajoqueta|cab:130,pat:250,jud:120,aov:5",
-      "Figatells caseros (cerdo e hígado) con puré de calabaza|lom:80,hig:80,cza:150,pat:150,aov:10",
+      "Figatells caseros (lomo de cerdo e hígado de pollo) con puré de calabaza|lom:80,hig:80,cza:150,pat:150,aov:10",
       "Lomo a la plancha con patatas al horno y ensalada|lom:130,pat:220,lec:60,tom:100,aov:10",
       "Fesols amb bledes (alubias con acelgas y patata)|alu:180,ace:200,pat:100,hue:55,aov:10",
       "Arroz con conejo y bajoqueta|arr:70,con:140,jud:120,tom:60,aov:10",
       "Dorada al horno con patata y tomate|dor:170,pat:220,tom:120,aov:10",
-      "Pavo en salsa de almendras (sin ajo) con arroz|pav:140,arr:60,alm:10,tri:80,aov:10",
+      "Pavo en salsa de almendras con arroz|pav:140,arr:60,alm:10,tri:80,aov:10",
     ],
     cenas: [
-      "Tortilla de patata (sin cebolla) con ensalada|hue:110,cla:70,pat:150,lec:60,tom:80,aov:10",
-      "Crema de calabaza con queso curado y huevo|cza:150,zan:120,pat:60,que:15,hue:55,cla:70,aov:5",
+      "Tortilla de patata (sin cebolla) con ensalada|hue:55,cla:140,pat:150,lec:60,tom:80,aov:10",
+      "Crema de calabaza con huevo poché y taquitos de jamón cocido|cza:150,zan:120,pat:60,que:10,hue:55,jam:50,aov:5",
       "Bacalao con espinacas salteadas|bac:160,esp:200,tom:80,aov:7",
       "Sepia a la plancha con patata y ensalada|sep:200,pat:150,lec:60,tom:100,aov:10",
       "Merluza al horno con calabacín y patata|mer:200,cbc:200,pat:120,aov:10",
-      "Sardinas en lata con espina y tomate|sca:85,tom:150,hue:55",
+      "Sardinas en lata con espina y tomate|sca:85,tom:150",
       "Pollo a la plancha con acelgas y patata|pol:150,ace:200,pat:100,aov:10",
-      "Bullit de patata, bajoqueta y calabaza con huevo|pat:180,jud:150,cza:100,hue:110,cla:70,aov:10",
+      "Bullit de patata, bajoqueta y calabaza con merluza|pat:180,jud:150,cza:100,mer:150,aov:10",
       "Boquerones al horno con patata y espinacas|boq:170,pat:150,esp:150,aov:5",
-      "Tortilla de espinacas con queso curado|hue:110,cla:70,esp:150,que:20,aov:5",
-      "Clòtxines (mejillones) en salsa de tomate|mej:140,tri:100,aov:5",
+      "Tortilla de espinacas con queso curado|hue:55,cla:140,esp:150,que:20,aov:5",
+      "Mejillones en salsa de tomate|mej:140,tri:100,aov:5",
       "Lubina al horno con patata|lub:170,pat:150,tom:100,aov:10",
       "Pavo a la plancha con calabaza asada|pav:150,cza:150,pat:80,aov:10",
       "Calamares a la plancha con espinacas salteadas|cal:180,esp:200,aov:7",
@@ -277,8 +271,8 @@ const SEASONS = {
       "Revuelto de espinacas y gambas|hue:55,cla:100,esp:150,gam:100,aov:5",
       "Sorell (jurel) al horno con patata|jur:170,pat:150,tom:100,aov:5",
       "Hígado de pollo a la plancha con puré de calabaza|hig:150,cza:150,pat:100,aov:10",
-      "Pulpo con patata, ensalada y aceite de oliva|pul:150,pat:200,lec:80,tom:80,aov:10",
-      "Tortilla francesa con jamón cocido, tomate|hue:110,jam:60,tom:150,aov:5",
+      "Merluza en papillote con patata y ensalada|mer:180,pat:100,lec:80,tom:80,aov:8",
+      "Tortilla francesa con jamón cocido y tomate|hue:55,cla:70,jam:60,tom:150,aov:5",
       "Trucha a la plancha con acelgas y patata|tru:170,ace:200,pat:100,aov:5",
     ],
   },
@@ -286,52 +280,50 @@ const SEASONS = {
     name: "Invierno",
     range: "21 de diciembre – 19 de marzo",
     note: "Olleta y putxero con pilotes, arròs al forn, giraboix y platos de cuchara. Naranjas, mandarinas y kiwi.",
-    desFruit: "kiw",
-    mmFruits: [["nar", 130], ["man", 150], ["kiw", 150], ["pin", 150], ["nar", 130], ["kiw", 150], ["man", 150]],
     comidas: [
-      "Putxero valenciano con pilotes (garbanzos, pollo, ternera, patata, zanahoria, nabo y chirivía)|gar:120,pol:70,ter:50,pat:120,zan:80,nab:80,chi:60,aov:5",
-      "Arròs al forn con costilla, garbanzos y patata (sin morcilla)|arr:65,cos:85,gar:60,pat:60,tom:80,aov:5",
+      "Putxero valenciano con pilotes de ternera (garbanzos, pollo, ternera, patata y verduras)|gar:120,pol:70,ter:50,pat:120,zan:80,nab:80,chi:60,aov:5",
+      "Arròs al forn con costilla, magro de cerdo, garbanzos y patata (sin morcilla)|arr:65,cos:70,lom:60,gar:60,pat:60,tom:80,aov:5",
       "Arròs amb fesols i naps (arroz con alubias, nabo y costilla)|arr:60,alu:100,nab:120,cos:80,ace:80,aov:5",
       "Arròs amb bledes (arroz con acelgas, alubias y bacalao)|arr:60,ace:200,alu:100,bac:80,tom:60,aov:10",
-      "Lentejas con arroz y huevo duro|len:200,arr:30,zan:80,tri:60,hue:110,aov:10",
-      "Potaje de garbanzos con espinacas y bacalao|gar:150,esp:150,bac:120,hue:55,tri:60,aov:10",
+      "Lentejas con arroz y huevo duro|len:180,arr:50,zan:80,tri:60,hue:55,aov:10",
+      "Potaje de garbanzos con espinacas y bacalao|gar:150,esp:150,bac:120,tri:60,aov:10",
       "Giraboix (bacalao, patata, bajoqueta y huevo; sin alioli)|bac:150,pat:250,jud:150,hue:55,aov:10",
       "Arroz caldoso de pollo y acelgas|arr:70,pol:130,ace:150,zan:60,aov:10",
       "Pollo al horno con patatas y chirivía|mus:160,pat:200,chi:75,aov:10",
       "Conejo guisado con patata y zanahoria|con:170,pat:220,zan:100,tri:60,aov:10",
       "Fesols amb bledes (alubias con acelgas y patata)|alu:180,ace:200,pat:100,hue:55,aov:10",
-      "Pilotes de ternera en salsa de tomate con patata|ter:120,pan:15,hue:30,tri:150,pat:200,aov:10",
+      "Pilotes de ternera en salsa de tomate con patata|ter:120,hue:30,tri:100,pat:200,aov:10",
       "Arròs negre de sepia|arr:70,sep:180,tom:60,aov:10",
       "Macarrones integrales con atún, tomate y parmesano|pas:70,atu:112,tri:150,par:10,aov:5",
       "Borreta (patata, espinacas, bacalao y huevo)|pat:250,esp:200,bac:150,hue:55,aov:10",
-      "Figatells caseros (cerdo e hígado) con patata y acelgas|lom:80,hig:80,pat:200,ace:150,aov:10",
-      "Merluza en salsa verde (perejil) con patata|mer:200,pat:250,jud:80,aov:10",
+      "Figatells caseros (lomo de cerdo e hígado de pollo) con patata y acelgas|lom:80,hig:80,pat:200,ace:150,aov:10",
+      "Merluza en salsa verde con patata y bajoqueta|mer:200,pat:250,jud:80,aov:10",
       "Lomo con puré de patata y espinacas|lom:130,pat:250,esp:150,aov:10",
       "Garbanzos guisados con pollo y zanahoria|gar:150,mus:130,zan:100,pat:80,tri:60,aov:10",
       "Paella valenciana de pollo y conejo|arr:70,pol:80,con:70,jud:100,grf:30,tom:60,aov:10",
       "Caballa al horno con patata y nabo|cab:130,pat:220,nab:100,aov:5",
     ],
     cenas: [
-      "Crema de calabaza con huevo y queso curado|cza:150,zan:120,pat:60,que:15,hue:55,cla:70,aov:5",
+      "Crema de calabaza con huevo poché y taquitos de jamón cocido|cza:150,zan:120,pat:60,que:10,hue:55,jam:50,aov:5",
       "Caldo de putxero con pollo, verduras y huevo|pol:100,hue:55,zan:100,nab:80,pue:40,aov:5",
-      "Tortilla de espinacas con queso curado|hue:110,cla:70,esp:150,que:20,aov:5",
+      "Tortilla de espinacas con queso curado|hue:55,cla:140,esp:150,que:20,aov:5",
       "Merluza a la plancha con acelgas y patata|mer:200,ace:200,pat:120,aov:10",
       "Bacalao con espinacas salteadas|bac:160,esp:200,tom:80,aov:7",
       "Sepia a la plancha con patata y endibias|sep:200,pat:150,end:120,aov:10",
       "Pollo a la plancha con calabaza asada|pol:150,cza:150,pat:80,aov:10",
-      "Sardinas en lata con espina con tomate|sca:85,tom:120,hue:55",
-      "Tortilla de patata (sin cebolla) con ensalada|hue:110,cla:70,pat:150,lec:60,tom:80,aov:10",
-      "Boquerones al horno con patata y espinacas|boq:170,pat:150,esp:150,aov:5",
-      "Bullit de patata, zanahoria y acelgas con huevo duro|pat:180,zan:100,ace:150,hue:110,cla:70,aov:10",
-      "Clòtxines (mejillones) en salsa de tomate|mej:140,tri:100,aov:5",
+      "Sardinas en lata con espina y tomate|sca:85,tom:120",
+      "Tortilla de patata (sin cebolla) con ensalada|hue:55,cla:140,pat:150,lec:60,tom:80,aov:10",
+      "Salmón al horno con patata y espinacas|sal:130,pat:150,esp:150,aov:5",
+      "Bullit de patata, zanahoria y acelgas con huevo duro y atún|pat:180,zan:100,ace:150,hue:55,atu:80,aov:10",
+      "Mejillones en salsa de tomate|mej:140,tri:100,aov:5",
       "Lubina al horno con patata y nabo|lub:170,pat:120,nab:100,aov:10",
       "Pavo a la plancha con endibias|pav:150,end:120,aov:10",
       "Revuelto de espinacas y gambas|hue:55,cla:100,esp:150,gam:100,aov:5",
       "Hígado de pollo a la plancha con patata y endibias|hig:150,pat:150,end:100,aov:10",
       "Calamares a la plancha con acelgas rehogadas|cal:180,ace:200,aov:7",
       "Sorell (jurel) al horno con patata|jur:170,pat:150,tom:80,aov:5",
-      "Pulpo con patata, ensalada y aceite de oliva|pul:150,pat:200,lec:80,tom:80,aov:10",
-      "Tortilla francesa con jamón cocido, tomate|hue:110,jam:60,tom:150,aov:5",
+      "Merluza en papillote con patata y ensalada|mer:180,pat:100,lec:80,tom:80,aov:8",
+      "Tortilla francesa con jamón cocido y tomate|hue:55,cla:70,jam:60,tom:150,aov:5",
       "Trucha al horno con calabaza y patata|tru:170,cza:120,pat:80,aov:5",
     ],
   },
@@ -340,8 +332,8 @@ const SEASONS = {
 // Desayunos (la fruta del A cambia según estación)
 const DESAYUNOS = {
   A: { t: "Porridge de avena con leche, whey, fruta y nueces", base: "avn:60,lsl:200,whe:15,nue:15", fruta: true },
-  B: { t: "Tostada de espelta con tomate y 2 huevos revueltos con queso curado", base: "pan:70,tom:60,aov:7,hue:110,que:20" },
-  C: { t: "Tortitas de avena y plátano con crema de cacahuete", base: "avn:50,lsl:150,hue:55,whe:15,pla:80,cac:15" },
+  B: { t: "Tostada de espelta con tomate y revuelto de huevo y claras con queso curado", base: "pan:70,tom:60,aov:7,hue:55,cla:100,que:20" },
+  C: { t: "Tortitas de avena y plátano con crema de cacahuete", base: "avn:50,lsl:150,cla:70,whe:15,pla:80,cac:15" },
   D: { t: "Tostada de espelta con tomate, aceite, jamón cocido y queso, y café con leche", base: "pan:70,tom:60,aov:7,jam:70,que:15,lsl:200" },
   E: { t: "Yogur o skyr con copos de avena, fruta y nueces", base: "sky:200,avn:50,nue:15", fruta: true },
 };
@@ -351,9 +343,17 @@ const DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "
 const ENTRENO_DEF = [true, true, false, true, true, false, false];
 const REST_FACTOR = 0.8; // hidratos de comida y cena en días de descanso
 // Objetivo de pérdida de peso: techo diario de energía
-const KCAL_MAX_ENT = 1850, KCAL_MAX_DES = 1700, KCAL_MAX_DOM = 1800;
-const AOV_FACTOR = 0.7; // aceite de comida y cena: 10 g -> 7 g, 5 g -> 4 g
-const CITRICO = { primavera: "kiw", verano: "kiw", otono: "man", invierno: "nar" };
+const KCAL_MAX_ENT = 1800, KCAL_MAX_DES = 1700, KCAL_MAX_DOM = 1750;
+const KCAL_MIN_ENT = 1650, KCAL_MIN_DES = 1550, KCAL_MIN_DOM = 1500, PROT_MIN = 107; // suelos: 1,6 g/kg con 67 kg
+const AOV_FACTOR = 1; // aceite de comida y cena tal cual (la dieta mediterránea pide 20-30 g de AOVE al día)
+// Fruta de temporada por mes (Comunitat Valenciana). La fruta se elige según el mes de cada semana.
+const FRUTA_MES = { fre: [3, 4, 5, 6], kiw: [11, 12, 1, 2, 3, 4], nar: [11, 12, 1, 2, 3, 4, 5], man: [10, 11, 12, 1, 2], uva: [8, 9, 10, 11],
+  mel: [6, 7, 8, 9], fra: [6, 7, 8, 9], ara: [6, 7, 8, 9], pla: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] };
+const FRUTA_G = { fre: 100, kiw: 100, nar: 130, man: 100, uva: 100, mel: 120, fra: 70, ara: 100, pla: 100 };
+const FRUTA_ORDEN = ["fre", "kiw", "nar", "man", "uva", "mel", "fra", "ara", "pla"];
+const MES_POR_DEFECTO = { primavera: 4, verano: 7, otono: 11, invierno: 1 };
+// Postre de los días con legumbre: fruta rica en vitamina C (ayuda a absorber el hierro)
+const POSTRE_VITC = ["nar", "man", "kiw", "fre", "mel"];
 
 function parse(s) {
   return s.split(",").map((p) => { const [c, g] = p.split(":"); return [c, +g]; });
@@ -391,18 +391,21 @@ function capProt(o) {
 }
 
 // Platos pequeños y con verdura: techo de energía por plato y mínimo de verdura
-const MEAL_KCAL = { c: 620, n: 380, f: 720 }; // f: comida del domingo (día de juntarse; ese día no se cena)
+const MEAL_KCAL = { c: 600, n: 380, f: 700 }; // f: comida del domingo (día de juntarse; ese día no se cena)
 const VEG_MIN = 150;
 function kcalOf(items) { return items.reduce((a, [c, g]) => a + ING[c][2] * g / 100, 0); }
 function normalize(o, slot) {
   let items = o.items.map((x) => x.slice());
   let t = o.t;
   // 1) verdura mínima
-  const veg = items.filter(([c]) => ING[c][1] === "verdura");
-  const vg = veg.reduce((a, [, g]) => a + g, 0);
-  if (vg < VEG_MIN) {
-    if (vg > 0) items = items.map(([c, g]) => [c, ING[c][1] === "verdura" ? Math.round(g * VEG_MIN / vg / 10) * 10 : g]);
-    else { items.push(["lec", 70], ["tom", 80]); t += " y ensalada"; }
+  // (el tomate y el tomate triturado del sofrito no cuentan ni se aumentan)
+  const isVeg = (c) => ING[c][1] === "verdura" && c !== "tom" && c !== "tri";
+  const vg = items.filter(([c]) => isVeg(c)).reduce((a, [, g]) => a + g, 0);
+  const tomG = items.filter(([c]) => c === "tom").reduce((a, [, g]) => a + g, 0);
+  if (vg + tomG < VEG_MIN) {
+    if (vg > 0) items = items.map(([c, g]) => [c, isVeg(c) ? Math.round(g * Math.min(2, (VEG_MIN - tomG) / vg) / 10) * 10 : g]);
+    else if (!/ensalada/i.test(t)) { items.push(["lec", 80]); t += " y ensalada"; }
+    else items.push(["lec", 80]);
   }
   // Cena ligera: como mucho 100 g de patata y 30 g de pan
   if (slot === "n") items = items.filter(([c]) => c !== "pan").map(([c, g]) => [c, c === "pat" ? Math.min(g, 100) : g]);
@@ -418,15 +421,15 @@ function normalize(o, slot) {
       if (pk) { const f = Math.max(0.8, 1 - (k - cap) / pk); items = items.map(([c, g]) => [c, PROT.includes(c) && !ING[c][5] ? Math.round(g * f / 5) * 5 : g]); }
     }
   }
-  // Comida de diario: es la comida principal; si queda pequeña, sube hasta ~590 kcal (máx. +30 %)
+  // Comida de diario: es la comida principal; si queda pequeña, sube hasta ~550 kcal (máx. +20 %)
   if (slot === "c") {
     const kk = kcalOf(items);
-    if (kk < 590) { const up = Math.min(1.3, 590 / kk); items = items.map(([c, g]) => [c, ING[c][1] === "verdura" || ING[c][4] || PROT.includes(c) ? Math.round(g * up / 5) * 5 : g]); }
+    if (kk < 550) { const up = Math.min(1.2, 550 / kk); items = items.map(([c, g]) => [c, (ING[c][1] === "verdura" && c !== "tom" && c !== "tri") || ING[c][4] || PROT.includes(c) || LEG.includes(c) ? Math.round(g * up / 5) * 5 : g]); }
   }
-  // Comida del domingo (sin cena después): ración generosa, hasta ~700 kcal
+  // Comida del domingo (sin cena después): ración generosa, hasta ~650 kcal
   if (slot === "f") {
     const kk = kcalOf(items);
-    if (kk < 700) { const up = Math.min(1.35, 700 / kk); items = items.map(([c, g]) => [c, Math.round(g * up / 5) * 5]); }
+    if (kk < 650) { const up = Math.min(1.3, 650 / kk); items = items.map(([c, g]) => [c, ["tom", "tri", "aov"].includes(c) ? g : Math.round(g * up / 5) * 5]); }
   }
   return { ...o, t, items };
 }
@@ -470,7 +473,7 @@ function famOf(str) {
 // Alimento proteico principal (para no repetirlo más de 2 veces por semana)
 const KEY = { pol: "pollo", mus: "pollo", pav: "pavo", con: "conejo", ter: "ternera", lom: "cerdo", cos: "cerdo", hig: "hígado", jam: "jamón",
   sar: "sardina", sca: "sardina", atu: "atún", bon: "atún", mer: "merluza", bac: "bacalao", dor: "dorada", lub: "lubina", tru: "trucha",
-  cab: "caballa", jur: "jurel", boq: "boquerón", sal: "salmón", gam: "gamba", cal: "calamar", sep: "sepia", mej: "mejillón", pul: "pulpo", hue: "huevo", tof: "tofu" };
+  cab: "caballa", jur: "jurel", len: "lentejas", gar: "garbanzos", alu: "alubias", boq: "boquerón", sal: "salmón", gam: "gamba", cal: "calamar", sep: "sepia", mej: "mejillón", pul: "pulpo", hue: "huevo", tof: "tofu" };
 function keysOf(str) { return [...new Set(parse(str.split("|")[1]).filter(([c]) => KEY[c] && c !== "hue").map(([c]) => KEY[c]))]; }
 function mainKey(str) {
   const it = parse(str.split("|")[1]).filter(([c]) => KEY[c] && c !== "hue");
@@ -491,7 +494,14 @@ function tipoOf(str) {
 }
 const TIPO_MAX = { tortilla: 2, bullit: 1, crema: 2, ensalada: 3, arroz: 2, pasta: 1 };
 const isFiesta = (str) => /^(Paella|Fideuà|Arròs al forn|Arròs a banda|Arròs negre|Putxero)/.test(str);
-const isCenaFinde = (str) => /^(Coca|Minxos)/.test(str);
+
+// Topes de ración por toma (g en crudo): tolerancia digestiva y platos de tamaño normal
+const RACION_MIN = { arr: 50, pas: 50, fid: 50, pat: 60 }; // por debajo no es una ración que se pueda cocinar
+const RACION_MAX = { tri: 100, tom: 150, gar: 150, len: 200, alu: 200, grf: 50, cza: 150, chi: 100, pat: 250, arr: 80, pas: 80, fid: 80,
+  sep: 200, cal: 200, mer: 200, bac: 180, dor: 180, lub: 180, tru: 170, sal: 140, mus: 160, pol: 150, pav: 150, lom: 150, ter: 130,
+  con: 200, cos: 100, hig: 100, sar: 170, boq: 170, bon: 150, cab: 150, jur: 170, gam: 150, mej: 150, pul: 150, atu: 120 };
+const limRacion = ([c, g]) => [c, Math.max(RACION_MIN[c] || 0, RACION_MAX[c] ? Math.min(g, RACION_MAX[c]) : g)];
+const capRacion = (o) => ({ ...o, items: o.items.map(limRacion) });
 
 // Índices por defecto de comida (w = 0..3). Con 21 platos, las semanas 1-3 no repiten; la 4 mezcla.
 function defaultComida(w, d, N) { return w < 3 ? (d + 7 * w) % N : (d * 3 + 1) % N; }
@@ -660,12 +670,14 @@ function selectWeek(key, w) {
 function buildWeek(key, w, opts = {}) {
   const S = SEASONS[key];
   const ENT = opts.ent || ENTRENO_DEF;
+  const mes = opts.month || MES_POR_DEFECTO[key];
   const NC = S.comidas.length, NN = S.cenas.length;
 
   const { CI, NI } = selectWeek(key, w);
 
   // 3) Montar los días
   const days = [];
+  let prevDk = null;
   for (let d = 0; d < 7; d++) {
     const ent = ENT[d];
     const ci = CI[d], ni = NI[d];
@@ -673,20 +685,21 @@ function buildWeek(key, w, opts = {}) {
     // Legumbres con cítrico de postre: la vitamina C mejora la absorción del hierro
     const withCitrus = (o) => {
       if (!o.items.some(([c]) => LEG.includes(c))) return o;
-      const f = CITRICO[key];
-      return { ...o, t: `${o.t} + ${ING[f][0].toLowerCase()} de postre`, items: [...o.items, [f, f === "nar" ? 130 : 150]] };
+      const f = POSTRE_VITC.find((c) => FRUTA_MES[c].includes(mes)) || "pla";
+      return { ...o, t: `${o.t} + ${ING[f][0].toLowerCase()} de postre`, items: [...o.items, [f, FRUTA_G[f]]] };
     };
     const lessOil = (o) => ({ ...o, items: o.items.map(([c, g]) => [c, c === "aov" ? Math.round(g * AOV_FACTOR) : g]) });
-    const com = withCitrus(scale(normalize(capProt(lessOil(dish(S.comidas[ci]))), d === 6 ? "f" : "c")));
+    const oil = (o, min) => (o.items.some(([c]) => c === "aov") ? { ...o, items: o.items.map(([c, g]) => [c, c === "aov" ? Math.max(g, min) : g]) } : { ...o, items: [...o.items, ["aov", min]] });
+    const com = withCitrus(capRacion(scale(normalize(oil(capProt(lessOil(dish(S.comidas[ci]))), 10), d === 6 ? "f" : "c"))));
     const cen = ni === -1
       ? (w % 2 ? { t: "Palomitas caseras (maíz en la sartén con una gota de aceite)", items: [["pal", 20], ["aov", 3]], noRecipe: true }
-               : { t: "Un yogur sin lactosa con canela", items: [["sky", 125]], noRecipe: true })
-      : withCitrus(scale(normalize(capProt(lessOil(dish(S.cenas[ni]))), "n")));
+               : { t: "Un skyr o yogur proteico sin lactosa con canela", items: [["sky", 125]], noRecipe: true })
+      : withCitrus(capRacion(scale(normalize(oil(capProt(lessOil(dish(S.cenas[ni]))), 8), "n"))));
     com.spices = spicesFor(com); if (!cen.noRecipe) cen.spices = spicesFor(cen);
     // ---- Desayuno, almuerzo y merienda
     // Reglas: un solo pan o cereal al día (desayuno); como mucho 3 piezas de fruta al día, ninguna repetida,
     // 1 por toma y un solo plátano; el almuerzo no repite yogur si el desayuno ya lo lleva.
-    const FR = [...new Map(S.mmFruits).entries()]; // frutas de temporada sin repetir [código, gramos]
+    const FR = FRUTA_ORDEN.filter((c) => FRUTA_MES[c].includes(mes)).map((c) => [c, FRUTA_G[c]]); // fruta de temporada del mes
     const usedF = new Set();
     const postre = /de postre$/.test(com.t) ? com.items[com.items.length - 1][0] : null;
     if (postre) usedF.add(postre);
@@ -696,11 +709,15 @@ function buildWeek(key, w, opts = {}) {
         const [c, g] = FR[(fi + j) % FR.length];
         if (usedF.has(c) || (noPla && c === "pla")) continue;
         fi = (fi + j + 1) % FR.length; usedF.add(c);
-        return [c, c === "fra" ? 70 : c === "mel" ? 120 : g];
+        return [c, g];
       }
       return null;
     };
-    const dk = DES_ROT[(d + w * 2) % 7];
+    let dk = DES_ROT[(d + w * 2) % 7];
+    // Nunca huevo en el desayuno y en la cena (ni en la comida) del mismo día: se cambia el desayuno por uno sin huevo
+    const eggMain = [com, cen].some((m) => m.items.some(([c]) => c === "hue"));
+    if (eggMain && /\bhue:/.test(DESAYUNOS[dk].base)) dk = ["A", "E"].find((x) => x !== prevDk && x !== DES_ROT[(d + 1 + w * 2) % 7]) || "A";
+    prevDk = dk;
     const D0 = DESAYUNOS[dk];
     const des = { t: D0.t, items: parse(D0.base) };
     if (dk === "C") usedF.add("pla");
@@ -742,7 +759,62 @@ function buildWeek(key, w, opts = {}) {
     if (n.kcal > limit) {
       const carbK = [com, cen].flatMap((m) => m.items).filter(([c]) => ING[c][4]).reduce((a, [c, g]) => a + ING[c][2] * g / 100, 0);
       const f = Math.max(0.5, 1 - (n.kcal - limit) / carbK);
-      [com, cen].forEach((m) => { m.items = m.items.map(([c, g]) => [c, ING[c][4] ? Math.round(g * f / 5) * 5 : g]); });
+      [com, cen].forEach((m) => { m.items = m.items.map(([c, g]) => limRacion([c, ING[c][4] ? Math.round(g * f / 5) * 5 : g])); });
+      n = nutrients(meals.flatMap(([, m]) => m.items));
+    }
+    // Si aún se pasa: un poco menos de proteína en la comida (mín. 85 %) y, si hace falta, merienda solo con fruta
+    if (n.kcal > limit + 15) {
+      com.items = com.items.map(([c, g]) => limRacion([c, PROT.includes(c) && !ING[c][5] ? Math.round(g * 0.85 / 5) * 5 : g]));
+      n = nutrients(meals.flatMap(([, m]) => m.items));
+    }
+    if (n.kcal > limit + 15 && mer.items.length > 1) {
+      mer.items = mer.items.filter(([c]) => !["que", "alm"].includes(c));
+      mer.t = mer.t.replace(/ y (25 g de queso curado|10 almendras)/, "");
+      n = nutrients(meals.flatMap(([, m]) => m.items));
+    }
+    // Suelos: proteína mínima (1,6 g/kg) y energía mínima del día
+    if (n.prot < PROT_MIN && !mer.items.some(([c]) => c === "sky")) {
+      // el skyr sustituye al queso o las almendras (más proteína y menos kcal)
+      mer.items = [...mer.items.filter(([c]) => !["alm", "que"].includes(c)), ["sky", 125]];
+      mer.t = mer.t.replace(/ y (25 g de queso curado|10 almendras)/, "").replace(/^(25 g de queso curado|10 almendras)/, "Skyr").replace(/ \(60-90/, " y un skyr (60-90");
+      if (!/skyr/i.test(mer.t)) mer.t += " y un skyr";
+      n = nutrients(meals.flatMap(([, m]) => m.items));
+    }
+    const floor = d === 6 ? KCAL_MIN_DOM : ent ? KCAL_MIN_ENT : KCAL_MIN_DES;
+    if (n.kcal < floor && !mm.items.some(([c]) => c === "nue")) {
+      mm.items = [...mm.items, ["nue", 10]]; mm.t += " y 10 g de nueces";
+      n = nutrients(meals.flatMap(([, m]) => m.items));
+    }
+    // Si la proteína sigue baja (p. ej. domingo de arroz): más pescado o carne en la comida (hasta 35 g de proteína y su ración máxima)
+    if (n.prot < PROT_MIN - 2) {
+      const pr = (it) => it.reduce((a, [c, g]) => a + ING[c][3] * g / 100, 0);
+      const main = com.items.filter(([c]) => PROT.includes(c) && !ING[c][5]);
+      const room = Math.min(PROT_MIN - n.prot, 35 - pr(com.items));
+      const mp = pr(main);
+      if (main.length && room > 1 && mp > 0) {
+        const f = 1 + room / mp;
+        com.items = com.items.map(([c, g]) => main.some(([x]) => x === c) ? limRacion([c, Math.round(g * f / 5) * 5]) : [c, g]);
+        n = nutrients(meals.flatMap(([, m]) => m.items));
+      }
+    }
+    // Domingo con palomitas: si aún falta proteína, merienda con un yogur más grande
+    if (n.prot < PROT_MIN - 2 && mer.items.some(([c, g]) => c === "sky" && g < 170)) {
+      mer.items = mer.items.map(([c, g]) => [c, c === "sky" ? 170 : g]);
+      n = nutrients(meals.flatMap(([, m]) => m.items));
+    }
+    // Si la energía sigue baja: fruta de postre en la comida (si quedan frutas por poner en el día)
+    if (n.kcal < floor - 100 && nFruit() < 3 && !/de postre$/.test(com.t)) {
+      const f = nextFruit(false);
+      if (f) { com.items = [...com.items, f]; com.t += ` + ${ING[f[0]][0].toLowerCase()} de postre`; n = nutrients(meals.flatMap(([, m]) => m.items)); }
+    }
+    // Recorte final si los suelos han pasado el techo: fuera los frutos secos del almuerzo y, si hace falta, menos hidratos en la comida
+    if (n.kcal > limit + 20) {
+      com.items = com.items.map(([c, g]) => limRacion([c, ING[c][4] ? Math.round(g * 0.85 / 5) * 5 : g]));
+      n = nutrients(meals.flatMap(([, m]) => m.items));
+    }
+    if (n.kcal > limit + 20 && mm.items.length > 1 && !mm.items.some(([c]) => c === "que") && mm.items.some(([c]) => ["alm", "nue"].includes(c))) {
+      mm.items = mm.items.filter(([c]) => !["alm", "nue"].includes(c));
+      mm.t = mm.t.replace(/ y (10|15) (g de )?(almendras|nueces)/, "");
       n = nutrients(meals.flatMap(([, m]) => m.items));
     }
     days.push({ dia: DIAS[d], ent, meals, kcal: Math.round(n.kcal), prot: Math.round(n.prot), fat: Math.round(n.fat), carb: Math.round(n.carb), fib: Math.round(n.fib), ca: Math.round(n.ca), fe: +n.fe.toFixed(1) });
@@ -778,7 +850,7 @@ function seasonKey(date) {
 }
 
 // Semanas de lunes a domingo. Cada semana pertenece al mes en el que cae su lunes:
-// el 1.er lunes del mes abre la semana 1. Si el mes tiene 5 lunes, la semana 5 repite el menú 1.
+// el 1.er lunes del mes abre la semana 1. Si el mes tiene 5 lunes, la semana 5 usa el menú 2 (así no se repite con la semana 1 del mes siguiente).
 // La estación se decide por el lunes, para que toda la semana use el mismo menú.
 function seasonOf(date) {
   const dow = (date.getDay() + 6) % 7;

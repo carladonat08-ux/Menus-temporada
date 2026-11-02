@@ -78,6 +78,9 @@ button { font: inherit; cursor: pointer; color: inherit; }
 .seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px; gap: 4px; }
 .seg button { border: 0; background: transparent; border-radius: 999px; padding: 8px 6px; font-weight: 600; font-size: .9rem; color: var(--muted); position: relative; white-space: nowrap; }
 .seg button[aria-selected="true"] { background: var(--accent); color: var(--surface); }
+.seg .wk { display: block; line-height: 1.15; }
+.seg .rg { display: block; font-size: .7rem; font-weight: 500; opacity: .8; line-height: 1.1; }
+#weeks button { padding: 6px 2px; }
 .seg .dot { position: absolute; top: 3px; right: 5px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
 .seg button[aria-selected="true"] .dot { background: var(--surface); }
 .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
@@ -231,45 +234,60 @@ function ingParts(c, g) {
 const ingLine = (items) => items.map(([c, g]) => { const [n, q] = ingParts(c, g); return `${n.toLowerCase()} ${q}`; }).join(" · ");
 const sameDay = (a, b) => a.toDateString() === b.toDateString();
 
+// Semanas reales del mes: cada pestaña es un lunes del mes (lunes a domingo), con su estación y su menú
+function mondaysOfMonth(y, m) {
+  const first = new Date(y, m, 1);
+  const off = (8 - first.getDay()) % 7; // días hasta el primer lunes (0 si el día 1 es lunes)
+  const out = [];
+  for (let d = new Date(y, m, 1 + off); d.getMonth() === m; d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 7)) out.push(d);
+  return out;
+}
+function selectTab(mon) {
+  const s = seasonOf(mon);
+  state.tabMonday = mon; state.key = s.key; state.week = s.week; state.n = s.n; state.monthName = s.month;
+  state.sel = sameDay(mon, state.monday) ? state.dow : 0;
+  document.documentElement.dataset.season = s.key;
+}
 function setDate(d) {
   const s = seasonOf(d);
-  state = { date: d, key: s.key, week: s.week, currentWeek: s.week, dow: s.dow, n: s.n, month: s.month, monday: s.monday, sel: s.dow };
-  document.documentElement.dataset.season = s.key;
+  state = { date: d, dow: s.dow, monday: s.monday };
+  selectTab(s.monday);
   $("fecha").value = toInput(d);
   $("fecha-txt").textContent = d.toLocaleDateString("es-ES", { weekday: "short", day: "numeric", month: "short" });
   $("hoy").hidden = sameDay(d, new Date());
   render();
 }
+const fmtRange = (a) => { const b = new Date(a.getFullYear(), a.getMonth(), a.getDate() + 6); return `${a.getDate()}-${b.getDate()} ${MESES[b.getMonth()].slice(0, 3)}`; };
 
 function render() {
   const S = SEASONS[state.key];
+  const mon = state.tabMonday;
   $("hero").innerHTML = `
-    <div class="kicker">Semana ${state.n} de ${state.month}${state.n === 5 ? " · menú 2" : ""}</div>
+    <div class="kicker">Semana ${state.n} de ${state.monthName}${state.n === 5 ? " · menú 2" : ""}</div>
     <h1>${S.name}</h1>
     <p>${S.note}</p>`;
-  $("weeks").innerHTML = [0, 1, 2, 3].map((w) => `<button type="button" role="tab" aria-selected="${w === state.week}" data-w="${w}">Semana ${w + 1}${w === state.currentWeek ? '<span class="dot" aria-label="(te toca)"></span>' : ""}</button>`).join("");
-  $("weeks").querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { state.week = +b.dataset.w; if (state.week !== state.currentWeek) state.sel = 0; else state.sel = state.dow; render(); }));
+  const tabs = mondaysOfMonth(state.monday.getFullYear(), state.monday.getMonth());
+  $("weeks").innerHTML = tabs.map((m, i) => `<button type="button" role="tab" aria-selected="${sameDay(m, mon)}" data-i="${i}" aria-label="Semana ${i + 1}, ${fmtRange(m)}${sameDay(m, state.monday) ? ", la que te toca" : ""}"><span class="wk">Semana ${i + 1}</span><span class="rg">${fmtRange(m)}</span>${sameDay(m, state.monday) ? '<span class="dot"></span>' : ""}</button>`).join("");
+  $("weeks").querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { selectTab(tabs[+b.dataset.i]); render(); }));
   $("v-menu").setAttribute("aria-selected", view === "menu");
   $("v-compra").setAttribute("aria-selected", view === "compra");
 
-  const days = buildWeek(state.key, state.week, { ent });
+  const days = buildWeek(state.key, state.week, { ent, month: mon.getMonth() + 1 });
   state.days = days;
   if (view === "compra") return renderShop(days);
 
-  const monday = new Date(state.monday);
-  monday.setDate(monday.getDate() + 7 * (state.week - state.currentWeek));
-  const isCur = state.week === state.currentWeek;
   const d = days[state.sel];
-  const dayDate = new Date(monday); dayDate.setDate(monday.getDate() + state.sel);
+  const dateOf = (i) => new Date(mon.getFullYear(), mon.getMonth(), mon.getDate() + i);
+  const dayDate = dateOf(state.sel);
   $("view").innerHTML = `
     <nav class="days" role="tablist" aria-label="Día">${days.map((x, i) => {
-      const dd = new Date(monday); dd.setDate(monday.getDate() + i);
-      return `<button type="button" class="day-btn${isCur && i === state.dow && sameDay(state.date, new Date()) ? " is-today" : ""}" role="tab" aria-selected="${i === state.sel}" data-i="${i}" aria-label="${x.dia}${x.ent ? ", entreno" : ""}">
-        <span class="d">${DCORTO[i]}</span>${isCur ? `<span class="n">${dd.getDate()}</span>` : ""}<span class="tr${x.ent ? " on" : ""}"></span></button>`;
+      const dd = dateOf(i);
+      return `<button type="button" class="day-btn${sameDay(dd, new Date()) ? " is-today" : ""}" role="tab" aria-selected="${i === state.sel}" data-i="${i}" aria-label="${x.dia} ${dd.getDate()}${x.ent ? ", entreno" : ""}">
+        <span class="d">${DCORTO[i]}</span><span class="n">${dd.getDate()}</span><span class="tr${x.ent ? " on" : ""}"></span></button>`;
     }).join("")}</nav>
     <div style="height:14px"></div>
     <div class="day-head">
-      <h2>${d.dia}${isCur ? ` <span style="color:var(--muted);font-size:1rem">${dayDate.getDate()} de ${MESES[dayDate.getMonth()]}</span>` : ""}<span class="tag${d.ent ? "" : " rest"}">${d.ent ? "Entreno" : "Descanso"}</span></h2>
+      <h2>${d.dia} <span style="color:var(--muted);font-size:1rem">${dayDate.getDate()} de ${MESES[dayDate.getMonth()]}</span><span class="tag${d.ent ? "" : " rest"}">${d.ent ? "Entreno" : "Descanso"}</span></h2>
       <div class="meta">${d.kcal.toLocaleString("es-ES")} kcal · ${d.prot} g proteína</div>
     </div>
     <div style="height:12px"></div>
@@ -289,10 +307,10 @@ function render() {
 function renderShop(days) {
   const S = SEASONS[state.key];
   const list = shopping(days);
-  const sk = `shop-${state.key}-${state.week}`;
+  const sk = `shop-${toInput(state.tabMonday)}`; // una lista por semana real (fecha de su lunes)
   const checked = store.get(sk) || {};
   const order = ["carne", "pescado", "huevos", "lacteos", "cereal", "legumbre", "verdura", "fruta", "grasa", "suple"];
-  let html = `<section class="shop"><h2>Lista de la compra</h2><div class="sub">${S.name} · semana ${state.week + 1} · para 7 días</div>`;
+  let html = `<section class="shop"><h2>Lista de la compra</h2><div class="sub">${S.name} · ${fmtRange(state.tabMonday)} · para una persona, 7 días</div>`;
   order.forEach((cat) => {
     if (!list[cat]) return;
     html += `<h3>${CATS[cat]}</h3><ul>` + list[cat].sort((a, b) => a[0].localeCompare(b[0], "es")).map(([n, q], j) => {

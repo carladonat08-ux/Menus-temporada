@@ -62,7 +62,7 @@ with sync_playwright() as p:
     # 5. Fechas límite
     def set_date(v):
         pg.fill("#fecha", v); pg.dispatch_event("#fecha", "change"); pg.wait_for_timeout(150)
-    cases = [("2026-11-02", "Otoño", "SEMANA 1 DE NOVIEMBRE", 0), ("2026-11-30", "Otoño", "SEMANA 5 DE NOVIEMBRE · MENÚ 2", 1),
+    cases = [("2026-11-02", "Otoño", "SEMANA 1 DE NOVIEMBRE", 0), ("2026-11-30", "Otoño", "SEMANA 5 DE NOVIEMBRE · MENÚ 2", 4),
              ("2026-12-20", "Otoño", "SEMANA 2 DE DICIEMBRE", 1), ("2026-12-21", "Invierno", "SEMANA 3 DE DICIEMBRE", 2),
              ("2027-01-04", "Invierno", "SEMANA 1 DE ENERO", 0), ("2027-03-22", "Primavera", "SEMANA 4 DE MARZO", 3),
              ("2027-06-21", "Verano", "SEMANA 3 DE JUNIO", 2), ("2028-02-29", "Invierno", "SEMANA 4 DE FEBRERO", 3)]
@@ -73,6 +73,20 @@ with sync_playwright() as p:
         sel = pg.locator('#weeks button[aria-selected="true"]').inner_text().strip()
         check(sel.startswith(f"Semana {wk + 1}"), f"{v}: pestaña Semana {wk + 1}")
         check(pg.locator("#hoy").is_visible(), f"{v}: aparece el botón Hoy")
+    # Pestañas = semanas reales del mes, cada una con su estación
+    set_date("2026-11-02")
+    tabs = pg.locator("#weeks button")
+    check(tabs.count() == 5, "Noviembre 2026: 5 pestañas de semana")
+    check("2-8 nov" in tabs.nth(0).inner_text(), "Semana 1 de noviembre: 2-8 nov")
+    check("30-6 dic" in tabs.nth(4).inner_text(), "Semana 5 de noviembre: 30-6 dic")
+    check(pg.locator(".day-btn .n").nth(0).inner_text().strip() == "2", "La semana 1 empieza el lunes 2")
+    tabs.nth(4).click(); pg.wait_for_timeout(100)
+    check("MENÚ 2" in pg.inner_text("#hero").upper(), "Pestaña semana 5 → menú 2")
+    set_date("2027-03-15")
+    check("INVIERNO" in pg.inner_text("#hero").upper(), "15 mar 2027: invierno")
+    pg.locator("#weeks button").nth(3).click(); pg.wait_for_timeout(100)
+    check("PRIMAVERA" in pg.inner_text("#hero").upper(), "Pestaña 22-28 mar → primavera")
+    check(pg.evaluate("document.documentElement.dataset.season") == "primavera", "El color cambia a primavera")
     pg.click("#hoy"); pg.wait_for_timeout(150)
     check("SEMANA 4 DE OCTUBRE" in pg.inner_text("#hero").upper(), "Botón Hoy vuelve a hoy")
 

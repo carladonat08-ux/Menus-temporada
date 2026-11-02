@@ -12,7 +12,7 @@ const X = ctx.X;
 // Generador pseudoaleatorio con semilla (resultado reproducible)
 function rng(seed) { let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
 const big = (f) => (f === "roja" ? "carne" : f === "azul" ? "pescado" : f);
-const hasHig = (x) => /\bhig:/.test(x), hasLeg = (x) => /\b(len|gar|alu|grf):/.test(x);
+const hasHig = (x) => /\bhig:/.test(x), hasLeg = (x) => /\b(len|gar|alu):([89]\d|\d{3})/.test(x);
 const TIPO_MAX = { tortilla: 2, bullit: 1, crema: 2, ensalada: 3, arroz: 2, pasta: 1 };
 
 function planSeason(key, seed, tries) {
@@ -70,7 +70,7 @@ function planSeason(key, seed, tries) {
     for (let d = 0; d < 6; d++) {
       let chosen = null;
       const left = 6 - d; // días entre semana que quedan, incluido este
-      const needLeg = legCount + left <= 1 ? false : (2 - legCount) >= left;
+      const needLeg = (3 - legCount) >= left;
       const azulNow = (fam.azul || 0);
       const needAzul = (2 - azulNow) >= left;
       const comCands = order(DIARIO, useC);
@@ -85,7 +85,7 @@ function planSeason(key, seed, tries) {
         for (const ni of order(S.cenas.map((_, i) => i), useN)) {
           if (NI.includes(ni)) continue;
           if (big(CF[ci]) === big(NF[ni])) continue;
-          if (/\bhue:/.test(S.comidas[ci]) && NF[ni] === "huevo") continue; // nunca huevo en las dos comidas
+          if (/\bhue:/.test(S.comidas[ci]) && /\bhue:/.test(S.cenas[ni])) continue; // nunca huevo en comida y cena
           if (X.clash(CD[ci], ND[ni])) continue;
           const tn = NT[ni];
           if (tn !== "otro" && (tn === tc || (tipoCnt[tn] || 0) + (tn === tc ? 1 : 0) >= TIPO_MAX[tn])) continue;
@@ -123,7 +123,7 @@ function planSeason(key, seed, tries) {
     const fail = (r) => { DIAG[r] = (DIAG[r] || 0) + 1; return null; };
     if (P < 4) return fail("pescado<4"); if (P > 6) return fail("pescado>6"); if (C < 4) return fail("carne<4"); if (C > 6) return fail("carne>6");
     if ((fam2.azul || 0) < 2) return fail("azul<2"); if ((fam2.roja || 0) > 2) return fail("roja>2"); if ((fam2.huevo || 0) < 1) return fail("huevo<1");
-    if (CI.slice(0, 6).filter((i) => hasLeg(S.comidas[i])).length < 2) return fail("legumbre<2");
+    if (CI.slice(0, 6).filter((i) => hasLeg(S.comidas[i])).length < 3) return fail("legumbre<3");
     return { CI, NI };
   }
 }
